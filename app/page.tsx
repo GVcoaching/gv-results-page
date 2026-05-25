@@ -191,7 +191,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full min-h-screen lg:min-h-[90vh] flex flex-col justify-center overflow-hidden pt-[72px]"
+      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-hidden pt-[72px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -200,44 +200,38 @@ function Hero() {
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      {/* ── MOBILE LAYOUT — full-bleed image with overlay (hidden on lg+) ── */}
-      <div className="lg:hidden absolute inset-0 flex flex-col">
+      {/* ── MOBILE LAYOUT — stacked, clean (hidden on lg+) ── */}
+      <div className="lg:hidden relative z-10 flex flex-col items-center text-center px-6 pt-10 pb-12 gap-8">
+        <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-3xl">
+          Health &amp; Performance Coach for{" "}
+          <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+        </h1>
+        <p className="text-white/70 text-[16px] font-light leading-[1.8]">
+          Personalised one-to-one coaching for ambitious professionals who want
+          to transform their health, sharpen their energy, and perform at the
+          highest level — in work and in life.
+        </p>
         <img
           src="/Headshot/IMG_8821.jpg"
           alt="George Vernon — Health & Performance Coach"
-          className="absolute inset-0 w-full h-full object-cover object-top"
+          className="w-full h-auto block"
         />
-        {/* Dark overlay — pointer-events-none so it never intercepts the button */}
-        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
-        <div className="relative z-10 flex flex-col justify-between h-full px-6 pb-10 pt-[80px]">
-          {/* Headline + subtext */}
-          <div className="flex-1 flex flex-col justify-center items-center text-center">
-            <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-3xl text-center">
-              Health &amp; Performance Coach for{" "}
-              <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
-            </h1>
-            <p className="text-white/70 text-[16px] font-light leading-[1.8] text-center">
-              Personalised one-to-one coaching for ambitious professionals who want
-              to transform their health, sharpen their energy, and perform at the
-              highest level — in work and in life.
-            </p>
-          </div>
-          {/* Caption + CTA button */}
-          <div className="flex flex-col gap-4">
-            <div className="bg-[#222f39]/90 backdrop-blur-sm px-6 py-4">
-              <div className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
-              <div className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</div>
-            </div>
-            <a
-              href="https://health.gvcoaching.co.uk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
-            >
-              Take Your Health Phase Test
-              <ArrowRight size={14} />
-            </a>
-          </div>
+        <div className="text-center">
+          <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
+          <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
+        </div>
+        <a
+          href="https://health.gvcoaching.co.uk/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+        >
+          Take Your Health Phase Test
+          <ArrowRight size={14} />
+        </a>
+        <div className="flex flex-col items-center gap-2 opacity-50">
+          <div className="w-[1px] h-8 bg-white/60" />
+          <span className="text-white text-[9px] tracking-[0.35em] uppercase">Scroll</span>
         </div>
       </div>
 
@@ -316,8 +310,8 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 mt-8 lg:mt-0">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
           <EyebrowCenter>Watch</EyebrowCenter>
@@ -383,12 +377,12 @@ function VideoTestimonialsSection() {
   };
 
   return (
-    <section id="results" className="w-full bg-white pt-20 md:pt-52 lg:pt-72 pb-16 md:pb-44 lg:pb-60 overflow-hidden">
+    <section id="results" className="w-full bg-white pt-16 md:pt-52 lg:pt-72 pb-16 md:pb-44 lg:pb-60 overflow-hidden mt-8 lg:mt-0">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
-      <div className="mx-auto w-full max-w-7xl px-4 md:px-8 text-center">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
@@ -410,7 +404,7 @@ function VideoTestimonialsSection() {
           <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-6 px-4 md:px-8 mx-auto scroll-hide pb-4"
+              className="flex overflow-x-auto gap-6 px-6 md:px-8 mx-auto scroll-hide pb-4"
               style={{ scrollSnapType: "x mandatory" }}
             >
               {youtubeVideos.map((id) => (
@@ -489,8 +483,8 @@ function ScreenshotTestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-48 lg:py-64 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-7xl px-4 md:px-8 text-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-48 lg:py-64 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+      <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
@@ -512,7 +506,7 @@ function ScreenshotTestimonialsSection() {
           <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-8 px-4 md:px-8 mx-auto scroll-hide pb-4 items-start"
+              className="flex overflow-x-auto gap-8 px-6 md:px-8 mx-auto scroll-hide pb-4 items-start"
               style={{ scrollSnapType: "x mandatory" }}
             >
               {testimonialImages.map((src, i) => (
@@ -547,8 +541,8 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
+    <section id="corporate" className="w-full bg-white py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-16">
           <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
@@ -633,8 +627,8 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
           <EyebrowCenter>Expert Consulting</EyebrowCenter>
@@ -677,14 +671,14 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-16 md:py-48 lg:py-72 overflow-hidden"
+      className="relative w-full py-16 md:py-48 lg:py-72 overflow-hidden mt-8 lg:mt-0"
       style={{ background: "#222f39" }}
     >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%)" }}
       />
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center relative">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center relative">
         <Reveal className="flex flex-col items-center w-full">
           <div className="flex items-center justify-center gap-4 mb-10">
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
