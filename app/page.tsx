@@ -331,7 +331,7 @@ function VideoTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 464 : -464, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 304 : -304, behavior: "smooth" });
   };
 
   return (
@@ -340,7 +340,7 @@ function VideoTestimonialsSection() {
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 text-center">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
@@ -391,7 +391,7 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-[300px] md:w-[440px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
+      className="flex-shrink-0 w-[280px] md:w-[280px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
@@ -437,12 +437,12 @@ function ScreenshotTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 284 : -284, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 216 : -216, behavior: "smooth" });
   };
 
   return (
     <section className="w-full bg-[#f7f7f7] py-16 md:py-48 lg:py-64 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 text-center">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
@@ -470,7 +470,7 @@ function ScreenshotTestimonialsSection() {
               {testimonialImages.map((src, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[300px] md:w-[264px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                  className="flex-shrink-0 w-[280px] md:w-[200px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
                   style={{ scrollSnapAlign: "start" }}
                 >
                   <img
