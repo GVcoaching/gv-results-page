@@ -189,7 +189,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full min-h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
+      className="hero-section relative w-full min-h-[90vh] flex flex-col justify-center overflow-hidden pt-[72px]"
       style={{ background: "#222f39" }}
     >
       <div
@@ -331,7 +331,7 @@ function VideoTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 304 : -304, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 384 : -384, behavior: "smooth" });
   };
 
   return (
@@ -391,7 +391,7 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-[280px] md:w-[280px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
+      className="flex-shrink-0 w-[300px] md:w-[360px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
@@ -437,7 +437,7 @@ function ScreenshotTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 216 : -216, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 296 : -296, behavior: "smooth" });
   };
 
   return (
@@ -470,7 +470,7 @@ function ScreenshotTestimonialsSection() {
               {testimonialImages.map((src, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[280px] md:w-[200px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                  className="flex-shrink-0 w-[300px] md:w-[280px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
                   style={{ scrollSnapAlign: "start" }}
                 >
                   <img
@@ -510,7 +510,7 @@ function WellbeingTalksSection() {
             Invest in Your{" "}
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
-          <p className="text-[#1c252e] text-[17px] leading-[1.85]">
+          <p className="text-[#1c252e] text-[18px] md:text-[20px] leading-[1.85]">
             George delivers engaging health and wellbeing education talks to
             organisations across the UK, helping teams improve energy, focus
             and performance. Available for corporate events, away days and
@@ -596,7 +596,7 @@ function ConsultingSection() {
             Trusted by Organisations{" "}
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
-          <p className="text-[#54595f] text-[17px] w-full leading-relaxed text-center">
+          <p className="text-[#54595f] text-[18px] md:text-[20px] w-full leading-relaxed text-center">
             George also consults for organisations across the UK, including The Principals Club — a private membership for dental practice owners — bringing the same evidence-based approach to organisational health and performance.
           </p>
         </Reveal>
@@ -659,7 +659,7 @@ function CTASection() {
             Take Your Health Phase Test
             <ArrowRight size={15} />
           </a>
-          <p className="text-white/30 text-[12px] tracking-wide mt-7">
+          <p className="text-white/50 text-[16px] md:text-[18px] font-light tracking-wide mt-7 text-center">
             Free · Takes 3 minutes · No commitment required
           </p>
         </Reveal>
@@ -674,7 +674,7 @@ function Footer() {
   return (
     <footer className="bg-[#1c252e] py-10">
       <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center text-center gap-4">
-        <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[14px]">
+        <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[14px] w-full text-center block">
           george@gvcoaching.co.uk
         </a>
         <div className="flex items-center gap-6">
