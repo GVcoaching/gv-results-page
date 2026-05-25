@@ -138,7 +138,7 @@ function Navbar() {
           : "bg-white/95"
       }`}
     >
-      <div className="w-full px-12 md:px-16 lg:px-24 flex items-center justify-between h-[72px]">
+      <div className="w-full px-4 md:px-12 lg:px-24 flex items-center justify-between h-[72px]">
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
           <span className="font-georgia text-[22px] md:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
@@ -197,19 +197,19 @@ function Hero() {
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      <div className="w-full py-4 md:py-6 relative">
-        <div className="flex flex-col md:flex-row items-stretch gap-3 md:gap-5">
+      <div className="w-full px-4 md:px-0 py-4 md:py-6 relative">
+        <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-5">
 
           {/* Left: headline + subtext */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center pl-0">
+          <div className="flex-1 min-w-0 flex flex-col justify-center items-center md:items-start pl-0">
             <h1
-              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6"
-              style={{ fontSize: "clamp(36px, 4.5vw, 66px)" }}
+              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center md:text-left"
+              style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
               Health &amp; Performance Coach for{" "}
               <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
             </h1>
-            <p className="text-white/70 text-[18px] font-light leading-[1.8]">
+            <p className="text-white/70 text-[16px] md:text-[18px] font-light leading-[1.8] text-center md:text-left">
               Personalised one-to-one coaching for ambitious professionals who want
               to transform their health, sharpen their energy, and perform at the
               highest level — in work and in life.
@@ -219,8 +219,7 @@ function Hero() {
           {/* Right: headshot + primary CTA below */}
           <div className="w-full md:w-[46%] flex-shrink-0 flex flex-col pr-0">
             <div
-              className="relative flex-1 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
-              style={{ minHeight: "460px" }}
+              className="relative flex-1 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)] min-h-[300px] md:min-h-[460px]"
             >
               <img
                 src="/Headshot/IMG_8821.jpg"
@@ -271,8 +270,8 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-40 md:py-60">
-      <div className="mx-auto w-full max-w-5xl px-8 flex flex-col items-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
           <EyebrowCenter>Watch</EyebrowCenter>
@@ -299,13 +298,13 @@ function FeaturedVideo() {
               />
             </div>
           </div>
-          <div className="bg-[#222f39] px-7 py-5 flex items-center justify-between">
-            <span className="font-georgia text-white text-[15px] font-semibold tracking-wide">
+          <div className="bg-[#222f39] px-5 md:px-7 py-4 md:py-5 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-0 md:justify-between">
+            <span className="font-georgia text-white text-[14px] md:text-[15px] font-semibold tracking-wide">
               George Vernon — Health &amp; Performance Coach
             </span>
             <a
               href="https://health.gvcoaching.co.uk/"
-              className="text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors flex items-center gap-2 whitespace-nowrap ml-4"
+              className="text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors flex items-center gap-2 whitespace-nowrap md:ml-4"
             >
               Take Your Health Phase Test <ArrowRight size={12} />
             </a>
@@ -336,12 +335,12 @@ function VideoTestimonialsSection() {
   };
 
   return (
-    <section id="results" className="w-full bg-white pt-52 md:pt-72 pb-44 md:pb-60 overflow-hidden">
+    <section id="results" className="w-full bg-white pt-20 md:pt-52 lg:pt-72 pb-16 md:pb-44 lg:pb-60 overflow-hidden">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
-      <div className="mx-auto w-full max-w-5xl px-8 text-center">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
@@ -354,7 +353,7 @@ function VideoTestimonialsSection() {
           </h2>
         </Reveal>
 
-        <div className="flex justify-end mb-5 gap-3">
+        <div className="hidden md:flex justify-end mb-5 gap-3">
           <button onClick={() => scroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
           <button onClick={() => scroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
         </div>
@@ -363,7 +362,7 @@ function VideoTestimonialsSection() {
           <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-6 px-8 mx-auto scroll-hide pb-4"
+              className="flex overflow-x-auto gap-6 px-4 md:px-8 mx-auto scroll-hide pb-4"
               style={{ scrollSnapType: "x mandatory" }}
             >
               {youtubeVideos.map((id) => (
@@ -392,7 +391,7 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-[440px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
+      className="flex-shrink-0 w-[300px] md:w-[440px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
@@ -442,8 +441,8 @@ function ScreenshotTestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-48 md:py-64 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-8 text-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-48 lg:py-64 border-t border-[#e5e5e5]">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
@@ -456,7 +455,7 @@ function ScreenshotTestimonialsSection() {
           </h2>
         </Reveal>
 
-        <div className="flex justify-end mb-5 gap-3">
+        <div className="hidden md:flex justify-end mb-5 gap-3">
           <button onClick={() => scroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
           <button onClick={() => scroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
         </div>
@@ -465,13 +464,13 @@ function ScreenshotTestimonialsSection() {
           <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-4 px-8 mx-auto scroll-hide pb-4 items-start"
+              className="flex overflow-x-auto gap-4 px-4 md:px-8 mx-auto scroll-hide pb-4 items-start"
               style={{ scrollSnapType: "x mandatory" }}
             >
               {testimonialImages.map((src, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[264px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                  className="flex-shrink-0 w-[300px] md:w-[264px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
                   style={{ scrollSnapAlign: "start" }}
                 >
                   <img
@@ -499,8 +498,8 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-40 md:py-60 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-8 flex flex-col items-center">
+    <section id="corporate" className="w-full bg-white py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-16">
           <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
@@ -530,10 +529,10 @@ function WellbeingTalksSection() {
           ))}
         </Reveal>
 
-        <Reveal delay={250} className="mb-20">
+        <Reveal delay={250} className="mb-20 w-full md:w-auto">
           <a
             href="mailto:george@gvcoaching.co.uk"
-            className="inline-flex items-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.1em] uppercase px-8 py-[18px]"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.1em] uppercase px-8 py-[18px] w-full md:w-auto min-h-[44px]"
           >
             Enquire About a Wellbeing Talk
             <ArrowRight size={13} />
@@ -585,8 +584,8 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-40 md:py-60 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-8 flex flex-col items-center">
+    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
           <EyebrowCenter>Expert Consulting</EyebrowCenter>
@@ -629,14 +628,14 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-48 md:py-72 overflow-hidden"
+      className="relative w-full py-16 md:py-48 lg:py-72 overflow-hidden"
       style={{ background: "#222f39" }}
     >
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%)" }}
       />
-      <div className="mx-auto w-full max-w-5xl px-8 flex flex-col items-center relative">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center relative">
         <Reveal className="flex flex-col items-center w-full">
           <div className="flex items-center justify-center gap-4 mb-10">
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
@@ -645,17 +644,17 @@ function CTASection() {
           </div>
           <h2
             className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center"
-            style={{ fontSize: "clamp(40px, 6.5vw, 84px)" }}
+            style={{ fontSize: "clamp(28px, 6.5vw, 84px)" }}
           >
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
-          <p className="text-white/65 text-[18px] font-light leading-[1.8] max-w-lg mb-14 text-center">
+          <p className="text-white/65 text-[16px] md:text-[18px] font-light leading-[1.8] max-w-lg mb-14 text-center">
             Find out exactly where you are with your health and what to focus on next.
           </p>
           <a
             href="https://health.gvcoaching.co.uk/"
-            className="inline-flex items-center gap-4 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 py-6"
+            className="inline-flex items-center justify-center gap-4 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 py-6 w-full md:w-auto min-h-[44px]"
           >
             Take Your Health Phase Test
             <ArrowRight size={15} />
@@ -674,7 +673,7 @@ function CTASection() {
 function Footer() {
   return (
     <footer className="bg-[#1c252e] py-10">
-      <div className="mx-auto w-full max-w-5xl px-8 flex flex-col items-center text-center gap-4">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center text-center gap-4">
         <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[14px]">
           george@gvcoaching.co.uk
         </a>
