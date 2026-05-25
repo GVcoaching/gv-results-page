@@ -283,7 +283,7 @@ function FeaturedVideo() {
           </h2>
         </Reveal>
 
-        <Reveal delay={200} className="w-full max-w-4xl">
+        <Reveal delay={200} className="w-full max-w-4xl mx-auto">
           <div ref={sectionRef} className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
@@ -518,7 +518,7 @@ function WellbeingTalksSection() {
           </p>
         </Reveal>
 
-        <Reveal delay={150} className="max-w-lg mb-12 space-y-3 text-center">
+        <Reveal delay={150} className="max-w-lg mx-auto mb-12 space-y-3 text-center">
           {[
             "Keynote wellness talks (60–90 min)",
             "Half-day & full-day employee workshops",
@@ -539,7 +539,7 @@ function WellbeingTalksSection() {
           </a>
         </Reveal>
 
-        <Reveal delay={150} className="w-full max-w-4xl mb-12">
+        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-12">
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
@@ -558,7 +558,7 @@ function WellbeingTalksSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
           <div className="overflow-hidden border border-[#e5e5e5] shadow-sm" style={{ aspectRatio: "16 / 9" }}>
             <img
               src={encodeURI("/Public speaking/IMG_3363.jpg")}
@@ -601,7 +601,7 @@ function ConsultingSection() {
           </p>
         </Reveal>
 
-        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
           <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
             <img
               src={encodeURI("/Expert consultant/IMG_6076 2.JPG")}
@@ -649,7 +649,7 @@ function CTASection() {
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
-          <p className="text-white/65 text-[16px] md:text-[18px] font-light leading-[1.8] max-w-lg mb-14 text-center">
+          <p className="text-white/65 text-[16px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-14 text-center">
             Find out exactly where you are with your health and what to focus on next.
           </p>
           <a
