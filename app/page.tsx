@@ -191,38 +191,79 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full min-h-[90vh] flex flex-col justify-center overflow-hidden pt-[72px]"
+      className="hero-section relative w-full min-h-screen lg:min-h-[90vh] flex flex-col justify-center overflow-hidden pt-[72px]"
       style={{ background: "#222f39" }}
     >
+      {/* Desktop radial gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      <div className="w-full px-4 md:px-0 py-4 md:py-6 relative">
-        <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-5">
+      {/* ── MOBILE LAYOUT — full-bleed image with overlay (hidden on lg+) ── */}
+      <div className="lg:hidden absolute inset-0 flex flex-col">
+        <img
+          src="/Headshot/IMG_8821.jpg"
+          alt="George Vernon — Health & Performance Coach"
+          className="absolute inset-0 w-full h-full object-cover object-top"
+        />
+        {/* Dark overlay — pointer-events-none so it never intercepts the button */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+        <div className="relative z-10 flex flex-col justify-between h-full px-6 pb-10 pt-[80px]">
+          {/* Headline + subtext */}
+          <div className="flex-1 flex flex-col justify-center items-center text-center">
+            <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-3xl text-center">
+              Health &amp; Performance Coach for{" "}
+              <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+            </h1>
+            <p className="text-white/70 text-[16px] font-light leading-[1.8] text-center">
+              Personalised one-to-one coaching for ambitious professionals who want
+              to transform their health, sharpen their energy, and perform at the
+              highest level — in work and in life.
+            </p>
+          </div>
+          {/* Caption + CTA button */}
+          <div className="flex flex-col gap-4">
+            <div className="bg-[#222f39]/90 backdrop-blur-sm px-6 py-4">
+              <div className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
+              <div className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</div>
+            </div>
+            <a
+              href="https://health.gvcoaching.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+            >
+              Take Your Health Phase Test
+              <ArrowRight size={14} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── DESKTOP LAYOUT — two-column (hidden below lg:) ── */}
+      <div className="hidden lg:block w-full px-0 py-6 relative">
+        <div className="flex flex-row items-stretch gap-5">
 
           {/* Left: headline + subtext */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center items-center md:items-start pl-0">
+          <div className="flex-1 min-w-0 flex flex-col justify-center items-start pl-0">
             <h1
-              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center md:text-left"
+              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-left"
               style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
               Health &amp; Performance Coach for{" "}
               <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
             </h1>
-            <p className="text-white/70 text-[16px] md:text-[18px] font-light leading-[1.8] text-center md:text-left">
+            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-left">
               Personalised one-to-one coaching for ambitious professionals who want
               to transform their health, sharpen their energy, and perform at the
               highest level — in work and in life.
             </p>
           </div>
 
-          {/* Right: headshot + primary CTA below */}
-          <div className="w-full md:w-[46%] flex-shrink-0 flex flex-col pr-0">
-            <div
-              className="relative flex-1 overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.5)] min-h-[300px] md:min-h-[460px]"
-            >
+          {/* Right: headshot + CTA below */}
+          <div className="w-[46%] flex-shrink-0 flex flex-col pr-0">
+            <div className="relative flex-1 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.4)] min-h-[460px]">
               <img
                 src="/Headshot/IMG_8821.jpg"
                 alt="George Vernon — Health & Performance Coach"
@@ -238,7 +279,7 @@ function Hero() {
               href="https://health.gvcoaching.co.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full justify-center"
+              className="mt-6 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
             >
               Take Your Health Phase Test
               <ArrowRight size={14} />
@@ -248,7 +289,8 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      {/* Scroll indicator — desktop only */}
+      <div className="hidden lg:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
         <div className="w-[1px] h-12 bg-white/60" />
         <span className="text-white text-[9px] tracking-[0.35em] uppercase">Scroll</span>
       </div>
