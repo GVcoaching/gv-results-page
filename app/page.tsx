@@ -154,6 +154,8 @@ function Navbar() {
           <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Talks</a>
           <a
             href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 whitespace-nowrap"
           >
             Take Your Health Phase Test <ArrowRight size={12} />
@@ -175,7 +177,7 @@ function Navbar() {
         <div className="md:hidden bg-white border-t border-[#e5e5e5] px-6 py-8 flex flex-col gap-6 shadow-lg">
           <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-[#222f39] tracking-wide">Results</a>
           <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-[#222f39] tracking-wide">Wellbeing Talks</a>
-          <a href="https://health.gvcoaching.co.uk/" className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-center text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4">
+          <a href="https://health.gvcoaching.co.uk/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-center text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4">
             Take Your Health Phase Test <ArrowRight size={12} />
           </a>
         </div>
@@ -234,6 +236,8 @@ function Hero() {
             </div>
             <a
               href="https://health.gvcoaching.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full justify-center"
             >
               Take Your Health Phase Test
@@ -304,6 +308,8 @@ function FeaturedVideo() {
             </span>
             <a
               href="https://health.gvcoaching.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors flex items-center gap-2 whitespace-nowrap md:ml-4"
             >
               Take Your Health Phase Test <ArrowRight size={12} />
@@ -331,7 +337,7 @@ function VideoTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 384 : -384, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 584 : -584, behavior: "smooth" });
   };
 
   return (
@@ -391,7 +397,7 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-[300px] md:w-[360px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
+      className="flex-shrink-0 w-[300px] md:w-[560px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
       style={{ scrollSnapAlign: "start" }}
     >
       <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
@@ -437,7 +443,7 @@ function ScreenshotTestimonialsSection() {
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 296 : -296, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir === "right" ? 624 : -624, behavior: "smooth" });
   };
 
   return (
@@ -464,19 +470,20 @@ function ScreenshotTestimonialsSection() {
           <div className="relative w-full">
             <div
               ref={scrollRef}
-              className="flex overflow-x-auto gap-4 px-4 md:px-8 mx-auto scroll-hide pb-4 items-start"
+              className="flex overflow-x-auto gap-8 px-4 md:px-8 mx-auto scroll-hide pb-4 items-start"
               style={{ scrollSnapType: "x mandatory" }}
             >
               {testimonialImages.map((src, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[300px] md:w-[280px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                  style={{ scrollSnapAlign: "start" }}
+                  className="flex-shrink-0 w-[300px] md:w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                  style={{ scrollSnapAlign: "start", minHeight: "400px" }}
                 >
                   <img
                     src={encodeURI(src)}
                     alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-auto block"
+                    className="w-full h-full object-contain block"
+                    style={{ minHeight: "400px" }}
                   />
                 </div>
               ))}
@@ -654,6 +661,8 @@ function CTASection() {
           </p>
           <a
             href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-4 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 py-6 w-full md:w-auto min-h-[44px]"
           >
             Take Your Health Phase Test
