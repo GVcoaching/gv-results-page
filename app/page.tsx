@@ -189,7 +189,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
+      className="hero-section relative w-full min-h-screen flex flex-col justify-center overflow-hidden pt-[72px]"
       style={{ background: "#222f39" }}
     >
       <div

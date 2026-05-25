@@ -41,6 +41,19 @@ section > div {
   text-align: center;
 }
 
+/* Hero section — excluded from global centering */
+section.hero-section {
+  display: block;
+  align-items: unset;
+}
+
+section.hero-section > div {
+  max-width: unset;
+  margin-left: unset;
+  margin-right: unset;
+  text-align: unset;
+}
+
 /* Hide scrollbar on carousels */
 .scroll-hide::-webkit-scrollbar { display: none; }
 .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
