@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  display: block;
+}
+
+/* Georgia heading stack */
+.font-georgia {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Hide scrollbar on carousels */
+.scroll-hide::-webkit-scrollbar { display: none; }
+.scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
