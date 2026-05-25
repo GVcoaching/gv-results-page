@@ -191,7 +191,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-hidden pt-[72px]"
+      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[72px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -201,8 +201,11 @@ function Hero() {
       />
 
       {/* ── MOBILE LAYOUT — stacked, clean (hidden on lg+) ── */}
-      <div className="lg:hidden relative z-10 flex flex-col items-center text-center px-6 pt-10 pb-12 gap-8">
-        <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-3xl">
+      <div
+        className="lg:hidden relative z-10 flex flex-col items-center text-center px-6 pt-24 gap-8 overflow-x-hidden"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 2rem)" }}
+      >
+        <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-2xl">
           Health &amp; Performance Coach for{" "}
           <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
         </h1>
@@ -310,7 +313,7 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 mt-8 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 mt-12 lg:mt-0">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
@@ -377,7 +380,7 @@ function VideoTestimonialsSection() {
   };
 
   return (
-    <section id="results" className="w-full bg-white pt-16 md:pt-52 lg:pt-72 pb-16 md:pb-44 lg:pb-60 overflow-hidden mt-8 lg:mt-0">
+    <section id="results" className="w-full bg-white pt-20 pb-20 md:pt-52 md:pb-44 lg:pt-72 lg:pb-60 overflow-hidden mt-12 lg:mt-0">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
@@ -483,7 +486,7 @@ function ScreenshotTestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-48 lg:py-64 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-48 lg:py-64 border-t border-[#e5e5e5] mt-12 lg:mt-0">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-14">
@@ -541,7 +544,7 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+    <section id="corporate" className="w-full bg-white py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-12 lg:mt-0">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-16">
@@ -627,7 +630,7 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-16 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-8 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-12 lg:mt-0">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-16">
@@ -671,7 +674,7 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-16 md:py-48 lg:py-72 overflow-hidden mt-8 lg:mt-0"
+      className="relative w-full py-20 md:py-48 lg:py-72 overflow-hidden mt-12 lg:mt-0"
       style={{ background: "#222f39" }}
     >
       <div
@@ -762,7 +765,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main className="w-full">
+      <main className="w-full overflow-x-hidden">
         <Hero />
         <FeaturedVideo />
         <VideoTestimonialsSection />
