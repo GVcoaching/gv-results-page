@@ -420,11 +420,11 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
 const testimonialImages = [
   "/Testimonial pictures/Darren testimonial.png",
   "/Testimonial pictures/Kieran - 1.PNG",
-  "/Testimonial pictures/13.jpg",
+  "/Testimonial pictures/Results - 3.PNG",
   "/Testimonial pictures/Mani Konkon 2.PNG",
   "/Testimonial pictures/One of the First Things.PNG",
   "/Testimonial pictures/Results - 10.PNG",
-  "/Testimonial pictures/Results - 3.PNG",
+  "/Testimonial pictures/13.jpg",
   "/Testimonial pictures/Results - 5.PNG",
   "/Testimonial pictures/Results - 6.PNG",
   "/Testimonial pictures/Results - 7.PNG",
