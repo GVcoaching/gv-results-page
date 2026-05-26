@@ -693,7 +693,7 @@ function WellbeingTalksSection() {
             "Ongoing corporate health programmes",
             "Senior leadership performance coaching",
           ].map((item, i) => (
-            <p key={i} className="text-[#1c252e] text-[17px] text-center font-semibold">{item}</p>
+            <p key={i} className="text-[#1c252e] text-[17px] lg:text-[22px] text-center font-semibold">{item}</p>
           ))}
         </Reveal>
 
