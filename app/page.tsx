@@ -214,13 +214,13 @@ function Hero() {
       <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-16">
 
         {/* Headline */}
-        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-2xl w-full">
+        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
           Health &amp; Performance Coach for{" "}
           <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
         </h1>
 
         {/* Subtext */}
-        <p className="text-white/70 text-base font-light leading-[1.8] mt-8 w-full">
+        <p className="text-white/70 text-[1.05rem] font-light leading-[1.8] mt-8 w-full">
           Personalised one-to-one coaching for ambitious professionals who want
           to transform their health, sharpen their energy, and perform at the
           highest level — in work and in life.
@@ -249,7 +249,7 @@ function Hero() {
         </div>
 
         {/* Caption */}
-        <div className="mt-1 text-center">
+        <div className="mt-0 text-center">
           <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
           <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
         </div>
