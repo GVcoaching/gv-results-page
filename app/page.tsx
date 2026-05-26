@@ -142,7 +142,7 @@ function Navbar() {
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[15px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-[20px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
           <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
@@ -211,7 +211,7 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-8">
+      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-4">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
