@@ -220,7 +220,7 @@ function Hero() {
         </h1>
 
         {/* Subtext */}
-        <p className="text-white/70 text-[1.05rem] font-light leading-[1.8] mt-8 w-full">
+        <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
           Personalised one-to-one coaching for ambitious professionals who want
           to transform their health, sharpen their energy, and perform at the
           highest level — in work and in life.
@@ -251,7 +251,7 @@ function Hero() {
         {/* Caption */}
         <div className="mt-0 text-center">
           <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
-          <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
+          <p className="font-georgia text-white text-[16px] font-semibold">Health &amp; Performance Coach</p>
         </div>
       </div>
 
@@ -354,7 +354,7 @@ function FeaturedVideo() {
             </div>
           </div>
           <div className="bg-[#222f39] px-5 md:px-7 py-4 md:py-5 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-0 md:justify-between">
-            <span className="font-georgia text-white text-[14px] md:text-[15px] font-semibold tracking-wide">
+            <span className="font-georgia text-white text-[15px] md:text-[16px] font-semibold tracking-wide">
               George Vernon — Health &amp; Performance Coach
             </span>
             <a
@@ -693,7 +693,7 @@ function WellbeingTalksSection() {
             "Ongoing corporate health programmes",
             "Senior leadership performance coaching",
           ].map((item, i) => (
-            <p key={i} className="text-[#1c252e] text-[16px] text-center font-semibold">{item}</p>
+            <p key={i} className="text-[#1c252e] text-[17px] text-center font-semibold">{item}</p>
           ))}
         </Reveal>
 
@@ -761,7 +761,7 @@ function ConsultingSection() {
             Trusted by Organisations{" "}
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] w-full leading-relaxed text-center">
+          <p className="text-[#54595f] text-[18px] md:text-[20px] w-full leading-[1.8] text-center">
             George also consults for organisations across the UK, including The Principals Club — a private membership for dental practice owners — bringing the same evidence-based approach to organisational health and performance.
           </p>
         </Reveal>
@@ -811,7 +811,7 @@ function CTASection() {
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
-          <p className="text-white/65 text-[16px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-14 text-center">
+          <p className="text-white/65 text-[17px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-14 text-center">
             Find out exactly where you are with your health and what to focus on next.
           </p>
           <a
@@ -823,7 +823,7 @@ function CTASection() {
             Take Your Health Phase Test
             <ArrowRight size={15} />
           </a>
-          <p className="text-white/50 text-[16px] md:text-[18px] font-light tracking-wide mt-7 text-center">
+          <p className="text-white/50 text-[17px] md:text-[18px] font-light tracking-wide mt-7 text-center">
             Free · Takes 3 minutes · No commitment required
           </p>
         </Reveal>
@@ -838,7 +838,7 @@ function Footer() {
   return (
     <footer className="bg-[#1c252e] py-10">
       <div className="mx-auto w-full max-w-[1100px] px-4 md:px-8 flex flex-col items-center text-center gap-4">
-        <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[14px] w-full text-center block">
+        <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[15px] w-full text-center block">
           george@gvcoaching.co.uk
         </a>
         <div className="flex items-center gap-6">
