@@ -221,7 +221,7 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-24 pb-16">
+      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-32 pb-20">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-3xl w-full">
@@ -338,7 +338,7 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -396,6 +396,7 @@ function VideoTestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [mobileIndex, setMobileIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
   const total = youtubeVideos.length;
 
   const desktopScroll = (dir: "left" | "right") => {
@@ -403,8 +404,19 @@ function VideoTestimonialsSection() {
     scrollRef.current.scrollBy({ left: dir === "right" ? 584 : -584, behavior: "smooth" });
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) setMobileIndex(i => Math.min(total - 1, i + 1));
+      else setMobileIndex(i => Math.max(0, i - 1));
+    }
+  };
+
   return (
-    <section id="results" className="w-full bg-white py-28 md:pt-52 md:pb-44 lg:pt-80 lg:pb-72 overflow-hidden border-t border-[#e5e5e5]">
+    <section id="results" className="w-full bg-white py-40 md:pt-56 md:pb-52 lg:pt-96 lg:pb-80 overflow-hidden border-t border-[#e5e5e5]">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
@@ -419,9 +431,13 @@ function VideoTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: one card + dots (no arrow buttons) ── */}
+        {/* ── MOBILE: swipeable card + dots ── */}
         <div className="lg:hidden">
-          <div className="w-full">
+          <div
+            className="w-full"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <YouTubeVideoCard
               videoId={youtubeVideos[mobileIndex]}
               onClick={() => setActiveVideo(youtubeVideos[mobileIndex])}
@@ -534,6 +550,7 @@ const testimonialImages = [
 function ScreenshotTestimonialsSection() {
   const [mobileIndex, setMobileIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
   const total = testimonialImages.length;
 
   const desktopScroll = (dir: "left" | "right") => {
@@ -541,8 +558,19 @@ function ScreenshotTestimonialsSection() {
     scrollRef.current.scrollBy({ left: dir === "right" ? 624 : -624, behavior: "smooth" });
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) {
+      if (delta > 0) setMobileIndex(i => Math.min(total - 1, i + 1));
+      else setMobileIndex(i => Math.max(0, i - 1));
+    }
+  };
+
   return (
-    <section className="w-full bg-[#f7f7f7] py-28 md:py-52 lg:py-80 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-40 md:py-56 lg:py-96 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-10 lg:mb-14">
@@ -553,9 +581,13 @@ function ScreenshotTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: one card + dots (no arrow buttons) ── */}
+        {/* ── MOBILE: swipeable card + dots ── */}
         <div className="lg:hidden">
-          <div className="w-full overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]">
+          <div
+            className="w-full overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <img
               src={encodeURI(testimonialImages[mobileIndex])}
               alt={`Client testimonial ${mobileIndex + 1}`}
@@ -620,7 +652,7 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
+    <section id="corporate" className="w-full bg-white py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-10 lg:mb-16">
@@ -703,7 +735,7 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -744,7 +776,7 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-28 md:py-52 lg:py-80 overflow-hidden"
+      className="relative w-full py-40 md:py-56 lg:py-96 overflow-hidden"
       style={{ background: "#222f39" }}
     >
       <div
