@@ -259,15 +259,15 @@ function Hero() {
       <div className="hidden lg:block w-full px-0 py-6 relative">
         <div className="flex flex-row items-stretch gap-5">
 
-          <div className="flex-1 min-w-0 flex flex-col justify-center items-start pl-0">
+          <div className="flex-1 min-w-0 flex flex-col justify-center items-center pl-0">
             <h1
-              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-left"
+              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center"
               style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
               Health &amp; Performance Coach for{" "}
               <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
             </h1>
-            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-left">
+            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center">
               Personalised one-to-one coaching for ambitious professionals who want
               to transform their health, sharpen their energy, and perform at the
               highest level — in work and in life.
@@ -411,7 +411,7 @@ function VideoTestimonialsSection() {
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
-      <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
+      <div className="mx-auto w-full max-w-7xl lg:max-w-[1500px] px-6 md:px-8 lg:px-4 text-center">
 
         <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
@@ -471,7 +471,7 @@ function VideoTestimonialsSection() {
             <div className="relative w-full">
               <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-6 px-8 mx-auto scroll-hide pb-4"
+                className="flex overflow-x-auto gap-6 px-2 mx-auto scroll-hide pb-4"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 {youtubeVideos.map((id) => (
@@ -507,7 +507,7 @@ function YouTubeVideoCard({
     <div
       onClick={onClick}
       className={`${
-        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[560px]"
+        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[660px]"
       } group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer`}
       style={fullWidth ? undefined : { scrollSnapAlign: "start" }}
     >
@@ -573,13 +573,13 @@ function ScreenshotTestimonialsSection() {
 
   return (
     <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-56 md:mb-0 lg:py-96 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
+      <div className="mx-auto w-full max-w-7xl lg:max-w-[1500px] px-6 md:px-8 lg:px-4 text-center">
 
         <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(28px,4vw,54px)]">
             No Time to Watch the Videos?{" "}
-            <span className="text-[#c9a96e]">Here&apos;s What Clients Say.</span>
+            <span className="text-[#c9a96e]">Here&apos;s What Clients Achieve.</span>
           </h2>
         </Reveal>
 
@@ -636,20 +636,20 @@ function ScreenshotTestimonialsSection() {
             <div className="relative w-full">
               <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-8 px-8 mx-auto scroll-hide pb-4 items-start"
+                className="flex overflow-x-auto gap-8 px-2 mx-auto scroll-hide pb-4 items-start"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 {testimonialImages.map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                    style={{ scrollSnapAlign: "start", minHeight: "400px" }}
+                    className="flex-shrink-0 w-[700px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                    style={{ scrollSnapAlign: "start", minHeight: "460px" }}
                   >
                     <img
                       src={encodeURI(src)}
                       alt={`Client testimonial ${i + 1}`}
                       className="w-full h-full object-contain block"
-                      style={{ minHeight: "400px" }}
+                      style={{ minHeight: "460px" }}
                     />
                   </div>
                 ))}
@@ -678,7 +678,7 @@ function WellbeingTalksSection() {
             Invest in Your{" "}
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
-          <p className="text-[#1c252e] text-[18px] md:text-[20px] leading-[1.85]">
+          <p className="text-[#1c252e] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.85]">
             George delivers engaging health and wellbeing education talks to
             organisations across the UK, helping teams improve energy, focus
             and performance. Available for corporate events, away days and
@@ -761,7 +761,7 @@ function ConsultingSection() {
             Trusted by Organisations{" "}
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] w-full leading-[1.8] text-center">
+          <p className="text-[#54595f] text-[18px] md:text-[20px] lg:text-[22px] w-full leading-[1.8] text-center">
             George also consults for organisations across the UK, including The Principals Club — a private membership for dental practice owners — bringing the same evidence-based approach to organisational health and performance.
           </p>
         </Reveal>
