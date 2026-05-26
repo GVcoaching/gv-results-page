@@ -53,6 +53,17 @@ section.hero-section > div {
   text-align: unset;
 }
 
+/* Anchor scroll offset — compensate for fixed navbar */
+#results, #corporate {
+  scroll-margin-top: 72px;
+}
+
+@media (max-width: 1023px) {
+  #results, #corporate {
+    scroll-margin-top: 48px;
+  }
+}
+
 /* Hide scrollbar on carousels */
 .scroll-hide::-webkit-scrollbar { display: none; }
 .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
