@@ -236,8 +236,8 @@ function Hero() {
           highest level — in work and in life.
         </p>
 
-        {/* CTA buttons */}
-        <div className="flex flex-col gap-4 mt-8 w-full">
+        {/* CTA button */}
+        <div className="mt-8 w-full">
           <a
             href="https://health.gvcoaching.co.uk/"
             target="_blank"
@@ -245,13 +245,6 @@ function Hero() {
             className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
           >
             Take Your Health Phase Test
-            <ArrowRight size={14} />
-          </a>
-          <a
-            href="mailto:george@gvcoaching.co.uk"
-            className="inline-flex items-center justify-center gap-3 border border-[#c9a96e] text-[#c9a96e] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
-          >
-            Enquire Now
             <ArrowRight size={14} />
           </a>
         </div>
@@ -345,7 +338,7 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -411,7 +404,7 @@ function VideoTestimonialsSection() {
   };
 
   return (
-    <section id="results" className="w-full bg-white py-20 md:pt-52 md:pb-44 lg:pt-72 lg:pb-60 overflow-hidden border-t border-[#e5e5e5]">
+    <section id="results" className="w-full bg-white py-28 md:pt-52 md:pb-44 lg:pt-80 lg:pb-72 overflow-hidden border-t border-[#e5e5e5]">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
@@ -426,32 +419,14 @@ function VideoTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: one card + arrows + dots ── */}
+        {/* ── MOBILE: one card + dots (no arrow buttons) ── */}
         <div className="lg:hidden">
-          <div className="relative flex items-center gap-2">
-            <button
-              onClick={() => setMobileIndex(i => Math.max(0, i - 1))}
-              disabled={mobileIndex === 0}
-              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] text-[#222f39] disabled:opacity-20"
-              aria-label="Previous video"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <div className="flex-1 min-w-0">
-              <YouTubeVideoCard
-                videoId={youtubeVideos[mobileIndex]}
-                onClick={() => setActiveVideo(youtubeVideos[mobileIndex])}
-                fullWidth
-              />
-            </div>
-            <button
-              onClick={() => setMobileIndex(i => Math.min(total - 1, i + 1))}
-              disabled={mobileIndex === total - 1}
-              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] text-[#222f39] disabled:opacity-20"
-              aria-label="Next video"
-            >
-              <ChevronRight size={20} />
-            </button>
+          <div className="w-full">
+            <YouTubeVideoCard
+              videoId={youtubeVideos[mobileIndex]}
+              onClick={() => setActiveVideo(youtubeVideos[mobileIndex])}
+              fullWidth
+            />
           </div>
           <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
             {youtubeVideos.map((_, i) => (
@@ -567,7 +542,7 @@ function ScreenshotTestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-48 lg:py-64 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-28 md:py-52 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-10 lg:mb-14">
@@ -578,32 +553,14 @@ function ScreenshotTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: one card + arrows + dots ── */}
+        {/* ── MOBILE: one card + dots (no arrow buttons) ── */}
         <div className="lg:hidden">
-          <div className="relative flex items-center gap-2">
-            <button
-              onClick={() => setMobileIndex(i => Math.max(0, i - 1))}
-              disabled={mobileIndex === 0}
-              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] bg-white text-[#222f39] disabled:opacity-20"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <div className="flex-1 min-w-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]">
-              <img
-                src={encodeURI(testimonialImages[mobileIndex])}
-                alt={`Client testimonial ${mobileIndex + 1}`}
-                className="w-full h-auto block"
-              />
-            </div>
-            <button
-              onClick={() => setMobileIndex(i => Math.min(total - 1, i + 1))}
-              disabled={mobileIndex === total - 1}
-              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] bg-white text-[#222f39] disabled:opacity-20"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={20} />
-            </button>
+          <div className="w-full overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]">
+            <img
+              src={encodeURI(testimonialImages[mobileIndex])}
+              alt={`Client testimonial ${mobileIndex + 1}`}
+              className="w-full h-auto block"
+            />
           </div>
           <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
             {testimonialImages.map((_, i) => (
@@ -663,7 +620,7 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
+    <section id="corporate" className="w-full bg-white py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-10 lg:mb-16">
@@ -721,18 +678,18 @@ function WellbeingTalksSection() {
         </Reveal>
 
         <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm">
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm lg:aspect-[4/3]">
             <img
               src={encodeURI("/Public speaking/IMG_3363.jpg")}
               alt="George Vernon speaking"
-              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
+              className="w-full h-auto block lg:h-full lg:object-cover lg:object-center hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm">
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm lg:aspect-[4/3]">
             <img
               src={encodeURI("/Public speaking/IMG_4770.jpg")}
               alt="George Vernon presenting"
-              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
+              className="w-full h-auto block lg:h-full lg:object-cover lg:object-center hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
         </Reveal>
@@ -746,7 +703,7 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-28 md:py-44 lg:py-72 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -787,7 +744,7 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-20 md:py-48 lg:py-72 overflow-hidden"
+      className="relative w-full py-28 md:py-52 lg:py-80 overflow-hidden"
       style={{ background: "#222f39" }}
     >
       <div
