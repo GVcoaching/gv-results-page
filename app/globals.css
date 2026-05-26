@@ -81,7 +81,7 @@ section.hero-section > div {
 
 @media (min-width: 1024px) {
   section:not(.hero-section) {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
   }
 }

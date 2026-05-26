@@ -331,7 +331,7 @@ function FeaturedVideo() {
     <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="w-full text-center mb-10 lg:mb-16">
+        <Reveal className="w-full text-center mb-8 lg:mb-8">
           <EyebrowCenter>Watch</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,56px)]">
             What Makes GV Coaching Different
@@ -411,9 +411,9 @@ function VideoTestimonialsSection() {
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
-      <div className="mx-auto w-full max-w-7xl lg:max-w-[1500px] px-6 md:px-8 lg:px-4 text-center">
+      <div className="mx-auto w-full max-w-7xl lg:max-w-none px-6 md:px-8 lg:px-6 text-center">
 
-        <Reveal className="text-center mb-10 lg:mb-14">
+        <Reveal className="text-center mb-8 lg:mb-8">
           <EyebrowCenter>Client Results</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(34px,5vw,64px)]">
             Straight From{" "}
@@ -471,7 +471,7 @@ function VideoTestimonialsSection() {
             <div className="relative w-full">
               <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-6 px-2 mx-auto scroll-hide pb-4"
+                className="flex overflow-x-auto gap-5 px-0 mx-auto scroll-hide pb-4"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 {youtubeVideos.map((id) => (
@@ -507,7 +507,7 @@ function YouTubeVideoCard({
     <div
       onClick={onClick}
       className={`${
-        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[660px]"
+        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[46vw]"
       } group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer`}
       style={fullWidth ? undefined : { scrollSnapAlign: "start" }}
     >
@@ -573,9 +573,9 @@ function ScreenshotTestimonialsSection() {
 
   return (
     <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-56 md:mb-0 lg:py-96 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-7xl lg:max-w-[1500px] px-6 md:px-8 lg:px-4 text-center">
+      <div className="mx-auto w-full max-w-7xl lg:max-w-none px-6 md:px-8 lg:px-6 text-center">
 
-        <Reveal className="text-center mb-10 lg:mb-14">
+        <Reveal className="text-center mb-8 lg:mb-8">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(28px,4vw,54px)]">
             No Time to Watch the Videos?{" "}
@@ -636,13 +636,13 @@ function ScreenshotTestimonialsSection() {
             <div className="relative w-full">
               <div
                 ref={scrollRef}
-                className="flex overflow-x-auto gap-8 px-2 mx-auto scroll-hide pb-4 items-start"
+                className="flex overflow-x-auto gap-4 px-0 mx-auto scroll-hide pb-4 items-start"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 {testimonialImages.map((src, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-[700px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                    className="flex-shrink-0 w-[48vw] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
                     style={{ scrollSnapAlign: "start", minHeight: "460px" }}
                   >
                     <img
@@ -672,7 +672,7 @@ function WellbeingTalksSection() {
     <section id="corporate" className="w-full bg-white py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="text-center w-full mb-10 lg:mb-16">
+        <Reveal className="text-center w-full mb-8 lg:mb-8">
           <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
             Invest in Your{" "}
@@ -686,7 +686,7 @@ function WellbeingTalksSection() {
           </p>
         </Reveal>
 
-        <Reveal delay={150} className="max-w-lg mx-auto mb-12 space-y-3 text-center">
+        <Reveal delay={150} className="max-w-lg mx-auto mb-8 space-y-3 text-center">
           {[
             "Keynote wellness talks (60–90 min)",
             "Half-day & full-day employee workshops",
@@ -697,7 +697,7 @@ function WellbeingTalksSection() {
           ))}
         </Reveal>
 
-        <Reveal delay={250} className="mb-16 lg:mb-20 w-full md:w-auto">
+        <Reveal delay={250} className="mb-8 lg:mb-10 w-full md:w-auto">
           <a
             href="mailto:george@gvcoaching.co.uk"
             className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.1em] uppercase px-8 py-[18px] w-full md:w-auto min-h-[44px]"
@@ -707,7 +707,7 @@ function WellbeingTalksSection() {
           </a>
         </Reveal>
 
-        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-12">
+        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-8">
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
@@ -755,7 +755,7 @@ function ConsultingSection() {
     <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="w-full text-center mb-10 lg:mb-16">
+        <Reveal className="w-full text-center mb-8 lg:mb-8">
           <EyebrowCenter>Expert Consulting</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
             Trusted by Organisations{" "}
