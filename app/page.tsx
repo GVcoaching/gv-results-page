@@ -13,7 +13,7 @@ function EyebrowCenter({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-center gap-3 mb-5">
       <GoldBar />
-      <span className="font-georgia text-[#c9a96e] text-[15px] tracking-[0.2em] uppercase font-semibold">
+      <span className="font-georgia text-[#c9a96e] text-[14px] md:text-[15px] tracking-[0.2em] uppercase font-semibold">
         {children}
       </span>
       <GoldBar />
@@ -361,11 +361,20 @@ function FeaturedVideo() {
               href="https://health.gvcoaching.co.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors flex items-center gap-2 whitespace-nowrap md:ml-4"
+              className="hidden md:flex text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors items-center gap-2 whitespace-nowrap md:ml-4"
             >
               Take Your Health Phase Test <ArrowRight size={12} />
             </a>
           </div>
+          {/* Mobile-only CTA button */}
+          <a
+            href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden mt-4 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
+          >
+            Take Your Health Phase Test <ArrowRight size={14} />
+          </a>
         </Reveal>
 
       </div>
@@ -802,16 +811,16 @@ function CTASection() {
       />
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center relative">
         <Reveal className="flex flex-col items-center w-full">
-          <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex items-center justify-center gap-4 mb-6 md:mb-10">
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
-            <span className="font-georgia text-[#c9a96e] text-[12px] tracking-[0.25em] uppercase font-semibold">Start Here</span>
+            <span className="font-georgia text-[#c9a96e] text-[13px] tracking-[0.25em] uppercase font-semibold">Start Here</span>
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
           </div>
           <h2 className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center text-[2rem] lg:text-[clamp(28px,6.5vw,84px)]">
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
-          <p className="text-white/65 text-[17px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-14 text-center">
+          <p className="text-white/65 text-[17px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-8 md:mb-14 text-center">
             Find out exactly where you are with your health and what to focus on next.
           </p>
           <a
