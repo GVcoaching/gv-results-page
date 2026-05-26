@@ -709,7 +709,7 @@ function WellbeingTalksSection() {
         <Reveal delay={250} className="mb-8 lg:mb-10 w-full md:w-auto">
           <a
             href="mailto:george@gvcoaching.co.uk"
-            className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] md:tracking-[0.1em] uppercase px-6 md:px-8 py-[18px] w-full md:w-auto min-h-[44px]"
+            className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] md:tracking-[0.1em] uppercase px-6 md:px-8 lg:px-14 py-[18px] w-full md:w-auto min-h-[44px]"
           >
             Enquire About a Wellbeing Talk
             <ArrowRight size={13} />
