@@ -132,17 +132,17 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 bg-[#222f39] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 bg-white ${
         scrolled
-          ? "lg:bg-white lg:shadow-[0_2px_20px_rgba(0,0,0,0.08)] lg:border-b lg:border-[#e5e5e5]"
-          : "lg:bg-white/95"
+          ? "shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-[#e5e5e5]"
+          : ""
       }`}
     >
       <div className="w-full px-4 lg:px-24 flex items-center justify-between h-12 lg:h-[72px]">
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[20px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-[20px] lg:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
           <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
@@ -171,9 +171,9 @@ function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
         </button>
       </div>
 
@@ -201,7 +201,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full lg:min-h-[72vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[72px]"
+      className="hero-section relative w-full lg:min-h-[72vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[110px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -837,7 +837,7 @@ function CTASection() {
 function Footer() {
   return (
     <footer className="bg-[#1c252e] py-10">
-      <div className="mx-auto w-full max-w-[1100px] px-4 md:px-8 flex flex-col items-center text-center gap-4">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center text-center gap-4">
         <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[15px] w-full text-center block">
           george@gvcoaching.co.uk
         </a>
