@@ -69,6 +69,7 @@ section.hero-section > div {
 @media (max-width: 1023px) {
   .mobile-hero-content {
     padding-top: 40px !important;
+    text-align: center !important;
   }
 
   section {

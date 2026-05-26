@@ -249,7 +249,7 @@ function Hero() {
         </div>
 
         {/* Caption */}
-        <div className="mt-8 text-center">
+        <div className="mt-1 text-center">
           <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
           <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
         </div>
@@ -333,7 +333,7 @@ function FeaturedVideo() {
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
           <EyebrowCenter>Watch</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-3xl lg:text-[clamp(32px,4.5vw,56px)]">
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,56px)]">
             What Makes GV Coaching Different
           </h2>
         </Reveal>
@@ -415,7 +415,7 @@ function VideoTestimonialsSection() {
 
         <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-3xl lg:text-[clamp(34px,5vw,64px)]">
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(34px,5vw,64px)]">
             Straight From{" "}
             <span className="text-[#c9a96e]">The Clients.</span>
           </h2>
@@ -577,7 +577,7 @@ function ScreenshotTestimonialsSection() {
 
         <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-3xl lg:text-[clamp(28px,4vw,54px)]">
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(28px,4vw,54px)]">
             No Time to Watch the Videos?{" "}
             <span className="text-[#c9a96e]">Here&apos;s What Clients Say.</span>
           </h2>
@@ -674,7 +674,7 @@ function WellbeingTalksSection() {
 
         <Reveal className="text-center w-full mb-10 lg:mb-16">
           <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-3xl lg:text-[clamp(32px,4.5vw,58px)]">
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
             Invest in Your{" "}
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
@@ -757,7 +757,7 @@ function ConsultingSection() {
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
           <EyebrowCenter>Expert Consulting</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-3xl lg:text-[clamp(32px,4.5vw,58px)]">
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
             Trusted by Organisations{" "}
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
@@ -807,7 +807,7 @@ function CTASection() {
             <span className="font-georgia text-[#c9a96e] text-[12px] tracking-[0.25em] uppercase font-semibold">Start Here</span>
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
           </div>
-          <h2 className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center text-3xl lg:text-[clamp(28px,6.5vw,84px)]">
+          <h2 className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center text-[2rem] lg:text-[clamp(28px,6.5vw,84px)]">
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
