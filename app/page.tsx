@@ -834,20 +834,88 @@ function CTASection() {
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 
-function Footer() {
+function PolicyModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
   return (
-    <footer className="bg-[#1c252e] py-10">
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center text-center gap-4">
-        <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[15px] w-full text-center block">
-          george@gvcoaching.co.uk
-        </a>
-        <div className="flex items-center gap-6">
-          <a href="#" className="text-white/35 hover:text-white/70 transition-colors text-[11px] tracking-[0.15em] uppercase">Privacy Policy</a>
-          <span className="text-white/15 text-[11px]">|</span>
-          <p className="text-white/25 text-[11px]">&copy; 2026 GV Coaching Ltd</p>
+    <div
+      className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-8"
+      style={{ background: "rgba(10,12,14,0.85)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full md:max-w-2xl bg-white max-h-[88vh] overflow-y-auto"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="h-[3px] bg-[#c9a96e]" />
+        <div className="px-6 md:px-10 py-8">
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 text-[#222f39]/40 hover:text-[#222f39] transition-colors text-[20px] leading-none"
+            aria-label="Close"
+          >✕</button>
+          <h2 className="font-georgia text-[#222f39] text-[20px] md:text-[24px] font-bold mb-2 pr-8">
+            Fulfillment, Refund &amp; Cancellation Policy
+          </h2>
+          <p className="text-[#c9a96e] text-[11px] tracking-[0.2em] uppercase mb-6">GV Coaching Ltd</p>
+          <p className="text-[#54595f] text-[15px] leading-[1.8] mb-8">
+            At GV Coaching Ltd, we strive to deliver the highest quality service and a seamless customer experience. Please review our policies below before making a purchase.
+          </p>
+
+          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Fulfillment Policy</h3>
+          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+            <li>All digital products and services are delivered promptly via email or through our secure online platforms.</li>
+            <li>For coaching programmes, access details and scheduling information will be provided within 24 hours of purchase.</li>
+          </ul>
+
+          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Refund Policy</h3>
+          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+            <li>Refunds are only available for coaching programmes within the first 14 days after purchase.</li>
+            <li>For exceptional circumstances, refund requests will be reviewed on a case-by-case basis.</li>
+          </ul>
+
+          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Cancellation Policy</h3>
+          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+            <li>Coaching programme subscriptions can be cancelled after the initial agreement period with 30 days&apos; notice. You will retain access until the end of your current billing cycle.</li>
+            <li>To cancel, contact <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:underline">george@gvcoaching.co.uk</a> at least 30 days before your next billing date.</li>
+          </ul>
+
+          <p className="text-[#54595f] text-[14px] leading-[1.8] border-t border-[#e5e5e5] pt-6">
+            For further assistance contact{" "}
+            <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:underline">george@gvcoaching.co.uk</a>.
+          </p>
         </div>
       </div>
-    </footer>
+    </div>
+  );
+}
+
+function Footer() {
+  const [policyOpen, setPolicyOpen] = useState(false);
+  return (
+    <>
+      {policyOpen && <PolicyModal onClose={() => setPolicyOpen(false)} />}
+      <footer className="bg-[#1c252e] py-10">
+        <div className="mx-auto w-full max-w-5xl px-6 md:px-8 text-center">
+          <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[15px] block mb-4">
+            george@gvcoaching.co.uk
+          </a>
+          <div className="flex items-center justify-center gap-6">
+            <button
+              onClick={() => setPolicyOpen(true)}
+              className="text-white/35 hover:text-white/70 transition-colors text-[11px] tracking-[0.15em] uppercase cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            <span className="text-white/15 text-[11px]">|</span>
+            <p className="text-white/25 text-[11px]">&copy; 2026 GV Coaching Ltd</p>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
 

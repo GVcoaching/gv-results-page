@@ -77,6 +77,10 @@ section.hero-section > div {
     padding-bottom: 32px !important;
     margin-bottom: 0px !important;
   }
+
+  section.hero-section {
+    padding-bottom: 8px !important;
+  }
 }
 
 @media (min-width: 1024px) {
