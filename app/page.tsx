@@ -221,7 +221,7 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-32 pb-20">
+      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-40 pb-20">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-3xl w-full">
@@ -431,18 +431,30 @@ function VideoTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: swipeable card + dots ── */}
+        {/* ── MOBILE: smooth sliding carousel ── */}
         <div className="lg:hidden">
           <div
-            className="w-full"
+            className="w-full overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            <YouTubeVideoCard
-              videoId={youtubeVideos[mobileIndex]}
-              onClick={() => setActiveVideo(youtubeVideos[mobileIndex])}
-              fullWidth
-            />
+            <div
+              className="flex"
+              style={{
+                transform: `translateX(-${mobileIndex * 100}%)`,
+                transition: "transform 0.3s ease",
+              }}
+            >
+              {youtubeVideos.map((id) => (
+                <div key={id} className="w-full flex-shrink-0">
+                  <YouTubeVideoCard
+                    videoId={id}
+                    onClick={() => setActiveVideo(id)}
+                    fullWidth
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
             {youtubeVideos.map((_, i) => (
@@ -455,7 +467,7 @@ function VideoTestimonialsSection() {
             ))}
           </div>
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
-            Swipe left to see more →
+            Swipe to see more →
           </p>
         </div>
 
@@ -581,18 +593,33 @@ function ScreenshotTestimonialsSection() {
           </h2>
         </Reveal>
 
-        {/* ── MOBILE: swipeable card + dots ── */}
+        {/* ── MOBILE: smooth sliding carousel ── */}
         <div className="lg:hidden">
           <div
-            className="w-full overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]"
+            className="w-full overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            <img
-              src={encodeURI(testimonialImages[mobileIndex])}
-              alt={`Client testimonial ${mobileIndex + 1}`}
-              className="w-full h-auto block"
-            />
+            <div
+              className="flex"
+              style={{
+                transform: `translateX(-${mobileIndex * 100}%)`,
+                transition: "transform 0.3s ease",
+              }}
+            >
+              {testimonialImages.map((src, i) => (
+                <div
+                  key={i}
+                  className="w-full flex-shrink-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]"
+                >
+                  <img
+                    src={encodeURI(src)}
+                    alt={`Client testimonial ${i + 1}`}
+                    className="w-full h-auto block"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
             {testimonialImages.map((_, i) => (
@@ -605,7 +632,7 @@ function ScreenshotTestimonialsSection() {
             ))}
           </div>
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
-            Swipe left to see more →
+            Swipe to see more →
           </p>
         </div>
 
