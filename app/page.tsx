@@ -132,24 +132,27 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 bg-[#222f39] ${
         scrolled
-          ? "bg-white shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-[#e5e5e5]"
-          : "bg-white/95"
+          ? "lg:bg-white lg:shadow-[0_2px_20px_rgba(0,0,0,0.08)] lg:border-b lg:border-[#e5e5e5]"
+          : "lg:bg-white/95"
       }`}
     >
-      <div className="w-full px-4 md:px-12 lg:px-24 flex items-center justify-between h-[72px]">
+      <div className="w-full px-4 lg:px-24 flex items-center justify-between h-[72px]">
+
+        {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[22px] md:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-[22px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
-          <span className="text-[#c9a96e] font-georgia text-[22px] md:text-[24px] font-bold leading-tight">|</span>
-          <span className="hidden sm:block font-georgia text-[16px] text-[#54595f] leading-tight tracking-wide whitespace-nowrap">
+          <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
+          <span className="hidden lg:block font-georgia text-[16px] text-[#54595f] leading-tight tracking-wide whitespace-nowrap">
             Health &amp; Performance Coach
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop nav — lg+ only */}
+        <div className="hidden lg:flex items-center gap-8">
           <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Results</a>
           <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Talks</a>
           <a
@@ -162,22 +165,39 @@ function Navbar() {
           </a>
         </div>
 
-        <button
-          className="md:hidden flex flex-col gap-[5px] p-1 flex-shrink-0"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-        </button>
+        {/* Mobile — gold CTA + hamburger */}
+        <div className="lg:hidden flex items-center gap-3 flex-shrink-0">
+          <a
+            href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 bg-[#c9a96e] text-[#222f39] text-[11px] font-bold tracking-[0.08em] uppercase px-4 py-2.5 whitespace-nowrap"
+          >
+            Health Phase Test <ArrowRight size={10} />
+          </a>
+          <button
+            className="flex flex-col gap-[5px] p-1"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+          </button>
+        </div>
       </div>
 
+      {/* Mobile drawer */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t border-[#e5e5e5] px-6 py-8 flex flex-col gap-6 shadow-lg">
-          <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-[#222f39] tracking-wide">Results</a>
-          <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-[#222f39] tracking-wide">Wellbeing Talks</a>
-          <a href="https://health.gvcoaching.co.uk/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-center text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4">
+        <div className="lg:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
+          <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
+          <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Talks</a>
+          <a
+            href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4"
+          >
             Take Your Health Phase Test <ArrowRight size={12} />
           </a>
         </div>
@@ -200,54 +220,62 @@ function Hero() {
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      {/* ── MOBILE LAYOUT — full-screen hero (hidden on lg+) ── */}
-      <div className="lg:hidden relative overflow-hidden" style={{ height: "100svh" }}>
-        {/* Background headshot */}
-        <img
-          src="/Headshot/IMG_8821.jpg"
-          alt="George Vernon — Health & Performance Coach"
-          className="absolute inset-0 w-full h-full object-cover object-top block"
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.55)", zIndex: 1 }} />
-        {/* Content */}
-        <div
-          className="relative flex flex-col items-center text-center px-6 h-full"
-          style={{ zIndex: 10, paddingTop: "5rem", paddingBottom: "calc(env(safe-area-inset-bottom) + 2rem)" }}
-        >
-          <h1
-            className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-2xl"
-            style={{ overflowWrap: "break-word", maxWidth: "100%" }}
-          >
-            Health &amp; Performance Coach for{" "}
-            <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
-          </h1>
-          <p className="text-white/70 text-[16px] font-light leading-[1.8] mt-5" style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
-            Personalised one-to-one coaching for ambitious professionals who want
-            to transform their health, sharpen their energy, and perform at the
-            highest level — in work and in life.
-          </p>
-          <div className="text-center mt-4">
-            <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
-            <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
-          </div>
+      {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
+      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-24 pb-16">
+
+        {/* Headline */}
+        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-3xl w-full">
+          Health &amp; Performance Coach for{" "}
+          <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+        </h1>
+
+        {/* Subtext */}
+        <p className="text-white/70 text-base font-light leading-[1.8] mt-8 w-full">
+          Personalised one-to-one coaching for ambitious professionals who want
+          to transform their health, sharpen their energy, and perform at the
+          highest level — in work and in life.
+        </p>
+
+        {/* CTA buttons */}
+        <div className="flex flex-col gap-4 mt-8 w-full">
           <a
             href="https://health.gvcoaching.co.uk/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-auto inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+            className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
           >
             Take Your Health Phase Test
             <ArrowRight size={14} />
           </a>
+          <a
+            href="mailto:george@gvcoaching.co.uk"
+            className="inline-flex items-center justify-center gap-3 border border-[#c9a96e] text-[#c9a96e] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
+          >
+            Enquire Now
+            <ArrowRight size={14} />
+          </a>
+        </div>
+
+        {/* Headshot — full width, natural ratio */}
+        <div className="mt-8 w-full">
+          <img
+            src="/Headshot/IMG_8821.jpg"
+            alt="George Vernon — Health & Performance Coach"
+            className="w-full h-auto block"
+          />
+        </div>
+
+        {/* Caption */}
+        <div className="mt-8 text-center">
+          <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
+          <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
         </div>
       </div>
 
-      {/* ── DESKTOP LAYOUT — two-column (hidden below lg:) ── */}
+      {/* ── DESKTOP: two-column (hidden below lg) ── */}
       <div className="hidden lg:block w-full px-0 py-6 relative">
         <div className="flex flex-row items-stretch gap-5">
 
-          {/* Left: headline + subtext */}
           <div className="flex-1 min-w-0 flex flex-col justify-center items-start pl-0">
             <h1
               className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-left"
@@ -263,7 +291,6 @@ function Hero() {
             </p>
           </div>
 
-          {/* Right: headshot + CTA below */}
           <div className="w-[46%] flex-shrink-0 flex flex-col pr-0">
             <div className="relative flex-1 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.4)] min-h-[460px]">
               <img
@@ -318,15 +345,12 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 mt-12 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="w-full text-center mb-16">
+        <Reveal className="w-full text-center mb-10 lg:mb-16">
           <EyebrowCenter>Watch</EyebrowCenter>
-          <h2
-            className="font-georgia text-[#222f39] font-bold leading-tight mb-5"
-            style={{ fontSize: "clamp(32px, 4.5vw, 56px)" }}
-          >
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-3xl lg:text-[clamp(32px,4.5vw,56px)]">
             What Makes GV Coaching Different
           </h2>
         </Reveal>
@@ -377,62 +401,110 @@ const youtubeVideos = [
 
 function VideoTestimonialsSection() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [mobileIndex, setMobileIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const total = youtubeVideos.length;
 
-  const scroll = (dir: "left" | "right") => {
+  const desktopScroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollBy({ left: dir === "right" ? 584 : -584, behavior: "smooth" });
   };
 
   return (
-    <section id="results" className="w-full bg-white pt-20 pb-20 md:pt-52 md:pb-44 lg:pt-72 lg:pb-60 overflow-hidden mt-12 lg:mt-0">
+    <section id="results" className="w-full bg-white py-20 md:pt-52 md:pb-44 lg:pt-72 lg:pb-60 overflow-hidden border-t border-[#e5e5e5]">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
 
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
-        <Reveal className="text-center mb-14">
+        <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>Client Results</EyebrowCenter>
-          <h2
-            className="font-georgia text-[#222f39] font-bold leading-tight"
-            style={{ fontSize: "clamp(34px, 5vw, 64px)" }}
-          >
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-3xl lg:text-[clamp(34px,5vw,64px)]">
             Straight From{" "}
             <span className="text-[#c9a96e]">The Clients.</span>
           </h2>
         </Reveal>
 
-        <div className="hidden md:flex justify-end mb-5 gap-3">
-          <button onClick={() => scroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
-          <button onClick={() => scroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
+        {/* ── MOBILE: one card + arrows + dots ── */}
+        <div className="lg:hidden">
+          <div className="relative flex items-center gap-2">
+            <button
+              onClick={() => setMobileIndex(i => Math.max(0, i - 1))}
+              disabled={mobileIndex === 0}
+              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] text-[#222f39] disabled:opacity-20"
+              aria-label="Previous video"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex-1 min-w-0">
+              <YouTubeVideoCard
+                videoId={youtubeVideos[mobileIndex]}
+                onClick={() => setActiveVideo(youtubeVideos[mobileIndex])}
+                fullWidth
+              />
+            </div>
+            <button
+              onClick={() => setMobileIndex(i => Math.min(total - 1, i + 1))}
+              disabled={mobileIndex === total - 1}
+              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] text-[#222f39] disabled:opacity-20"
+              aria-label="Next video"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+          <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
+            {youtubeVideos.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setMobileIndex(i)}
+                className={`w-2 h-2 rounded-full transition-colors ${i === mobileIndex ? "bg-[#c9a96e]" : "bg-[#d9d9d9]"}`}
+                aria-label={`Video ${i + 1}`}
+              />
+            ))}
+          </div>
+          <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
+            Swipe left to see more →
+          </p>
         </div>
 
-        <Reveal delay={150} className="w-full flex justify-center">
-          <div className="relative w-full">
-            <div
-              ref={scrollRef}
-              className="flex overflow-x-auto gap-6 px-6 md:px-8 mx-auto scroll-hide pb-4"
-              style={{ scrollSnapType: "x mandatory" }}
-            >
-              {youtubeVideos.map((id) => (
-                <YouTubeVideoCard key={id} videoId={id} onClick={() => setActiveVideo(id)} />
-              ))}
-            </div>
-            <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white to-transparent pointer-events-none" />
-            <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none" />
+        {/* ── DESKTOP: horizontal scroll ── */}
+        <div className="hidden lg:block">
+          <div className="flex justify-end mb-5 gap-3">
+            <button onClick={() => desktopScroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
+            <button onClick={() => desktopScroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
           </div>
-        </Reveal>
+          <Reveal delay={150} className="w-full flex justify-center">
+            <div className="relative w-full">
+              <div
+                ref={scrollRef}
+                className="flex overflow-x-auto gap-6 px-8 mx-auto scroll-hide pb-4"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                {youtubeVideos.map((id) => (
+                  <YouTubeVideoCard key={id} videoId={id} onClick={() => setActiveVideo(id)} />
+                ))}
+              </div>
+              <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white to-transparent pointer-events-none" />
+              <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none" />
+            </div>
+          </Reveal>
+        </div>
 
-        <p className="lg:hidden text-[#c9a96e] text-lg font-bold text-center mt-6">
-          Swipe left to see more →
-        </p>
       </div>
     </section>
   );
 }
 
-function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () => void }) {
+function YouTubeVideoCard({
+  videoId,
+  onClick,
+  fullWidth = false,
+}: {
+  videoId: string;
+  onClick: () => void;
+  fullWidth?: boolean;
+}) {
   const [imgError, setImgError] = useState(false);
   const thumbUrl = imgError
     ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
@@ -441,8 +513,10 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 w-[300px] md:w-[560px] group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer"
-      style={{ scrollSnapAlign: "start" }}
+      className={`${
+        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[560px]"
+      } group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer`}
+      style={fullWidth ? undefined : { scrollSnapAlign: "start" }}
     >
       <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
         <img
@@ -452,7 +526,7 @@ function YouTubeVideoCard({ videoId, onClick }: { videoId: string; onClick: () =
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
         />
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/18 transition-colors duration-300" />
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-[72px] h-[72px] rounded-full bg-white/90 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
             <svg width="22" height="24" viewBox="0 0 22 24" fill="none" className="ml-1">
@@ -483,63 +557,103 @@ const testimonialImages = [
 ];
 
 function ScreenshotTestimonialsSection() {
+  const [mobileIndex, setMobileIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const total = testimonialImages.length;
 
-  const scroll = (dir: "left" | "right") => {
+  const desktopScroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollBy({ left: dir === "right" ? 624 : -624, behavior: "smooth" });
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-48 lg:py-64 border-t border-[#e5e5e5] mt-12 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-48 lg:py-64 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
-        <Reveal className="text-center mb-14">
+        <Reveal className="text-center mb-10 lg:mb-14">
           <EyebrowCenter>More Testimonials</EyebrowCenter>
-          <h2
-            className="font-georgia text-[#222f39] font-bold leading-tight"
-            style={{ fontSize: "clamp(28px, 4vw, 54px)" }}
-          >
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-3xl lg:text-[clamp(28px,4vw,54px)]">
             No Time to Watch the Videos?{" "}
             <span className="text-[#c9a96e]">Here&apos;s What Clients Say.</span>
           </h2>
         </Reveal>
 
-        <div className="hidden md:flex justify-end mb-5 gap-3">
-          <button onClick={() => scroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
-          <button onClick={() => scroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
+        {/* ── MOBILE: one card + arrows + dots ── */}
+        <div className="lg:hidden">
+          <div className="relative flex items-center gap-2">
+            <button
+              onClick={() => setMobileIndex(i => Math.max(0, i - 1))}
+              disabled={mobileIndex === 0}
+              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] bg-white text-[#222f39] disabled:opacity-20"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex-1 min-w-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]">
+              <img
+                src={encodeURI(testimonialImages[mobileIndex])}
+                alt={`Client testimonial ${mobileIndex + 1}`}
+                className="w-full h-auto block"
+              />
+            </div>
+            <button
+              onClick={() => setMobileIndex(i => Math.min(total - 1, i + 1))}
+              disabled={mobileIndex === total - 1}
+              className="flex-shrink-0 w-11 h-11 flex items-center justify-center border border-[#e5e5e5] bg-white text-[#222f39] disabled:opacity-20"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+          <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
+            {testimonialImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setMobileIndex(i)}
+                className={`w-2 h-2 rounded-full transition-colors ${i === mobileIndex ? "bg-[#c9a96e]" : "bg-[#d9d9d9]"}`}
+                aria-label={`Testimonial ${i + 1}`}
+              />
+            ))}
+          </div>
+          <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
+            Swipe left to see more →
+          </p>
         </div>
 
-        <Reveal delay={150} className="w-full flex justify-center">
-          <div className="relative w-full">
-            <div
-              ref={scrollRef}
-              className="flex overflow-x-auto gap-8 px-6 md:px-8 mx-auto scroll-hide pb-4 items-start"
-              style={{ scrollSnapType: "x mandatory" }}
-            >
-              {testimonialImages.map((src, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 w-[300px] md:w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                  style={{ scrollSnapAlign: "start", minHeight: "400px" }}
-                >
-                  <img
-                    src={encodeURI(src)}
-                    alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-full object-contain block"
-                    style={{ minHeight: "400px" }}
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-[#f7f7f7] to-transparent pointer-events-none" />
-            <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-[#f7f7f7] to-transparent pointer-events-none" />
+        {/* ── DESKTOP: horizontal scroll ── */}
+        <div className="hidden lg:block">
+          <div className="flex justify-end mb-5 gap-3">
+            <button onClick={() => desktopScroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
+            <button onClick={() => desktopScroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
           </div>
-        </Reveal>
+          <Reveal delay={150} className="w-full flex justify-center">
+            <div className="relative w-full">
+              <div
+                ref={scrollRef}
+                className="flex overflow-x-auto gap-8 px-8 mx-auto scroll-hide pb-4 items-start"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                {testimonialImages.map((src, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
+                    style={{ scrollSnapAlign: "start", minHeight: "400px" }}
+                  >
+                    <img
+                      src={encodeURI(src)}
+                      alt={`Client testimonial ${i + 1}`}
+                      className="w-full h-full object-contain block"
+                      style={{ minHeight: "400px" }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-[#f7f7f7] to-transparent pointer-events-none" />
+              <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-[#f7f7f7] to-transparent pointer-events-none" />
+            </div>
+          </Reveal>
+        </div>
 
-        <p className="lg:hidden text-[#c9a96e] text-lg font-bold text-center mt-5">
-          Swipe left to see more →
-        </p>
       </div>
     </section>
   );
@@ -549,15 +663,12 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-12 lg:mt-0">
+    <section id="corporate" className="w-full bg-white py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="text-center w-full mb-16">
+        <Reveal className="text-center w-full mb-10 lg:mb-16">
           <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
-          <h2
-            className="font-georgia text-[#222f39] font-bold leading-tight mb-7"
-            style={{ fontSize: "clamp(32px, 4.5vw, 58px)" }}
-          >
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-3xl lg:text-[clamp(32px,4.5vw,58px)]">
             Invest in Your{" "}
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
@@ -580,7 +691,7 @@ function WellbeingTalksSection() {
           ))}
         </Reveal>
 
-        <Reveal delay={250} className="mb-20 w-full md:w-auto">
+        <Reveal delay={250} className="mb-16 lg:mb-20 w-full md:w-auto">
           <a
             href="mailto:george@gvcoaching.co.uk"
             className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.1em] uppercase px-8 py-[18px] w-full md:w-auto min-h-[44px]"
@@ -610,18 +721,18 @@ function WellbeingTalksSection() {
         </Reveal>
 
         <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm" style={{ aspectRatio: "16 / 9" }}>
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm">
             <img
               src={encodeURI("/Public speaking/IMG_3363.jpg")}
               alt="George Vernon speaking"
-              className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm" style={{ aspectRatio: "16 / 9" }}>
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm">
             <img
               src={encodeURI("/Public speaking/IMG_4770.jpg")}
               alt="George Vernon presenting"
-              className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
         </Reveal>
@@ -635,15 +746,12 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5] mt-12 lg:mt-0">
+    <section className="w-full bg-[#f7f7f7] py-20 md:py-40 lg:py-60 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
-        <Reveal className="w-full text-center mb-16">
+        <Reveal className="w-full text-center mb-10 lg:mb-16">
           <EyebrowCenter>Expert Consulting</EyebrowCenter>
-          <h2
-            className="font-georgia text-[#222f39] font-bold leading-tight mb-5"
-            style={{ fontSize: "clamp(32px, 4.5vw, 58px)" }}
-          >
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-3xl lg:text-[clamp(32px,4.5vw,58px)]">
             Trusted by Organisations{" "}
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
@@ -679,7 +787,7 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-20 md:py-48 lg:py-72 overflow-hidden mt-12 lg:mt-0"
+      className="relative w-full py-20 md:py-48 lg:py-72 overflow-hidden"
       style={{ background: "#222f39" }}
     >
       <div
@@ -693,10 +801,7 @@ function CTASection() {
             <span className="font-georgia text-[#c9a96e] text-[12px] tracking-[0.25em] uppercase font-semibold">Start Here</span>
             <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
           </div>
-          <h2
-            className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center"
-            style={{ fontSize: "clamp(28px, 6.5vw, 84px)" }}
-          >
+          <h2 className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center text-3xl lg:text-[clamp(28px,6.5vw,84px)]">
             Take Control of{" "}
             <span className="text-[#c9a96e]">Your Health.</span>
           </h2>
@@ -749,16 +854,16 @@ function ArrowRight({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
-function ChevronLeft() {
+function ChevronLeft({ size = 16 }: { size?: number }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
       <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
-function ChevronRight() {
+function ChevronRight({ size = 16 }: { size?: number }) {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
       <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
