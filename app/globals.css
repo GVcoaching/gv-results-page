@@ -65,3 +65,18 @@ section.hero-section > div {
     word-break: break-word;
   }
 }
+
+@media (max-width: 1023px) {
+  /* Force hero content below navbar */
+  .mobile-hero-content {
+    padding-top: 120px !important;
+    margin-top: 0 !important;
+  }
+
+  /* Force section spacing */
+  section {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    margin-bottom: 60px !important;
+  }
+}

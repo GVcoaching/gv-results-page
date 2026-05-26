@@ -211,7 +211,7 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-16 pb-16">
+      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-16">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-2xl w-full">
