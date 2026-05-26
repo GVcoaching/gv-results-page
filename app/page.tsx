@@ -142,7 +142,7 @@ function Navbar() {
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-sm lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-[15px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
           <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
@@ -201,7 +201,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[72px]"
+      className="hero-section relative w-full lg:min-h-[72vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[72px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -211,7 +211,7 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-16">
+      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-8">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
@@ -837,7 +837,7 @@ function CTASection() {
 function Footer() {
   return (
     <footer className="bg-[#1c252e] py-10">
-      <div className="mx-auto w-full max-w-5xl px-4 md:px-8 flex flex-col items-center text-center gap-4">
+      <div className="mx-auto w-full max-w-[1100px] px-4 md:px-8 flex flex-col items-center text-center gap-4">
         <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[14px] w-full text-center block">
           george@gvcoaching.co.uk
         </a>

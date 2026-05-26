@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Health & Performance Coaching Results | George Vernon",
   description:
     "George Vernon is a Health & Performance Coach helping ambitious professionals transform their health, energy and performance through personalised coaching and corporate wellbeing talks.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Health & Performance Coaching Results | George Vernon",
     description:
