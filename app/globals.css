@@ -67,16 +67,13 @@ section.hero-section > div {
 }
 
 @media (max-width: 1023px) {
-  /* Force hero content below navbar */
   .mobile-hero-content {
-    padding-top: 120px !important;
-    margin-top: 0 !important;
+    padding-top: 80px !important;
   }
 
-  /* Force section spacing */
   section {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
-    margin-bottom: 60px !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+    margin-bottom: 0px !important;
   }
 }
