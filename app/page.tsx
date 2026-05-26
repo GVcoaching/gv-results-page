@@ -138,11 +138,11 @@ function Navbar() {
           : "lg:bg-white/95"
       }`}
     >
-      <div className="w-full px-4 lg:px-24 flex items-center justify-between h-[72px]">
+      <div className="w-full px-4 lg:px-24 flex items-center justify-between h-12 lg:h-[72px]">
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[22px] lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-sm lg:text-[24px] text-white lg:text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
           <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
@@ -165,26 +165,16 @@ function Navbar() {
           </a>
         </div>
 
-        {/* Mobile — gold CTA + hamburger */}
-        <div className="lg:hidden flex items-center gap-3 flex-shrink-0">
-          <a
-            href="https://health.gvcoaching.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-[#c9a96e] text-[#222f39] text-[11px] font-bold tracking-[0.08em] uppercase px-4 py-2.5 whitespace-nowrap"
-          >
-            Health Phase Test <ArrowRight size={10} />
-          </a>
-          <button
-            className="flex flex-col gap-[5px] p-1"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-          </button>
-        </div>
+        {/* Mobile — hamburger only */}
+        <button
+          className="lg:hidden flex flex-col gap-[5px] p-1 flex-shrink-0"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+        </button>
       </div>
 
       {/* Mobile drawer */}
@@ -221,10 +211,10 @@ function Hero() {
       />
 
       {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-40 pb-20">
+      <div className="lg:hidden flex flex-col items-center text-center px-6 pt-16 pb-16">
 
         {/* Headline */}
-        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-3xl w-full">
+        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-2xl w-full">
           Health &amp; Performance Coach for{" "}
           <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
         </h1>
@@ -338,7 +328,7 @@ function FeaturedVideo() {
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -416,7 +406,7 @@ function VideoTestimonialsSection() {
   };
 
   return (
-    <section id="results" className="w-full bg-white py-40 md:pt-56 md:pb-52 lg:pt-96 lg:pb-80 overflow-hidden border-t border-[#e5e5e5]">
+    <section id="results" className="w-full bg-white py-20 mb-12 md:pt-56 md:pb-52 md:mb-0 lg:pt-96 lg:pb-80 overflow-hidden border-t border-[#e5e5e5]">
       {activeVideo && (
         <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
@@ -582,7 +572,7 @@ function ScreenshotTestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-40 md:py-56 lg:py-96 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-56 md:mb-0 lg:py-96 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-7xl px-6 md:px-8 text-center">
 
         <Reveal className="text-center mb-10 lg:mb-14">
@@ -679,7 +669,7 @@ function ScreenshotTestimonialsSection() {
 
 function WellbeingTalksSection() {
   return (
-    <section id="corporate" className="w-full bg-white py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
+    <section id="corporate" className="w-full bg-white py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-10 lg:mb-16">
@@ -762,7 +752,7 @@ function WellbeingTalksSection() {
 
 function ConsultingSection() {
   return (
-    <section className="w-full bg-[#f7f7f7] py-40 md:py-48 lg:py-80 border-t border-[#e5e5e5]">
+    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-10 lg:mb-16">
@@ -803,7 +793,7 @@ function ConsultingSection() {
 function CTASection() {
   return (
     <section
-      className="relative w-full py-40 md:py-56 lg:py-96 overflow-hidden"
+      className="relative w-full py-20 mb-12 md:py-56 md:mb-0 lg:py-96 overflow-hidden"
       style={{ background: "#222f39" }}
     >
       <div
