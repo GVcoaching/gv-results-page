@@ -200,41 +200,46 @@ function Hero() {
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      {/* ── MOBILE LAYOUT — stacked, clean (hidden on lg+) ── */}
-      <div
-        className="lg:hidden relative z-10 flex flex-col items-center text-center px-6 pt-24 gap-8 overflow-x-hidden"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 2rem)" }}
-      >
-        <h1 className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-2xl">
-          Health &amp; Performance Coach for{" "}
-          <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
-        </h1>
-        <p className="text-white/70 text-[16px] font-light leading-[1.8]">
-          Personalised one-to-one coaching for ambitious professionals who want
-          to transform their health, sharpen their energy, and perform at the
-          highest level — in work and in life.
-        </p>
+      {/* ── MOBILE LAYOUT — full-screen hero (hidden on lg+) ── */}
+      <div className="lg:hidden relative overflow-hidden" style={{ height: "100svh" }}>
+        {/* Background headshot */}
         <img
           src="/Headshot/IMG_8821.jpg"
           alt="George Vernon — Health & Performance Coach"
-          className="w-full h-auto block"
+          className="absolute inset-0 w-full h-full object-cover object-top block"
         />
-        <div className="text-center">
-          <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
-          <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
-        </div>
-        <a
-          href="https://health.gvcoaching.co.uk/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+        {/* Dark overlay */}
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.55)", zIndex: 1 }} />
+        {/* Content */}
+        <div
+          className="relative flex flex-col items-center text-center px-6 h-full"
+          style={{ zIndex: 10, paddingTop: "5rem", paddingBottom: "calc(env(safe-area-inset-bottom) + 2rem)" }}
         >
-          Take Your Health Phase Test
-          <ArrowRight size={14} />
-        </a>
-        <div className="flex flex-col items-center gap-2 opacity-50">
-          <div className="w-[1px] h-8 bg-white/60" />
-          <span className="text-white text-[9px] tracking-[0.35em] uppercase">Scroll</span>
+          <h1
+            className="font-georgia text-white font-bold leading-[1.1] tracking-tight text-2xl"
+            style={{ overflowWrap: "break-word", maxWidth: "100%" }}
+          >
+            Health &amp; Performance Coach for{" "}
+            <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+          </h1>
+          <p className="text-white/70 text-[16px] font-light leading-[1.8] mt-5" style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
+            Personalised one-to-one coaching for ambitious professionals who want
+            to transform their health, sharpen their energy, and perform at the
+            highest level — in work and in life.
+          </p>
+          <div className="text-center mt-4">
+            <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
+            <p className="font-georgia text-white text-[15px] font-semibold">Health &amp; Performance Coach</p>
+          </div>
+          <a
+            href="https://health.gvcoaching.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+          >
+            Take Your Health Phase Test
+            <ArrowRight size={14} />
+          </a>
         </div>
       </div>
 
@@ -419,8 +424,8 @@ function VideoTestimonialsSection() {
           </div>
         </Reveal>
 
-        <p className="text-[#808285] text-[15px] tracking-widest uppercase mt-6 text-center">
-          ← Scroll to see more →
+        <p className="lg:hidden text-[#c9a96e] text-lg font-bold text-center mt-6">
+          Swipe left to see more →
         </p>
       </div>
     </section>
@@ -532,8 +537,8 @@ function ScreenshotTestimonialsSection() {
           </div>
         </Reveal>
 
-        <p className="text-[#808285] text-[12px] tracking-widest uppercase mt-5 text-center">
-          ← Scroll to see more →
+        <p className="lg:hidden text-[#c9a96e] text-lg font-bold text-center mt-5">
+          Swipe left to see more →
         </p>
       </div>
     </section>

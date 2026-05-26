@@ -56,3 +56,12 @@ section.hero-section > div {
 /* Hide scrollbar on carousels */
 .scroll-hide::-webkit-scrollbar { display: none; }
 .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Mobile-only: prevent heading overflow */
+@media (max-width: 1023px) {
+  h1, h2, h3, h4, h5, h6 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
