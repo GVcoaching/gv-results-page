@@ -243,8 +243,8 @@ function Hero() {
           highest level in work and in life.
         </p>
 
-        {/* CTA button */}
-        <div className="mt-8 w-full">
+        {/* CTA buttons */}
+        <div className="mt-8 w-full flex flex-col gap-3">
           <a
             href="https://health.gvcoaching.co.uk/"
             target="_blank"
@@ -252,6 +252,15 @@ function Hero() {
             className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
           >
             Take Your Health Phase Test
+            <ArrowRight size={14} />
+          </a>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] border border-white/20 text-white text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
+          >
+            Book a Call with George
             <ArrowRight size={14} />
           </a>
         </div>
@@ -485,6 +494,14 @@ function VideoTestimonialsSection() {
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
             Swipe to see more →
           </p>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
+          >
+            Book a Call with George <ArrowRight size={14} />
+          </a>
         </div>
 
         {/* ── DESKTOP: horizontal scroll ── */}
@@ -650,6 +667,14 @@ function ScreenshotTestimonialsSection() {
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
             Swipe to see more →
           </p>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
+          >
+            Book a Call with George <ArrowRight size={14} />
+          </a>
         </div>
 
         {/* ── DESKTOP: horizontal scroll ── */}
@@ -808,6 +833,15 @@ function ConsultingSection() {
             />
           </div>
         </Reveal>
+
+        <a
+          href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="lg:hidden mt-8 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
+        >
+          Book a Call with George <ArrowRight size={14} />
+        </a>
 
       </div>
     </section>
