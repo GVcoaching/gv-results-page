@@ -154,7 +154,15 @@ function Navbar() {
         {/* Desktop nav — lg+ only */}
         <div className="hidden lg:flex items-center gap-8">
           <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Results</a>
-          <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Talks</a>
+          <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Programs</a>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold whitespace-nowrap"
+          >
+            Book a Call with George
+          </a>
           <a
             href="https://health.gvcoaching.co.uk/"
             target="_blank"
@@ -181,7 +189,16 @@ function Navbar() {
       {menuOpen && (
         <div className="lg:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
           <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
-          <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Talks</a>
+          <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Programs</a>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="font-georgia text-[16px] text-white tracking-wide"
+          >
+            Book a Call with George
+          </a>
           <a
             href="https://health.gvcoaching.co.uk/"
             target="_blank"
@@ -221,9 +238,9 @@ function Hero() {
 
         {/* Subtext */}
         <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
-          Personalised one-to-one coaching for ambitious professionals who want
-          to transform their health, sharpen their energy, and perform at the
-          highest level — in work and in life.
+          Personalised one-to-one coaching and health and wellbeing programs for people who want
+          to transform their health, sharpen their energy and perform at the
+          highest level in work and in life.
         </p>
 
         {/* CTA button */}
@@ -334,7 +351,7 @@ function FeaturedVideo() {
         <Reveal className="w-full text-center mb-8 lg:mb-8">
           <EyebrowCenter>Watch</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,56px)]">
-            What Makes GV Coaching Different
+            Why Choose George
           </h2>
         </Reveal>
 
@@ -682,13 +699,13 @@ function WellbeingTalksSection() {
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="text-center w-full mb-8 lg:mb-8">
-          <EyebrowCenter>Wellbeing Talks</EyebrowCenter>
+          <EyebrowCenter>Wellbeing Programs</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
             Invest in Your{" "}
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
           <p className="text-[#1c252e] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.85]">
-            George delivers engaging health and wellbeing education talks to
+            George delivers engaging health and wellbeing programs to
             organisations across the UK, helping teams improve energy, focus
             and performance. Available for corporate events, away days and
             leadership conferences.
@@ -697,9 +714,9 @@ function WellbeingTalksSection() {
 
         <Reveal delay={150} className="max-w-lg mx-auto mb-8 space-y-3 text-center">
           {[
-            "Keynote wellness talks (60–90 min)",
-            "Half-day & full-day employee workshops",
-            "Ongoing corporate health programmes",
+            "Keynote talks (45 minutes to 90 minutes)",
+            "Half a day to four-day employee workshops",
+            "Ongoing corporate health program",
             "Senior leadership performance coaching",
           ].map((item, i) => (
             <p key={i} className="text-[#1c252e] text-[17px] lg:text-[22px] text-center font-semibold">{item}</p>
