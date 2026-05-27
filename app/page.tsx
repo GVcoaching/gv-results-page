@@ -342,18 +342,24 @@ function Hero() {
 function FeaturedVideo() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+  const [mobilePlaying, setMobilePlaying] = useState(false);
 
   useEffect(() => {
+    const mobile = window.innerWidth < 1024;
+    setIsMobileDevice(mobile);
     const el = sectionRef.current;
     if (!el) return;
-    const isMobile = window.innerWidth < 1024;
+    if (mobile) return; // desktop-only autoplay via IntersectionObserver
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: isMobile ? 0 : 0.5 }
+      { threshold: 0.5 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  const videoSrc = "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1";
 
   return (
     <section id="why-george" className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
@@ -370,14 +376,45 @@ function FeaturedVideo() {
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-              {inView && (
+              {/* Desktop: autoplay when 50% in view */}
+              {!isMobileDevice && inView && (
                 <iframe
                   className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1"
+                  src={videoSrc}
                   title="George Vernon — GV Coaching"
                   allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
                   allowFullScreen
                 />
+              )}
+              {/* Mobile: tap-to-play thumbnail; iOS only allows autoplay via user gesture */}
+              {isMobileDevice && (
+                mobilePlaying ? (
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={videoSrc}
+                    title="George Vernon — GV Coaching"
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 cursor-pointer"
+                    onClick={() => setMobilePlaying(true)}
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/TQBuOmHEoSw/maxresdefault.jpg"
+                      alt="Why Choose George — tap to play"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <div className="w-[56px] h-[56px] rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                        <svg width="16" height="18" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1">
+                          <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                )
               )}
             </div>
           </div>
