@@ -155,6 +155,7 @@ function Navbar() {
         <div className="hidden lg:flex items-center gap-8">
           <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Results</a>
           <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
@@ -190,6 +191,7 @@ function Navbar() {
         <div className="lg:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
           <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
           <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Programs</a>
+          <a href="#about" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
@@ -394,12 +396,12 @@ function FeaturedVideo() {
           </div>
           {/* Mobile-only CTA button */}
           <a
-            href="https://health.gvcoaching.co.uk/"
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
             className="md:hidden mt-4 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
           >
-            Take Your Health Phase Test <ArrowRight size={14} />
+            Book a Call with George <ArrowRight size={14} />
           </a>
         </Reveal>
 
@@ -753,7 +755,7 @@ function WellbeingTalksSection() {
             href="mailto:george@gvcoaching.co.uk"
             className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] md:tracking-[0.1em] uppercase px-6 md:px-8 lg:px-14 py-[18px] w-full md:w-auto min-h-[44px]"
           >
-            Enquire About a Wellbeing Talk
+            Enquire About a Wellbeing Programme
             <ArrowRight size={13} />
           </a>
         </Reveal>
@@ -979,6 +981,150 @@ function Footer() {
   );
 }
 
+// ─── ABOUT GEORGE ─────────────────────────────────────────────────────────────
+
+function AboutGeorgeSection() {
+  return (
+    <section id="about" className="w-full bg-white border-t border-[#e5e5e5]">
+      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
+
+        <Reveal className="w-full text-center mb-8">
+          <EyebrowCenter>About George</EyebrowCenter>
+          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
+            About George
+          </h2>
+        </Reveal>
+
+        {/* Portrait + opening paragraphs */}
+        <Reveal delay={100} className="w-full flex flex-col lg:flex-row gap-8 lg:gap-14 items-start mb-10">
+          <div className="w-full lg:w-[38%] flex-shrink-0">
+            <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
+              <div className="h-[3px] bg-[#c9a96e]" />
+              <img
+                src={encodeURI("/:assets:images:about-george:/Me/IMG_8821.jpg")}
+                alt="George Vernon"
+                className="w-full h-auto block"
+                loading="lazy"
+              />
+              <div className="bg-[#222f39] px-5 py-3">
+                <span className="font-georgia text-white text-[14px] font-semibold">George Vernon</span>
+                <span className="text-white/40 text-[12px] ml-2">— Health &amp; Performance Coach</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 min-w-0 flex flex-col gap-5 justify-center">
+            <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+              George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks to organisations across the UK.
+            </p>
+            <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+              Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Remaining bio paragraphs */}
+        <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto">
+          <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+            He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.
+          </p>
+          <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+            Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.
+          </p>
+        </Reveal>
+
+        {/* Image groups */}
+
+        {/* Boxing + University — single images side by side */}
+        <Reveal delay={100} className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+            <div className="h-[3px] bg-[#c9a96e]" />
+            <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto block" loading="lazy" />
+            <div className="bg-[#222f39] px-5 py-3">
+              <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Ring</span>
+              <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Elite Amateur Boxing</span>
+            </div>
+          </div>
+          <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+            <div className="h-[3px] bg-[#c9a96e]" />
+            <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto block" loading="lazy" />
+            <div className="bg-[#222f39] px-5 py-3">
+              <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Science</span>
+              <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Sports Science &amp; S&amp;C</span>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Coaching athletes — 3 images */}
+        <Reveal delay={150} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+          <div className="h-[3px] bg-[#c9a96e]" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+            {[
+              "/:assets:images:about-george:/Coaching athletes/3AA8E17A-815B-4E55-8AFA-D66A6379CDD7 2.JPG",
+              "/:assets:images:about-george:/Coaching athletes/IMG_4759 2.JPG",
+              "/:assets:images:about-george:/Coaching athletes/IMG_4770 2.JPG",
+            ].map((src, i) => (
+              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className="w-full h-auto block md:h-full md:object-cover" loading="lazy" />
+            ))}
+          </div>
+          <div className="bg-[#222f39] px-5 py-3">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Athletes</span>
+            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Elite Athletes &amp; Professional Boxers</span>
+          </div>
+        </Reveal>
+
+        {/* Working in the gym — 2 images */}
+        <Reveal delay={200} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+          <div className="h-[3px] bg-[#c9a96e]" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {[
+              "/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG",
+              "/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg",
+            ].map((src, i) => (
+              <img key={i} src={encodeURI(src)} alt="George Vernon coaching in the gym" className="w-full h-auto block" loading="lazy" />
+            ))}
+          </div>
+          <div className="bg-[#222f39] px-5 py-3">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Gym Floor</span>
+            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Seven Years Coaching</span>
+          </div>
+        </Reveal>
+
+        {/* Fitness by Science — 4 images 2x2 */}
+        <Reveal delay={250} className="w-full mb-10 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+          <div className="h-[3px] bg-[#c9a96e]" />
+          <div className="grid grid-cols-2 gap-0">
+            {[
+              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_1432.jpg",
+              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG",
+              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG",
+              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG",
+            ].map((src, i) => (
+              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full h-auto block" loading="lazy" />
+            ))}
+          </div>
+          <div className="bg-[#222f39] px-5 py-3">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
+            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Co-Founding &amp; Mentoring Personal Trainers</span>
+          </div>
+        </Reveal>
+
+        {/* CTA */}
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center">
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-10 py-[18px] w-full sm:w-auto min-h-[44px]"
+          >
+            Book a Call with George <ArrowRight size={13} />
+          </a>
+        </Reveal>
+
+      </div>
+    </section>
+  );
+}
+
 // ─── ICONS ────────────────────────────────────────────────────────────────────
 
 function ArrowRight({ size = 16 }: { size?: number }) {
@@ -1016,6 +1162,7 @@ export default function Page() {
         <ScreenshotTestimonialsSection />
         <WellbeingTalksSection />
         <ConsultingSection />
+        <AboutGeorgeSection />
         <CTASection />
       </main>
       <Footer />
