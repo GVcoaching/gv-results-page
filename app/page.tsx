@@ -155,6 +155,7 @@ function Navbar() {
 
         {/* Desktop nav — lg+ only */}
         <div className="hidden lg:flex items-center gap-8">
+          <a href="#why-george" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Why George</a>
           <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Results</a>
           <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Programs</a>
           <a href="#about" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">About George</a>
@@ -191,6 +192,7 @@ function Navbar() {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="lg:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
+          <a href="#why-george" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Why George</a>
           <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
           <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Programs</a>
           <a href="#about" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">About George</a>
@@ -347,14 +349,14 @@ function FeaturedVideo() {
     const isMobile = window.innerWidth < 1024;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: isMobile ? 0.1 : 0.5 }
+      { threshold: isMobile ? 0 : 0.5 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
+    <section id="why-george" className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div ref={sectionRef} className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-8 lg:mb-8">

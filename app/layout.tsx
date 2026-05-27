@@ -10,14 +10,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://georgevernon.co.uk"),
-  title: "Health & Performance Coaching Results | George Vernon",
+  title: "Health & Performance Coach | George Vernon",
   description:
     "George Vernon is a Health & Performance Coach helping ambitious professionals transform their health, energy and performance through personalised coaching and corporate wellbeing talks.",
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
-    title: "Health & Performance Coaching Results | George Vernon",
+    title: "Health & Performance Coach | George Vernon",
     description:
       "Real coaching results from real clients. Personalised health and performance coaching for driven professionals.",
     url: "https://georgevernon.co.uk",

@@ -54,12 +54,12 @@ section.hero-section > div {
 }
 
 /* Anchor scroll offset — compensate for fixed navbar */
-#results, #corporate, #about {
+#why-george, #results, #corporate, #about {
   scroll-margin-top: 72px;
 }
 
 @media (max-width: 1023px) {
-  #results, #corporate, #about {
+  #why-george, #results, #corporate, #about {
     scroll-margin-top: 48px;
   }
 }
