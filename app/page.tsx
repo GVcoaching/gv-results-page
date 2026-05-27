@@ -702,6 +702,20 @@ function ScreenshotTestimonialsSection() {
 // ─── WELLBEING TALKS ─────────────────────────────────────────────────────────
 
 function WellbeingTalksSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="corporate" className="w-full bg-white py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
@@ -746,12 +760,14 @@ function WellbeingTalksSection() {
         <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-0">
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
-            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <div ref={sectionRef} className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/TQBuOmHEoSw?controls=1&rel=0&modestbranding=1"
+                src={inView
+                  ? "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1"
+                  : "about:blank"}
                 title="George Vernon — Speaker Reel"
-                allow="encrypted-media; fullscreen; picture-in-picture"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
                 allowFullScreen
               />
             </div>
