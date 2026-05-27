@@ -9,9 +9,7 @@
       "Bash(git commit *)",
       "Bash(gh repo *)",
       "Bash(git remote *)",
-      "Bash(git push *)",
-      "Bash(open *)",
-      "Bash(npx next *)"
+      "Bash(git push *)"
     ]
   }
 }
