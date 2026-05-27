@@ -344,9 +344,10 @@ function FeaturedVideo() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    const isMobile = window.innerWidth < 1024;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: 0.05 }
+      { threshold: isMobile ? 0.1 : 0.5 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -354,7 +355,7 @@ function FeaturedVideo() {
 
   return (
     <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
+      <div ref={sectionRef} className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
 
         <Reveal className="w-full text-center mb-8 lg:mb-8">
           <EyebrowCenter>Watch</EyebrowCenter>
@@ -364,7 +365,7 @@ function FeaturedVideo() {
         </Reveal>
 
         <Reveal delay={200} className="w-full max-w-4xl mx-auto">
-          <div ref={sectionRef} className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
+          <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <iframe
