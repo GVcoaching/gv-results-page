@@ -1092,7 +1092,7 @@ function AboutGeorgeSection() {
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
             <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
-            <span className="font-georgia text-white text-[12px]"><span className="hidden md:inline">· </span>A business George co-founded with his brother where he mentored new personal trainers</span>
+            <span className="font-georgia text-white text-[12px]">A business George co-founded with his brother where he mentored new personal trainers</span>
           </div>
         </Reveal>
 
