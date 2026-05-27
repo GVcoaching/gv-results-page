@@ -453,6 +453,7 @@ function VideoTestimonialsSection() {
             Straight From{" "}
             <span className="text-[#c9a96e]">The Clients.</span>
           </h2>
+          <p className="text-[#54595f] text-[16px] mt-3">Click to watch the videos</p>
         </Reveal>
 
         {/* ── MOBILE: smooth sliding carousel ── */}
@@ -553,10 +554,9 @@ function YouTubeVideoCard({
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
         />
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[72px] h-[72px] rounded-full bg-white/90 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
-            <svg width="22" height="24" viewBox="0 0 22 24" fill="none" className="ml-1">
+          <div className="w-[40px] h-[40px] rounded-full bg-white/85 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+            <svg width="12" height="13" viewBox="0 0 22 24" fill="none" className="ml-0.5">
               <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
             </svg>
           </div>
@@ -702,20 +702,6 @@ function ScreenshotTestimonialsSection() {
 // ─── WELLBEING TALKS ─────────────────────────────────────────────────────────
 
 function WellbeingTalksSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="corporate" className="w-full bg-white py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
       <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
@@ -760,14 +746,12 @@ function WellbeingTalksSection() {
         <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-0">
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
-            <div ref={sectionRef} className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={inView
-                  ? "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1"
-                  : "about:blank"}
+                src="https://www.youtube.com/embed/TQBuOmHEoSw?controls=1&rel=0&modestbranding=1"
                 title="George Vernon — Speaker Reel"
-                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allow="encrypted-media; fullscreen; picture-in-picture"
                 allowFullScreen
               />
             </div>
@@ -1068,9 +1052,9 @@ function AboutGeorgeSection() {
               <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "320px", ...(op ? { objectPosition: op } : {}) }} loading="lazy" />
             ))}
           </div>
-          <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Athletes</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· George coached elite athletes and elite boxers</span>
+          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Athletes</span>
+            <span className="font-georgia text-white text-[12px]">George coached elite athletes and elite boxers</span>
           </div>
         </Reveal>
 
@@ -1085,9 +1069,9 @@ function AboutGeorgeSection() {
               <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full h-auto md:h-full md:object-cover md:object-top block" loading="lazy" />
             </div>
           </div>
-          <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Gym Floor</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· 7 years coaching</span>
+          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Gym Floor</span>
+            <span className="font-georgia text-white text-[12px]">7 years coaching</span>
           </div>
         </Reveal>
 
@@ -1106,9 +1090,9 @@ function AboutGeorgeSection() {
               </div>
             ))}
           </div>
-          <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2 flex-wrap">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">Fitness by Science</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· A business George co-founded with his brother where he mentored new personal trainers</span>
+          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
+            <span className="font-georgia text-white text-[12px]"><span className="hidden md:inline">· </span>A business George co-founded with his brother where he mentored new personal trainers</span>
           </div>
         </Reveal>
 
