@@ -9,6 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://georgevernon.co.uk"),
   title: "Health & Performance Coaching Results | George Vernon",
   description:
     "George Vernon is a Health & Performance Coach helping ambitious professionals transform their health, energy and performance through personalised coaching and corporate wellbeing talks.",
@@ -19,22 +20,22 @@ export const metadata: Metadata = {
     title: "Health & Performance Coaching Results | George Vernon",
     description:
       "Real coaching results from real clients. Personalised health and performance coaching for driven professionals.",
-    url: "https://gvcoaching.co.uk",
+    url: "https://georgevernon.co.uk",
     siteName: "GV Coaching — George Vernon",
     locale: "en_GB",
     type: "website",
     images: [
       {
-        url: "https://gvcoaching.co.uk/Headshot/IMG_8821.jpg",
+        url: "/og-image.jpg",
         width: 1200,
-        height: 630,
-        alt: "George Vernon — Health & Performance Coach",
+        height: 800,
+        alt: "George Vernon speaking on stage — Health & Performance Coach",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://gvcoaching.co.uk/Headshot/IMG_8821.jpg"],
+    images: ["/og-image.jpg"],
   },
 };
 
