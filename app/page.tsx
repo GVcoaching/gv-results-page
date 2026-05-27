@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 // ─── SHARED ───────────────────────────────────────────────────────────────────
 
@@ -83,7 +84,7 @@ function VideoModal({ videoId, onClose }: { videoId: string; onClose: () => void
     };
   }, [handleClose]);
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10"
       style={{ background: "rgba(10, 12, 14, 0.92)" }}
@@ -114,7 +115,8 @@ function VideoModal({ videoId, onClose }: { videoId: string; onClose: () => void
           Press Esc or click outside to close
         </p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
