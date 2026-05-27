@@ -1032,15 +1032,15 @@ function AboutGeorgeSection() {
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             <div className="flex flex-col">
-              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full object-cover object-top block" style={{ height: "420px" }} loading="lazy" />
-              <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
+              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto block" loading="lazy" />
+              <div className="mt-auto bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
                 <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Boxing</span>
                 <span className="font-georgia text-white text-[13px] font-semibold">· Elite Amateur Boxer</span>
               </div>
             </div>
             <div className="flex flex-col md:border-l border-[#2e3d47]">
-              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full object-cover object-top block" style={{ height: "420px" }} loading="lazy" />
-              <div className="bg-[#222f39] px-4 py-3 flex items-center justify-center gap-2 flex-wrap">
+              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto block" loading="lazy" />
+              <div className="mt-auto bg-[#222f39] px-4 py-3 flex items-center justify-center gap-2 flex-wrap">
                 <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Science</span>
                 <span className="font-georgia text-white text-[11px]">· Sports and Exercise Science degree and S&amp;C Master&apos;s degree</span>
               </div>
@@ -1053,16 +1053,16 @@ function AboutGeorgeSection() {
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
             {[
-              { src: "/:assets:images:about-george:/Coaching athletes/3AA8E17A-815B-4E55-8AFA-D66A6379CDD7 2.JPG", pos: "object-top" },
-              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4759 2.JPG", pos: "object-top" },
-              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4770 2.JPG", pos: "object-left" },
-            ].map(({ src, pos }, i) => (
-              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "320px" }} loading="lazy" />
+              { src: "/:assets:images:about-george:/Coaching athletes/3AA8E17A-815B-4E55-8AFA-D66A6379CDD7 2.JPG", pos: "object-top", op: undefined },
+              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4759 2.JPG", pos: "object-top", op: "50% 10%" },
+              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4770 2.JPG", pos: "object-left", op: undefined },
+            ].map(({ src, pos, op }, i) => (
+              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "320px", ...(op ? { objectPosition: op } : {}) }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
             <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Athletes</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· Coached Elite Athletes and Boxers</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">· George coached athletes and boxers</span>
           </div>
         </Reveal>
 
@@ -1084,12 +1084,12 @@ function AboutGeorgeSection() {
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-2 gap-0">
             {[
-              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_1432.jpg",
-              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG",
-              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG",
-              "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG",
-            ].map((src, i) => (
-              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover object-top block" style={{ height: i < 2 ? "420px" : "320px" }} loading="lazy" />
+              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_1432.jpg" },
+              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG" },
+              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG" },
+              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG", op: "50% 15%" },
+            ].map(({ src, op }, i) => (
+              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover object-top block" style={{ height: i < 2 ? "600px" : "340px", objectPosition: op }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2 flex-wrap text-center">
@@ -1099,7 +1099,7 @@ function AboutGeorgeSection() {
         </Reveal>
 
         {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-32 mb-10">
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-48 mb-10">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
