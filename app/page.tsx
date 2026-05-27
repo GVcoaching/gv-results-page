@@ -370,15 +370,15 @@ function FeaturedVideo() {
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src={inView
-                  ? "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1"
-                  : "about:blank"}
-                title="George Vernon — GV Coaching"
-                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                allowFullScreen
-              />
+              {inView && (
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1"
+                  title="George Vernon — GV Coaching"
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
             </div>
           </div>
           <div className="bg-[#222f39] px-5 md:px-7 py-4 md:py-5 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-0 md:justify-between">
