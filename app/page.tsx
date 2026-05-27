@@ -234,15 +234,13 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
-          Health &amp; Performance Coach for{" "}
-          <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+          Health and performance coach for{" "}
+          <span className="text-[#c9a96e]">business owners, medical professionals and senior leaders.</span>
         </h1>
 
         {/* Subtext */}
         <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
-          Personalised one-to-one coaching and health and wellbeing programs for people who want
-          to transform their health, sharpen their energy and perform at the
-          highest level in work and in life.
+          Personalised one-to-one coaching and health and wellbeing programmes for professionals who want to transform their health, sharpen their energy and perform at the highest level, both in work and in life.
         </p>
 
         {/* CTA buttons */}
@@ -292,13 +290,11 @@ function Hero() {
               className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center"
               style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
-              Health &amp; Performance Coach for{" "}
-              <span className="text-[#c9a96e]">business owners, medical professionals, and senior leaders.</span>
+              Health and performance coach for{" "}
+              <span className="text-[#c9a96e]">business owners, medical professionals and senior leaders.</span>
             </h1>
             <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center">
-              Personalised one-to-one coaching for ambitious professionals who want
-              to transform their health, sharpen their energy, and perform at the
-              highest level — in work and in life.
+              Personalised one-to-one coaching and health and wellbeing programmes for professionals who want to transform their health, sharpen their energy and perform at the highest level, both in work and in life.
             </p>
           </div>
 
@@ -386,12 +382,12 @@ function FeaturedVideo() {
               George Vernon — Health &amp; Performance Coach
             </span>
             <a
-              href="https://health.gvcoaching.co.uk/"
+              href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors items-center gap-2 whitespace-nowrap md:ml-4"
             >
-              Take Your Health Phase Test <ArrowRight size={12} />
+              Book a Call with George <ArrowRight size={12} />
             </a>
           </div>
           {/* Mobile-only CTA button */}
@@ -732,7 +728,7 @@ function WellbeingTalksSection() {
             <span className="text-[#c9a96e]">People&apos;s Performance.</span>
           </h2>
           <p className="text-[#1c252e] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.85]">
-            George delivers engaging health and wellbeing programs to
+            George delivers engaging health and wellbeing talks to
             organisations across the UK, helping teams improve energy, focus
             and performance. Available for corporate events, away days and
             leadership conferences.
@@ -741,9 +737,9 @@ function WellbeingTalksSection() {
 
         <Reveal delay={150} className="max-w-lg mx-auto mb-8 space-y-3 text-center">
           {[
-            "Keynote talks (45 minutes to 90 minutes)",
-            "Half a day to four-day employee workshops",
-            "Ongoing corporate health program",
+            "Keynotes (45 minutes to 90 minutes)",
+            "One-day to four-day employee workshops",
+            "Ongoing corporate health programmes",
             "Senior leadership performance coaching",
           ].map((item, i) => (
             <p key={i} className="text-[#1c252e] text-[17px] lg:text-[22px] text-center font-semibold">{item}</p>
@@ -752,7 +748,9 @@ function WellbeingTalksSection() {
 
         <Reveal delay={250} className="mb-8 lg:mb-10 w-full md:w-auto">
           <a
-            href="mailto:george@gvcoaching.co.uk"
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] md:tracking-[0.1em] uppercase px-6 md:px-8 lg:px-14 py-[18px] w-full md:w-auto min-h-[44px]"
           >
             Enquire About a Wellbeing Programme
@@ -991,39 +989,34 @@ function AboutGeorgeSection() {
         <Reveal className="w-full text-center mb-8">
           <EyebrowCenter>About George</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
-            About George
+            George Vernon&apos;s Bio
           </h2>
         </Reveal>
 
-        {/* Portrait + opening paragraphs */}
-        <Reveal delay={100} className="w-full flex flex-col lg:flex-row gap-8 lg:gap-14 items-start mb-10">
-          <div className="w-full lg:w-[38%] flex-shrink-0">
-            <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
-              <div className="h-[3px] bg-[#c9a96e]" />
-              <img
-                src={encodeURI("/:assets:images:about-george:/Me/IMG_8821.jpg")}
-                alt="George Vernon"
-                className="w-full h-auto block"
-                loading="lazy"
-              />
-              <div className="bg-[#222f39] px-5 py-3">
-                <span className="font-georgia text-white text-[14px] font-semibold">George Vernon</span>
-                <span className="text-white/40 text-[12px] ml-2">— Health &amp; Performance Coach</span>
-              </div>
-            </div>
+        {/* Portrait — centered */}
+        <Reveal delay={100} className="w-full flex flex-col items-center mb-8">
+          <div className="w-full max-w-sm overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
+            <div className="h-[3px] bg-[#c9a96e]" />
+            <img
+              src={encodeURI("/:assets:images:about-george:/Me/IMG_8821.jpg")}
+              alt="George Vernon"
+              className="w-full h-auto block"
+              loading="lazy"
+            />
           </div>
-          <div className="flex-1 min-w-0 flex flex-col gap-5 justify-center">
-            <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
-              George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks to organisations across the UK.
-            </p>
-            <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
-              Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
-            </p>
-          </div>
+          <p className="mt-4 font-georgia text-[#54595f] text-[15px] text-center tracking-wide">
+            George Vernon, Health &amp; Performance Coach
+          </p>
         </Reveal>
 
-        {/* Remaining bio paragraphs */}
-        <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto">
+        {/* Bio paragraphs — centered */}
+        <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-center">
+          <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks to organisations across the UK.
+          </p>
+          <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
+            Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
+          </p>
           <p className="text-[#54595f] text-[17px] md:text-[18px] leading-[1.85]">
             He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.
           </p>
@@ -1040,16 +1033,16 @@ function AboutGeorgeSection() {
             <div className="h-[3px] bg-[#c9a96e]" />
             <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto block" loading="lazy" />
             <div className="bg-[#222f39] px-5 py-3">
-              <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Ring</span>
-              <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Elite Amateur Boxing</span>
+              <span className="font-georgia text-white text-[13px] font-semibold">Boxing · Elite Amateur Boxer</span>
             </div>
           </div>
           <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
             <div className="h-[3px] bg-[#c9a96e]" />
             <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto block" loading="lazy" />
-            <div className="bg-[#222f39] px-5 py-3">
+            <div className="bg-[#222f39] px-5 py-4 flex flex-col gap-1">
               <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Science</span>
-              <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Sports Science &amp; S&amp;C</span>
+              <span className="font-georgia text-white text-[12px]">Sports Science undergraduate degree</span>
+              <span className="font-georgia text-white text-[12px]">Strength and Conditioning S&amp;C Masters degree</span>
             </div>
           </div>
         </Reveal>
@@ -1067,8 +1060,7 @@ function AboutGeorgeSection() {
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Athletes</span>
-            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Elite Athletes &amp; Professional Boxers</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">The Athletes · Coached Elite Athletes and Boxers</span>
           </div>
         </Reveal>
 
@@ -1080,12 +1072,11 @@ function AboutGeorgeSection() {
               "/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG",
               "/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg",
             ].map((src, i) => (
-              <img key={i} src={encodeURI(src)} alt="George Vernon coaching in the gym" className="w-full h-auto block" loading="lazy" />
+              <img key={i} src={encodeURI(src)} alt="George Vernon coaching in the gym" className="w-full object-cover block" style={{ height: "320px" }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Gym Floor</span>
-            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Seven Years Coaching</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">The Gym Floor · 7 years coaching</span>
           </div>
         </Reveal>
 
@@ -1099,22 +1090,21 @@ function AboutGeorgeSection() {
               "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG",
               "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG",
             ].map((src, i) => (
-              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full h-auto block" loading="lazy" />
+              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover block" style={{ height: "260px" }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
-            <span className="font-georgia text-white text-[13px] font-semibold ml-2">— Co-Founding &amp; Mentoring Personal Trainers</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">A business George co-founded with his brother where he mentored new personal trainers</span>
           </div>
         </Reveal>
 
         {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-10 mb-8">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-10 py-[18px] w-full sm:w-auto min-h-[44px]"
+            className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#1a2530] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-[18px] w-full sm:w-auto min-h-[44px]"
           >
             Book a Call with George <ArrowRight size={13} />
           </a>
