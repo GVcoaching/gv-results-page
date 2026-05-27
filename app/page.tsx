@@ -319,6 +319,15 @@ function Hero() {
               Take Your Health Phase Test
               <ArrowRight size={14} />
             </a>
+            <a
+              href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+            >
+              Book a Call with George
+              <ArrowRight size={14} />
+            </a>
           </div>
 
         </div>
@@ -491,14 +500,6 @@ function VideoTestimonialsSection() {
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
             Swipe to see more →
           </p>
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
-          >
-            Book a Call with George <ArrowRight size={14} />
-          </a>
         </div>
 
         {/* ── DESKTOP: horizontal scroll ── */}
@@ -664,14 +665,6 @@ function ScreenshotTestimonialsSection() {
           <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
             Swipe to see more →
           </p>
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
-          >
-            Book a Call with George <ArrowRight size={14} />
-          </a>
         </div>
 
         {/* ── DESKTOP: horizontal scroll ── */}
@@ -774,6 +767,14 @@ function WellbeingTalksSection() {
               <span className="text-white/40 text-[12px] ml-2">— George Vernon</span>
             </div>
           </div>
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden mt-4 inline-flex items-center justify-center gap-3 bg-[#222f39] text-white text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
+          >
+            Enquire About a Wellbeing Programme <ArrowRight size={14} />
+          </a>
         </Reveal>
 
         <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
@@ -1011,16 +1012,16 @@ function AboutGeorgeSection() {
 
         {/* Bio paragraphs — centered */}
         <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-center">
-          <p className="text-[#54595f] text-[18px] md:text-[20px] leading-[1.85]">
+          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks to organisations across the UK.
           </p>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] leading-[1.85]">
+          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
           </p>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] leading-[1.85]">
+          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.
           </p>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] leading-[1.85]">
+          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.
           </p>
         </Reveal>
@@ -1032,17 +1033,17 @@ function AboutGeorgeSection() {
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             <div className="flex flex-col">
-              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto block" loading="lazy" />
-              <div className="mt-auto bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
+              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full object-contain block bg-[#1c252e]" style={{ height: "480px" }} loading="lazy" />
+              <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
                 <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Boxing</span>
                 <span className="font-georgia text-white text-[13px] font-semibold">· Elite Amateur Boxer</span>
               </div>
             </div>
             <div className="flex flex-col md:border-l border-[#2e3d47]">
-              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto block" loading="lazy" />
-              <div className="mt-auto bg-[#222f39] px-4 py-3 flex items-center justify-center gap-2 flex-wrap">
-                <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Science</span>
-                <span className="font-georgia text-white text-[11px]">· Sports and Exercise Science degree and S&amp;C Master&apos;s degree</span>
+              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full object-contain block bg-[#1c252e]" style={{ height: "480px" }} loading="lazy" />
+              <div className="bg-[#222f39] px-4 py-3 flex flex-col items-center gap-0.5 text-center">
+                <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold">The Science</span>
+                <span className="font-georgia text-white text-[12px]">Sports and Exercise Science degree and S&amp;C MSc</span>
               </div>
             </div>
           </div>
@@ -1070,8 +1071,12 @@ function AboutGeorgeSection() {
         <Reveal delay={200} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG")} alt="George Vernon coaching in the gym" className="w-full object-cover object-top block" style={{ height: "600px" }} loading="lazy" />
-            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full object-cover object-top block" style={{ height: "600px" }} loading="lazy" />
+            <div className="overflow-hidden md:h-[600px]">
+              <img src={encodeURI("/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG")} alt="George Vernon coaching in the gym" className="w-full h-auto md:h-full md:object-cover md:object-top block" loading="lazy" />
+            </div>
+            <div className="overflow-hidden md:h-[600px]">
+              <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full h-auto md:h-full md:object-cover md:object-top block" loading="lazy" />
+            </div>
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
             <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Gym Floor</span>
@@ -1082,19 +1087,21 @@ function AboutGeorgeSection() {
         {/* Fitness by Science — 4 images 2x2 */}
         <Reveal delay={250} className="w-full mb-10 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
           <div className="h-[3px] bg-[#c9a96e]" />
-          <div className="grid grid-cols-2 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             {[
               { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_1432.jpg" },
               { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG" },
               { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG" },
               { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG", op: "50% 15%" },
             ].map(({ src, op }, i) => (
-              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover object-top block" style={{ height: i < 2 ? "600px" : "340px", objectPosition: op }} loading="lazy" />
+              <div key={i} className={`overflow-hidden ${i < 2 ? "md:h-[600px]" : "md:h-[340px]"}`}>
+                <img src={encodeURI(src)} alt="Fitness by Science" className="w-full h-auto md:h-full md:object-cover md:object-top block" style={{ objectPosition: op }} loading="lazy" />
+              </div>
             ))}
           </div>
-          <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2 flex-wrap text-center">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">Fitness by Science</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· A business George co-founded with his brother where he mentored new personal trainers</span>
+          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
+            <span className="font-georgia text-white text-[12px]">A business George co-founded with his brother where he mentored new personal trainers</span>
           </div>
         </Reveal>
 
