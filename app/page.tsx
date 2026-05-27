@@ -305,7 +305,7 @@ function Hero() {
                 alt="George Vernon — Health & Performance Coach"
                 className="absolute inset-0 w-full h-full object-cover object-top block"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-[#222f39]/90 backdrop-blur-sm px-6 py-4">
+              <div className="absolute bottom-0 left-0 right-0 bg-[#222f39]/90 backdrop-blur-sm px-6 py-4 text-center">
                 <div className="text-[#c9a96e] font-georgia text-[11px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
                 <div className="font-georgia text-white text-[18px] font-semibold">Health &amp; Performance Coach</div>
               </div>
@@ -1032,14 +1032,14 @@ function AboutGeorgeSection() {
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             <div className="flex flex-col">
-              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto block" loading="lazy" />
+              <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full object-cover object-top block" style={{ height: "420px" }} loading="lazy" />
               <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
                 <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Boxing</span>
                 <span className="font-georgia text-white text-[13px] font-semibold">· Elite Amateur Boxer</span>
               </div>
             </div>
             <div className="flex flex-col md:border-l border-[#2e3d47]">
-              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto block" loading="lazy" />
+              <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full object-cover object-top block" style={{ height: "420px" }} loading="lazy" />
               <div className="bg-[#222f39] px-4 py-3 flex items-center justify-center gap-2 flex-wrap">
                 <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Science</span>
                 <span className="font-georgia text-white text-[11px]">· Sports and Exercise Science degree and S&amp;C Master&apos;s degree</span>
@@ -1057,7 +1057,7 @@ function AboutGeorgeSection() {
               { src: "/:assets:images:about-george:/Coaching athletes/IMG_4759 2.JPG", pos: "object-top" },
               { src: "/:assets:images:about-george:/Coaching athletes/IMG_4770 2.JPG", pos: "object-left" },
             ].map(({ src, pos }, i) => (
-              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "280px" }} loading="lazy" />
+              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "320px" }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
@@ -1070,8 +1070,8 @@ function AboutGeorgeSection() {
         <Reveal delay={200} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG")} alt="George Vernon coaching in the gym" className="w-full h-auto block" loading="lazy" />
-            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full h-auto block" loading="lazy" />
+            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG")} alt="George Vernon coaching in the gym" className="w-full object-cover object-top block" style={{ height: "600px" }} loading="lazy" />
+            <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full object-cover object-top block" style={{ height: "600px" }} loading="lazy" />
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
             <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Gym Floor</span>
@@ -1089,7 +1089,7 @@ function AboutGeorgeSection() {
               "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG",
               "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG",
             ].map((src, i) => (
-              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover object-top block" style={{ height: "320px" }} loading="lazy" />
+              <img key={i} src={encodeURI(src)} alt="Fitness by Science" className="w-full object-cover object-top block" style={{ height: i < 2 ? "420px" : "320px" }} loading="lazy" />
             ))}
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2 flex-wrap text-center">
@@ -1099,7 +1099,7 @@ function AboutGeorgeSection() {
         </Reveal>
 
         {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-20 mb-10">
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-32 mb-10">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
