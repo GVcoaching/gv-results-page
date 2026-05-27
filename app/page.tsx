@@ -346,7 +346,7 @@ function FeaturedVideo() {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -370,7 +370,7 @@ function FeaturedVideo() {
               <iframe
                 className="absolute inset-0 w-full h-full"
                 src={inView
-                  ? "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1"
+                  ? "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1"
                   : "about:blank"}
                 title="George Vernon — GV Coaching"
                 allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
@@ -555,8 +555,8 @@ function YouTubeVideoCard({
         />
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[40px] h-[40px] rounded-full bg-white/85 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-            <svg width="12" height="13" viewBox="0 0 22 24" fill="none" className="ml-0.5">
+          <div className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-full bg-white/85 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
+            <svg width="9" height="10" className="md:w-[12px] md:h-[13px] ml-0.5" viewBox="0 0 22 24" fill="none">
               <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
             </svg>
           </div>
