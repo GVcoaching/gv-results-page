@@ -721,7 +721,7 @@ function WellbeingTalksSection() {
         <Reveal delay={150} className="max-w-lg mx-auto mb-8 space-y-3 text-center">
           {[
             "Keynotes (45 minutes to 90 minutes)",
-            "One-day to four-day employee workshops",
+            "Employee workshops",
             "Ongoing corporate health programmes",
             "Senior leadership performance coaching",
           ].map((item, i) => (
@@ -998,7 +998,7 @@ function AboutGeorgeSection() {
         {/* Bio paragraphs — centered */}
         <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-center">
           <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks to organisations across the UK.
+            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and well-being education talks and well-being programs to organizations across the UK.
           </p>
           <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
@@ -1052,7 +1052,7 @@ function AboutGeorgeSection() {
           </div>
           <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2">
             <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">The Athletes</span>
-            <span className="font-georgia text-white text-[13px] font-semibold">· George coached athletes and boxers</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">· George coached elite athletes and elite boxers</span>
           </div>
         </Reveal>
 
@@ -1088,9 +1088,9 @@ function AboutGeorgeSection() {
               </div>
             ))}
           </div>
-          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
-            <span className="font-georgia text-white text-[12px]">A business George co-founded with his brother where he mentored new personal trainers</span>
+          <div className="bg-[#222f39] px-5 py-3 flex items-center justify-center gap-2 flex-wrap">
+            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold whitespace-nowrap">Fitness by Science</span>
+            <span className="font-georgia text-white text-[13px] font-semibold">· A business George co-founded with his brother where he mentored new personal trainers</span>
           </div>
         </Reveal>
 
