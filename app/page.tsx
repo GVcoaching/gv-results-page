@@ -830,7 +830,7 @@ function ConsultingSection() {
             <span className="text-[#c9a96e]">Across the UK.</span>
           </h2>
           <p className="text-[#54595f] text-[18px] md:text-[20px] lg:text-[22px] w-full leading-[1.8] text-center">
-            George also consults for organisations across the UK, including The Principals Club — a private membership for dental practice owners — bringing the same evidence-based approach to organisational health and performance.
+            George also consults for organisations across the UK, including The Principals Club, a private membership for dental practice owners, bringing the same evidence-based approach to organisational health and performance.
           </p>
         </Reveal>
 
@@ -1022,7 +1022,7 @@ function AboutGeorgeSection() {
         {/* Bio paragraphs — centered */}
         <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-center">
           <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and well-being education talks and well-being programs to organizations across the UK.
+            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and well-being education talks and well-being programs to organisations across the UK.
           </p>
           <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
             Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
