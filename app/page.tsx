@@ -155,15 +155,15 @@ function Navbar() {
 
         {/* Desktop nav — lg+ only */}
         <div className="hidden lg:flex items-center gap-6">
-          <a href="#why-george" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
-          <a href="#results" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
-          <a href="#corporate" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
+          <a href="#why-george" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
+          <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
+          <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
+            className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
           >
             Book a Call with George
           </a>
@@ -319,7 +319,7 @@ function Hero() {
               href="https://health.gvcoaching.co.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
+              className="mt-0 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
             >
               Take Your Health Phase Test
               <ArrowRight size={14} />
@@ -749,19 +749,7 @@ function WellbeingTalksSection() {
           ))}
         </Reveal>
 
-        <Reveal delay={250} className="hidden md:flex mb-8 lg:mb-10 justify-center">
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
-          >
-            Book a Discovery Call
-            <ArrowRight size={13} />
-          </a>
-        </Reveal>
-
-        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-0">
+        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-8">
           <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
             <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
@@ -800,17 +788,7 @@ function WellbeingTalksSection() {
           </div>
         </Reveal>
 
-        <a
-          href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="md:hidden mt-4 mb-8 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-8 py-5 w-full min-h-[44px]"
-        >
-          Book a Discovery Call
-          <ArrowRight size={13} />
-        </a>
-
-        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
+        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto mb-8">
           <div className="overflow-hidden border border-[#e5e5e5] shadow-sm lg:aspect-[4/3]">
             <img
               src={encodeURI("/Public speaking/IMG_3363.jpg")}
@@ -826,6 +804,28 @@ function WellbeingTalksSection() {
             />
           </div>
         </Reveal>
+
+        <Reveal delay={250} className="hidden md:flex justify-center">
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
+          >
+            Book a Discovery Call
+            <ArrowRight size={13} />
+          </a>
+        </Reveal>
+
+        <a
+          href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="md:hidden inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-8 py-5 w-full min-h-[44px]"
+        >
+          Book a Discovery Call
+          <ArrowRight size={13} />
+        </a>
 
       </div>
     </section>
@@ -1146,7 +1146,7 @@ function AboutGeorgeSection() {
         </Reveal>
 
         {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-48 mb-10">
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-10 mb-4">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
