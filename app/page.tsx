@@ -248,7 +248,7 @@ function Hero() {
         </p>
 
         {/* Headshot — full width, natural ratio */}
-        <div className="mt-8 w-full">
+        <div className="mt-4 w-full">
           <img
             src="/Headshot/IMG_8821.jpg"
             alt="George Vernon, Health and Performance Coach"
