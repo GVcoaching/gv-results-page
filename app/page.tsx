@@ -244,7 +244,7 @@ function Hero() {
 
         {/* Subtext */}
         <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
-          One to one coaching and wellbeing programmes for business and medical professionals and senior leaders who want to perform at the top of their game at work and enjoy their life when they get home.
+          One-to-one coaching and well-being programmes for business owners, medical professionals, and senior leaders who want to perform at the top of their game in work and enjoy their life when they get home.
         </p>
 
         {/* Headshot — full width, natural ratio */}
@@ -298,7 +298,7 @@ function Hero() {
               <span className="text-[#c9a96e]">Better performance, without burning out.</span>
             </h1>
             <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center w-full">
-              One to one coaching and wellbeing programmes for business and medical professionals and senior leaders who want to perform at the top of their game at work and enjoy their life when they get home.
+              One-to-one coaching and well-being programmes for business owners, medical professionals, and senior leaders who want to perform at the top of their game in work and enjoy their life when they get home.
             </p>
           </div>
 
