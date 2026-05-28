@@ -155,15 +155,15 @@ function Navbar() {
 
         {/* Desktop nav — lg+ only */}
         <div className="hidden lg:flex items-center gap-3">
-          <a href="#why-george" className="font-georgia text-sm text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
-          <a href="#results" className="font-georgia text-sm text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
-          <a href="#corporate" className="font-georgia text-sm text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-sm text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
+          <a href="#why-george" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
+          <a href="#results" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
+          <a href="#corporate" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-georgia text-sm text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
+            className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
           >
             Book a Call with George
           </a>
