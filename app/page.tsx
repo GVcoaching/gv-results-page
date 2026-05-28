@@ -653,12 +653,12 @@ function ScreenshotTestimonialsSection() {
               {testimonialImages.map((src, i) => (
                 <div
                   key={i}
-                  className="w-full flex-shrink-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] aspect-square"
+                  className="w-full flex-shrink-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]"
                 >
                   <img
                     src={encodeURI(src)}
                     alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-full object-contain block"
+                    className="w-full h-auto block"
                   />
                 </div>
               ))}
@@ -696,12 +696,12 @@ function ScreenshotTestimonialsSection() {
                   <div
                     key={i}
                     className="flex-shrink-0 w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                    style={{ scrollSnapAlign: "start", height: "600px" }}
+                    style={{ scrollSnapAlign: "start" }}
                   >
                     <img
                       src={encodeURI(src)}
                       alt={`Client testimonial ${i + 1}`}
-                      className="w-full h-full object-contain block"
+                      className="w-full h-auto block"
                     />
                   </div>
                 ))}
