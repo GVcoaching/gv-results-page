@@ -658,7 +658,7 @@ function ScreenshotTestimonialsSection() {
                   <img
                     src={encodeURI(src)}
                     alt={`Client testimonial ${i + 1}`}
-                    className={`w-full block ${i === 0 ? "aspect-square object-contain" : "h-auto"}`}
+                    className={`w-full block ${i === 0 ? "aspect-square object-cover" : "h-auto"}`}
                   />
                 </div>
               ))}
@@ -701,7 +701,7 @@ function ScreenshotTestimonialsSection() {
                     <img
                       src={encodeURI(src)}
                       alt={`Client testimonial ${i + 1}`}
-                      className={`w-full block ${i === 0 ? "aspect-square object-contain" : "h-full object-contain"}`}
+                      className={`w-full block ${i === 0 ? "aspect-square object-cover" : "h-full object-contain"}`}
                       style={i !== 0 ? { minHeight: "400px" } : undefined}
                     />
                   </div>
