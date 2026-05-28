@@ -749,12 +749,12 @@ function WellbeingTalksSection() {
           ))}
         </Reveal>
 
-        <Reveal delay={250} className="hidden md:flex mb-8 lg:mb-10 w-full md:w-auto">
+        <Reveal delay={250} className="hidden md:flex mb-8 lg:mb-10 justify-center">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 md:px-16 lg:px-20 py-5 w-full md:w-auto min-h-[44px]"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
           >
             Book a Discovery Call
             <ArrowRight size={13} />
@@ -872,7 +872,7 @@ function ConsultingSection() {
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 md:px-20 py-5 w-full md:w-auto min-h-[44px]"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
           >
             Enquire About Consulting
             <ArrowRight size={13} />
