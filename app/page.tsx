@@ -1125,7 +1125,7 @@ function AboutGeorgeSection() {
         </Reveal>
 
         {/* Fitness by Science — 4 images 2x2 */}
-        <Reveal delay={250} className="w-full mb-10 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
+        <Reveal delay={250} className="w-full overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
           <div className="h-[3px] bg-[#c9a96e]" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             {[
