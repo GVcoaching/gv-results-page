@@ -1146,7 +1146,7 @@ function AboutGeorgeSection() {
         </Reveal>
 
         {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-4 mb-4">
+        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-10">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
