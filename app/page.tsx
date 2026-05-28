@@ -140,7 +140,7 @@ function Navbar() {
           : ""
       }`}
     >
-      <div className="w-full px-4 lg:px-6 flex items-center justify-between h-12 lg:h-[72px]">
+      <div className="w-full px-4 lg:pl-10 lg:pr-6 flex items-center justify-between h-12 lg:h-[72px]">
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
@@ -155,15 +155,15 @@ function Navbar() {
 
         {/* Desktop nav — lg+ only */}
         <div className="hidden lg:flex items-center gap-6">
-          <a href="#why-george" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
-          <a href="#results" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
-          <a href="#corporate" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
+          <a href="#why-george" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
+          <a href="#results" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
+          <a href="#corporate" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
+            className="font-georgia text-[19px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
           >
             Book a Call with George
           </a>
