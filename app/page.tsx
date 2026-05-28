@@ -147,23 +147,23 @@ function Navbar() {
           <span className="font-georgia text-[20px] lg:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
-          <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
-          <span className="hidden lg:block font-georgia text-[13px] text-[#54595f] leading-tight whitespace-nowrap">
+          <span className="hidden 2xl:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
+          <span className="hidden 2xl:block font-georgia text-[13px] text-[#54595f] leading-tight whitespace-nowrap">
             Health &amp; Performance Coach
           </span>
         </a>
 
         {/* Desktop nav — lg+ only */}
-        <div className="hidden lg:flex items-center gap-3">
-          <a href="#why-george" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
-          <a href="#results" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
-          <a href="#corporate" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
+        <div className="hidden lg:flex items-center gap-6">
+          <a href="#why-george" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
+          <a href="#results" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
+          <a href="#corporate" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-georgia text-base text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
+            className="font-georgia text-[17px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
           >
             Book a Call with George
           </a>
