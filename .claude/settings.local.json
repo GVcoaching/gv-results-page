@@ -13,7 +13,9 @@
       "Bash(open *)",
       "Bash(npx next *)",
       "Bash(git revert *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(git checkout *)",
+      "Bash(lsof -ti:3000)"
     ]
   }
 }
