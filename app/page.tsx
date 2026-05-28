@@ -140,7 +140,7 @@ function Navbar() {
           : ""
       }`}
     >
-      <div className="w-full px-4 lg:px-24 flex items-center justify-between h-12 lg:h-[72px]">
+      <div className="w-full px-4 lg:px-6 flex items-center justify-between h-12 lg:h-[72px]">
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
@@ -148,22 +148,22 @@ function Navbar() {
             George Vernon
           </span>
           <span className="hidden lg:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
-          <span className="hidden lg:block font-georgia text-[16px] text-[#54595f] leading-tight tracking-wide whitespace-nowrap">
+          <span className="hidden lg:block font-georgia text-[13px] text-[#54595f] leading-tight whitespace-nowrap">
             Health &amp; Performance Coach
           </span>
         </a>
 
         {/* Desktop nav — lg+ only */}
-        <div className="hidden lg:flex items-center gap-8">
-          <a href="#why-george" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Why George</a>
-          <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Results</a>
-          <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold">About George</a>
+        <div className="hidden lg:flex items-center gap-3">
+          <a href="#why-george" className="font-georgia text-xs text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
+          <a href="#results" className="font-georgia text-xs text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
+          <a href="#corporate" className="font-georgia text-xs text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
+          <a href="#about" className="font-georgia text-xs text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors tracking-wide font-semibold whitespace-nowrap"
+            className="font-georgia text-xs text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
           >
             Book a Call with George
           </a>
@@ -224,7 +224,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full lg:min-h-[72vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[110px]"
+      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[110px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -286,18 +286,18 @@ function Hero() {
       </div>
 
       {/* ── DESKTOP: two-column (hidden below lg) ── */}
-      <div className="hidden lg:block w-full px-0 py-6 relative">
+      <div className="hidden lg:block w-full px-16 py-20 relative">
         <div className="flex flex-row items-stretch gap-5">
 
           <div className="flex-1 min-w-0 flex flex-col justify-center items-center pl-0">
             <h1
-              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center"
+              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center w-full"
               style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
               Health and performance coach for{" "}
               <span className="text-[#c9a96e]">business owners, medical professionals and senior leaders.</span>
             </h1>
-            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center">
+            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center w-full">
               Personalised one-to-one coaching and health and wellbeing programmes for professionals who want to transform their health, sharpen their energy and perform at the highest level, both in work and in life.
             </p>
           </div>
@@ -307,7 +307,8 @@ function Hero() {
               <img
                 src="/Headshot/IMG_8821.jpg"
                 alt="George Vernon — Health & Performance Coach"
-                className="absolute inset-0 w-full h-full object-cover object-top block"
+                className="absolute inset-0 w-full h-full object-cover block"
+                style={{ objectPosition: "left center" }}
               />
               <div className="absolute bottom-0 left-0 right-0 bg-[#222f39]/90 backdrop-blur-sm px-6 py-4 text-center">
                 <div className="text-[#c9a96e] font-georgia text-[11px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
