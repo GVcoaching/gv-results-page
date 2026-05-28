@@ -821,7 +821,7 @@ function WellbeingTalksSection() {
           href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
           target="_blank"
           rel="noopener noreferrer"
-          className="md:hidden inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-8 py-5 w-full min-h-[44px]"
+          className="md:hidden inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-8 py-5 w-full min-h-[44px]"
         >
           Book a Discovery Call
           <ArrowRight size={13} />
