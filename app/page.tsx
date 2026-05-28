@@ -812,7 +812,7 @@ function WellbeingTalksSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
           >
-            Book a Discovery Call
+            Book a Call with George
             <ArrowRight size={13} />
           </a>
         </Reveal>
