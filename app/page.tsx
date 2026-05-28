@@ -238,20 +238,20 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
-          Health and performance coach for{" "}
-          <span className="text-[#c9a96e]">business owners, medical professionals and senior leaders.</span>
+          More energy. Sharper focus.{" "}
+          <span className="text-[#c9a96e]">Better performance, without burning out.</span>
         </h1>
 
         {/* Subtext */}
         <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
-          Personalised one-to-one coaching and health and wellbeing programmes for professionals who want to transform their health, sharpen their energy and perform at the highest level, both in work and in life.
+          One to one coaching and wellbeing programmes for business and medical professionals and senior leaders who want to perform at the top of their game at work and enjoy their life when they get home.
         </p>
 
         {/* Headshot — full width, natural ratio */}
         <div className="mt-8 w-full">
           <img
             src="/Headshot/IMG_8821.jpg"
-            alt="George Vernon — Health & Performance Coach"
+            alt="George Vernon, Health and Performance Coach"
             className="w-full h-auto block"
           />
         </div>
@@ -294,11 +294,11 @@ function Hero() {
               className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center w-full"
               style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
             >
-              Health and performance coach for{" "}
-              <span className="text-[#c9a96e]">business owners, medical professionals and senior leaders.</span>
+              More energy. Sharper focus.{" "}
+              <span className="text-[#c9a96e]">Better performance, without burning out.</span>
             </h1>
             <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center w-full">
-              Personalised one-to-one coaching and health and wellbeing programmes for professionals who want to transform their health, sharpen their energy and perform at the highest level, both in work and in life.
+              One to one coaching and wellbeing programmes for business and medical professionals and senior leaders who want to perform at the top of their game at work and enjoy their life when they get home.
             </p>
           </div>
 
@@ -306,7 +306,7 @@ function Hero() {
             <div className="relative flex-1 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.4)] min-h-[460px]">
               <img
                 src="/Headshot/IMG_8821.jpg"
-                alt="George Vernon — Health & Performance Coach"
+                alt="George Vernon, Health and Performance Coach"
                 className="absolute inset-0 w-full h-full object-cover block"
                 style={{ objectPosition: "left center" }}
               />
@@ -404,7 +404,7 @@ function FeaturedVideo() {
                   >
                     <img
                       src="https://img.youtube.com/vi/TQBuOmHEoSw/maxresdefault.jpg"
-                      alt="Why Choose George — tap to play"
+                      alt="Why Choose George, tap to play"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
@@ -419,28 +419,6 @@ function FeaturedVideo() {
               )}
             </div>
           </div>
-          <div className="bg-[#222f39] px-5 md:px-7 py-4 md:py-5 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-0 md:justify-between">
-            <span className="font-georgia text-white text-[15px] md:text-[16px] font-semibold tracking-wide">
-              George Vernon — Health &amp; Performance Coach
-            </span>
-            <a
-              href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex text-[#c9a96e] text-[12px] font-semibold tracking-[0.1em] uppercase hover:text-[#d4bc8a] transition-colors items-center gap-2 whitespace-nowrap md:ml-4"
-            >
-              Book a Call with George <ArrowRight size={12} />
-            </a>
-          </div>
-          {/* Mobile-only CTA button */}
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="md:hidden mt-4 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase py-5 w-full"
-          >
-            Book a Call with George <ArrowRight size={14} />
-          </a>
         </Reveal>
 
       </div>
@@ -752,14 +730,11 @@ function WellbeingTalksSection() {
         <Reveal className="text-center w-full mb-8 lg:mb-8">
           <EyebrowCenter>Wellbeing Programs</EyebrowCenter>
           <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
-            Invest in Your{" "}
-            <span className="text-[#c9a96e]">People&apos;s Performance.</span>
+            Healthier, Happier Teams. Better Business Performance.{" "}
+            <span className="text-[#c9a96e]">Bigger Profits.</span>
           </h2>
           <p className="text-[#1c252e] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.85]">
-            George delivers engaging health and wellbeing talks to
-            organisations across the UK, helping teams improve energy, focus
-            and performance. Available for corporate events, away days and
-            leadership conferences.
+            Engaging, evidence based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity.
           </p>
         </Reveal>
 
@@ -781,7 +756,7 @@ function WellbeingTalksSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] md:tracking-[0.1em] uppercase px-6 md:px-8 lg:px-14 py-[18px] w-full md:w-auto min-h-[44px]"
           >
-            Enquire About a Wellbeing Programme
+            Book a Discovery Call
             <ArrowRight size={13} />
           </a>
         </Reveal>
@@ -820,7 +795,7 @@ function WellbeingTalksSection() {
             </div>
             <div className="bg-[#222f39] px-6 py-4 text-center">
               <span className="font-georgia text-white text-[14px] font-semibold">Speaker Reel</span>
-              <span className="text-white/40 text-[12px] ml-2">— George Vernon</span>
+              <span className="text-white/40 text-[12px] ml-2">, George Vernon</span>
             </div>
           </div>
         </Reveal>
@@ -831,7 +806,7 @@ function WellbeingTalksSection() {
           rel="noopener noreferrer"
           className="md:hidden mt-4 mb-8 inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[12px] font-bold tracking-[0.04em] uppercase px-6 py-[18px] w-full min-h-[44px]"
         >
-          Enquire About a Wellbeing Programme
+          Book a Discovery Call
           <ArrowRight size={13} />
         </a>
 
@@ -879,19 +854,30 @@ function ConsultingSection() {
           <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
             <img
               src={encodeURI("/Expert consultant/IMG_6076 2.JPG")}
-              alt="George Vernon — expert consultant"
+              alt="George Vernon, expert consultant"
               className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
           <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
             <img
               src={encodeURI("/Expert consultant/IMG_6077.JPG")}
-              alt="George Vernon — expert consultant"
+              alt="George Vernon, expert consultant"
               className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
             />
           </div>
         </Reveal>
 
+        <Reveal delay={250} className="flex mt-10 w-full justify-center">
+          <a
+            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-14 py-[18px] w-full md:w-auto min-h-[44px]"
+          >
+            Enquire About Consulting
+            <ArrowRight size={13} />
+          </a>
+        </Reveal>
 
       </div>
     </section>
@@ -1084,7 +1070,7 @@ function AboutGeorgeSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             <div className="flex flex-col">
               <div className="overflow-hidden md:h-[480px] bg-[#1c252e]">
-                <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon — elite amateur boxing" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
+                <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon, elite amateur boxing" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
               </div>
               <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
                 <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold">Boxing</span>
@@ -1093,7 +1079,7 @@ function AboutGeorgeSection() {
             </div>
             <div className="flex flex-col md:border-l border-[#2e3d47]">
               <div className="overflow-hidden md:h-[480px] bg-[#1c252e]">
-                <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon — sports science degree" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
+                <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon, sports science degree" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
               </div>
               <div className="bg-[#222f39] px-4 py-3 flex flex-col items-center gap-0.5 text-center">
                 <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold">The Science</span>
