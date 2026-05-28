@@ -788,24 +788,7 @@ function WellbeingTalksSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto mb-8">
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm lg:aspect-[4/3]">
-            <img
-              src={encodeURI("/Public speaking/IMG_3363.jpg")}
-              alt="George Vernon speaking"
-              className="w-full h-auto block lg:h-full lg:object-cover lg:object-center hover:scale-[1.03] transition-transform duration-500"
-            />
-          </div>
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-sm lg:aspect-[4/3]">
-            <img
-              src={encodeURI("/Public speaking/IMG_4770.jpg")}
-              alt="George Vernon presenting"
-              className="w-full h-auto block lg:h-full lg:object-cover lg:object-center hover:scale-[1.03] transition-transform duration-500"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal delay={250} className="hidden md:flex justify-center">
+<Reveal delay={250} className="hidden md:flex justify-center">
           <a
             href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
             target="_blank"
