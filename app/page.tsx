@@ -654,11 +654,12 @@ function ScreenshotTestimonialsSection() {
                 <div
                   key={i}
                   className="w-full flex-shrink-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)]"
+                  style={{ height: "340px" }}
                 >
                   <img
                     src={encodeURI(src)}
                     alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-auto block"
+                    className="w-full h-full object-contain block"
                   />
                 </div>
               ))}
@@ -696,13 +697,12 @@ function ScreenshotTestimonialsSection() {
                   <div
                     key={i}
                     className="flex-shrink-0 w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                    style={{ scrollSnapAlign: "start", minHeight: "400px" }}
+                    style={{ scrollSnapAlign: "start", height: "400px" }}
                   >
                     <img
                       src={encodeURI(src)}
                       alt={`Client testimonial ${i + 1}`}
                       className="w-full h-full object-contain block"
-                      style={{ minHeight: "400px" }}
                     />
                   </div>
                 ))}
