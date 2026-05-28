@@ -658,7 +658,7 @@ function ScreenshotTestimonialsSection() {
                   <img
                     src={encodeURI(src)}
                     alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-full object-cover block"
+                    className="w-full h-full object-contain block"
                   />
                 </div>
               ))}
@@ -701,7 +701,7 @@ function ScreenshotTestimonialsSection() {
                     <img
                       src={encodeURI(src)}
                       alt={`Client testimonial ${i + 1}`}
-                      className="w-full h-full object-cover block"
+                      className="w-full h-full object-contain block"
                     />
                   </div>
                 ))}
