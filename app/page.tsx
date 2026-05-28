@@ -588,9 +588,9 @@ function YouTubeVideoCard({
 // ─── SCREENSHOT TESTIMONIALS ─────────────────────────────────────────────────
 
 const testimonialImages = [
-  "/Testimonial pictures/New darren testimonial picture.png",
-  "/Testimonial pictures/Kieran - 1.PNG",
   "/Testimonial pictures/Results - 3.PNG",
+  "/Testimonial pictures/Kieran - 1.PNG",
+  "/Testimonial pictures/New darren testimonial picture.png",
   "/Testimonial pictures/Mani Konkon 2.PNG",
   "/Testimonial pictures/One of the First Things.PNG",
   "/Testimonial pictures/Results - 10.PNG",
