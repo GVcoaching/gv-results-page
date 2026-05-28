@@ -237,7 +237,7 @@ function Hero() {
       <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-4">
 
         {/* Headline */}
-        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[1.75rem] w-full">
+        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[2.25rem] w-full">
           More energy. Sharper focus.{" "}
           <span className="text-[#c9a96e]">Better performance, without burning out.</span>
         </h1>
