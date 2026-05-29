@@ -113,6 +113,7 @@ section.hero-section > div {
     width: 100% !important;
     max-height: 60vh !important;
     object-fit: cover !important;
+    object-position: center top !important;
   }
 
   section {
