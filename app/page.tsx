@@ -140,11 +140,11 @@ function Navbar() {
           : ""
       }`}
     >
-      <div className="w-full px-4 lg:pl-10 lg:pr-6 flex items-center justify-between h-12 lg:h-[72px]">
+      <div className="w-full px-4 xl:pl-10 xl:pr-6 flex items-center justify-between h-12 xl:h-[72px]">
 
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[20px] lg:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
+          <span className="font-georgia text-[20px] xl:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
             George Vernon
           </span>
           <span className="hidden 2xl:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
@@ -153,8 +153,8 @@ function Navbar() {
           </span>
         </a>
 
-        {/* Desktop nav — lg+ only */}
-        <div className="hidden lg:flex items-center gap-6">
+        {/* Desktop nav — xl+ only */}
+        <div className="hidden xl:flex items-center gap-6">
           <a href="#why-george" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
           <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
           <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
@@ -177,9 +177,9 @@ function Navbar() {
           </a>
         </div>
 
-        {/* Mobile — hamburger only */}
+        {/* Mobile/tablet — hamburger only */}
         <button
-          className="lg:hidden flex flex-col gap-[5px] p-1 flex-shrink-0"
+          className="xl:hidden flex flex-col gap-[5px] p-1 flex-shrink-0"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -189,9 +189,9 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile/tablet drawer */}
       {menuOpen && (
-        <div className="lg:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
+        <div className="xl:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
           <a href="#why-george" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Why George</a>
           <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
           <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Programs</a>
@@ -224,7 +224,7 @@ function Navbar() {
 function Hero() {
   return (
     <section
-      className="hero-section relative w-full lg:min-h-[90vh] flex flex-col lg:justify-center overflow-x-hidden lg:pt-[80px]"
+      className="hero-section relative w-full xl:min-h-[90vh] flex flex-col xl:justify-center overflow-x-hidden xl:pt-[80px]"
       style={{ background: "#222f39" }}
     >
       {/* Desktop radial gradient */}
@@ -233,8 +233,8 @@ function Hero() {
         style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
       />
 
-      {/* ── MOBILE: stacked Kirk Miller layout (hidden lg+) ── */}
-      <div className="mobile-hero-content lg:hidden flex flex-col items-center text-center px-6 pb-4">
+      {/* ── MOBILE + TABLET: stacked Kirk Miller layout (hidden xl+) ── */}
+      <div className="mobile-hero-content xl:hidden flex flex-col items-center text-center px-6 pb-4">
 
         {/* Headline */}
         <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[2rem] w-full">
@@ -285,8 +285,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* ── DESKTOP: two-column (hidden below lg) ── */}
-      <div className="hidden lg:block w-full px-16 pt-10 pb-20 relative">
+      {/* ── DESKTOP: two-column (hidden below xl) ── */}
+      <div className="hidden xl:block w-full px-16 pt-10 pb-20 relative">
         <div className="flex flex-row items-stretch gap-5">
 
           <div className="flex-1 min-w-0 flex flex-col justify-center items-center pl-0">
@@ -330,7 +330,7 @@ function Hero() {
       </div>
 
       {/* Scroll indicator — desktop only */}
-      <div className="hidden lg:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
+      <div className="hidden xl:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
         <div className="w-[1px] h-12 bg-white/60" />
         <span className="text-white text-[9px] tracking-[0.35em] uppercase">Scroll</span>
       </div>

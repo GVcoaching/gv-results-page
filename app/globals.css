@@ -60,7 +60,7 @@ section.hero-section > div {
   scroll-margin-top: 72px;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   #why-george, #results, #corporate, #about {
     scroll-margin-top: 48px;
   }
@@ -70,8 +70,8 @@ section.hero-section > div {
 .scroll-hide::-webkit-scrollbar { display: none; }
 .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Mobile-only: prevent heading overflow */
-@media (max-width: 1023px) {
+/* Mobile + tablet: prevent heading overflow */
+@media (max-width: 1279px) {
   h1, h2, h3, h4, h5, h6 {
     max-width: 100%;
     overflow-wrap: break-word;
@@ -79,7 +79,7 @@ section.hero-section > div {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   .mobile-hero-content {
     padding-top: 44px !important;
     text-align: center !important;
@@ -96,9 +96,27 @@ section.hero-section > div {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   section:not(.hero-section) {
     padding-top: 28px !important;
     padding-bottom: 28px !important;
+  }
+}
+
+/* Tablet fix: 768–1279px (iPad portrait through iPad landscape, below xl: desktop) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-section {
+    flex-direction: column !important;
+  }
+
+  .hero-section img {
+    width: 100% !important;
+    max-height: 60vh !important;
+    object-fit: cover !important;
+  }
+
+  section {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
   }
 }
