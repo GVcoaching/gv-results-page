@@ -286,7 +286,7 @@ function Hero() {
       </div>
 
       {/* ── DESKTOP: two-column (hidden below xl) ── */}
-      <div className="hidden xl:block w-full px-16 pt-10 pb-20 relative">
+      <div className="hidden xl:block w-full max-w-[1440px] mx-auto px-16 pt-10 pb-20 relative">
         <div className="flex flex-row items-stretch gap-5">
 
           <div className="flex-1 min-w-0 flex flex-col justify-center items-center pl-0">
