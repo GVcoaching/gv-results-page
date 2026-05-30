@@ -308,7 +308,7 @@ function Hero() {
                 src="/Headshot/IMG_8821.jpg"
                 alt="George Vernon, Health and Performance Coach"
                 className="absolute inset-0 w-full h-full object-cover block"
-                style={{ objectPosition: "left center" }}
+                style={{ objectPosition: "center top" }}
               />
               <div className="absolute bottom-0 left-0 right-0 bg-[#222f39]/90 backdrop-blur-sm px-6 py-4 text-center">
                 <div className="text-[#c9a96e] font-georgia text-[11px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
