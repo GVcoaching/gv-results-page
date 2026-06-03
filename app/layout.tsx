@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       {
         url: "/og-image.jpg",
         width: 1200,
-        height: 800,
+        height: 867,
         alt: "George Vernon speaking on stage — Health & Performance Coach",
       },
     ],
