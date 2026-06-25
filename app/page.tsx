@@ -429,10 +429,10 @@ function FeaturedVideo() {
 // ─── VIDEO TESTIMONIALS ───────────────────────────────────────────────────────
 
 const youtubeVideos = [
-  "wLREk3NHYd0", "znNeTPMBxTs", "BshYj_w56LU", "Q_B-ajMX4B4",
-  "Vd7LEChZjBs", "HE9kxhuNZOU", "n2GZO2-QZtQ", "u9IJAWhxF2Y",
-  "cZC4YfC29_Q", "yoKPbAjhfIo", "rlctXVS0e8A", "HTYQEOJxg2k",
-  "ryg6JrOmCZU", "2MK7XZytM3I", "bn35xfRdFEQ",
+  "0OrneCoUSSU", "wLREk3NHYd0", "znNeTPMBxTs", "BshYj_w56LU",
+  "Q_B-ajMX4B4", "Vd7LEChZjBs", "HE9kxhuNZOU", "n2GZO2-QZtQ",
+  "u9IJAWhxF2Y", "cZC4YfC29_Q", "yoKPbAjhfIo", "rlctXVS0e8A",
+  "HTYQEOJxg2k", "ryg6JrOmCZU", "2MK7XZytM3I", "bn35xfRdFEQ",
 ];
 
 function VideoTestimonialsSection() {
