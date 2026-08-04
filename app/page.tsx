@@ -173,7 +173,7 @@ function Navbar() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 whitespace-nowrap"
           >
-            Take Your Health Phase Test <ArrowRight size={12} />
+            Take The Assessment <ArrowRight size={12} />
           </a>
         </div>
 
@@ -211,7 +211,7 @@ function Navbar() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4"
           >
-            Take Your Health Phase Test <ArrowRight size={12} />
+            Take The Assessment <ArrowRight size={12} />
           </a>
         </div>
       )}
@@ -270,7 +270,7 @@ function Hero() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
           >
-            Take Your Health Phase Test
+            Take The Assessment
             <ArrowRight size={14} />
           </a>
           <a
@@ -321,7 +321,7 @@ function Hero() {
               rel="noopener noreferrer"
               className="mt-0 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
             >
-              Take Your Health Phase Test
+              Take The Assessment
               <ArrowRight size={14} />
             </a>
           </div>
@@ -898,7 +898,7 @@ function CTASection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-4 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 py-6 w-full md:w-auto min-h-[44px]"
           >
-            Take Your Health Phase Test
+            Take The Assessment
             <ArrowRight size={15} />
           </a>
           <p className="text-white/50 text-[17px] md:text-[18px] font-light tracking-wide mt-7 text-center">
