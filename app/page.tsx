@@ -902,7 +902,7 @@ function CTASection() {
             <ArrowRight size={15} />
           </a>
           <p className="text-white/50 text-[17px] md:text-[18px] font-light tracking-wide mt-7 text-center">
-            Free · Takes 2 minutes · No commitment required
+            Free · Takes 4 minutes · No commitment required
           </p>
         </Reveal>
       </div>
