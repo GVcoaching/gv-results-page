@@ -189,13 +189,13 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 }
 .qc-media { background: #fff; display: flex; flex-direction: column; padding: 0; }
 @media (min-width: 820px) { .qc-media { flex: 0 0 38%; } }
-.qc-photo { width: 100%; aspect-ratio: 3 / 2; overflow: hidden; background: #e9e7e2; position: relative; }
-@media (min-width: 820px) { .qc-photo { aspect-ratio: 4 / 5; } }
+/* Photo aspect matches source portrait so faces don't get cropped.
+   4:5 on both breakpoints keeps the whole head + shoulders visible. */
+.qc-photo { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #e9e7e2; position: relative; }
 .qc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-/* Vish/Kieran collages — keep 1:1 on desktop, bias top so heads survive
-   the mobile 3:2 crop. */
-.qc-photo-wide img { object-position: center top; }
-@media (min-width: 820px) { .qc-photo-wide { aspect-ratio: 1 / 1; } }
+/* Vish/Kieran collages — 1:1 at every breakpoint so nothing gets clipped */
+.qc-photo-wide { aspect-ratio: 1 / 1; }
+.qc-photo-wide img { object-position: center center; }
 .qc-meta { padding: 14px 18px 18px; text-align: center; margin-top: 0; }
 @media (min-width: 820px) { .qc-meta { padding: 18px 22px 22px; } }
 .qc-meta.no-photo { padding: 56px 24px; text-align: center; }
