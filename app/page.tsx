@@ -216,7 +216,6 @@ function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: 
     if (!autoplayOnDesktop) return;
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.matchMedia("(hover: none), (max-width: 1023px)").matches) return;
     const el = wrapperRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -339,7 +338,8 @@ function Slider({
   return (
     <>
       <div className="slider-bar">
-        <div className="hint">Click the arrows to see more →</div>
+        <div className="hint hint-mobile">Swipe to see more →</div>
+        <div className="hint hint-desktop">Click the arrows to see more →</div>
         <div className="arrows">
           <button
             type="button"
@@ -617,19 +617,19 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">In their own words</span><span className="goldbar" /></div>
-              <h2>No time <span className="gold">to watch?</span></h2>
+              <h2>No time to watch <span className="gold">videos?</span></h2>
             </div>
             <Slider count={QUOTES.length} trackClassName="track-q">
               {QUOTES.map((q, i) => (
                 <article className="slide" key={i}>
-                  <div className={`qc-media${q.wide ? " wide" : ""}`}>
+                  <div className="qc-media">
                     {q.photo && (
-                      <div className="ring">
+                      <div className="qc-photo">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={encodeURI(q.photo)} alt={q.name} />
                       </div>
                     )}
-                    <div className="qc-meta">
+                    <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
                       <div className="qc-name">{q.name}</div>
                       <div className="qc-role">{q.role}</div>
                       <div className="stars qc-stars">{STARS}</div>
@@ -794,26 +794,17 @@ export default function Page() {
 
         {/* CORPORATE */}
         <section className="grey" id="corporate">
-          <Reveal className="wrap-wide">
-            <div className="about-grid">
-              <div>
-                <div className="eyebrow">Business wellbeing programmes</div>
-                <h2 style={{ margin: "18px 0 20px" }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
-                <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
-                <div className="inc" style={{ marginTop: 26 }}>
-                  <div>Keynotes, 45 to 90 minutes</div>
-                  <div>Employee workshops</div>
-                  <div>Ongoing corporate health programmes</div>
-                  <div>Senior leadership performance coaching</div>
-                </div>
-                <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
-              </div>
-              <div>
-                <div className="about-ph" style={{ aspectRatio: "4 / 5" }}>
-                  <Image src="/images/george-stage-hero.webp" alt="George Vernon speaking on stage at a corporate wellbeing event" width={1383} height={2481} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
-                </div>
-              </div>
+          <Reveal className="wrap center">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
+            <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
+            <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
+            <div className="inc" style={{ marginTop: 26, textAlign: "left" }}>
+              <div>Keynotes, 45 to 90 minutes</div>
+              <div>Employee workshops</div>
+              <div>Ongoing corporate health programmes</div>
+              <div>Senior leadership performance coaching</div>
             </div>
+            <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
           </Reveal>
         </section>
 
