@@ -1,122 +1,345 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-// ─── SHARED ───────────────────────────────────────────────────────────────────
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
-function GoldBar() {
-  return <span className="block w-12 h-[2px] bg-[#c9a96e]" />;
-}
+const STARS = "★★★★★";
+const AUDIT_URL = "https://health.gvcoaching.co.uk/";
+const CALENDLY_URL = "https://calendly.com/georgegvcoaching/coaching-call-with-george";
 
-function EyebrowCenter({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-center gap-3 mb-5">
-      <GoldBar />
-      <span className="font-georgia text-[#c9a96e] text-[14px] md:text-[15px] tracking-[0.2em] uppercase font-semibold">
-        {children}
-      </span>
-      <GoldBar />
-    </div>
-  );
-}
+type Result = {
+  yt: string;
+  name: string;
+  role: string;
+  results: string[];
+  quote: string;
+};
 
-// ─── SCROLL REVEAL ───────────────────────────────────────────────────────────
+type Quote = {
+  photo: string;
+  wide?: boolean;
+  name: string;
+  role: string;
+  metric: string;
+  quote: string;
+};
 
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+const RESULTS: Result[] = [
+  { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
+    results: ["10kg lost in four months", "Works fewer hours and is more productive", "More control over food while thinking about it less"],
+    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life. I work far less now since working with you, George, and I'm more productive because of it." },
+  { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association",
+    results: ["A dentist, a practice owner, four kids and no energy left", "Daily energy rebuilt while running six providers and twenty staff", "Focus back to lead the practice at her best"],
+    quote: "Recovery finally outweighing stress. That was the shift." },
+  { yt: "HE9kxhuNZOU", name: "Darren", role: "General dentist, Dublin",
+    results: ["12kg lost over seven months", "VO2 max the highest it has ever been", "Heart rate variability the highest it has ever been", "Resting heart rate the lowest it has ever been"],
+    quote: "It's the first time in 32 years I've ever felt like this is a lifestyle change that I'm happy with." },
+  { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist",
+    results: ["25kg lost in seven months", "Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
+    quote: "Family members couldn't even recognise me." },
+  { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
+    results: ["13kg down in four months", "Higher energy levels and sharper focus", "Better business performance", "More quality time with family"],
+    quote: "And it hasn't felt difficult." },
+  { yt: "BshYj_w56LU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property",
+    results: ["Finally achieved the goal he set over ten years ago", "13.2% body fat, down from the twenties", "Consistency where the right actions felt easy"],
+    quote: "You are what you repeatedly do." },
+  { yt: "rlctXVS0e8A", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
+    results: ["Was in a rut and had given up after various programmes", "Best fitness regime he has been on, with a new baby at home", "No late-night eating"],
+    quote: "My mindset shift to not needing to overeat has been my biggest win." },
+  { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover",
+    results: ["Best year the business has had in a long time", "Burnt out with no brain space, to mindset and strength back", "Present and happier at home"],
+    quote: "I'm the captain again, steering the ship. I feel like I've gained another five years." },
+  { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
+    results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
+    quote: "Going to the root cause, and building my energy back up." },
+  { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
+    results: ["14kg off over seven months", "Resting heart rate down 20 to 30 percent", "Running quicker in his forties than he did in his thirties"],
+    quote: "Long-term health is the ROI. This was life-changing for me." },
+  { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London",
+    results: ["Back pain from 7 out of 10, spiking to 9, down to zero", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
+    quote: "Take the jump." },
+  { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training",
+    results: ["Weight down and energy up over five months", "Off the sofa and out on the trampoline with his four-year-old", "A fit dad, in his son's words"],
+    quote: "My energy levels have gone through the roof." },
+  { yt: "2MK7XZytM3I", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
+    results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
+    quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
+  { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in",
+    results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures", "First interview went incredibly well"],
+    quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have. I did not have that before." },
+  { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner",
+    results: ["Down to 110kg, a weight he had not seen in three to four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it hold"],
+    quote: "Sometimes it doesn't feel hard. It feels like you're not doing anything, but it's still working in the background." },
+  { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist",
+    results: ["WHOOP stress reading hit zero for the first time ever", "Slept properly instead of overthinking his first patient complaint", "Handled it calmly the next morning, and the complaint was dropped"],
+    quote: "The thing that would have wrecked a week became a conversation." },
+];
+
+const QUOTES: Quote[] = [
+  { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
+    metric: "10kg lost in four months · works fewer hours and is more productive",
+    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
+  { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist",
+    metric: "61.7 lbs lost in seven months",
+    quote: "Family members couldn't even recognise me." },
+  { photo: "/images/headshot-darren.webp", name: "Darren Hill", role: "General dentist, Dublin",
+    metric: "12kg lost · VO2 max, HRV and resting heart rate all at personal bests",
+    quote: "You've helped me remove the ceiling of what I thought I was capable of achieving." },
+  { photo: "/images/headshot-sanchia.webp", name: "Dr Sanchia Jauch", role: "Dental practice owner, mum of four",
+    metric: "Six providers, twenty staff, energy rebuilt",
+    quote: "A dentist. A practice owner. Four kids. And no energy left. That is what changed." },
+  { photo: "/images/ben-rutter.webp", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
+    metric: "Best fitness regime he has been on, with a new baby at home",
+    quote: "My mindset shift to not needing to overeat has been my biggest win." },
+  { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
+    metric: "Five months · off the sofa and onto the trampoline with his four-year-old",
+    quote: "My energy levels have gone through the roof." },
+  { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
+    metric: "The all-or-nothing cycle, broken",
+    quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
+  { photo: "/Testimonial pictures/Kieran - 1.webp", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
+    metric: "30.1kg down in just under eight months",
+    quote: "Going to the root cause, and building my energy back up." },
+  { photo: "", name: "Mani Konkon", role: "Finance Director",
+    metric: "Years of failed attempts, finally sustainable",
+    quote: "The focus on sustainability and execution changed my whole mentality around weight and healthy living." },
+  { photo: "", name: "Commercial Director", role: "Name withheld by request",
+    metric: "Headhunted three months in, for a role paying well over six figures",
+    quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have." },
+];
+
+type Faq = { q: string; a: string[] };
+
+const FAQS: Faq[] = [
+  { q: "Honestly, I don't think I have the time.", a: [
+    "This is the first thing nearly everyone says, and it is almost always a picture of training that is out of date. One client, a specialist endodontist, told me on our first call that he was not ready, because to him resistance training meant ninety minutes in a gym three times a week.",
+    "When he saw the actual requirement, three sessions of around thirty minutes, he said \"three times half an hour, I can definitely do.\" He signed for six months on that call.",
+  ] },
+  { q: "I'm all or nothing. I go hard for six weeks then it falls apart.", a: [
+    "Then the problem is the plan, not you. A plan that only works on a perfect week will fail, because you do not get perfect weeks. You get renovations, inspections, staff shortages and school holidays.",
+    "So we build a minimum that survives your worst week, and the weekly call exists so the plan changes when your week changes rather than collapsing.",
+  ] },
+  { q: "What if I pay and then don't actually do it?", a: [
+    "This is the real fear behind most hesitation, and it is a fair one. It is also why the programme is built around accountability rather than information. A weekly call with me, daily actions tracked in the app, and targets we set on day one and review against.",
+    "You have two weeks to change your mind and get a full refund. And if you have not hit those targets after three months, I keep working with you at no further cost until you do.",
+  ] },
+  { q: "How long will it actually take to lose the weight?", a: [
+    "It depends on how much, and I would rather tell you the truth than a number that sounds good. Losing faster than roughly one percent of bodyweight a week costs you muscle, energy and sleep, which are the three things you need most.",
+    "So two to three stone is a six-month project, not a twelve-week one. Done at that rate it stays off.",
+  ] },
+  { q: "What exactly do I get each week?", a: [
+    "A one-to-one call with me. A training programme written for you, with video for every movement. A nutrition plan built around what you actually eat, with nothing off limits. Your daily habits tracked in the app. A progress dashboard covering sleep, steps, weight and trends, which we review on every call.",
+    "Plus the full education course on demand, so you understand why you are doing each thing.",
+  ] },
+  { q: "What does it cost?", a: [
+    "Programmes run over three or six months. Which one is right for you depends entirely on what you are trying to change, so I would rather understand that properly than put a number in front of you before we have spoken. We cover it fully on the call, with no pressure either way.",
+  ] },
+  { q: "Now isn't a great time. Can I start in a few weeks?", a: [
+    "There is never a clean starting point, and waiting for one is usually the pattern rather than the solution. If you have a holiday, a build or an inspection coming up, we plan around it. That is exactly the kind of week the system is designed to survive.",
+  ] },
+  { q: "What happens on the first call?", a: [
+    "Thirty minutes. I ask questions about your health, your work and what has and has not worked before, and by the end of it I will tell you what I think is actually holding you back.",
+    "You leave with that whether or not we work together. There is no pitch unless you ask for one.",
+  ] },
+];
+
+// ─── REVEAL ──────────────────────────────────────────────────────────────────
+
+function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            io.disconnect();
+          }
+        });
       },
       { threshold: 0.08, rootMargin: "0px 0px -60px 0px" }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (
     <div
       ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(44px)",
-        transition: `opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-      }}
+      className={`reveal-el ${visible ? "reveal-in" : ""} ${className}`}
     >
       {children}
     </div>
   );
 }
 
-// ─── VIDEO LIGHTBOX MODAL ─────────────────────────────────────────────────────
+// ─── ICONS ───────────────────────────────────────────────────────────────────
 
-function VideoModal({ videoId, onClose }: { videoId: string; onClose: () => void }) {
-  const handleClose = useCallback(onClose, [onClose]);
+function ChevLeft() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden>
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  );
+}
+function ChevRight() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden>
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
+// ─── YOUTUBE VIDEO (thumbnail → inline iframe on click) ──────────────────────
+
+function YouTubeVideo({ id, label, className = "" }: { id: string; label: string; className?: string }) {
+  const [playing, setPlaying] = useState(false);
+  const [imgSrc, setImgSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
+
+  if (playing) {
+    return (
+      <iframe
+        className={`emb ${className}`}
+        src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+        title={label}
+        allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
+        allowFullScreen
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className={`vid ${className}`}
+      onClick={() => setPlaying(true)}
+      aria-label={`Play: ${label}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imgSrc}
+        alt={label}
+        onError={() => setImgSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`)}
+        loading="lazy"
+      />
+      <span className="play"><i /></span>
+    </button>
+  );
+}
+
+// ─── SLIDER ──────────────────────────────────────────────────────────────────
+
+function Slider({
+  count,
+  trackClassName = "",
+  children,
+}: {
+  count: number;
+  trackClassName?: string;
+  children: React.ReactNode;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [pages, setPages] = useState(1);
+  const [activePage, setActivePage] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const measure = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return { step: 340, perView: 1 };
+    const first = track.querySelector<HTMLElement>(".slide");
+    const step = first ? first.getBoundingClientRect().width + 22 : 340;
+    const perView = Math.max(1, Math.round(track.clientWidth / step));
+    return { step, perView };
+  }, []);
+
+  const recompute = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const { step, perView } = measure();
+    const p = Math.max(1, Math.ceil(count / perView));
+    setPages(p);
+    const idx = Math.round(track.scrollLeft / (perView * step));
+    setActivePage(Math.min(idx, p - 1));
+    setCanPrev(track.scrollLeft > 8);
+    setCanNext(track.scrollLeft < track.scrollWidth - track.clientWidth - 8);
+  }, [count, measure]);
+
+  useLayoutEffect(() => {
+    recompute();
+  }, [recompute]);
 
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
-    };
-    document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [handleClose]);
+    const onResize = () => recompute();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [recompute]);
 
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10"
-      style={{ background: "rgba(10, 12, 14, 0.92)" }}
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-[960px]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors text-[22px] leading-none"
-          aria-label="Close video"
-        >
-          ✕
-        </button>
-        <div className="h-[3px] bg-[#c9a96e]" />
-        <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-          <iframe
-            className="absolute inset-0 w-full h-full"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
-            title="Client testimonial video"
-            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-            allowFullScreen
-          />
+  const scrollByViews = (dir: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const { step, perView } = measure();
+    track.scrollBy({ left: dir * perView * step });
+  };
+
+  const goToPage = (i: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const { step, perView } = measure();
+    track.scrollTo({ left: i * perView * step });
+  };
+
+  return (
+    <>
+      <div className="slider-bar">
+        <div className="hint">Click the arrows to see more →</div>
+        <div className="arrows">
+          <button
+            type="button"
+            className="arw"
+            onClick={() => scrollByViews(-1)}
+            disabled={!canPrev}
+            aria-label="Previous"
+          >
+            <ChevLeft />
+          </button>
+          <button
+            type="button"
+            className="arw"
+            onClick={() => scrollByViews(1)}
+            disabled={!canNext}
+            aria-label="Next"
+          >
+            <ChevRight />
+          </button>
         </div>
-        <p className="text-white/25 text-[11px] tracking-widest uppercase text-center pt-4">
-          Press Esc or click outside to close
-        </p>
       </div>
-    </div>,
-    document.body
+      <div
+        ref={trackRef}
+        className={`track ${trackClassName}`}
+        onScroll={recompute}
+      >
+        {children}
+      </div>
+      <div className="dots">
+        {Array.from({ length: pages }).map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            className={`dot ${i === activePage ? "on" : ""}`}
+            onClick={() => goToPage(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -124,850 +347,110 @@ function VideoModal({ videoId, onClose }: { videoId: string; onClose: () => void
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 bg-white ${
-        scrolled
-          ? "shadow-[0_2px_20px_rgba(0,0,0,0.08)] border-b border-[#e5e5e5]"
-          : ""
-      }`}
-    >
-      <div className="w-full px-4 xl:pl-10 xl:pr-6 flex items-center justify-between h-12 xl:h-[72px]">
-
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2 flex-shrink-0 min-w-0">
-          <span className="font-georgia text-[20px] xl:text-[24px] text-[#222f39] font-bold tracking-tight leading-tight">
-            George Vernon
-          </span>
-          <span className="hidden 2xl:inline text-[#c9a96e] font-georgia text-[24px] font-bold leading-tight">|</span>
-          <span className="hidden 2xl:block font-georgia text-[13px] text-[#54595f] leading-tight whitespace-nowrap">
-            Health &amp; Performance Coach
-          </span>
-        </a>
-
-        {/* Desktop nav — xl+ only */}
-        <div className="hidden xl:flex items-center gap-6">
-          <a href="#why-george" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Why George</a>
-          <a href="#results" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Results</a>
-          <a href="#corporate" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">Wellbeing Programs</a>
-          <a href="#about" className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap">About George</a>
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-georgia text-[16px] text-[#222f39] hover:text-[#c9a96e] transition-colors font-semibold whitespace-nowrap"
-          >
-            Book a Call with George
-          </a>
-          <a
-            href="https://health.gvcoaching.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-3 whitespace-nowrap"
-          >
-            Take The Dental Performance Audit <ArrowRight size={12} />
-          </a>
-        </div>
-
-        {/* Mobile/tablet — hamburger only */}
-        <button
-          className="xl:hidden flex flex-col gap-[5px] p-1 flex-shrink-0"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-[2px] bg-[#222f39] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-        </button>
-      </div>
-
-      {/* Mobile/tablet drawer */}
-      {menuOpen && (
-        <div className="xl:hidden bg-[#1c252e] border-t border-white/10 px-6 py-8 flex flex-col gap-6 shadow-lg">
-          <a href="#why-george" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Why George</a>
-          <a href="#results" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Results</a>
-          <a href="#corporate" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">Wellbeing Programs</a>
-          <a href="#about" onClick={() => setMenuOpen(false)} className="font-georgia text-[16px] text-white tracking-wide">About George</a>
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMenuOpen(false)}
-            className="font-georgia text-[16px] text-white tracking-wide"
-          >
-            Book a Call with George
-          </a>
-          <a
-            href="https://health.gvcoaching.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-4"
-          >
-            Take The Dental Performance Audit <ArrowRight size={12} />
-          </a>
-        </div>
-      )}
-    </nav>
-  );
-}
-
-// ─── HERO ────────────────────────────────────────────────────────────────────
-
-function Hero() {
-  return (
-    <section
-      className="hero-section relative w-full xl:min-h-[90vh] flex flex-col xl:justify-center overflow-x-hidden xl:pt-[80px]"
-      style={{ background: "#222f39" }}
-    >
-      {/* Desktop radial gradient */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(201,169,110,0.09) 0%, transparent 65%)" }}
-      />
-
-      {/* ── MOBILE + TABLET: stacked Kirk Miller layout (hidden xl+) ── */}
-      <div className="mobile-hero-content xl:hidden flex flex-col items-center text-center px-6 pb-4">
-
-        {/* Headline */}
-        <h1 className="font-georgia text-white font-bold leading-[1.15] tracking-tight text-[2rem] w-full">
-          More energy. Sharper focus.{" "}
-          <span className="text-[#c9a96e]">Better performance, without burning out.</span>
-        </h1>
-
-        {/* Subtext */}
-        <p className="text-white/70 text-[17px] font-light leading-[1.8] mt-8 w-full">
-          One-to-one coaching and well-being programmes for business owners, medical professionals, and senior leaders who want to perform at the top of their game in work and enjoy their life when they get home.
-        </p>
-
-        {/* Headshot — full width, natural ratio */}
-        <div className="mt-4 w-full">
-          <img
-            src="/Headshot/IMG_8821.jpg"
-            alt="George Vernon, Health and Performance Coach"
-            className="w-full h-auto block"
-          />
-        </div>
-
-        {/* Caption */}
-        <div className="mt-0 text-center">
-          <p className="text-[#c9a96e] font-georgia text-[10px] tracking-[0.3em] uppercase mb-1">George Vernon</p>
-          <p className="font-georgia text-white text-[16px] font-semibold">Health &amp; Performance Coach</p>
-        </div>
-
-        {/* CTA buttons */}
-        <div className="mt-8 w-full flex flex-col gap-3">
-          <a
-            href="https://health.gvcoaching.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
-          >
-            Take The Dental Performance Audit
-            <ArrowRight size={14} />
-          </a>
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] border border-white/20 text-white text-[13px] font-bold tracking-[0.1em] uppercase px-6 py-5 w-full"
-          >
-            Book a Call with George
-            <ArrowRight size={14} />
-          </a>
-        </div>
-      </div>
-
-      {/* ── DESKTOP: two-column (hidden below xl) ── */}
-      <div className="hidden xl:block w-full max-w-[1440px] mx-auto px-16 pt-10 pb-20 relative">
-        <div className="flex flex-row items-stretch gap-5">
-
-          <div className="flex-1 min-w-0 flex flex-col justify-center items-center pl-0">
-            <h1
-              className="font-georgia text-white font-bold leading-[1.1] tracking-tight mb-6 text-center w-full"
-              style={{ fontSize: "clamp(30px, 4.5vw, 66px)" }}
-            >
-              More energy. Sharper focus.{" "}
-              <span className="text-[#c9a96e]">Better performance, without burning out.</span>
-            </h1>
-            <p className="text-white/70 text-[18px] font-light leading-[1.8] text-center w-full">
-              One-to-one coaching and well-being programmes for business owners, medical professionals, and senior leaders who want to perform at the top of their game in work and enjoy their life when they get home.
-            </p>
-          </div>
-
-          <div className="w-[46%] flex-shrink-0 flex flex-col pr-0">
-            <div className="relative flex-1 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.4)] min-h-[460px]">
-              <img
-                src="/Headshot/IMG_8821.jpg"
-                alt="George Vernon, Health and Performance Coach"
-                className="absolute inset-0 w-full h-full object-cover block"
-                style={{ objectPosition: "center top" }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-[#222f39]/90 backdrop-blur-sm px-6 py-4 text-center">
-                <div className="text-[#c9a96e] font-georgia text-[11px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
-                <div className="font-georgia text-white text-[18px] font-semibold">Health &amp; Performance Coach</div>
-              </div>
-            </div>
-            <a
-              href="https://health.gvcoaching.co.uk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-0 relative z-10 inline-flex items-center justify-center gap-3 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-9 py-[18px] w-full"
-            >
-              Take The Dental Performance Audit
-              <ArrowRight size={14} />
-            </a>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Scroll indicator — desktop only */}
-      <div className="hidden xl:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 opacity-40">
-        <div className="w-[1px] h-12 bg-white/60" />
-        <span className="text-white text-[9px] tracking-[0.35em] uppercase">Scroll</span>
-      </div>
-    </section>
-  );
-}
-
-// ─── FEATURED VIDEO ───────────────────────────────────────────────────────────
-
-function FeaturedVideo() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [isMobileDevice, setIsMobileDevice] = useState(false);
-  const [mobilePlaying, setMobilePlaying] = useState(false);
-
   useEffect(() => {
-    const mobile = window.innerWidth < 1024;
-    setIsMobileDevice(mobile);
-    const el = sectionRef.current;
-    if (!el) return;
-    if (mobile) return; // desktop-only autoplay via IntersectionObserver
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); observer.disconnect(); } },
-      { threshold: 0.5 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
-  const videoSrc = "https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&mute=1&loop=1&playlist=TQBuOmHEoSw&controls=1&rel=0&modestbranding=1&playsinline=1";
+  const close = () => setOpen(false);
 
   return (
-    <section id="why-george" className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
-      <div ref={sectionRef} className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
-
-        <Reveal className="w-full text-center mb-8 lg:mb-8">
-          <EyebrowCenter>Watch</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,56px)]">
-            Why Choose George
-          </h2>
-        </Reveal>
-
-        <Reveal delay={200} className="w-full max-w-4xl mx-auto">
-          <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.22)]" style={{ background: "#1c252e" }}>
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
-            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-              {/* Desktop: autoplay when 50% in view */}
-              {!isMobileDevice && inView && (
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src={videoSrc}
-                  title="George Vernon — GV Coaching"
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-              {/* Mobile: tap-to-play thumbnail; iOS only allows autoplay via user gesture */}
-              {isMobileDevice && (
-                mobilePlaying ? (
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src={videoSrc}
-                    title="George Vernon — GV Coaching"
-                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                    allowFullScreen
-                  />
-                ) : (
-                  <div
-                    className="absolute inset-0 cursor-pointer"
-                    onClick={() => setMobilePlaying(true)}
-                  >
-                    <img
-                      src="https://img.youtube.com/vi/TQBuOmHEoSw/maxresdefault.jpg"
-                      alt="Why Choose George, tap to play"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <div className="w-[56px] h-[56px] rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                        <svg width="16" height="18" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-1">
-                          <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        </Reveal>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── VIDEO TESTIMONIALS ───────────────────────────────────────────────────────
-
-const youtubeVideos = [
-  "0OrneCoUSSU", "wLREk3NHYd0", "znNeTPMBxTs", "BshYj_w56LU",
-  "Q_B-ajMX4B4", "Vd7LEChZjBs", "HE9kxhuNZOU", "n2GZO2-QZtQ",
-  "u9IJAWhxF2Y", "cZC4YfC29_Q", "yoKPbAjhfIo", "rlctXVS0e8A",
-  "HTYQEOJxg2k", "ryg6JrOmCZU", "2MK7XZytM3I", "bn35xfRdFEQ",
-];
-
-function VideoTestimonialsSection() {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef(0);
-  const total = youtubeVideos.length;
-
-  const desktopScroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 584 : -584, behavior: "smooth" });
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) > 40) {
-      if (delta > 0) setMobileIndex(i => Math.min(total - 1, i + 1));
-      else setMobileIndex(i => Math.max(0, i - 1));
-    }
-  };
-
-  return (
-    <section id="results" className="w-full bg-white py-20 mb-12 md:pt-56 md:pb-52 md:mb-0 lg:pt-96 lg:pb-80 overflow-hidden border-t border-[#e5e5e5]">
-      {activeVideo && (
-        <VideoModal videoId={activeVideo} onClose={() => setActiveVideo(null)} />
-      )}
-
-      <div className="mx-auto w-full max-w-7xl lg:max-w-none px-6 md:px-8 lg:px-6 text-center">
-
-        <Reveal className="text-center mb-8 lg:mb-8">
-          <EyebrowCenter>Client Results</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(34px,5vw,64px)]">
-            Straight From{" "}
-            <span className="text-[#c9a96e]">The Clients.</span>
-          </h2>
-          <p className="text-[#54595f] text-[16px] mt-3">Click to watch the videos</p>
-        </Reveal>
-
-        {/* ── MOBILE: smooth sliding carousel ── */}
-        <div className="lg:hidden">
-          <div
-            className="w-full overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className="flex"
-              style={{
-                transform: `translateX(-${mobileIndex * 100}%)`,
-                transition: "transform 0.3s ease",
-              }}
-            >
-              {youtubeVideos.map((id) => (
-                <div key={id} className="w-full flex-shrink-0">
-                  <YouTubeVideoCard
-                    videoId={id}
-                    onClick={() => setActiveVideo(id)}
-                    fullWidth
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
-            {youtubeVideos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setMobileIndex(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${i === mobileIndex ? "bg-[#c9a96e]" : "bg-[#d9d9d9]"}`}
-                aria-label={`Video ${i + 1}`}
-              />
-            ))}
-          </div>
-          <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
-            Swipe to see more →
-          </p>
-        </div>
-
-        {/* ── DESKTOP: horizontal scroll ── */}
-        <div className="hidden lg:block">
-          <div className="flex justify-end mb-5 gap-3">
-            <button onClick={() => desktopScroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
-            <button onClick={() => desktopScroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
-          </div>
-          <Reveal delay={150} className="w-full flex justify-center">
-            <div className="relative w-full">
-              <div
-                ref={scrollRef}
-                className="flex overflow-x-auto gap-5 px-0 mx-auto scroll-hide pb-4"
-                style={{ scrollSnapType: "x mandatory" }}
-              >
-                {youtubeVideos.map((id) => (
-                  <YouTubeVideoCard key={id} videoId={id} onClick={() => setActiveVideo(id)} />
-                ))}
-              </div>
-              <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white to-transparent pointer-events-none" />
-              <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-white to-transparent pointer-events-none" />
-            </div>
-          </Reveal>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-function YouTubeVideoCard({
-  videoId,
-  onClick,
-  fullWidth = false,
-}: {
-  videoId: string;
-  onClick: () => void;
-  fullWidth?: boolean;
-}) {
-  const [imgError, setImgError] = useState(false);
-  const thumbUrl = imgError
-    ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-    : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-
-  return (
-    <div
-      onClick={onClick}
-      className={`${
-        fullWidth ? "w-full" : "flex-shrink-0 w-[300px] md:w-[46vw]"
-      } group overflow-hidden border border-[#e5e5e5] hover:border-[#c9a96e] hover:shadow-[0_12px_40px_rgba(34,47,57,0.14)] transition-all duration-300 cursor-pointer`}
-      style={fullWidth ? undefined : { scrollSnapAlign: "start" }}
-    >
-      <div className="relative overflow-hidden bg-[#1c252e]" style={{ aspectRatio: "16 / 9" }}>
-        <img
-          src={thumbUrl}
-          alt="Client testimonial video"
-          onError={() => setImgError(true)}
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
-        />
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-full bg-white/85 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-            <svg width="9" height="10" className="md:w-[12px] md:h-[13px] ml-0.5" viewBox="0 0 22 24" fill="none">
-              <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── SCREENSHOT TESTIMONIALS ─────────────────────────────────────────────────
-
-const testimonialImages = [
-  "/Testimonial pictures/Results - 3.PNG",
-  "/Testimonial pictures/Kieran - 1.PNG",
-  "/Testimonial pictures/New darren testimonial picture.png",
-  "/Testimonial pictures/Mani Konkon 2.PNG",
-  "/Testimonial pictures/One of the First Things.PNG",
-  "/Testimonial pictures/Results - 10.PNG",
-  "/Testimonial pictures/13.jpg",
-  "/Testimonial pictures/Results - 5.PNG",
-  "/Testimonial pictures/Results - 6.PNG",
-  "/Testimonial pictures/Results - 7.PNG",
-  "/Testimonial pictures/Results - 8.PNG",
-  "/Testimonial pictures/Transformation.png",
-];
-
-function ScreenshotTestimonialsSection() {
-  const [mobileIndex, setMobileIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef(0);
-  const total = testimonialImages.length;
-
-  const desktopScroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir === "right" ? 624 : -624, behavior: "smooth" });
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const delta = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) > 40) {
-      if (delta > 0) setMobileIndex(i => Math.min(total - 1, i + 1));
-      else setMobileIndex(i => Math.max(0, i - 1));
-    }
-  };
-
-  return (
-    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-56 md:mb-0 lg:py-96 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-7xl lg:max-w-none px-6 md:px-8 lg:px-6 text-center">
-
-        <Reveal className="text-center mb-8 lg:mb-8">
-          <EyebrowCenter>More Testimonials</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(28px,4vw,54px)]">
-            No Time to Watch the Videos?{" "}
-            <span className="text-[#c9a96e]">Here&apos;s What Clients Achieve.</span>
-          </h2>
-        </Reveal>
-
-        {/* ── MOBILE: smooth sliding carousel ── */}
-        <div className="lg:hidden">
-          <div
-            className="w-full overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              className="flex"
-              style={{
-                transform: `translateX(-${mobileIndex * 100}%)`,
-                transition: "transform 0.3s ease",
-              }}
-            >
-              {testimonialImages.map((src, i) => (
-                <div
-                  key={i}
-                  className="w-full flex-shrink-0 overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] aspect-square"
-                >
-                  <img
-                    src={encodeURI(src)}
-                    alt={`Client testimonial ${i + 1}`}
-                    className="w-full h-full object-contain block"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="flex justify-center gap-1.5 mt-5 flex-wrap px-4">
-            {testimonialImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setMobileIndex(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${i === mobileIndex ? "bg-[#c9a96e]" : "bg-[#d9d9d9]"}`}
-                aria-label={`Testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
-          <p className="text-[#c9a96e] text-lg font-bold text-center mt-5">
-            Swipe to see more →
-          </p>
-        </div>
-
-        {/* ── DESKTOP: horizontal scroll ── */}
-        <div className="hidden lg:block">
-          <div className="flex justify-end mb-5 gap-3">
-            <button onClick={() => desktopScroll("left")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll left"><ChevronLeft /></button>
-            <button onClick={() => desktopScroll("right")} className="w-11 h-11 border border-[#e5e5e5] hover:border-[#222f39] flex items-center justify-center text-[#54595f] hover:text-[#222f39] transition-all" aria-label="Scroll right"><ChevronRight /></button>
-          </div>
-          <Reveal delay={150} className="w-full flex justify-center">
-            <div className="relative w-full">
-              <div
-                ref={scrollRef}
-                className="flex overflow-x-auto gap-4 px-0 mx-auto scroll-hide pb-4 items-start"
-                style={{ scrollSnapType: "x mandatory" }}
-              >
-                {testimonialImages.map((src, i) => (
-                  <div
-                    key={i}
-                    className="flex-shrink-0 w-[600px] overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_2px_12px_rgba(34,47,57,0.06)] hover:shadow-[0_8px_32px_rgba(34,47,57,0.12)] hover:border-[#c9a96e] transition-all duration-300"
-                    style={{ scrollSnapAlign: "start", height: "600px" }}
-                  >
-                    <img
-                      src={encodeURI(src)}
-                      alt={`Client testimonial ${i + 1}`}
-                      className="w-full h-full object-contain block"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-[#f7f7f7] to-transparent pointer-events-none" />
-              <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-[#f7f7f7] to-transparent pointer-events-none" />
-            </div>
-          </Reveal>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── WELLBEING TALKS ─────────────────────────────────────────────────────────
-
-function WellbeingTalksSection() {
-  const [playing, setPlaying] = useState(false);
-
-  return (
-    <section id="corporate" className="w-full bg-white py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
-
-        <Reveal className="text-center w-full mb-8 lg:mb-8">
-          <EyebrowCenter>Wellbeing Programs</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-7 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
-            Healthier, Happier Teams. Better Business Performance.{" "}
-            <span className="text-[#c9a96e]">Bigger Profits.</span>
-          </h2>
-          <p className="text-[#1c252e] text-[18px] md:text-[20px] lg:text-[22px] leading-[1.85]">
-            Engaging, evidence based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity.
-          </p>
-        </Reveal>
-
-        <Reveal delay={150} className="max-w-lg mx-auto mb-8 space-y-3 text-center">
-          {[
-            "Keynotes (45 minutes to 90 minutes)",
-            "Employee workshops",
-            "Ongoing corporate health programmes",
-            "Senior leadership performance coaching",
-          ].map((item, i) => (
-            <p key={i} className="text-[#1c252e] text-[17px] lg:text-[22px] text-center font-semibold">{item}</p>
-          ))}
-        </Reveal>
-
-        <Reveal delay={150} className="w-full max-w-4xl mx-auto mb-8">
-          <div className="relative overflow-hidden shadow-[0_24px_72px_rgba(34,47,57,0.2)]" style={{ background: "#1c252e" }}>
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c9a96e] z-10" />
-            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
-              {playing ? (
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/TQBuOmHEoSw?autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1"
-                  title="George Vernon — Speaker Reel"
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <div
-                  className="absolute inset-0 cursor-pointer group"
-                  onClick={() => setPlaying(true)}
-                >
-                  <img
-                    src="https://img.youtube.com/vi/TQBuOmHEoSw/maxresdefault.jpg"
-                    alt="George Vernon Speaker Reel"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors duration-300">
-                    <div className="w-[56px] h-[56px] rounded-full bg-white/90 group-hover:bg-[#c9a96e] transition-colors duration-300 flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
-                      <svg width="16" height="18" viewBox="0 0 22 24" fill="none" className="ml-1">
-                        <path d="M2 1.5L20 12L2 22.5V1.5Z" fill="#222f39" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="bg-[#222f39] px-6 py-4 text-center">
-              <span className="font-georgia text-white text-[14px] font-semibold">Speaker Reel</span>
-              <span className="text-white/40 text-[12px] ml-2">, George Vernon</span>
-            </div>
-          </div>
-        </Reveal>
-
-<Reveal delay={250} className="hidden md:flex justify-center">
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
-          >
-            Book a Call with George
-            <ArrowRight size={13} />
+    <>
+      <nav className={`site-nav ${scrolled ? "scrolled" : ""}`} aria-label="Primary">
+        <div className="nav-in">
+          <a className="logo" href="#top">
+            George Vernon<span>Health &amp; Performance Coach</span>
           </a>
-        </Reveal>
-
-        <a
-          href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="md:hidden inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-8 py-5 w-full min-h-[44px]"
-        >
-          Book a Discovery Call
-          <ArrowRight size={13} />
+          <div className="nav-links">
+            <a href="#why">Why George</a>
+            <a href="#results">Results</a>
+            <a href="#coaching">Coaching</a>
+            <a href="#corporate">Business Wellbeing Programs</a>
+            <a href="#about">About George</a>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
+            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
+          </div>
+          <button
+            type="button"
+            className="burger"
+            aria-label="Menu"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </nav>
+      <div className={`drawer ${open ? "open" : ""}`}>
+        <a href="#why" onClick={close}>Why George</a>
+        <a href="#results" onClick={close}>Results</a>
+        <a href="#coaching" onClick={close}>Coaching</a>
+        <a href="#corporate" onClick={close}>Business Wellbeing Programs</a>
+        <a href="#about" onClick={close}>About George</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a Call with George</a>
+        <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
+          Take the Dental Performance Audit
         </a>
-
       </div>
-    </section>
+    </>
   );
 }
 
-// ─── CONSULTING ───────────────────────────────────────────────────────────────
-
-function ConsultingSection() {
-  return (
-    <section className="w-full bg-[#f7f7f7] py-20 mb-12 md:py-48 md:mb-0 lg:py-80 border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
-
-        <Reveal className="w-full text-center mb-8 lg:mb-8">
-          <EyebrowCenter>Expert Consulting</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight mb-5 text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
-            Trusted by Organisations{" "}
-            <span className="text-[#c9a96e]">Across the UK.</span>
-          </h2>
-          <p className="text-[#54595f] text-[18px] md:text-[20px] lg:text-[22px] w-full leading-[1.8] text-center">
-            George also consults for organisations across the UK, including The Principals Club, a private membership for dental practice owners, bringing the same evidence-based approach to organisational health and performance.
-          </p>
-        </Reveal>
-
-        <Reveal delay={200} className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full mx-auto">
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
-            <img
-              src={encodeURI("/Expert consultant/IMG_6076 2.JPG")}
-              alt="George Vernon, expert consultant"
-              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
-            />
-          </div>
-          <div className="overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
-            <img
-              src={encodeURI("/Expert consultant/IMG_6077.JPG")}
-              alt="George Vernon, expert consultant"
-              className="w-full h-auto block hover:scale-[1.03] transition-transform duration-500"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal delay={250} className="flex mt-10 w-full justify-center">
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-5 min-h-[44px] whitespace-nowrap"
-          >
-            Enquire About Consulting
-            <ArrowRight size={13} />
-          </a>
-        </Reveal>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── CTA SECTION ─────────────────────────────────────────────────────────────
-
-function CTASection() {
-  return (
-    <section
-      className="relative w-full py-20 mb-12 md:py-56 md:mb-0 lg:py-96 overflow-hidden"
-      style={{ background: "#222f39" }}
-    >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 70%)" }}
-      />
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center relative">
-        <Reveal className="flex flex-col items-center w-full">
-          <div className="flex items-center justify-center gap-4 mb-6 md:mb-10">
-            <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
-            <span className="font-georgia text-[#c9a96e] text-[13px] tracking-[0.25em] uppercase font-semibold">Start Here</span>
-            <span className="block w-12 h-[2px] bg-[#c9a96e]/50" />
-          </div>
-          <h2 className="font-georgia text-white font-bold leading-[1.05] mb-7 text-center text-[2rem] lg:text-[clamp(28px,6.5vw,84px)]">
-            Take Control of{" "}
-            <span className="text-[#c9a96e]">Your Health.</span>
-          </h2>
-          <p className="text-white/65 text-[17px] md:text-[18px] font-light leading-[1.8] max-w-lg mx-auto mb-8 md:mb-14 text-center">
-            Find out exactly where you are with your health and what to focus on next.
-          </p>
-          <a
-            href="https://health.gvcoaching.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-4 bg-[#c9a96e] text-[#222f39] hover:bg-[#d4bc8a] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-12 py-6 w-full md:w-auto min-h-[44px]"
-          >
-            Take The Dental Performance Audit
-            <ArrowRight size={15} />
-          </a>
-          <p className="text-white/50 text-[17px] md:text-[18px] font-light tracking-wide mt-7 text-center">
-            Free · Takes 4 minutes · No commitment required
-          </p>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-// ─── FOOTER ──────────────────────────────────────────────────────────────────
+// ─── FOOTER + POLICY MODAL ───────────────────────────────────────────────────
 
 function PolicyModal({ onClose }: { onClose: () => void }) {
   useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, []);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
 
-  return (
-    <div
-      className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-8"
-      style={{ background: "rgba(10,12,14,0.85)" }}
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full md:max-w-2xl bg-white max-h-[88vh] overflow-y-auto"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="h-[3px] bg-[#c9a96e]" />
-        <div className="px-6 md:px-10 py-8">
-          <button
-            onClick={onClose}
-            className="absolute top-5 right-5 text-[#222f39]/40 hover:text-[#222f39] transition-colors text-[20px] leading-none"
-            aria-label="Close"
-          >✕</button>
-          <h2 className="font-georgia text-[#222f39] text-[20px] md:text-[24px] font-bold mb-2 pr-8">
-            Fulfillment, Refund &amp; Cancellation Policy
-          </h2>
-          <p className="text-[#c9a96e] text-[11px] tracking-[0.2em] uppercase mb-6">GV Coaching Ltd</p>
-          <p className="text-[#54595f] text-[15px] leading-[1.8] mb-8">
-            At GV Coaching Ltd, we strive to deliver the highest quality service and a seamless customer experience. Please review our policies below before making a purchase.
-          </p>
+  return createPortal(
+    <div className="policy-scrim" onClick={onClose}>
+      <div className="policy-card" onClick={(e) => e.stopPropagation()}>
+        <div className="accent" />
+        <div className="policy-body">
+          <button className="policy-close" onClick={onClose} aria-label="Close">✕</button>
+          <h2>Fulfillment, Refund &amp; Cancellation Policy</h2>
+          <p className="kicker">GV Coaching Ltd</p>
+          <p>At GV Coaching Ltd, we strive to deliver the highest quality service and a seamless customer experience. Please review our policies below before making a purchase.</p>
 
-          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Fulfillment Policy</h3>
-          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+          <h3>Fulfillment Policy</h3>
+          <ul>
             <li>All digital products and services are delivered promptly via email or through our secure online platforms.</li>
             <li>For coaching programmes, access details and scheduling information will be provided within 24 hours of purchase.</li>
           </ul>
 
-          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Refund Policy</h3>
-          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+          <h3>Refund Policy</h3>
+          <ul>
             <li>Refunds are only available for coaching programmes within the first 14 days after purchase.</li>
             <li>For exceptional circumstances, refund requests will be reviewed on a case-by-case basis.</li>
           </ul>
 
-          <h3 className="font-georgia text-[#222f39] text-[17px] font-bold mb-3">Cancellation Policy</h3>
-          <ul className="text-[#54595f] text-[15px] leading-[1.8] mb-8 space-y-2">
+          <h3>Cancellation Policy</h3>
+          <ul>
             <li>Coaching programme subscriptions can be cancelled after the initial agreement period with 30 days&apos; notice. You will retain access until the end of your current billing cycle.</li>
-            <li>To cancel, contact <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:underline">george@gvcoaching.co.uk</a> at least 30 days before your next billing date.</li>
+            <li>To cancel, contact <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a> at least 30 days before your next billing date.</li>
           </ul>
 
-          <p className="text-[#54595f] text-[14px] leading-[1.8] border-t border-[#e5e5e5] pt-6">
-            For further assistance contact{" "}
-            <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:underline">george@gvcoaching.co.uk</a>.
-          </p>
+          <p>For further assistance contact <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a>.</p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -975,196 +458,18 @@ function Footer() {
   const [policyOpen, setPolicyOpen] = useState(false);
   return (
     <>
-      {policyOpen && <PolicyModal onClose={() => setPolicyOpen(false)} />}
-      <footer className="bg-[#1c252e] py-10">
-        <div className="mx-auto w-full max-w-5xl px-6 md:px-8 text-center">
-          <a href="mailto:george@gvcoaching.co.uk" className="text-[#c9a96e] hover:text-[#d4bc8a] transition-colors text-[15px] block mb-4">
-            george@gvcoaching.co.uk
-          </a>
-          <div className="flex items-center justify-center gap-6">
-            <button
-              onClick={() => setPolicyOpen(true)}
-              className="text-white/35 hover:text-white/70 transition-colors text-[11px] tracking-[0.15em] uppercase cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <span className="text-white/15 text-[11px]">|</span>
-            <p className="text-white/25 text-[11px]">&copy; 2026 GV Coaching Ltd</p>
+      <footer className="site-footer">
+        <div className="wrap foot">
+          <div>© 2026 GV Coaching Ltd</div>
+          <div>
+            <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a>
+            {" · "}
+            <button type="button" onClick={() => setPolicyOpen(true)}>Privacy Policy</button>
           </div>
         </div>
       </footer>
+      {policyOpen && <PolicyModal onClose={() => setPolicyOpen(false)} />}
     </>
-  );
-}
-
-// ─── ABOUT GEORGE ─────────────────────────────────────────────────────────────
-
-function AboutGeorgeSection() {
-  return (
-    <section id="about" className="w-full bg-white border-t border-[#e5e5e5]">
-      <div className="mx-auto w-full max-w-5xl px-6 md:px-8 flex flex-col items-center">
-
-        <Reveal className="w-full text-center mb-8">
-          <EyebrowCenter>About George</EyebrowCenter>
-          <h2 className="font-georgia text-[#222f39] font-bold leading-tight text-[2rem] lg:text-[clamp(32px,4.5vw,58px)]">
-            George Vernon&apos;s Bio
-          </h2>
-        </Reveal>
-
-        {/* Portrait — centered */}
-        <Reveal delay={100} className="w-full flex flex-col items-center mb-8">
-          <div className="w-full max-w-2xl overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.08)]">
-            <div className="h-[3px] bg-[#c9a96e]" />
-            <img
-              src={encodeURI("/:assets:images:about-george:/Me/IMG_8821.jpg")}
-              alt="George Vernon"
-              className="w-full h-auto block"
-              loading="lazy"
-            />
-            <div className="bg-[#222f39] px-6 py-4 w-full">
-              <div className="text-[#c9a96e] font-georgia text-[11px] tracking-[0.3em] uppercase mb-1">George Vernon</div>
-              <div className="font-georgia text-white text-[18px] font-semibold">Health &amp; Performance Coach</div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Bio paragraphs — centered */}
-        <Reveal delay={150} className="w-full flex flex-col gap-5 mb-10 max-w-4xl mx-auto text-center">
-          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals, and senior leaders improve their health to increase daily energy, focus, and long-term business performance. Alongside his coaching work, he delivers health and well-being education talks and well-being programs to organisations across the UK.
-          </p>
-          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness, and long-term weight loss within gym environments.
-          </p>
-          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.
-          </p>
-          <p className="text-[#3d4349] text-[19px] md:text-[21px] leading-[1.85]">
-            Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.
-          </p>
-        </Reveal>
-
-        {/* Image groups */}
-
-        {/* Boxing + University — single container, images touching */}
-        <Reveal delay={100} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
-          <div className="h-[3px] bg-[#c9a96e]" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div className="flex flex-col">
-              <div className="overflow-hidden md:h-[480px] bg-[#1c252e]">
-                <img src={encodeURI("/:assets:images:about-george:/Me boxing/IMG_4436.JPG")} alt="George Vernon, elite amateur boxing" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
-              </div>
-              <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
-                <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold">Boxing</span>
-                <span className="font-georgia text-white text-[12px]">Elite Amateur Boxer</span>
-              </div>
-            </div>
-            <div className="flex flex-col md:border-l border-[#2e3d47]">
-              <div className="overflow-hidden md:h-[480px] bg-[#1c252e]">
-                <img src={encodeURI("/:assets:images:about-george:/University/IMG_4758.JPG")} alt="George Vernon, sports science degree" className="w-full h-auto md:h-full md:object-contain block" loading="lazy" />
-              </div>
-              <div className="bg-[#222f39] px-4 py-3 flex flex-col items-center gap-0.5 text-center">
-                <span className="text-[#c9a96e] text-[10px] tracking-[0.18em] uppercase font-semibold">The Science</span>
-                <span className="font-georgia text-white text-[12px]">Sports and Exercise Science degree and S&amp;C MSc</span>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Coaching athletes — 3 images */}
-        <Reveal delay={150} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
-          <div className="h-[3px] bg-[#c9a96e]" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-            {[
-              { src: "/:assets:images:about-george:/Coaching athletes/3AA8E17A-815B-4E55-8AFA-D66A6379CDD7 2.JPG", pos: "object-top", op: undefined },
-              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4759 2.JPG", pos: "object-top", op: "50% 10%" },
-              { src: "/:assets:images:about-george:/Coaching athletes/IMG_4770 2.JPG", pos: "object-left", op: undefined },
-            ].map(({ src, pos, op }, i) => (
-              <img key={i} src={encodeURI(src)} alt="George Vernon coaching elite athletes" className={`w-full object-cover block ${pos}`} style={{ height: "320px", ...(op ? { objectPosition: op } : {}) }} loading="lazy" />
-            ))}
-          </div>
-          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Athletes</span>
-            <span className="font-georgia text-white text-[12px]">George coached elite athletes and elite boxers</span>
-          </div>
-        </Reveal>
-
-        {/* Working in the gym — 2 images */}
-        <Reveal delay={200} className="w-full mb-6 overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
-          <div className="h-[3px] bg-[#c9a96e]" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div className="overflow-hidden md:h-[600px]">
-              <img src={encodeURI("/:assets:images:about-george:/Working in the gym/8CE0D153-6A98-4EC6-920B-039D388252FB.JPG")} alt="George Vernon coaching in the gym" className="w-full h-auto md:h-full md:object-cover md:object-top block" loading="lazy" />
-            </div>
-            <div className="overflow-hidden md:h-[600px]">
-              <img src={encodeURI("/:assets:images:about-george:/Working in the gym/IMG_6768 2.jpg")} alt="George Vernon coaching in the gym" className="w-full h-auto md:h-full md:object-cover md:object-top block" loading="lazy" />
-            </div>
-          </div>
-          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">The Gym Floor</span>
-            <span className="font-georgia text-white text-[12px]">7 years coaching</span>
-          </div>
-        </Reveal>
-
-        {/* Fitness by Science — 4 images 2x2 */}
-        <Reveal delay={250} className="w-full overflow-hidden border border-[#e5e5e5] shadow-[0_4px_24px_rgba(34,47,57,0.06)]">
-          <div className="h-[3px] bg-[#c9a96e]" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            {[
-              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_1432.jpg" },
-              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_6770 2.JPG" },
-              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_5450 2.JPEG" },
-              { src: "/:assets:images:about-george:/FITNESS BY SCIENCE/IMG_3363 2.JPG", op: "50% 15%" },
-            ].map(({ src, op }, i) => (
-              <div key={i} className={`overflow-hidden ${i < 2 ? "md:h-[600px]" : "md:h-[340px]"}`}>
-                <img src={encodeURI(src)} alt="Fitness by Science" className="w-full h-auto md:h-full md:object-cover md:object-top block" style={{ objectPosition: op }} loading="lazy" />
-              </div>
-            ))}
-          </div>
-          <div className="bg-[#222f39] px-5 py-3 flex flex-col items-center gap-0.5 text-center">
-            <span className="text-[#c9a96e] text-[11px] tracking-[0.18em] uppercase font-semibold">Fitness by Science</span>
-            <span className="font-georgia text-white text-[12px]">A business George co-founded with his brother where he mentored new personal trainers</span>
-          </div>
-        </Reveal>
-
-        {/* CTA */}
-        <Reveal delay={200} className="w-full flex flex-col sm:flex-row gap-3 justify-center items-center mt-8 lg:mt-7">
-          <a
-            href="https://calendly.com/georgegvcoaching/coaching-call-with-george"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 bg-[#222f39] text-white hover:bg-[#c9a96e] hover:text-[#222f39] transition-colors duration-300 text-[13px] font-bold tracking-[0.1em] uppercase px-16 py-[18px] w-full sm:w-auto min-h-[44px]"
-          >
-            Book a Call with George <ArrowRight size={13} />
-          </a>
-        </Reveal>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── ICONS ────────────────────────────────────────────────────────────────────
-
-function ArrowRight({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ChevronLeft({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ChevronRight({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
@@ -1174,17 +479,377 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main className="w-full overflow-x-hidden">
-        <Hero />
-        <FeaturedVideo />
-        <VideoTestimonialsSection />
-        <ScreenshotTestimonialsSection />
-        <WellbeingTalksSection />
-        <ConsultingSection />
-        <AboutGeorgeSection />
-        <CTASection />
+
+      {/* HERO */}
+      <header className="hero" id="top">
+        <div className="wrap-wide">
+          <div className="hero-grid">
+            <div>
+              <div className="eyebrow">For dentists, practice owners &amp; business leaders</div>
+              <h1 style={{ margin: "20px 0 24px" }}>
+                Make this the <span className="gold">last time</span> you go on a health kick.
+              </h1>
+              <p className="sub">
+                More energy, sharper focus and better performance, without burning out. One-to-one coaching for people who already know what to do, and cannot work out why it never sticks.
+              </p>
+              <div className="btns">
+                <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+                <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              </div>
+              <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>
+                Free · Takes 4 minutes · No commitment required
+              </p>
+            </div>
+            <div className="hero-ph">
+              <Image
+                src="/Headshot/IMG_8821.webp"
+                alt="George Vernon, Health and Performance Coach"
+                width={3707}
+                height={2678}
+                priority
+                sizes="(min-width: 1000px) 45vw, 100vw"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* TRUST */}
+      <div className="trust">
+        <div className="wrap">
+          <div className="trust-in">
+            <div className="trust-l">Trusted across UK dentistry</div>
+            <div className="trust-i">The Principals Club</div>
+            <div className="trust-i">Frank Taylor &amp; Associates</div>
+            <div className="trust-i">Dental Update</div>
+            <div className="trust-i">BDIA Dental Showcase</div>
+          </div>
+        </div>
+      </div>
+
+      <main>
+
+        {/* WHY GEORGE */}
+        <section className="grey" id="why">
+          <Reveal className="wrap center">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Why George</span><span className="goldbar" /></div>
+            <h2 style={{ marginBottom: 44 }}>
+              Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
+            </h2>
+            <div className="vwrap">
+              <YouTubeVideo id="TQBuOmHEoSw" label="Why George" />
+            </div>
+          </Reveal>
+        </section>
+
+        {/* RESULTS SLIDER */}
+        <section id="results">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
+              <h2>Straight From <span className="gold">The Clients.</span></h2>
+            </div>
+            <Slider count={RESULTS.length}>
+              {RESULTS.map((r) => (
+                <article className="slide" key={r.yt}>
+                  <div className="slide-vid">
+                    <YouTubeVideo id={r.yt} label={r.name} />
+                  </div>
+                  <div className="slide-body">
+                    <div className="stars">{STARS}</div>
+                    <div className="s-name">{r.name}</div>
+                    <div className="s-role">{r.role}</div>
+                    <ul className="s-res">
+                      {r.results.map((x, i) => <li key={i}>{x}</li>)}
+                    </ul>
+                    <div className="s-quote">&ldquo;{r.quote}&rdquo;</div>
+                  </div>
+                </article>
+              ))}
+            </Slider>
+          </Reveal>
+        </section>
+
+        {/* QUOTE SLIDER */}
+        <section className="grey">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">In their own words</span><span className="goldbar" /></div>
+              <h2>No time <span className="gold">to watch?</span></h2>
+            </div>
+            <Slider count={QUOTES.length} trackClassName="track-q">
+              {QUOTES.map((q, i) => (
+                <article className="slide" key={i}>
+                  <div className={`qc-media${q.wide ? " wide" : ""}`}>
+                    {q.photo && (
+                      <div className="ring">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={encodeURI(q.photo)} alt={q.name} />
+                      </div>
+                    )}
+                    <div className="qc-meta">
+                      <div className="qc-name">{q.name}</div>
+                      <div className="qc-role">{q.role}</div>
+                      <div className="stars qc-stars">{STARS}</div>
+                    </div>
+                  </div>
+                  <div className="qc-right">
+                    <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
+                    <div className="qc-metric">{q.metric}</div>
+                  </div>
+                </article>
+              ))}
+            </Slider>
+          </Reveal>
+        </section>
+
+        {/* OBJECTIONS */}
+        <section>
+          <Reveal className="wrap">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you talk yourself out of it</span><span className="goldbar" /></div>
+              <h2>Everyone worries about <span className="gold">the same two things.</span></h2>
+            </div>
+            <div className="obj">
+              <div className="ob">
+                <div className="q">&ldquo;I don&apos;t have the time.&rdquo;</div>
+                <p>The whole point of working with me as a coach is to get you the result using the least amount of time possible. Not ninety minutes in a gym. The shortest route that actually works, built around the diary you already have.</p>
+              </div>
+              <div className="ob">
+                <div className="q">&ldquo;I&apos;ll start Monday, and I never do. I can&apos;t stay consistent.&rdquo;</div>
+                <p>The coaching addresses the psychology underneath that, and builds a sustainable system around your actual life. Consistency stops being something you have to summon, because the system is doing the work instead of your willpower.</p>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* THE SYSTEM */}
+        <section className="grey">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The system</span><span className="goldbar" /></div>
+              <h2>The system we install <span className="gold">underneath your health.</span></h2>
+              <p className="sub" style={{ marginTop: 18 }}>
+                Five parts, built in this order. Most people try to solve a performance problem with more output when what they actually have is a recovery problem. Your recovery has to be equal to or greater than your stress.
+              </p>
+            </div>
+            <div className="five">
+              <div className="f"><div className="f-n">01</div><h3>Psychology</h3><p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred.</p></div>
+              <div className="f"><div className="f-n">02</div><h3>Stress &amp; recovery</h3><p>Nervous system, sleep, HRV. Where burnout gets built, and where it gets dismantled.</p></div>
+              <div className="f"><div className="f-n">03</div><h3>Nutrition</h3><p>Evidence-based and simple. Eating more than you intend is a system gap, not a willpower gap.</p></div>
+              <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Minimum effective dose, built around your actual diary and training you enjoy.</p></div>
+              <div className="f"><div className="f-n">05</div><h3>Measurement</h3><p>What gets measured gets managed. Your data decides what changes next, not guesswork.</p></div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* COACHING */}
+        <section id="coaching">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
+              <h2>What it <span className="gold">actually looks like.</span></h2>
+            </div>
+            <div className="cad">
+              <div className="c"><h3>Every week</h3><p>A one-to-one call with me. The plan changes when your week changes, so a chaotic week does not end the programme.</p></div>
+              <div className="c"><h3>Every month</h3><p>An in-person session where geography allows, or a deeper review call where it does not.</p></div>
+              <div className="c"><h3>Every day</h3><p>The whole plan sits in the app: the day&apos;s actions, your training, your meals and the data behind both.</p></div>
+            </div>
+            <div className="shots">
+              {[
+                { src: "/images/app-daily-plan.webp", alt: "Daily plan and habit tracking", title: "Daily plan and habits", caption: "The day's actions in one list, ticked off as you go.", w: 590, h: 930 },
+                { src: "/images/app-training.webp", alt: "Personalised training with video guidance", title: "Your training sessions", caption: "Every session written for you, with video for each movement.", w: 590, h: 932 },
+                { src: "/images/app-nutrition.webp", alt: "Meal plans and nutrition tracking", title: "Meals and nutrition", caption: "Built around what you actually eat. Nothing off limits.", w: 590, h: 931 },
+                { src: "/images/app-dashboard.webp", alt: "Progress dashboard covering sleep, steps, weight and trends", title: "Your dashboard", caption: "Sleep, steps, weight and trends, reviewed on every call.", w: 590, h: 931 },
+              ].map((s) => (
+                <div className="shot" key={s.src}>
+                  <div className="shot-img">
+                    <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                  </div>
+                  <b>{s.title}</b>
+                  <p>{s.caption}</p>
+                </div>
+              ))}
+            </div>
+            <div className="course">
+              <div className="course-img">
+                <div className="course-img-inner">
+                  <Image src="/images/education-course.webp" alt="The full education course inside the GV Coaching app" width={708} height={578} sizes="(min-width: 860px) 45vw, 90vw" style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              </div>
+              <div className="course-txt">
+                <span className="eyebrow">Included</span>
+                <h3 style={{ marginTop: 14 }}>The full education course, on demand</h3>
+                <p>Every lesson sits inside the app as video, so you learn why you are doing each thing rather than just following instructions. Watch it whenever the list finishes, and revisit any of it whenever you need to.</p>
+              </div>
+            </div>
+            <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>
+            <div className="inc">
+              <div>Weekly one-to-one coaching calls</div>
+              <div>Fully personalised training built around your week</div>
+              <div>Nutrition and meal planning, nothing off limits</div>
+              <div>Habit system tracked daily in the app</div>
+              <div>The full education course on demand</div>
+              <div>Progress dashboard reviewed on every call</div>
+              <div>Psychology work, so none of it depends on motivation</div>
+              <div>In-person sessions where geography allows</div>
+              <div>WHOOP integration, optional add-on</div>
+            </div>
+            <div className="btns">
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* GUARANTEE */}
+        <section className="grey">
+          <Reveal className="wrap">
+            <div className="guar">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The guarantee</span><span className="goldbar" /></div>
+              <h2>The risk sits <span className="gold">with me.</span></h2>
+              <div className="two">
+                <div>
+                  <b>Two weeks to change your mind</b>
+                  <p>If you start and decide within the first two weeks that it is not for you, tell me and I refund you in full. No conditions, and no conversation needed.</p>
+                </div>
+                <div>
+                  <b>Results, or I keep going for free</b>
+                  <p>We set your targets together on day one. If you have not achieved them after three months, I keep working with you at no further cost until you do.</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* AUDIT */}
+        <section id="audit">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+              <h2>Take the audit. <span className="gold">See where you&apos;re at.</span></h2>
+            </div>
+            <div className="audit">
+              <div className="audit-l">
+                <h3>The Dental Performance Audit</h3>
+                <p className="sub" style={{ marginTop: 16 }}>
+                  Four minutes, twenty-one questions. It scores you across three phases and tells you which one your health is actually in right now, before you commit to anything or speak to anybody.
+                </p>
+                <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a></div>
+                <p className="micro">Free · Takes 4 minutes · No commitment required</p>
+              </div>
+              <div className="audit-r">
+                <span className="eyebrow">What you get</span>
+                <ul className="alist">
+                  <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
+                  <li>What to focus on first, and what to leave alone for now</li>
+                  <li><b>The full four-part education series, free</b>, covering the whole framework</li>
+                  <li>No call required, and no pitch</li>
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* CORPORATE */}
+        <section className="grey" id="corporate">
+          <Reveal className="wrap-wide">
+            <div className="about-grid">
+              <div>
+                <div className="eyebrow">Business wellbeing programmes</div>
+                <h2 style={{ margin: "18px 0 20px" }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
+                <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
+                <div className="inc" style={{ marginTop: 26 }}>
+                  <div>Keynotes, 45 to 90 minutes</div>
+                  <div>Employee workshops</div>
+                  <div>Ongoing corporate health programmes</div>
+                  <div>Senior leadership performance coaching</div>
+                </div>
+                <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
+              </div>
+              <div>
+                <div className="about-ph" style={{ aspectRatio: "4 / 5" }}>
+                  <Image src="/images/george-stage-hero.webp" alt="George Vernon speaking on stage at a corporate wellbeing event" width={1383} height={2481} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* ABOUT */}
+        <section id="about">
+          <Reveal className="wrap-wide">
+            <div className="about-grid">
+              <div className="about">
+                <div className="eyebrow">About George</div>
+                <h2 style={{ margin: "18px 0 26px" }}>Fifteen years working out how <span className="gold">health drives performance.</span></h2>
+                <p>George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals and senior leaders improve their health to increase daily energy, focus and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
+                <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
+                <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
+                <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.</p>
+                <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a></div>
+              </div>
+              <div>
+                <div className="about-ph">
+                  <Image src="/Headshot/IMG_8821.webp" alt="Portrait of George Vernon" width={3707} height={2678} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+              </div>
+            </div>
+            <div className="gal">
+              <div className="ph">
+                <Image src="/about/boxing.webp" alt="George Vernon competing as an elite amateur boxer" width={1080} height={1080} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              <div className="ph">
+                <Image src="/about/university.webp" alt="George Vernon at university, studying Sports and Exercise Science" width={2048} height={2048} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              <div className="ph">
+                <Image src="/about/coaching-athletes.webp" alt="George Vernon coaching elite athletes" width={1200} height={1500} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              <div className="ph">
+                <Image src="/about/fitness-by-science.webp" alt="George Vernon at Fitness by Science, mentoring personal trainers" width={1440} height={1800} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* FAQ */}
+        <section className="grey" id="faq">
+          <Reveal className="wrap">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Questions</span><span className="goldbar" /></div>
+              <h2>Things people ask <span className="gold">before they start.</span></h2>
+            </div>
+            <div className="faq">
+              {FAQS.map((f, i) => (
+                <details key={i}>
+                  <summary>{f.q}</summary>
+                  {f.a.map((p, j) => <p key={j}>{p}</p>)}
+                </details>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="dark center">
+          <Reveal className="wrap">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+            <h2>Take Control of <span className="gold">Your Health.</span></h2>
+            <p className="sub" style={{ marginTop: 18 }}>Find out exactly where you are with your health and what to focus on next.</p>
+            <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a></div>
+            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>Free · Takes 4 minutes · No commitment required</p>
+          </Reveal>
+        </section>
+
       </main>
+
       <Footer />
+
+      {/* MOBILE STICKY */}
+      <div className="sticky" aria-hidden={false}>
+        <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a>
+        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
+      </div>
     </>
   );
 }

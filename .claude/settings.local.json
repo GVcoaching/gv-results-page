@@ -16,7 +16,12 @@
       "Bash(git stash *)",
       "Bash(git checkout *)",
       "Bash(lsof -ti:3000)",
-      "Bash(sips *)"
+      "Bash(sips *)",
+      "Bash(xargs -I{} git log -1 --format=\"%H %s\" {})",
+      "Bash(lsof -ti:3000 -ti:3001 -ti:3002)",
+      "WebFetch(domain:gvcoaching.co.uk)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" https://gvcoaching.co.uk/ -o /tmp/gv_live.html -w \"HTTP %{http_code} | %{size_download} bytes\\\\n\")",
+      "Bash(vercel --version)"
     ]
   }
 }
