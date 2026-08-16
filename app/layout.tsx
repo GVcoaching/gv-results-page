@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 const FAQ_JSONLD: { q: string; a: string }[] = [
   {
     q: "Honestly, I don't think I have the time.",
-    a: "This is the first thing nearly everyone says, and it is almost always a picture of training that is out of date. One client, a specialist endodontist, told me on our first call that he was not ready, because to him resistance training meant ninety minutes in a gym three times a week. When he saw the actual requirement, three sessions of around thirty minutes, he said \"three times half an hour, I can definitely do.\" He signed for six months on that call.",
+    a: "This is the first thing nearly everyone says, and it is almost always a picture of training that is out of date. One client, a specialist endodontist, told me on our first call that he was not ready, because to him resistance training meant ninety minutes in a gym three times a week. When he saw the actual requirement, three sessions of around thirty minutes, he said \"three times half an hour, I can definitely do.\" He signed for six months on that call. For the first time he could see how this could be a complete lifestyle change for him, one that would not move him away from what mattered most.",
   },
   {
     q: "I'm all or nothing. I go hard for six weeks then it falls apart.",
@@ -55,7 +55,7 @@ const FAQ_JSONLD: { q: string; a: string }[] = [
   },
   {
     q: "What if I pay and then don't actually do it?",
-    a: "This is the real fear behind most hesitation, and it is a fair one. It is also why the programme is built around accountability rather than information. A weekly call with me, daily actions tracked in the app, and targets we set on day one and review against. You have two weeks to change your mind and get a full refund. And if you have not hit those targets after three months, I keep working with you at no further cost until you do.",
+    a: "This is the real fear behind most hesitation, and it is a fair one. It is also why the programme is built around accountability rather than information. A weekly call with me, daily actions tracked in the app, and targets we set on day one and review against. The main focus of the coaching is the psychology of behaviour change. Getting you to be consistent is the whole point of working with me, and everything else is built around that. You have two weeks to change your mind and get a full refund. And if you have not hit those targets after three months, I keep working with you at no further cost until you do.",
   },
   {
     q: "How long will it actually take to lose the weight?",

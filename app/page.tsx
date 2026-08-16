@@ -117,6 +117,7 @@ const FAQS: Faq[] = [
   { q: "Honestly, I don't think I have the time.", a: [
     "This is the first thing nearly everyone says, and it is almost always a picture of training that is out of date. One client, a specialist endodontist, told me on our first call that he was not ready, because to him resistance training meant ninety minutes in a gym three times a week.",
     "When he saw the actual requirement, three sessions of around thirty minutes, he said \"three times half an hour, I can definitely do.\" He signed for six months on that call.",
+    "For the first time he could see how this could be a complete lifestyle change for him, one that would not move him away from what mattered most.",
   ] },
   { q: "I'm all or nothing. I go hard for six weeks then it falls apart.", a: [
     "Then the problem is the plan, not you. A plan that only works on a perfect week will fail, because you do not get perfect weeks. You get renovations, inspections, staff shortages and school holidays.",
@@ -124,6 +125,7 @@ const FAQS: Faq[] = [
   ] },
   { q: "What if I pay and then don't actually do it?", a: [
     "This is the real fear behind most hesitation, and it is a fair one. It is also why the programme is built around accountability rather than information. A weekly call with me, daily actions tracked in the app, and targets we set on day one and review against.",
+    "The main focus of the coaching is the psychology of behaviour change. Getting you to be consistent is the whole point of working with me, and everything else is built around that.",
     "You have two weeks to change your mind and get a full refund. And if you have not hit those targets after three months, I keep working with you at no further cost until you do.",
   ] },
   { q: "How long will it actually take to lose the weight?", a: [
@@ -199,15 +201,51 @@ function ChevRight() {
 
 // ─── YOUTUBE VIDEO (thumbnail → inline iframe on click) ──────────────────────
 
-function YouTubeVideo({ id, label, className = "" }: { id: string; label: string; className?: string }) {
+function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: {
+  id: string;
+  label: string;
+  className?: string;
+  autoplayOnDesktop?: boolean;
+}) {
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [imgSrc, setImgSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!autoplayOnDesktop) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(hover: none), (max-width: 1023px)").matches) return;
+    const el = wrapperRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setMuted(true);
+            setPlaying(true);
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [autoplayOnDesktop]);
 
   if (playing) {
+    const params = new URLSearchParams({
+      autoplay: "1",
+      rel: "0",
+      ...(muted ? { mute: "1", playsinline: "1", loop: "1", playlist: id, controls: "1", modestbranding: "1" } : {}),
+    });
     return (
       <iframe
+        ref={wrapperRef as unknown as React.RefObject<HTMLIFrameElement>}
         className={`emb ${className}`}
-        src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+        src={`https://www.youtube.com/embed/${id}?${params.toString()}`}
         title={label}
         allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
         allowFullScreen
@@ -216,21 +254,23 @@ function YouTubeVideo({ id, label, className = "" }: { id: string; label: string
   }
 
   return (
-    <button
-      type="button"
-      className={`vid ${className}`}
-      onClick={() => setPlaying(true)}
-      aria-label={`Play: ${label}`}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imgSrc}
-        alt={label}
-        onError={() => setImgSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`)}
-        loading="lazy"
-      />
-      <span className="play"><i /></span>
-    </button>
+    <div ref={wrapperRef} style={{ display: "contents" }}>
+      <button
+        type="button"
+        className={`vid ${className}`}
+        onClick={() => setPlaying(true)}
+        aria-label={`Play: ${label}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imgSrc}
+          alt={label}
+          onError={() => setImgSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`)}
+          loading="lazy"
+        />
+        <span className="play"><i /></span>
+      </button>
+    </div>
   );
 }
 
@@ -507,8 +547,9 @@ export default function Page() {
                 width={3707}
                 height={2678}
                 priority
-                sizes="(min-width: 1000px) 45vw, 100vw"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                fetchPriority="high"
+                sizes="(min-width: 1000px) 55vw, 100vw"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
               />
             </div>
           </div>
@@ -538,7 +579,7 @@ export default function Page() {
               Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
             </h2>
             <div className="vwrap">
-              <YouTubeVideo id="TQBuOmHEoSw" label="Why George" />
+              <YouTubeVideo id="TQBuOmHEoSw" label="Why George" autoplayOnDesktop />
             </div>
           </Reveal>
         </section>
@@ -727,7 +768,7 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-              <h2>Take the audit. <span className="gold">See where you&apos;re at.</span></h2>
+              <h2>Take the Dental Performance Audit. <span className="gold">See where you&apos;re at.</span></h2>
             </div>
             <div className="audit">
               <div className="audit-l">
@@ -743,7 +784,7 @@ export default function Page() {
                 <ul className="alist">
                   <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
                   <li>What to focus on first, and what to leave alone for now</li>
-                  <li><b>The full four-part education series, free</b>, covering the whole framework</li>
+                  <li><b>The full four-part education series, free of charge, covering the whole framework.</b></li>
                   <li>No call required, and no pitch</li>
                 </ul>
               </div>
@@ -769,7 +810,7 @@ export default function Page() {
               </div>
               <div>
                 <div className="about-ph" style={{ aspectRatio: "4 / 5" }}>
-                  <Image src="/images/george-stage-hero.webp" alt="George Vernon speaking on stage at a corporate wellbeing event" width={1383} height={2481} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <Image src="/images/george-stage-hero.webp" alt="George Vernon speaking on stage at a corporate wellbeing event" width={1383} height={2481} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
                 </div>
               </div>
             </div>
@@ -779,35 +820,86 @@ export default function Page() {
         {/* ABOUT */}
         <section id="about">
           <Reveal className="wrap-wide">
-            <div className="about-grid">
-              <div className="about">
-                <div className="eyebrow">About George</div>
-                <h2 style={{ margin: "18px 0 26px" }}>Fifteen years working out how <span className="gold">health drives performance.</span></h2>
-                <p>George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals and senior leaders improve their health to increase daily energy, focus and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
-                <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
-                <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
-                <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.</p>
-                <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a></div>
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">About George</span><span className="goldbar" /></div>
+              <h2>Fifteen years working out how <span className="gold">health drives performance.</span></h2>
+            </div>
+
+            <div className="about-portrait">
+              <div className="accent" />
+              <div className="about-portrait-img">
+                <Image src="/Headshot/IMG_8821.webp" alt="Portrait of George Vernon" width={3707} height={2678} sizes="(min-width: 700px) 640px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               </div>
-              <div>
-                <div className="about-ph">
-                  <Image src="/Headshot/IMG_8821.webp" alt="Portrait of George Vernon" width={3707} height={2678} sizes="(min-width: 920px) 380px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
+              <div className="about-caption">
+                <b>George Vernon</b>
+                <span>Health &amp; Performance Coach</span>
               </div>
             </div>
-            <div className="gal">
-              <div className="ph">
-                <Image src="/about/boxing.webp" alt="George Vernon competing as an elite amateur boxer" width={1080} height={1080} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+
+            <div className="about-centered">
+              <p>George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals and senior leaders improve their health to increase daily energy, focus and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
+              <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
+              <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
+              <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.</p>
+            </div>
+
+            {/* Boxing + University */}
+            <div className="grp grp-2">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image src="/about/boxing.webp" alt="George Vernon competing as an elite amateur boxer" width={1080} height={1080} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/university.webp" alt="George Vernon at university, studying Sports and Exercise Science" width={2048} height={2048} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
               </div>
-              <div className="ph">
-                <Image src="/about/university.webp" alt="George Vernon at university, studying Sports and Exercise Science" width={2048} height={2048} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div className="about-caption">
+                <b>Boxing &amp; the Science</b>
+                <span>Elite amateur boxer, Sports and Exercise Science degree and S&amp;C MSc</span>
               </div>
-              <div className="ph">
-                <Image src="/about/coaching-athletes.webp" alt="George Vernon coaching elite athletes" width={1200} height={1500} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+
+            {/* Coaching athletes */}
+            <div className="grp grp-3">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image src="/about/coaching-athletes-1.webp" alt="George Vernon coaching elite athletes" width={1440} height={1440} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/coaching-athletes-2.webp" alt="George Vernon coaching elite athletes" width={1200} height={1500} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 10%" }} /></div>
+                <div><Image src="/about/coaching-athletes-3.webp" alt="George Vernon coaching elite athletes" width={1600} height={1200} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "left center" }} /></div>
               </div>
-              <div className="ph">
-                <Image src="/about/fitness-by-science.webp" alt="George Vernon at Fitness by Science, mentoring personal trainers" width={1440} height={1800} sizes="(min-width: 700px) 22vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div className="about-caption">
+                <b>The Athletes</b>
+                <span>Coaching elite athletes and elite boxers</span>
               </div>
+            </div>
+
+            {/* Working in the gym */}
+            <div className="grp grp-2">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image src="/about/gym-1.webp" alt="George Vernon coaching in the gym" width={1194} height={1194} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/gym-2.webp" alt="George Vernon coaching in the gym" width={1179} height={1257} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+              </div>
+              <div className="about-caption">
+                <b>The Gym Floor</b>
+                <span>Seven years coaching general health, fitness and weight loss</span>
+              </div>
+            </div>
+
+            {/* Fitness by Science */}
+            <div className="grp grp-4">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image src="/about/fitness-by-science-1.webp" alt="Fitness by Science" width={1440} height={1800} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/fitness-by-science-2.webp" alt="Fitness by Science" width={1536} height={2048} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/fitness-by-science-3.webp" alt="Fitness by Science" width={1800} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} /></div>
+                <div><Image src="/about/fitness-by-science-4.webp" alt="Fitness by Science" width={1440} height={1440} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 15%" }} /></div>
+              </div>
+              <div className="about-caption">
+                <b>Fitness by Science</b>
+                <span>A business George co-founded with his brother, mentoring new personal trainers</span>
+              </div>
+            </div>
+
+            <div className="btns" style={{ justifyContent: "center", marginTop: 26 }}>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
             </div>
           </Reveal>
         </section>
