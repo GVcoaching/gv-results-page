@@ -123,7 +123,7 @@ const QUOTES: Quote[] = [
     quote: "The thing that would have wrecked a week became a conversation." },
   { photo: "/images/sana-ali.webp", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
-    quote: "George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
+    quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
   { photo: "", name: "Commercial Director", role: "Name withheld by request",
     metric: "Headhunted three months in, for a role paying well over six figures",
     quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have." },
@@ -602,7 +602,7 @@ export default function Page() {
             </div>
             <Slider count={QUOTES.length} trackClassName="track-q">
               {QUOTES.map((q, i) => (
-                <article className="slide" key={i}>
+                <article className={`slide${q.photo ? "" : " slide-nopic"}`} key={i}>
                   <div className="qc-media">
                     {q.photo && (
                       <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
