@@ -126,7 +126,7 @@ section { padding: 48px 0; border-top: 1px solid var(--border); scroll-margin-to
 .dark { background: var(--navy); color: #fff; border-top: none; }
 .dark h2, .dark h3 { color: #fff; }
 .dark .sub { color: rgba(255,255,255,.72); }
-.sec-head { margin-bottom: 26px; }
+.sec-head { margin-bottom: 18px; }
 @media (min-width: 768px) { .sec-head { margin-bottom: 32px; } }
 
 /* VIDEO */
@@ -163,37 +163,49 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 .dot.on::before { background: var(--gold); width: 22px; border-radius: 4px; }
 
 .slide-vid { background: #000; border-bottom: 1px solid var(--border); }
-.slide-body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
-.s-name { font-family: Georgia, serif; font-size: 24px; color: var(--navy); line-height: 1.15; margin-top: 10px; }
-.s-role { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-top: 6px; line-height: 1.5; }
-.s-res { list-style: none; margin: 14px 0 0; padding: 14px 0 0; border-top: 1px solid var(--border); }
-.s-res li { font-size: 15.5px; color: var(--text-2); padding: 4px 0 4px 20px; position: relative; line-height: 1.5; }
-.s-res li:before { content: ""; position: absolute; left: 0; top: 12px; width: 7px; height: 7px; background: var(--gold); }
-.s-quote { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-family: Georgia, serif; font-style: italic; font-size: 17.5px; line-height: 1.5; color: var(--navy); }
+.slide-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; }
+@media (min-width: 900px) { .slide-body { padding: 22px 24px 24px; } }
+.s-name { font-family: Georgia, serif; font-size: 18px; color: var(--navy); line-height: 1.15; margin-top: 6px; }
+@media (min-width: 900px) { .s-name { font-size: 24px; margin-top: 10px; } }
+.s-role { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-top: 4px; line-height: 1.4; }
+@media (min-width: 900px) { .s-role { font-size: 11px; margin-top: 6px; line-height: 1.5; } }
+.s-res { list-style: none; margin: 8px 0 0; padding: 8px 0 0; border-top: 1px solid var(--border); }
+@media (min-width: 900px) { .s-res { margin: 14px 0 0; padding: 14px 0 0; } }
+.s-res li { font-size: 12.5px; color: var(--text-2); padding: 2px 0 2px 15px; position: relative; line-height: 1.4; }
+@media (min-width: 900px) { .s-res li { font-size: 15.5px; padding: 4px 0 4px 20px; line-height: 1.5; } }
+.s-res li:before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: var(--gold); }
+@media (min-width: 900px) { .s-res li:before { top: 12px; width: 7px; height: 7px; } }
+.s-quote { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-family: Georgia, serif; font-style: italic; font-size: 13.5px; line-height: 1.35; color: var(--navy); }
+@media (min-width: 900px) { .s-quote { margin-top: 14px; padding-top: 14px; font-size: 17.5px; line-height: 1.5; } }
 
-/* QUOTE SLIDER — compact photo on mobile so a whole card fits one screen */
+/* QUOTE SLIDER — compact card that fits one mobile screen and stays modest
+   on desktop (capped so it doesn't dominate the viewport). */
+@media (min-width: 820px) {
+  .track-q { max-width: 880px; margin-left: auto; margin-right: auto; }
+}
 .track-q .slide { flex: 0 0 100%; background: var(--navy); border-color: var(--navy); flex-direction: column; }
-@media (min-width: 820px) { .track-q .slide { flex-direction: row; align-items: stretch; } }
+@media (min-width: 820px) {
+  .track-q .slide { flex-direction: row; align-items: stretch; }
+}
 .qc-media { background: #fff; display: flex; flex-direction: column; padding: 0; }
-@media (min-width: 820px) { .qc-media { flex: 0 0 40%; } }
+@media (min-width: 820px) { .qc-media { flex: 0 0 38%; } }
 .qc-photo { width: 100%; aspect-ratio: 3 / 2; overflow: hidden; background: #e9e7e2; position: relative; }
 @media (min-width: 820px) { .qc-photo { aspect-ratio: 4 / 5; } }
 .qc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-/* Vish before/after + Kieran are 1:1 collages. On mobile use the same
-   landscape aspect as other cards so the whole card fits one screen;
-   on desktop show them full (1:1) since horizontal room is available. */
-.qc-photo-wide img { object-position: center center; }
+/* Vish/Kieran collages — keep 1:1 on desktop, bias top so heads survive
+   the mobile 3:2 crop. */
+.qc-photo-wide img { object-position: center top; }
 @media (min-width: 820px) { .qc-photo-wide { aspect-ratio: 1 / 1; } }
-.qc-meta { padding: 14px 18px 18px; text-align: center; margin-top: 0; }
-@media (min-width: 820px) { .qc-meta { padding: 18px 22px 22px; } }
-.qc-meta.no-photo { padding: 36px 18px; }
-.qc-name { font-family: Georgia, serif; font-size: clamp(20px, 2vw, 26px); color: var(--navy); line-height: 1.15; }
+.qc-meta { padding: 12px 16px 14px; text-align: center; margin-top: 0; }
+@media (min-width: 820px) { .qc-meta { padding: 14px 18px 18px; } }
+.qc-meta.no-photo { padding: 40px 20px; }
+.qc-name { font-family: Georgia, serif; font-size: clamp(19px, 1.9vw, 23px); color: var(--navy); line-height: 1.15; }
 .qc-role { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 6px; line-height: 1.45; max-width: 32ch; margin-left: auto; margin-right: auto; }
-.qc-stars { margin-top: 10px; }
-.qc-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 22px 20px; color: #fff; }
-@media (min-width: 820px) { .qc-right { padding: 32px 36px; } }
-.qc-quote { font-family: Georgia, serif; font-size: clamp(18px, 2.1vw, 26px); line-height: 1.35; color: #fff; }
-.qc-metric { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-dark); font-size: 12.5px; color: var(--gold); letter-spacing: .03em; line-height: 1.5; }
+.qc-stars { margin-top: 8px; }
+.qc-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 18px 18px; color: #fff; text-align: left; }
+@media (min-width: 820px) { .qc-right { padding: 26px 30px; } }
+.qc-quote { font-family: Georgia, serif; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.35; color: #fff; }
+.qc-metric { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-dark); font-size: 12px; color: var(--gold); letter-spacing: .03em; line-height: 1.5; }
 
 /* OBJECTIONS */
 .obj { display: grid; gap: 1px; background: var(--border); }

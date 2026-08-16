@@ -79,7 +79,7 @@ const RESULTS: Result[] = [
 ];
 
 const QUOTES: Quote[] = [
-  { photo: "/images/vish-crutches.webp", name: "Vish", role: "Dentist",
+  { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist",
     metric: "On crutches when we started · full recovery after ACL reconstruction alongside his physio · 61.7 lbs lost in seven months",
     quote: "My own family could hardly recognise me at our most recent family wedding." },
   { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
@@ -101,7 +101,7 @@ const QUOTES: Quote[] = [
     metric: "14kg off in seven months · running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
-    metric: "13kg down in four months · higher energy, sharper focus",
+    metric: "13kg down in four months · higher energy, sharper focus · better business performance · more quality time with family",
     quote: "And it hasn't felt difficult." },
   { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     metric: "The all-or-nothing cycle, broken",
@@ -111,12 +111,12 @@ const QUOTES: Quote[] = [
     quote: "Going to the root cause, and building my energy back up." },
   { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
-    quote: "George's focus on a sustainable plan and execution has led to the biggest win for me: a shift in mentality around weight loss and healthy living." },
+    quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
   { photo: "/images/jaz.webp", name: "Jaz", role: "Property business owner",
-    metric: "Down to 110kg — hadn't seen that weight in three or four years",
+    metric: "Down to 102kg — a weight he hadn't seen in four years",
     quote: "Sometimes it doesn't feel hard. It feels like you're not doing anything, but it's still working in the background." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
-    metric: "Back pain from 7 out of 10, spiking to 9, down to zero",
+    metric: "Back pain 7 out of 10, spiking to 9, completely down to 0 after working with George",
     quote: "Take the jump." },
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
     metric: "WHOOP stress reading hit zero for the first time",
@@ -816,11 +816,11 @@ export default function Page() {
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
             <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
-            <div className="inc" style={{ marginTop: 26, textAlign: "left" }}>
+            <div className="inc" style={{ marginTop: 26, textAlign: "left", maxWidth: "760px", marginLeft: "auto", marginRight: "auto" }}>
               <div>Keynotes, 45 to 90 minutes</div>
               <div>Employee workshops</div>
               <div>Ongoing corporate health programmes</div>
-              <div>Senior leadership performance coaching</div>
+              <div>Senior leadership performance coach</div>
             </div>
             <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
           </Reveal>
