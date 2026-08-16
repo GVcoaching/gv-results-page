@@ -79,12 +79,12 @@ const RESULTS: Result[] = [
 ];
 
 const QUOTES: Quote[] = [
-  { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
-    metric: "10kg lost in four months · works fewer hours and is more productive",
-    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
   { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist",
     metric: "61.7 lbs lost in seven months",
     quote: "Family members couldn't even recognise me." },
+  { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
+    metric: "10kg lost in four months · works fewer hours and is more productive",
+    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
   { photo: "/images/headshot-darren.webp", name: "Darren Hill", role: "General dentist, Dublin",
     metric: "12kg lost · VO2 max, HRV and resting heart rate all at personal bests",
     quote: "You've helped me remove the ceiling of what I thought I was capable of achieving." },
@@ -624,7 +624,7 @@ export default function Page() {
                 <article className="slide" key={i}>
                   <div className="qc-media">
                     {q.photo && (
-                      <div className="qc-photo">
+                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={encodeURI(q.photo)} alt={q.name} />
                       </div>
