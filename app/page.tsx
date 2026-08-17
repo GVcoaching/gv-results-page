@@ -106,7 +106,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
     metric: "13kg down in four months · higher energy, sharper focus · better business performance · more quality time with family",
     quote: "And it hasn't felt difficult." },
-  { photo: "/images/rob-allen-pugh.webp", fit: "contain", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
+  { photo: "/images/rob-allen-pugh.webp", fit: "contain", pos: "center center", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     metric: "The all-or-nothing cycle, broken",
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { photo: "/Testimonial pictures/Kieran - 1.webp", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
