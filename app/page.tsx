@@ -191,13 +191,13 @@ function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: 
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [imgSrc, setImgSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!autoplayOnDesktop) return;
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = wrapperRef.current;
+    const el = btnRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -223,7 +223,6 @@ function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: 
     });
     return (
       <iframe
-        ref={wrapperRef as unknown as React.RefObject<HTMLIFrameElement>}
         className={`emb ${className}`}
         src={`https://www.youtube.com/embed/${id}?${params.toString()}`}
         title={label}
@@ -234,23 +233,22 @@ function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: 
   }
 
   return (
-    <div ref={wrapperRef} style={{ display: "contents" }}>
-      <button
-        type="button"
-        className={`vid ${className}`}
-        onClick={() => setPlaying(true)}
-        aria-label={`Play: ${label}`}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={imgSrc}
-          alt={label}
-          onError={() => setImgSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`)}
-          loading="lazy"
-        />
-        <span className="play"><i /></span>
-      </button>
-    </div>
+    <button
+      ref={btnRef}
+      type="button"
+      className={`vid ${className}`}
+      onClick={() => setPlaying(true)}
+      aria-label={`Play: ${label}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imgSrc}
+        alt={label}
+        onError={() => setImgSrc(`https://img.youtube.com/vi/${id}/hqdefault.jpg`)}
+        loading="lazy"
+      />
+      <span className="play"><i /></span>
+    </button>
   );
 }
 
@@ -759,7 +757,7 @@ export default function Page() {
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
             <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
-            <div className="inc" style={{ marginTop: 26, textAlign: "left", maxWidth: "760px", marginLeft: "auto", marginRight: "auto" }}>
+            <div className="inc inc-2x2" style={{ marginTop: 26, textAlign: "left", maxWidth: "680px", marginLeft: "auto", marginRight: "auto" }}>
               <div>Keynotes, 45 to 90 minutes</div>
               <div>Employee workshops</div>
               <div>Ongoing corporate health programmes</div>
