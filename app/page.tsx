@@ -51,7 +51,7 @@ const RESULTS: Result[] = [
     quote: "My mindset shift to not needing to overeat has been my biggest win." },
   { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover",
     results: ["Best year the business has had in a long time", "Burnt out with no brain space, to mindset and strength back", "Present and happier at home"],
-    quote: "I'm the captain again, steering the ship. I feel like I've gained another five years." },
+    quote: "I'm the captain again, steering the ship. I feel like I did when I was in my early thirties." },
   { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
     results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
     quote: "Going to the root cause, and building my energy back up." },
@@ -71,8 +71,8 @@ const RESULTS: Result[] = [
     results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures", "First interview went incredibly well"],
     quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have. I did not have that before." },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner",
-    results: ["Down to 110kg, a weight he had not seen in three to four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it hold"],
-    quote: "Sometimes it doesn't feel hard. It feels like you're not doing anything, but it's still working in the background." },
+    results: ["Down to 102kg, a weight he had not seen in four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it last"],
+    quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist",
     results: ["WHOOP stress reading hit zero for the first time ever", "Slept properly instead of overthinking his first patient complaint", "Handled it calmly the next morning, and the complaint was dropped"],
     quote: "The thing that would have wrecked a week became a conversation." },
@@ -109,12 +109,15 @@ const QUOTES: Quote[] = [
   { photo: "/Testimonial pictures/Kieran - 1.webp", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
     metric: "30.1kg down in just under eight months",
     quote: "Going to the root cause, and building my energy back up." },
+  { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
+    metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
+    quote: "First half marathon four months in. Something I never thought I could do." },
   { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
     quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
-  { photo: "/images/jaz.webp", name: "Jaz", role: "Property business owner",
+  { photo: "/images/jaz.webp", wide: true, name: "Jaz", role: "Property business owner",
     metric: "Down to 102kg — a weight he hadn't seen in four years",
-    quote: "Sometimes it doesn't feel hard. It feels like you're not doing anything, but it's still working in the background." },
+    quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
     metric: "Back pain 7 out of 10, spiking to 9, completely down to 0 after working with George",
     quote: "Take the jump." },
@@ -630,16 +633,13 @@ export default function Page() {
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The system</span><span className="goldbar" /></div>
               <h2>The system we install <span className="gold">underneath your health.</span></h2>
-              <p className="sub" style={{ marginTop: 18 }}>
-                Five parts, built in this order. Most people try to solve a performance problem with more output when what they actually have is a recovery problem. Your recovery has to be equal to or greater than your stress.
-              </p>
             </div>
             <div className="five">
-              <div className="f"><div className="f-n">01</div><h3>Psychology</h3><p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred.</p></div>
-              <div className="f"><div className="f-n">02</div><h3>Stress &amp; recovery</h3><p>Nervous system, sleep, HRV. Where burnout gets built, and where it gets dismantled.</p></div>
+              <div className="f"><div className="f-n">01</div><h3>Psychology</h3><p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred. Nothing changes long term without getting this right.</p></div>
+              <div className="f"><div className="f-n">02</div><h3>Stress &amp; recovery</h3><p>Recovery must be equal to or greater than stress, and it has to be managed deliberately.</p></div>
               <div className="f"><div className="f-n">03</div><h3>Nutrition</h3><p>Evidence-based and simple. Eating more than you intend is a system gap, not a willpower gap.</p></div>
-              <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Minimum effective dose, built around your actual diary and training you enjoy.</p></div>
-              <div className="f"><div className="f-n">05</div><h3>Measurement</h3><p>What gets measured gets managed. Your data decides what changes next, not guesswork.</p></div>
+              <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Built on training you enjoy and that gives you energy, not something you have to endure.</p></div>
+              <div className="f"><div className="f-n">05</div><h3>Measurement</h3><p>What gets measured gets managed. Your data decides what changes, not guesswork — very much like the way a business runs.</p></div>
             </div>
           </Reveal>
         </section>
@@ -659,7 +659,7 @@ export default function Page() {
             <div className="shots">
               {[
                 { src: "/images/app-daily-plan.webp", alt: "Daily plan and habit tracking", title: "Daily plan and habits", caption: "The day's actions in one list, ticked off as you go.", w: 590, h: 930 },
-                { src: "/images/app-training.webp", alt: "Personalised training with video guidance", title: "Your training sessions", caption: "Every session written for you, with video for each movement.", w: 590, h: 932 },
+                { src: "/images/app-training.webp", alt: "Personalised training with video guidance", title: "Your training sessions", caption: "Every session written for you, with a video to show you each movement.", w: 590, h: 932 },
                 { src: "/images/app-nutrition.webp", alt: "Meal plans and nutrition tracking", title: "Meals and nutrition", caption: "Built around what you actually eat. Nothing off limits.", w: 590, h: 931 },
                 { src: "/images/app-dashboard.webp", alt: "Progress dashboard covering sleep, steps, weight and trends", title: "Your dashboard", caption: "Sleep, steps, weight and trends, reviewed on every call.", w: 590, h: 931 },
               ].map((s) => (
@@ -681,7 +681,7 @@ export default function Page() {
               <div className="course-txt">
                 <span className="eyebrow">Included</span>
                 <h3 style={{ marginTop: 14 }}>The full education course, on demand</h3>
-                <p>Every lesson sits inside the app as video, so you learn why you are doing each thing rather than just following instructions. Watch it whenever the list finishes, and revisit any of it whenever you need to.</p>
+                <p>Every lesson sits inside the app as video, so you learn why you are doing each thing rather than just following instructions. Watch it on-demand and revisit any session when you need.</p>
               </div>
             </div>
             <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>
