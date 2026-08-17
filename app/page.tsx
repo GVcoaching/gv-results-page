@@ -21,6 +21,7 @@ type Result = {
 type Quote = {
   photo: string;
   wide?: boolean;
+  desktopOnly?: boolean;
   name: string;
   role: string;
   metric: string;
@@ -112,7 +113,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
     metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
     quote: "First half marathon four months in. Something I never thought I could do." },
-  { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director",
+  { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
     quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
   { photo: "/images/jaz.webp", wide: true, name: "Jaz", role: "Property business owner",
@@ -124,7 +125,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
     metric: "WHOOP stress reading hit zero for the first time",
     quote: "The thing that would have wrecked a week became a conversation." },
-  { photo: "/images/sana-ali.webp", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
+  { photo: "/images/sana-ali.webp", desktopOnly: true, name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
     quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
   { photo: "", name: "Commercial Director", role: "Name withheld by request",
@@ -603,7 +604,7 @@ export default function Page() {
             </div>
             <Slider count={QUOTES.length} trackClassName="track-q">
               {QUOTES.map((q, i) => (
-                <article className={`slide${q.photo ? "" : " slide-nopic"}`} key={i}>
+                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}`} key={i}>
                   <div className="qc-media">
                     {q.photo && (
                       <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
