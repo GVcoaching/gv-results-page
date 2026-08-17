@@ -214,7 +214,7 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 @media (min-width: 820px) { .qc-media { flex: 0 0 38%; } }
 /* Wide entries (Vish, Kieran, Jaz, Reece) get more photo width on desktop
    so the collage/paired image reads bigger. Photo aspect stays 1:1. */
-@media (min-width: 820px) { .slide-wide .qc-media { flex: 0 0 65%; } }
+@media (min-width: 820px) { .slide-wide .qc-media { flex: 0 0 72%; } }
 /* Photo aspect: square on mobile (compact, face visible), portrait 4:5 on
    desktop (more editorial). Wide collages stay 1:1 at every breakpoint.
    White background so bg-removed portraits blend seamlessly with .qc-media */
