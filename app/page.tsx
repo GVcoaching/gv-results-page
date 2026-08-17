@@ -532,20 +532,13 @@ export default function Page() {
       <header className="hero" id="top">
         <div className="wrap-wide">
           <div className="hero-grid">
-            <div>
+            <div className="hero-txt">
               <div className="eyebrow">For dentists, practice owners &amp; business leaders</div>
               <h1 style={{ margin: "20px 0 24px" }}>
                 Make this the <span className="gold">last time</span> you go on a health kick.
               </h1>
               <p className="sub">
                 More energy, sharper focus and better performance, without burning out. One-to-one coaching for people who already know what to do, and cannot work out why it never sticks.
-              </p>
-              <div className="btns">
-                <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-                <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
-              </div>
-              <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>
-                Free · Takes 4 minutes · No commitment required
               </p>
             </div>
             <div className="hero-ph">
@@ -559,6 +552,15 @@ export default function Page() {
                 sizes="(min-width: 1000px) 55vw, 100vw"
                 style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
               />
+            </div>
+            <div className="hero-cta">
+              <div className="btns">
+                <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+                <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              </div>
+              <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>
+                Free · Takes 4 minutes · No commitment required
+              </p>
             </div>
           </div>
         </div>
