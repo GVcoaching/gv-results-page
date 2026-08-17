@@ -121,7 +121,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
     quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
-  { photo: "/images/jaz.webp", wide: true, name: "Jaz", role: "Property business owner",
+  { photo: "/images/jaz.webp", wide: true, fit: "contain", name: "Jaz", role: "Property business owner",
     metric: "Down to 102kg — a weight he hadn't seen in four years",
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
