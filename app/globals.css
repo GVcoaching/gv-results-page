@@ -121,13 +121,13 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 
 /* SECTION */
 section { padding: 40px 0; border-top: 1px solid var(--border); scroll-margin-top: 80px; }
-@media (min-width: 768px) { section { padding: 52px 0; } }
+@media (min-width: 768px) { section { padding: 44px 0; } }
 .grey { background: var(--offwhite); }
 .dark { background: var(--navy); color: #fff; border-top: none; }
 .dark h2, .dark h3 { color: #fff; }
 .dark .sub { color: rgba(255,255,255,.72); }
 .sec-head { margin-bottom: 18px; }
-@media (min-width: 768px) { .sec-head { margin-bottom: 32px; } }
+@media (min-width: 768px) { .sec-head { margin-bottom: 24px; } }
 
 /* VIDEO */
 .vwrap { border: 1px solid var(--border); background: #000; max-width: 900px; margin: 0 auto; }
