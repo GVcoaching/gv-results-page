@@ -904,8 +904,8 @@ export default function Page() {
 
       {/* MOBILE STICKY */}
       <div className="sticky" aria-hidden={false}>
-        <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
-        <a className="btn out-light" href="#results">Straight from the Clients</a>
+        <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
       </div>
     </>
   );
