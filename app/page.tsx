@@ -127,7 +127,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
     metric: "WHOOP stress reading hit zero for the first time",
     quote: "The thing that would have wrecked a week became a conversation." },
-  { photo: "/images/sana-ali.webp", desktopOnly: true, pos: "right top", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
+  { photo: "/images/sana-ali.webp", desktopOnly: true, fit: "contain", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
     quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
   { photo: "", name: "Commercial Director", role: "Name withheld by request",
@@ -324,7 +324,7 @@ function Slider({
     <>
       <div className="slider-bar">
         <div className="hint hint-mobile">Swipe to see more →</div>
-        <div className="hint hint-desktop">Click the arrows to see more →</div>
+        <div className="hint hint-desktop">Click to see more →</div>
         <div className="arrows">
           <button
             type="button"
