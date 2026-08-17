@@ -22,6 +22,8 @@ type Quote = {
   photo: string;
   wide?: boolean;
   desktopOnly?: boolean;
+  fit?: "cover" | "contain";
+  pos?: string;
   name: string;
   role: string;
   metric: string;
@@ -95,10 +97,10 @@ const QUOTES: Quote[] = [
   { photo: "/images/ben-rutter.webp", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
     metric: "Best fitness regime he has been on, with a new baby at home",
     quote: "My mindset shift to not needing to overeat has been my biggest win." },
-  { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
+  { photo: "/images/steve-want.webp", fit: "contain", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
     metric: "Five months · off the sofa and onto the trampoline with his four-year-old",
     quote: "My energy levels have gone through the roof." },
-  { photo: "/images/andrew-thompson.webp", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
+  { photo: "/images/andrew-thompson.webp", fit: "contain", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
     metric: "14kg off in seven months · running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
@@ -116,7 +118,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
     quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
-  { photo: "/images/jaz.webp", wide: true, name: "Jaz", role: "Property business owner",
+  { photo: "/images/jaz.webp", wide: true, fit: "contain", name: "Jaz", role: "Property business owner",
     metric: "Down to 102kg — a weight he hadn't seen in four years",
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
@@ -125,7 +127,7 @@ const QUOTES: Quote[] = [
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
     metric: "WHOOP stress reading hit zero for the first time",
     quote: "The thing that would have wrecked a week became a conversation." },
-  { photo: "/images/sana-ali.webp", desktopOnly: true, name: "Sana Ali", role: "Consultant Paediatric Radiologist",
+  { photo: "/images/sana-ali.webp", desktopOnly: true, pos: "right top", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
     quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
   { photo: "", name: "Commercial Director", role: "Name withheld by request",
@@ -344,12 +346,32 @@ function Slider({
           </button>
         </div>
       </div>
-      <div
-        ref={trackRef}
-        className={`track ${trackClassName}`}
-        onScroll={recompute}
-      >
-        {children}
+      <div className="slider-frame">
+        <button
+          type="button"
+          className="arw arw-side arw-left"
+          onClick={() => scrollByViews(-1)}
+          disabled={!canPrev}
+          aria-label="Previous"
+        >
+          <ChevLeft />
+        </button>
+        <div
+          ref={trackRef}
+          className={`track ${trackClassName}`}
+          onScroll={recompute}
+        >
+          {children}
+        </div>
+        <button
+          type="button"
+          className="arw arw-side arw-right"
+          onClick={() => scrollByViews(1)}
+          disabled={!canNext}
+          aria-label="Next"
+        >
+          <ChevRight />
+        </button>
       </div>
       <div className="dots">
         {Array.from({ length: pages }).map((_, i) => (
@@ -609,7 +631,14 @@ export default function Page() {
                     {q.photo && (
                       <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={encodeURI(q.photo)} alt={q.name} />
+                        <img
+                          src={encodeURI(q.photo)}
+                          alt={q.name}
+                          style={{
+                            ...(q.fit ? { objectFit: q.fit } : {}),
+                            ...(q.pos ? { objectPosition: q.pos } : {}),
+                          }}
+                        />
                       </div>
                     )}
                     <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
