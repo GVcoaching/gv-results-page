@@ -554,7 +554,7 @@ export default function Page() {
               />
             </div>
             <div className="hero-cta">
-              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Book a Call with George</a>
+              <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Book a Call with George</a>
               <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Take the Dental Performance Audit</a>
               <p className="micro" style={{ color: "rgba(255,255,255,.55)", textAlign: "center" }}>
                 Free · Takes 4 minutes · No commitment required
