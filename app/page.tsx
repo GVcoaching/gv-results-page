@@ -100,13 +100,13 @@ const QUOTES: Quote[] = [
   { photo: "/images/steve-want.webp", fit: "contain", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
     metric: "Five months · off the sofa and onto the trampoline with his four-year-old",
     quote: "My energy levels have gone through the roof." },
-  { photo: "/images/andrew-thompson.webp", fit: "contain", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
+  { photo: "/images/andrew-thompson.webp", fit: "contain", pos: "center top", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
     metric: "14kg off in seven months · running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
     metric: "13kg down in four months · higher energy, sharper focus · better business performance · more quality time with family",
     quote: "And it hasn't felt difficult." },
-  { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
+  { photo: "/images/rob-allen-pugh.webp", fit: "contain", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     metric: "The all-or-nothing cycle, broken",
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { photo: "/Testimonial pictures/Kieran - 1.webp", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
@@ -626,7 +626,7 @@ export default function Page() {
             </div>
             <Slider count={QUOTES.length} trackClassName="track-q">
               {QUOTES.map((q, i) => (
-                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}`} key={i}>
+                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}`} key={i}>
                   <div className="qc-media">
                     {q.photo && (
                       <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
