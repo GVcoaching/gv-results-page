@@ -59,26 +59,26 @@ const RESULTS: Result[] = [
     results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
     quote: "Going to the root cause, and building my energy back up." },
   { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    results: ["14kg off over seven months", "Resting heart rate down 20 to 30 percent", "Running quicker in his forties than he did in his thirties"],
+    results: ["14kg off over seven months", "Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London",
     results: ["Back pain from 7 out of 10, spiking to 9, down to zero", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
-    quote: "Take the jump." },
+    quote: "Take the jump and work with George." },
   { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training",
-    results: ["Weight down and energy up over five months", "Off the sofa and out on the trampoline with his four-year-old", "A fit dad, in his son's words"],
-    quote: "My energy levels have gone through the roof." },
+    results: ["Five months in", "Weight lost", "Routine built"],
+    quote: "Off the sofa and onto the trampoline with his four-year-old son." },
   { yt: "2MK7XZytM3I", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in",
-    results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures", "First interview went incredibly well"],
+    results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures"],
     quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have. I did not have that before." },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner",
     results: ["Down to 102kg, a weight he had not seen in four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it last"],
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist",
-    results: ["WHOOP stress reading hit zero for the first time ever", "Slept properly instead of overthinking his first patient complaint", "Handled it calmly the next morning, and the complaint was dropped"],
-    quote: "The thing that would have wrecked a week became a conversation." },
+    results: ["WHOOP stress at its lowest during one of the most stressful weeks he had had in dentistry", "First patient complaint — handled it calmly using the psychology techniques we had worked on together", "Complaint dropped the next morning"],
+    quote: "The psychology work meant a week that would have wrecked me became a conversation instead." },
 ];
 
 const QUOTES: Quote[] = [
@@ -98,8 +98,8 @@ const QUOTES: Quote[] = [
     metric: "Best fitness regime he has been on, with a new baby at home",
     quote: "My mindset shift to not needing to overeat has been my biggest win." },
   { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
-    metric: "Five months · off the sofa and onto the trampoline with his four-year-old",
-    quote: "My energy levels have gone through the roof." },
+    metric: "Five months in · weight lost · routine built",
+    quote: "Off the sofa and onto the trampoline with his four-year-old son." },
   { photo: "/images/sam-sneyd.webp", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors",
     metric: "Three and a half months in · a bespoke, holistic plan built around a busy lifestyle",
     quote: "The main benefit I've had is just a lot more energy." },
@@ -126,10 +126,10 @@ const QUOTES: Quote[] = [
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
     metric: "Back pain 7 out of 10, spiking to 9, completely down to 0 after working with George",
-    quote: "Take the jump." },
+    quote: "Take the jump and work with George." },
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
-    metric: "WHOOP stress reading hit zero for the first time",
-    quote: "The thing that would have wrecked a week became a conversation." },
+    metric: "WHOOP stress at its lowest during one of the most stressful weeks in dentistry — his first patient complaint",
+    quote: "The psychology work meant a week that would have wrecked me became a conversation instead." },
   { photo: "/images/sana-ali.webp", desktopOnly: true, name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
     quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
@@ -554,11 +554,9 @@ export default function Page() {
               />
             </div>
             <div className="hero-cta">
-              <div className="btns">
-                <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-                <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
-              </div>
-              <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Book a Call with George</a>
+              <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Take the Dental Performance Audit</a>
+              <p className="micro" style={{ color: "rgba(255,255,255,.55)", textAlign: "center" }}>
                 Free · Takes 4 minutes · No commitment required
               </p>
             </div>
@@ -906,8 +904,8 @@ export default function Page() {
 
       {/* MOBILE STICKY */}
       <div className="sticky" aria-hidden={false}>
-        <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a>
-        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
+        <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+        <a className="btn out-light" href="#results">Straight from the Clients</a>
       </div>
     </>
   );

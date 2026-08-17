@@ -104,6 +104,8 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 .hero h1 { color: #fff; }
 .hero .sub { color: rgba(255,255,255,.72); }
 .hero-grid { display: grid; gap: 28px; align-items: center; }
+/* Mobile: hide the hero CTA block — sticky bar carries those actions */
+@media (max-width: 999px) { .hero-cta { display: none; } }
 @media (min-width: 1000px) {
   .hero-grid {
     grid-template-columns: .95fr 1.05fr;
@@ -234,7 +236,7 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 .qc-photo-wide { aspect-ratio: 1 / 1; }
 .qc-photo-wide img { object-position: center center; }
 .qc-meta { padding: 10px 14px 12px; text-align: center; margin-top: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; }
-@media (min-width: 820px) { .qc-meta { padding: 18px 22px 22px; } }
+@media (min-width: 820px) { .qc-meta { padding: 12px 18px 16px; } }
 .qc-meta.no-photo { padding: 56px 24px; text-align: center; }
 .qc-name { font-family: Georgia, serif; font-size: 19px; color: var(--navy); line-height: 1.15; }
 @media (min-width: 820px) { .qc-name { font-size: clamp(22px, 2.4vw, 30px); } }
@@ -243,7 +245,7 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 .qc-stars { margin-top: 8px; font-size: 14px; letter-spacing: .2em; }
 @media (min-width: 820px) { .qc-stars { margin-top: 12px; font-size: 17px; } }
 .qc-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 14px 16px; color: #fff; text-align: left; }
-@media (min-width: 820px) { .qc-right { padding: 32px 36px; } }
+@media (min-width: 820px) { .qc-right { padding: 22px 28px; } }
 .qc-quote { font-family: Georgia, serif; font-size: 17px; line-height: 1.32; color: #fff; }
 @media (min-width: 820px) { .qc-quote { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.35; } }
 .qc-metric { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border-dark); font-size: 12px; color: var(--gold); letter-spacing: .03em; line-height: 1.45; }
