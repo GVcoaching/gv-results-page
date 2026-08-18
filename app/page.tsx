@@ -25,6 +25,7 @@ type Quote = {
   fit?: "cover" | "contain";
   pos?: string;
   photoClass?: string;
+  slideClass?: string;
   name: string;
   role: string;
   metric: string;
@@ -116,7 +117,7 @@ const QUOTES: Quote[] = [
   { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
     metric: "35kg down in just under eight months",
     quote: "Going to the root cause, and building my energy back up." },
-  { photo: "/images/reece.webp", wide: true, photoClass: "qc-reece", name: "Reece", role: "Maxillofacial dentist",
+  { photo: "/images/reece.webp", wide: true, photoClass: "qc-reece", slideClass: "slide-reece", name: "Reece", role: "Maxillofacial dentist",
     metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
     quote: "First half marathon four months in. Something I never thought I could do." },
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
@@ -630,7 +631,7 @@ export default function Page() {
             </div>
             <Slider count={QUOTES.length} trackClassName="track-q">
               {QUOTES.map((q, i) => (
-                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}`} key={i}>
+                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={i}>
                   <div className="qc-media">
                     {q.photo && (
                       <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
@@ -662,7 +663,7 @@ export default function Page() {
         </section>
 
         {/* THE SYSTEM */}
-        <section className="grey">
+        <section className="grey" id="coaching">
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The system</span><span className="goldbar" /></div>
@@ -679,7 +680,7 @@ export default function Page() {
         </section>
 
         {/* COACHING */}
-        <section id="coaching">
+        <section>
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
@@ -715,7 +716,7 @@ export default function Page() {
               <div className="course-txt">
                 <span className="eyebrow">Included</span>
                 <h3 style={{ marginTop: 14 }}>The full education course, on demand</h3>
-                <p>Every lesson sits inside the app as video, so you learn why you are doing each thing rather than just following instructions. Watch it on-demand and revisit any session when you need.</p>
+                <p>Every lesson sits inside the app so you learn why you are doing what you are doing instead of just following instructions. This is what takes the process from working once to something that will work long term. Watch it on demand and revisit any session when you need.</p>
               </div>
             </div>
             <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>

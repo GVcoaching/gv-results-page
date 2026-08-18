@@ -263,8 +263,18 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
   /* Andrew: fit the whole picture into the frame so his face is visible */
   .qc-photo.qc-andrew { aspect-ratio: 5 / 3; background: #f7f7f7; }
   .qc-photo.qc-andrew img { object-fit: contain; object-position: center center; }
-  /* Reece: give the photo more vertical space so he reads bigger */
-  .qc-photo.qc-reece { aspect-ratio: 4 / 5; }
+  /* Reece: image is square — keep container 1:1 so nothing is cropped */
+  .qc-photo.qc-reece { aspect-ratio: 1 / 1; }
+}
+
+/* Reece card: stack on desktop so the square photo fills the full card
+   width and the testimonial sits below it, no wasted white space. */
+@media (min-width: 820px) {
+  .track-q .slide.slide-reece { flex-direction: column; }
+  .slide.slide-reece .qc-media { flex: 0 0 auto; width: 100%; }
+  .slide.slide-reece .qc-photo,
+  .slide.slide-reece .qc-photo-wide { aspect-ratio: 1 / 1; width: 100%; }
+  .slide.slide-reece .qc-right { padding: 22px 28px; }
 }
 
 /* Slide with no photo — single centered column, everything centered */
