@@ -39,11 +39,11 @@ const RESULTS: Result[] = [
   { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association",
     results: ["A dentist, a practice owner, four kids and no energy left", "Daily energy rebuilt while running six providers and twenty staff", "Focus back to lead the practice at her best"],
     quote: "Recovery finally outweighing stress. That was the shift." },
-  { yt: "HE9kxhuNZOU", name: "Darren", role: "General dentist, Dublin",
+  { yt: "HE9kxhuNZOU", name: "Dr Darren Hill", role: "General dentist, Dublin",
     results: ["12kg lost over seven months", "VO2 max the highest it has ever been", "Heart rate variability the highest it has ever been", "Resting heart rate the lowest it has ever been"],
     quote: "It's the first time in 32 years I've ever felt like this is a lifestyle change that I'm happy with." },
   { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist",
-    results: ["25kg lost in seven months", "Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
+    results: ["61.7 lbs lost in seven months", "Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
     quote: "Family members couldn't even recognise me." },
   { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
     results: ["13kg down in four months", "Higher energy levels and sharper focus", "Better business performance", "More quality time with family"],
@@ -61,7 +61,7 @@ const RESULTS: Result[] = [
     results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
     quote: "Going to the root cause, and building my energy back up." },
   { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    results: ["14kg off over seven months", "Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
+    results: ["14kg off in seven months", "Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London",
     results: ["Back pain from 7 out of 10, spiking to 9, down to zero", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
@@ -115,7 +115,7 @@ const QUOTES: Quote[] = [
     metric: "The all-or-nothing cycle, broken",
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    metric: "35kg down in just under eight months",
+    metric: "35kg down in under a year",
     quote: "Going to the root cause, and building my energy back up." },
   { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
     metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
@@ -127,7 +127,7 @@ const QUOTES: Quote[] = [
     metric: "Down to 102kg — a weight he hadn't seen in four years",
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
-    metric: "Back pain 7 out of 10, spiking to 9, completely down to 0 after working with George",
+    metric: "Back pain 7 out of 10, spiking to 9, down to 0 after working with George",
     quote: "Take the jump and work with George." },
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
     metric: "WHOOP stress at its lowest during one of the most stressful weeks in dentistry — his first patient complaint",
@@ -424,7 +424,7 @@ function Navbar() {
             <a href="#why">Why George</a>
             <a href="#results">Results</a>
             <a href="#coaching">Coaching</a>
-            <a href="#corporate">Business Wellbeing Programs</a>
+            <a href="#corporate">Business Wellbeing Programmes</a>
             <a href="#about">About George</a>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
@@ -444,7 +444,7 @@ function Navbar() {
         <a href="#why" onClick={close}>Why George</a>
         <a href="#results" onClick={close}>Results</a>
         <a href="#coaching" onClick={close}>Coaching</a>
-        <a href="#corporate" onClick={close}>Business Wellbeing Programs</a>
+        <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
         <a href="#about" onClick={close}>About George</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a Call with George</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
