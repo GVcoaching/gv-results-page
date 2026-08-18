@@ -24,6 +24,7 @@ type Quote = {
   desktopOnly?: boolean;
   fit?: "cover" | "contain";
   pos?: string;
+  photoClass?: string;
   name: string;
   role: string;
   metric: string;
@@ -66,7 +67,7 @@ const RESULTS: Result[] = [
     quote: "Take the jump and work with George." },
   { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training",
     results: ["Five months in", "Weight lost", "Routine built"],
-    quote: "Off the sofa and onto the trampoline with his four-year-old son." },
+    quote: "After work, I'm now off the sofa and onto the trampoline with my four-year-old son because of the energy that I've gained." },
   { yt: "2MK7XZytM3I", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
@@ -99,11 +100,11 @@ const QUOTES: Quote[] = [
     quote: "My mindset shift to not needing to overeat has been my biggest win." },
   { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
     metric: "Five months in · weight lost · routine built",
-    quote: "Off the sofa and onto the trampoline with his four-year-old son." },
-  { photo: "/images/sam-sneyd.webp", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors",
+    quote: "After work, I'm now off the sofa and onto the trampoline with my four-year-old son because of the energy that I've gained." },
+  { photo: "/images/sam-sneyd.webp", photoClass: "qc-sam", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors",
     metric: "Three and a half months in · a bespoke, holistic plan built around a busy lifestyle",
     quote: "The main benefit I've had is just a lot more energy." },
-  { photo: "/images/andrew-thompson.webp", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
+  { photo: "/images/andrew-thompson.webp", photoClass: "qc-andrew", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
     metric: "14kg off in seven months · running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
@@ -112,10 +113,10 @@ const QUOTES: Quote[] = [
   { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
     metric: "The all-or-nothing cycle, broken",
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
-  { photo: "/Testimonial pictures/Kieran - 1.webp", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    metric: "30.1kg down in just under eight months",
+  { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
+    metric: "35kg down in just under eight months",
     quote: "Going to the root cause, and building my energy back up." },
-  { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
+  { photo: "/images/reece.webp", wide: true, photoClass: "qc-reece", name: "Reece", role: "Maxillofacial dentist",
     metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
     quote: "First half marathon four months in. Something I never thought I could do." },
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
@@ -632,7 +633,7 @@ export default function Page() {
                 <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}`} key={i}>
                   <div className="qc-media">
                     {q.photo && (
-                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}`}>
+                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={encodeURI(q.photo)}
@@ -794,7 +795,7 @@ export default function Page() {
               <div>Keynotes, 45 to 90 minutes</div>
               <div>Employee workshops</div>
               <div>Ongoing corporate health programmes</div>
-              <div>Senior leadership performance coach</div>
+              <div>Senior leadership performance coaching</div>
             </div>
             <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
           </Reveal>
