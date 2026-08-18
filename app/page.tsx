@@ -117,7 +117,7 @@ const QUOTES: Quote[] = [
   { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
     metric: "35kg down in just under eight months",
     quote: "Going to the root cause, and building my energy back up." },
-  { photo: "/images/reece.webp", wide: true, photoClass: "qc-reece", slideClass: "slide-reece", name: "Reece", role: "Maxillofacial dentist",
+  { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
     metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
     quote: "First half marathon four months in. Something I never thought I could do." },
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
