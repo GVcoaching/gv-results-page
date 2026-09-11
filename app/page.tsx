@@ -685,11 +685,24 @@ export default function Page() {
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
               <h2>What it <span className="gold">actually looks like.</span></h2>
+              <p className="sub" style={{ marginTop: 14 }}>Three things working together, all built around your time. Coaching to get the result. The app so it happens every day without willpower or admin. And the education so you understand it well enough to keep it when the coaching ends.</p>
             </div>
             <div className="cad">
               <div className="c"><h3>Every week</h3><p>A one-to-one call with me. The plan changes when your week changes, so a chaotic week does not end the programme.</p></div>
               <div className="c"><h3>Every month</h3><p>An in-person session where geography allows, or a deeper review call where it does not.</p></div>
-              <div className="c"><h3>Every day</h3><p>The whole plan sits in the app: the day&apos;s actions, your training, your meals and the data behind both.</p></div>
+              <div className="c"><h3>Every day</h3><p>The whole plan sits in the app, so there is nothing to plan and nothing to work out: the day&apos;s actions, your training, your meals and the data behind both. George AI is in there too, so a photo of your plate is logged in seconds and there is an answer whenever you need one.</p></div>
+            </div>
+            <div className="course">
+              <div className="course-img">
+                <div className="course-img-inner">
+                  <Image src="/images/education-course.webp" alt="The full education course inside the GV Coaching app" width={708} height={578} sizes="(min-width: 860px) 45vw, 90vw" style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              </div>
+              <div className="course-txt">
+                <span className="eyebrow">Why it lasts</span>
+                <h3 style={{ marginTop: 14 }}>Understand it, and you keep it.</h3>
+                <p>Most people lose their results because they were following instructions they never understood. The full education course sits inside the app, so you learn why you are doing what you are doing and build the skill to run it yourself. That is the difference between a result, and a result that lasts.</p>
+              </div>
             </div>
             <div className="shots">
               {[
@@ -707,25 +720,38 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            <div className="course">
-              <div className="course-img">
-                <div className="course-img-inner">
-                  <Image src="/images/education-course.webp" alt="The full education course inside the GV Coaching app" width={708} height={578} sizes="(min-width: 860px) 45vw, 90vw" style={{ width: "100%", height: "auto", display: "block" }} />
-                </div>
+            <div className="gai">
+              <div className="gai-head">
+                <span className="eyebrow">New in the app</span>
+                <h3>George AI, <span className="gold">with you between calls.</span></h3>
+                <p>Built to save you time. Take a photo of your plate and it is analysed and logged for you, no typing. Send a menu and it tells you what fits your targets. Send a video of a lift and it checks your form. Ask it anything, any time of day, and it answers the way I would.</p>
               </div>
-              <div className="course-txt">
-                <span className="eyebrow">Included</span>
-                <h3 style={{ marginTop: 14 }}>The full education course, on demand</h3>
-                <p>Every lesson sits inside the app so you learn why you are doing what you are doing instead of just following instructions. This is what takes the process from working once to something that will work long term. Watch it on demand and revisit any session when you need.</p>
+              <div className="shots gai-shots">
+                {[
+                  { src: "/images/ai-meal-photo.webp", alt: "A photo of a noodle dish sent to George AI, with the food analysis it returned", title: "Photo your food", caption: "Send a photo. It works out what is on the plate and the calories and macros.", w: 590, h: 931 },
+                  { src: "/images/ai-meal-logged.webp", alt: "The meal tracker showing the meal logged automatically from the photo", title: "Logged for you", caption: "The meal goes straight into your tracker. Nothing to type.", w: 590, h: 931 },
+                  { src: "/images/ai-menu-help.webp", alt: "A restaurant menu sent to George AI, with its recommendation of what fits", title: "Eating out", caption: "Send the menu and it tells you what fits your targets today.", w: 590, h: 931 },
+                  { src: "/images/ai-form-check.webp", alt: "George AI feedback on a deadlift video, correcting hip position and back rounding", title: "Form check", caption: "Send a video of a lift and it tells you what to fix before the next set.", w: 590, h: 931 },
+                  { src: "/images/ai-ask-anything.webp", alt: "A client asking George AI how much water to drink, with its detailed answer", title: "Ask it anything", caption: "A question about your plan, your food or your training, answered straight away.", w: 590, h: 931 },
+                ].map((s) => (
+                  <div className="shot" key={s.src}>
+                    <div className="shot-img">
+                      <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                    </div>
+                    <b>{s.title}</b>
+                    <p>{s.caption}</p>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>
             <div className="inc">
+              <div>The full education course, so you keep the result long term</div>
               <div>Weekly one-to-one coaching calls</div>
               <div>Fully personalised training built around your week</div>
               <div>Nutrition and meal planning, nothing off limits</div>
+              <div>George AI in the app: photo your food and it is logged, ask anything, any time</div>
               <div>Habit system tracked daily in the app</div>
-              <div>The full education course on demand</div>
               <div>Progress dashboard reviewed on every call</div>
               <div>Psychology work, so none of it depends on motivation</div>
               <div>In-person sessions where geography allows</div>
