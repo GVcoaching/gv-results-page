@@ -667,7 +667,7 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The system</span><span className="goldbar" /></div>
-              <h2>The system we install <span className="gold">underneath your health.</span></h2>
+              <h2>The system I install <span className="gold">underneath your health.</span></h2>
             </div>
             <div className="five">
               <div className="f"><div className="f-n">01</div><h3>Psychology</h3><p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred. Nothing changes long term without getting this right.</p></div>
@@ -684,8 +684,8 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
-              <h2>What it <span className="gold">actually looks like.</span></h2>
-              <p className="sub" style={{ marginTop: 14 }}>Three things working together, all built around your time. Coaching to get the result. The app so it happens every day without willpower or admin. And the education so you understand it well enough to keep it when the coaching ends.</p>
+              <h2>What installing it <span className="gold">actually looks like.</span></h2>
+              <p className="sub" style={{ marginTop: 14 }}>Those five pillars are the system. This is how it gets installed: three things working together, all built around your time. Coaching to get the result. The app so it happens every day without willpower or admin. And the education so you understand it well enough to keep it when the coaching ends.</p>
             </div>
             <div className="cad">
               <div className="c"><h3>Every week</h3><p>A one-to-one call with me. The plan changes when your week changes, so a chaotic week does not end the programme.</p></div>
@@ -701,7 +701,7 @@ export default function Page() {
               <div className="course-txt">
                 <span className="eyebrow">Why it lasts</span>
                 <h3 style={{ marginTop: 14 }}>Understand it, and you keep it.</h3>
-                <p>Most people lose their results because they were following instructions they never understood. The full education course sits inside the app, so you learn why you are doing what you are doing and build the skill to run it yourself. That is the difference between a result, and a result that lasts.</p>
+                <p>Most people lose their results because they were following instructions they never understood. The full education course sits inside the app and takes you through every part of the system, from psychology to measurement, so you understand why you are doing what you are doing and can run it yourself. That is the difference between a result, and a result that lasts.</p>
               </div>
             </div>
             <div className="shots">
