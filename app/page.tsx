@@ -584,7 +584,12 @@ export default function Page() {
         {/* WHY GEORGE */}
         <section className="grey" id="why">
           <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Why George</span><span className="goldbar" /></div>
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Sound familiar?</span><span className="goldbar" /></div>
+            <div className="pain">
+              <div>You know what to do. You have done it before and it worked, right up until the week it did not.</div>
+              <div>Twelve-hour days, patients or meetings back to back, and by the evening there is nothing left for the gym, for getting your nutrition right, or for the things you actually enjoy.</div>
+              <div>Every restart costs more than the last. It is never the plan that fails. It is fitting it into your life.</div>
+            </div>
             <h2 style={{ marginBottom: 44 }}>
               Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
             </h2>
@@ -615,46 +620,6 @@ export default function Page() {
                       {r.results.map((x, i) => <li key={i}>{x}</li>)}
                     </ul>
                     <div className="s-quote">&ldquo;{r.quote}&rdquo;</div>
-                  </div>
-                </article>
-              ))}
-            </Slider>
-          </Reveal>
-        </section>
-
-        {/* QUOTE SLIDER */}
-        <section className="grey">
-          <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">In their own words</span><span className="goldbar" /></div>
-              <h2>No time to watch <span className="gold">videos?</span></h2>
-            </div>
-            <Slider count={QUOTES.length} trackClassName="track-q">
-              {QUOTES.map((q, i) => (
-                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={i}>
-                  <div className="qc-media">
-                    {q.photo && (
-                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={encodeURI(q.photo)}
-                          alt={q.name}
-                          style={{
-                            ...(q.fit ? { objectFit: q.fit } : {}),
-                            ...(q.pos ? { objectPosition: q.pos } : {}),
-                          }}
-                        />
-                      </div>
-                    )}
-                    <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
-                      <div className="qc-name">{q.name}</div>
-                      <div className="qc-role">{q.role}</div>
-                      <div className="stars qc-stars">{STARS}</div>
-                    </div>
-                  </div>
-                  <div className="qc-right">
-                    <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
-                    <div className="qc-metric">{q.metric}</div>
                   </div>
                 </article>
               ))}
@@ -783,8 +748,48 @@ export default function Page() {
           </Reveal>
         </section>
 
+        {/* QUOTE SLIDER */}
+        <section>
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">More results</span><span className="goldbar" /></div>
+              <h2>In their <span className="gold">own words.</span></h2>
+            </div>
+            <Slider count={QUOTES.length} trackClassName="track-q">
+              {QUOTES.map((q, i) => (
+                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={i}>
+                  <div className="qc-media">
+                    {q.photo && (
+                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={encodeURI(q.photo)}
+                          alt={q.name}
+                          style={{
+                            ...(q.fit ? { objectFit: q.fit } : {}),
+                            ...(q.pos ? { objectPosition: q.pos } : {}),
+                          }}
+                        />
+                      </div>
+                    )}
+                    <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
+                      <div className="qc-name">{q.name}</div>
+                      <div className="qc-role">{q.role}</div>
+                      <div className="stars qc-stars">{STARS}</div>
+                    </div>
+                  </div>
+                  <div className="qc-right">
+                    <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
+                    <div className="qc-metric">{q.metric}</div>
+                  </div>
+                </article>
+              ))}
+            </Slider>
+          </Reveal>
+        </section>
+
         {/* AUDIT */}
-        <section id="audit">
+        <section className="grey" id="audit">
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
@@ -804,7 +809,7 @@ export default function Page() {
                 <ul className="alist">
                   <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
                   <li>What to focus on first, and what to leave alone for now</li>
-                  <li><b>The full four-part education series, free of charge, covering the whole framework.</b></li>
+                  <li><b>A free four-part introduction to the framework, so you can see how it works before you commit.</b></li>
                   <li>No call required, and no pitch</li>
                 </ul>
               </div>
@@ -812,19 +817,40 @@ export default function Page() {
           </Reveal>
         </section>
 
-        {/* CORPORATE */}
-        <section className="grey" id="corporate">
-          <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
-            <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
-            <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
-            <div className="inc inc-2x2" style={{ marginTop: 26, textAlign: "left", maxWidth: "680px", marginLeft: "auto", marginRight: "auto" }}>
-              <div>Keynotes, 45 to 90 minutes</div>
-              <div>Employee workshops</div>
-              <div>Ongoing corporate health programmes</div>
-              <div>Senior leadership performance coaching</div>
+        {/* FAQ */}
+        <section id="faq">
+          <Reveal className="wrap">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you book</span><span className="goldbar" /></div>
+              <h2>The questions <span className="gold">everyone asks first.</span></h2>
             </div>
-            <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
+            <div className="faq">
+              <details>
+                <summary>How much of my time does this take each week?</summary>
+                <p>One call with me each week. Everything else is built into a day you are already living: your training is written to fit the time you have, your meals fit how you already eat, and George AI turns logging into a photo. Most clients tell me it takes less time than their last attempt on their own.</p>
+              </details>
+              <details>
+                <summary>I travel a lot and eat out constantly. Does it still work?</summary>
+                <p>Yes. That is the point of building it around your life rather than around a meal plan. Nothing is off limits. Send George AI the menu and it tells you what fits your targets, and when your week changes, the plan changes with it on our call.</p>
+              </details>
+              <details>
+                <summary>I have tried coaches and plans before. Why would this be different?</summary>
+                <p>Because those ran on discipline, and discipline runs out. This runs on a system: the psychology first, so the start date stops moving; the app, so the right thing happens every day without willpower; and the education, so you understand it well enough to keep it once we finish.</p>
+                <p>And if it does not work, the guarantee means the risk sits with me, not you.</p>
+              </details>
+              <details>
+                <summary>Do I need a gym?</summary>
+                <p>No. Training is built around what you enjoy and what you have access to, whether that is a gym, a hotel room or a spare room at home. If you hate it, it will not last, so we do not start there.</p>
+              </details>
+              <details>
+                <summary>What does it cost?</summary>
+                <p>It depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
+              </details>
+              <details>
+                <summary>What happens on the call?</summary>
+                <p>We look at where your health is now, what has got in the way before, and whether this is the right fit for you. If it is not, I will tell you.</p>
+              </details>
+            </div>
           </Reveal>
         </section>
 
@@ -920,9 +946,28 @@ export default function Page() {
           <Reveal className="wrap">
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
             <h2>Take Control of <span className="gold">Your Health.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Find out exactly where you are with your health and what to focus on next.</p>
-            <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a></div>
-            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>Free · Takes 4 minutes · No commitment required</p>
+            <p className="sub" style={{ marginTop: 18 }}>Book a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
+            <div className="btns">
+              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+            </div>
+            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
+          </Reveal>
+        </section>
+
+        {/* CORPORATE */}
+        <section className="grey" id="corporate">
+          <Reveal className="wrap center">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
+            <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
+            <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
+            <div className="inc inc-2x2" style={{ marginTop: 26, textAlign: "left", maxWidth: "680px", marginLeft: "auto", marginRight: "auto" }}>
+              <div>Keynotes, 45 to 90 minutes</div>
+              <div>Employee workshops</div>
+              <div>Ongoing corporate health programmes</div>
+              <div>Senior leadership performance coaching</div>
+            </div>
+            <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
           </Reveal>
         </section>
 
