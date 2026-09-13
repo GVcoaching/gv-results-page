@@ -515,6 +515,8 @@ function Footer() {
             <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a>
             {" · "}
             <button type="button" onClick={() => setPolicyOpen(true)}>Refund &amp; Cancellation Policy</button>
+            {" · "}
+            <a href="/privacy">Privacy Policy</a>
           </div>
         </div>
       </footer>
