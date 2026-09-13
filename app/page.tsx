@@ -514,7 +514,7 @@ function Footer() {
           <div>
             <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a>
             {" · "}
-            <button type="button" onClick={() => setPolicyOpen(true)}>Privacy Policy</button>
+            <button type="button" onClick={() => setPolicyOpen(true)}>Refund &amp; Cancellation Policy</button>
           </div>
         </div>
       </footer>
@@ -604,7 +604,7 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
-              <h2>Straight From <span className="gold">The Clients.</span></h2>
+              <h2>Straight from <span className="gold">the clients.</span></h2>
             </div>
             <Slider count={RESULTS.length}>
               {RESULTS.map((r) => (
@@ -945,7 +945,7 @@ export default function Page() {
         <section className="dark center">
           <Reveal className="wrap">
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-            <h2>Take Control of <span className="gold">Your Health.</span></h2>
+            <h2>Take control of <span className="gold">your health.</span></h2>
             <p className="sub" style={{ marginTop: 18 }}>Book a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
             <div className="btns">
               <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>

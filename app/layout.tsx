@@ -9,7 +9,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://georgevernon.co.uk";
+const SITE_URL = "https://www.georgevernon.co.uk";
 const TITLE = "Health & Performance Coach | George Vernon";
 const DESCRIPTION =
   "One-to-one health and performance coaching for dentists, practice owners and business leaders. More energy, sharper focus, without burning out.";
@@ -51,7 +51,7 @@ const personSchema = {
   jobTitle: "Health & Performance Coach",
   url: SITE_URL,
   email: "george@gvcoaching.co.uk",
-  image: `${SITE_URL}/Headshot/IMG_8821.jpg`,
+  image: `${SITE_URL}/Headshot/IMG_8821.webp`,
   worksFor: {
     "@type": "Organization",
     name: "GV Coaching Ltd",
