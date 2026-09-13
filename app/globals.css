@@ -98,7 +98,7 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 .drawer { position: fixed; inset: 0; background: var(--navy-deep); z-index: 99; padding: 92px 26px 26px; display: none; flex-direction: column; gap: 4px; overflow-y: auto; }
 .drawer.open { display: flex; }
 .drawer a { font-family: Georgia, serif; font-size: 21px; color: #fff; text-decoration: none; padding: 16px 0; border-bottom: 1px solid var(--border-dark); min-height: 44px; display: flex; align-items: center; }
-.drawer .btn { margin-top: 22px; text-align: center; border-bottom: none; justify-content: center; }
+.drawer .btn { margin-top: 22px; text-align: center; border-bottom: none; justify-content: center; font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .1em; }
 
 /* HERO */
 .hero { background: var(--navy); color: #fff; padding: 126px 0 72px; }
