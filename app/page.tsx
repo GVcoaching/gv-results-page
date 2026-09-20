@@ -34,7 +34,7 @@ type Quote = {
 
 const RESULTS: Result[] = [
   { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    results: ["Pain down from 9 out of 10 to 3 out of 10", "Over a stone lost", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
+    results: ["Pain down from 9/10 to 3/10", "Over a stone lost", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
     quote: "Pain from 9/10 to 3/10." },
   { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
     results: ["10kg lost in four months", "Works fewer hours and is more productive", "More control over food while thinking about it less"],
@@ -100,7 +100,7 @@ const QUOTES: Quote[] = [
     metric: "13kg down in four months · higher energy, sharper focus · better business performance · more quality time with family",
     quote: "And it hasn't felt difficult." },
   { photo: "/images/lash-saranna.webp", fit: "contain", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    metric: "Pain down from 9 out of 10 to 3 out of 10 · over a stone lost · a new exercise routine built after years of body pain from multiple surgeries · a healthy routine that fits life as a busy CEO",
+    metric: "Pain down from 9/10 to 3/10 · over a stone lost · a new exercise routine built after years of body pain from multiple surgeries · a healthy routine that fits life as a busy CEO",
     quote: "Pain from 9/10 to 3/10." },
   { photo: "/images/headshot-darren.webp", name: "Dr Darren Hill", role: "General dentist, Dublin",
     metric: "12kg lost · VO2 max, HRV and resting heart rate all at personal bests",
