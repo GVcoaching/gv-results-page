@@ -33,6 +33,9 @@ type Quote = {
 };
 
 const RESULTS: Result[] = [
+  { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
+    results: ["Pain down from 9 out of 10 to 3 out of 10", "Over a stone lost", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
+    quote: "Pain from 9/10 to 3/10." },
   { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
     results: ["10kg lost in four months", "Works fewer hours and is more productive", "More control over food while thinking about it less"],
     quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life. I work far less now since working with you, George, and I'm more productive because of it." },
@@ -51,8 +54,8 @@ const RESULTS: Result[] = [
   { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist",
     results: ["61.7 lbs lost in seven months", "Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
     quote: "Family members couldn't even recognise me." },
-  { yt: "2MK7XZytM3I", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
-    results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
+  { yt: "pvpICrhtVlw", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
+    results: ["27kg lost and kept off over 15 months", "Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
     results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
