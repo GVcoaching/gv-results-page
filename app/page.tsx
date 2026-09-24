@@ -934,7 +934,7 @@ export default function Page() {
               </details>
               <details>
                 <summary>What does it cost?</summary>
-                <p>It depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
+                <p>Investment starts from £1,000, and I do not work with anyone for less than three months. Building something that lasts takes longer than that, but three months is the minimum to set it up properly. The exact package depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
               </details>
               <details>
                 <summary>What happens on the call?</summary>
