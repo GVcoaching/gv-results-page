@@ -680,12 +680,7 @@ export default function Page() {
         {/* WHY GEORGE */}
         <section className="grey" id="why">
           <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Sound familiar?</span><span className="goldbar" /></div>
-            <div className="pain">
-              <div>You know what to do. You have done it before and it worked, right up until the week it did not.</div>
-              <div>Twelve-hour days, patients or meetings back to back, and by the evening there is nothing left for the gym, for getting your nutrition right, or for the things you actually enjoy.</div>
-              <div>Every restart costs more than the last. It is never the plan that fails. It is fitting it into your life.</div>
-            </div>
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Why George</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 44 }}>
               Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
             </h2>
