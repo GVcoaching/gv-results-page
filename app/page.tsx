@@ -506,7 +506,6 @@ function Navbar() {
             <a href="#why">Why George</a>
             <a href="#results">Results</a>
             <a href="#coaching">Coaching</a>
-            <a href="#corporate">Business Wellbeing Programmes</a>
             <a href="#about">About George</a>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
@@ -526,7 +525,6 @@ function Navbar() {
         <a href="#why" onClick={close}>Why George</a>
         <a href="#results" onClick={close}>Results</a>
         <a href="#coaching" onClick={close}>Coaching</a>
-        <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
         <a href="#about" onClick={close}>About George</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Apply for a Call with George</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
