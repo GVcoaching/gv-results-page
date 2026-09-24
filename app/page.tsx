@@ -51,18 +51,16 @@ const WEIGHT: Record<string, Weight> = {
   "Lash Saranna":    { kg: "6kg+",  st: "1st+",     kept: "10 months" },
 };
 
-function WeightStat({ name, dark }: { name: string; dark?: boolean }) {
+function WeightStat({ name }: { name: string }) {
   const w = WEIGHT[name];
   if (!w) return null;
   return (
-    <div className={`wstat${dark ? " wstat-dark" : ""}`}>
-      <div className="wstat-num">
-        <b>{w.kg}</b><span>{w.st}</span>
+    <div className="wstat">
+      <div className="wstat-head">
+        <b>{w.kg} lost</b> <span>({w.st})</span>
       </div>
-      <div className="wstat-txt">
-        Lost and kept off for
-        <br />
-        <strong>{w.kept} and counting</strong>
+      <div className="wstat-sub">
+        and kept off for <strong>{w.kept}</strong> and counting
       </div>
     </div>
   );
@@ -750,7 +748,7 @@ export default function Page() {
                     </div>
                     <div className="qc-right">
                       <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
-                      <WeightStat name={q.name} dark />
+                      <WeightStat name={q.name} />
                       {q.metric && <div className="qc-metric">{q.metric}</div>}
                     </div>
                   </article>

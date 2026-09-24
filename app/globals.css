@@ -459,19 +459,19 @@ footer.site-footer { background: var(--navy-deep); color: rgba(255,255,255,.6); 
 .legal a { color: var(--navy); text-decoration: underline; }
 
 /* Weight result stat — same layout on every card */
-.wstat { display: flex; align-items: center; gap: 14px; margin: 14px 0 4px; padding: 12px 14px; border-left: 3px solid var(--gold); background: rgba(201,169,110,.08); }
-.wstat-num { display: flex; flex-direction: column; min-width: 78px; }
-.wstat-num b { font-family: Georgia, serif; font-size: 30px; line-height: 1; color: var(--navy); font-weight: 400; }
-.wstat-num span { font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-top: 4px; }
-.wstat-txt { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
-.wstat-txt strong { color: var(--navy); font-weight: 600; }
-.wstat-dark { margin: 12px 0 0; background: rgba(201,169,110,.1); flex-direction: column; align-items: flex-start; gap: 8px; }
-.wstat-dark .wstat-num b { color: var(--gold); }
-.wstat-dark .wstat-num span, .wstat-dark .wstat-txt { color: rgba(255,255,255,.7); }
-.wstat-dark .wstat-txt strong { color: #fff; }
+/* Weight result: one sentence, same look on every card — "35kg lost and kept off for 1 year+ and counting" */
+.wstat { margin: 14px 0 4px; padding: 12px 16px; border-left: 3px solid var(--gold); background: #f7f1e6; color: var(--navy); text-align: left; }
+.wstat-head { line-height: 1.1; }
+.wstat-head b { font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: var(--navy); }
+.wstat-head span { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.wstat-sub { margin-top: 4px; font-size: 15px; line-height: 1.4; color: var(--navy); }
+.wstat-sub strong { font-weight: 700; }
 
 /* Photo testimonials inside the main results slider: navy card, photo stacked on top. */
-.slide-q { background: var(--navy); border-color: var(--navy); }
+.slide-q { background: #fff; border-color: var(--border); }
+.slide-q .qc-right { color: var(--navy); border-top: 1px solid var(--border); }
+.slide-q .qc-quote { color: var(--navy); font-style: italic; }
+.slide-q .qc-metric { border-top-color: var(--border); color: var(--text-2); }
 .slide-q .qc-media,
 .slide-wide.slide-q .qc-media { flex: 0 0 auto; }
 /* Show every photo whole: never crop faces or text baked into the image. Square frame,
@@ -483,7 +483,6 @@ footer.site-footer { background: var(--navy-deep); color: rgba(255,255,255,.6); 
 .slide-q .qc-photo.qc-jaz { aspect-ratio: 4 / 3; max-height: none; }
 .slide-q .qc-photo.qc-jaz img { object-fit: cover; }
 .slide-q .qc-right { justify-content: flex-start; }
-.slide-q .wstat-dark { flex-direction: row; align-items: center; gap: 14px; }
 
 /* Laptop / iPad landscape: media on the left, words on the right, so every card
    (video or photo) fits one screen instead of stacking into a tall column. */
@@ -524,10 +523,8 @@ footer.site-footer { background: var(--navy-deep); color: rgba(255,255,255,.6); 
   .s-res li:before { top: 8px; }
   .s-quote { margin-top: 6px; padding-top: 6px; font-size: 14.5px; }
 
-  .wstat { margin: 10px 0 2px; padding: 8px 12px; gap: 12px; }
-  .wstat-num { min-width: 64px; }
-  .wstat-num b { font-size: 25px; }
-  .wstat-num span { margin-top: 2px; }
-  .wstat-txt { font-size: 12px; line-height: 1.35; }
-  .wstat-dark { margin-top: 10px; }
+  .wstat { margin: 10px 0 2px; padding: 8px 12px; }
+  .wstat-head b { font-size: 24px; }
+  .wstat-head span { font-size: 12px; }
+  .wstat-sub { margin-top: 2px; font-size: 13.5px; line-height: 1.35; }
 }
