@@ -147,7 +147,7 @@ const QUOTES: Quote[] = [
     quote: "Going to the root cause, and building my energy back up." },
   { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
     metric: "First-ever half marathon in 1h 49m",
-    quote: "First half marathon four months in. Something I never thought I could do." },
+    quote: "My first-ever half marathon. It was never even a target for me." },
   { photo: "/images/andrew-thompson.webp", photoClass: "qc-andrew", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
     metric: "Running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
