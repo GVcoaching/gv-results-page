@@ -168,12 +168,12 @@ const QUOTES: Quote[] = [
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
     metric: "Back pain from 7/10, spiking to 9/10, down to 0/10",
     quote: "Take the jump and work with George." },
-  { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
+  { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
     quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
-  { photo: "/images/sana-ali.webp", desktopOnly: true, name: "Sana Ali", role: "Consultant Paediatric Radiologist",
+  { photo: "/images/sana-ali.webp", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
     metric: "Health as complete physical, mental and social wellbeing — the whole picture",
-    quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health, which is that 'health is a state of complete physical, mental and social wellbeing and not merely the absence of disease or infirmity'. George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
+    quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health… George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
   { photo: "", name: "Commercial Director", role: "Name withheld by request",
     metric: "Headhunted three months in, for a role paying well over six figures",
     quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have." },
@@ -200,10 +200,10 @@ const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Steve Want"],
   ["video", "Robbie Newton"],
   ["video", "Commercial Director"],
-  ["video", "Lukman"],
   ["video", "Jacob"],
   ["video", "Ben Rutter"],
   ["photo", "Sam Sneyd"],
+  ["video", "Lukman"],
   ["photo", "Mani Konkon"],
   ["photo", "Sana Ali"],
 ];
@@ -669,7 +669,6 @@ export default function Page() {
             <div className="trust-i">Fingleton White</div>
             <div className="trust-i">Patient Plan Direct</div>
             <div className="trust-i">EZOO</div>
-            <div className="trust-i">Nova Solar Renewables</div>
           </div>
         </div>
       </div>
