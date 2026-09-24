@@ -8,7 +8,8 @@ import { createPortal } from "react-dom";
 
 const STARS = "★★★★★";
 const AUDIT_URL = "https://health.gvcoaching.co.uk/";
-const CALENDLY_URL = "https://calendly.com/georgegvcoaching/coaching-call-with-george";
+const CALENDLY_URL = "https://calendly.com/georgegvcoaching/performance-diagnostic";
+const TALK_ENQUIRY_URL = "mailto:george@gvcoaching.co.uk?subject=Talk%20enquiry";
 
 type Result = {
   yt: string;
@@ -559,7 +560,7 @@ function PolicyModal({ onClose }: { onClose: () => void }) {
           <p className="kicker">GV Coaching Ltd</p>
           <p>At GV Coaching Ltd, we strive to deliver the highest quality service and a seamless customer experience. Please review our policies below before making a purchase.</p>
 
-          <h3>Fulfillment Policy</h3>
+          <h3>Fulfilment Policy</h3>
           <ul>
             <li>All digital products and services are delivered promptly via email or through our secure online platforms.</li>
             <li>For coaching programmes, access details and scheduling information will be provided within 24 hours of purchase.</li>
@@ -939,7 +940,7 @@ export default function Page() {
               </details>
               <details>
                 <summary>What happens on the call?</summary>
-                <p>We look at where your health is now, what has got in the way before, and whether this is the right fit for you. If it is not, I will tell you.</p>
+                <p>It is 45 minutes. We look at where your health is now, where you want it to be and what has got in the way before. I walk you through the system, we cover the levels of support and what each one costs, and you leave with a clear next step. If this is not the right fit for you, I will tell you.</p>
               </details>
             </div>
           </Reveal>
@@ -1058,7 +1059,7 @@ export default function Page() {
               <div>Ongoing corporate health programmes</div>
               <div>Senior leadership performance coaching</div>
             </div>
-            <div className="btns"><a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Enquire About a Talk</a></div>
+            <div className="btns"><a className="btn navy" href={TALK_ENQUIRY_URL}>Enquire About a Talk</a></div>
           </Reveal>
         </section>
 
