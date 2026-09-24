@@ -655,12 +655,13 @@ export default function Page() {
       <div className="trust">
         <div className="wrap">
           <div className="trust-in">
-            <div className="trust-l">Trusted across UK dentistry</div>
+            <div className="trust-l">Trusted in dentistry</div>
             <div className="trust-i">The Principals Club</div>
             <div className="trust-i">Frank Taylor &amp; Associates</div>
             <div className="trust-i">Dental Update</div>
             <div className="trust-i">BDIA Dental Showcase</div>
             <div className="trust-i">Abbey House Dental</div>
+            <div className="trust-i">Namibia Dental Association</div>
           </div>
           <div className="trust-in">
             <div className="trust-l">Trusted by leaders from</div>
