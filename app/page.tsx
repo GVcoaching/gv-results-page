@@ -660,6 +660,7 @@ export default function Page() {
             <div className="trust-i">Frank Taylor &amp; Associates</div>
             <div className="trust-i">Dental Update</div>
             <div className="trust-i">BDIA Dental Showcase</div>
+            <div className="trust-i">Abbey House Dental</div>
           </div>
           <div className="trust-in">
             <div className="trust-l">Trusted by leaders from</div>
