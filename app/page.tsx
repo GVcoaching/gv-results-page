@@ -669,6 +669,8 @@ export default function Page() {
             <div className="trust-i">Fingleton White</div>
             <div className="trust-i">Patient Plan Direct</div>
             <div className="trust-i">EZOO</div>
+            <div className="trust-i">Bentley Independent Financial Advisors</div>
+            <div className="trust-i">Digital Prosthetics</div>
           </div>
         </div>
       </div>
