@@ -32,40 +32,76 @@ type Quote = {
   quote: string;
 };
 
+// One source of truth for weight results, shown the same way on both sliders.
+// kg first, stone rounded down so it never overstates.
+type Weight = { kg: string; st: string; kept: string };
+
+const WEIGHT: Record<string, Weight> = {
+  "Kieran Kearns":   { kg: "35kg",  st: "5st 7lb",  kept: "1 year+" },
+  "Vish":            { kg: "28kg",  st: "4st 5lb",  kept: "1 year+" },
+  "Rob Allen-Pugh":  { kg: "27kg",  st: "4st 3lb",  kept: "15 months" },
+  "Jaz":             { kg: "18kg",  st: "2st 11lb", kept: "3 years" },
+  "Andrew Thompson": { kg: "14kg",  st: "2st 2lb",  kept: "7 months" },
+  "Ian Tilley":      { kg: "13kg",  st: "2st",      kept: "10 months" },
+  "Dr Darren Hill":  { kg: "12kg",  st: "1st 12lb", kept: "7 months" },
+  "Matt Hadman":     { kg: "10kg",  st: "1st 8lb",  kept: "3 years" },
+  "Reece":           { kg: "7.5kg", st: "1st 2lb",  kept: "4 months" },
+  "Mark Harris":     { kg: "6kg",   st: "13lb",     kept: "10 months" },
+  "Steve Want":      { kg: "6kg+",  st: "13lb+",    kept: "5 months" },
+  "Lash Saranna":    { kg: "6kg+",  st: "1st+",     kept: "10 months" },
+};
+
+function WeightStat({ name, dark }: { name: string; dark?: boolean }) {
+  const w = WEIGHT[name];
+  if (!w) return null;
+  return (
+    <div className={`wstat${dark ? " wstat-dark" : ""}`}>
+      <div className="wstat-num">
+        <b>{w.kg}</b><span>{w.st}</span>
+      </div>
+      <div className="wstat-txt">
+        Lost and kept off for
+        <br />
+        <strong>{w.kept} and counting</strong>
+      </div>
+    </div>
+  );
+}
+
 const RESULTS: Result[] = [
   { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    results: ["Pain down from 9/10 to 3/10", "Over a stone lost", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
+    results: ["Pain down from 9/10 to 3/10", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
     quote: "Pain from 9/10 to 3/10." },
   { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
-    results: ["10kg lost in four months", "Works fewer hours and is more productive", "More control over food while thinking about it less"],
-    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life. I work far less now since working with you, George, and I'm more productive because of it." },
+    results: ["Works fewer hours and is more productive", "More control over food while thinking about it less"],
+    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
   { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association",
     results: ["A dentist, a practice owner, four kids and no energy left", "Daily energy rebuilt while running six providers and twenty staff", "Focus back to lead the practice at her best"],
     quote: "Recovery finally outweighing stress. That was the shift." },
   { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
-    results: ["13kg down in four months", "Higher energy levels and sharper focus", "Better business performance", "More quality time with family"],
+    results: ["Higher energy levels and sharper focus", "Better business performance", "More quality time with family"],
     quote: "And it hasn't felt difficult." },
   { yt: "HE9kxhuNZOU", name: "Dr Darren Hill", role: "General dentist, Dublin",
-    results: ["12kg lost over seven months", "VO2 max the highest it has ever been", "Heart rate variability the highest it has ever been", "Resting heart rate the lowest it has ever been"],
+    results: ["VO2 max the highest it has ever been", "Heart rate variability the highest it has ever been", "Resting heart rate the lowest it has ever been"],
     quote: "It's the first time in 32 years I've ever felt like this is a lifestyle change that I'm happy with." },
   { yt: "BshYj_w56LU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property",
     results: ["Finally achieved the goal he set over ten years ago", "13.2% body fat, down from the twenties", "Consistency where the right actions felt easy"],
     quote: "You are what you repeatedly do." },
   { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist",
-    results: ["61.7 lbs lost in seven months", "Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
+    results: ["Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
     quote: "Family members couldn't even recognise me." },
   { yt: "pvpICrhtVlw", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
-    results: ["27kg lost and kept off over 15 months", "Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
+    results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    results: ["140kg down to 105kg in a year", "First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
+    results: ["First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
     quote: "Going to the root cause, and building my energy back up." },
   { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    results: ["14kg off in seven months", "Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
+    results: ["Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training",
-    results: ["Five months in", "Weight lost", "Routine built"],
-    quote: "After work, I'm now off the sofa and onto the trampoline with my four-year-old son because of the energy that I've gained." },
+    results: ["Used to crash on the sofa after work", "Now out on the trampoline with his four-year-old", "Lost weight, got stronger, energy through the roof"],
+    quote: "He's happy that he's got a fit dad, and I'm over the moon that I've now got the energy to keep up with him." },
   { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover",
     results: ["Best year the business has had in a long time", "Burnt out with no brain space, to mindset and strength back", "Present and happier at home"],
     quote: "I'm the captain again, steering the ship. I feel like I did when I was in my early thirties." },
@@ -76,10 +112,10 @@ const RESULTS: Result[] = [
     results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures"],
     quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have. I did not have that before." },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner",
-    results: ["Down to 102kg, a weight he had not seen in four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it last"],
+    results: ["Back to a weight he had not seen in four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it last"],
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London",
-    results: ["Back pain from 7 out of 10, spiking to 9, down to zero", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
+    results: ["Back pain from 7/10, spiking to 9/10, down to 0/10", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
     quote: "Take the jump and work with George." },
   { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist",
     results: ["WHOOP stress at its lowest during one of the most stressful weeks he had had in dentistry", "First patient complaint — handled it calmly using the psychology techniques we had worked on together", "Complaint dropped the next morning"],
@@ -88,49 +124,49 @@ const RESULTS: Result[] = [
 
 const QUOTES: Quote[] = [
   { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist",
-    metric: "On crutches when we started · full recovery after ACL reconstruction alongside his physio · 61.7 lbs lost in seven months",
+    metric: "On crutches when we started · full recovery after ACL reconstruction alongside his physio",
     quote: "My own family could hardly recognise me at our most recent family wedding." },
   { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
-    metric: "27kg lost, and kept off for the past 15 months · the all-or-nothing cycle, broken",
+    metric: "The all-or-nothing cycle, broken",
     quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
   { photo: "/images/headshot-sanchia.webp", name: "Dr Sanchia Jauch", role: "Dental practice owner, mum of four",
     metric: "Six providers, twenty staff, energy rebuilt",
     quote: "A dentist. A practice owner. Four kids. And no energy left. That is what changed." },
   { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
-    metric: "13kg down in four months · higher energy, sharper focus · better business performance · more quality time with family",
+    metric: "Higher energy, sharper focus · better business performance · more quality time with family",
     quote: "And it hasn't felt difficult." },
   { photo: "/images/lash-saranna.webp", fit: "contain", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    metric: "Pain down from 9/10 to 3/10 · over a stone lost · a new exercise routine built after years of body pain from multiple surgeries · a healthy routine that fits life as a busy CEO",
+    metric: "Pain down from 9/10 to 3/10 · a new exercise routine built after years of body pain from multiple surgeries · a healthy routine that fits life as a busy CEO",
     quote: "Pain from 9/10 to 3/10." },
   { photo: "/images/headshot-darren.webp", name: "Dr Darren Hill", role: "General dentist, Dublin",
-    metric: "12kg lost · VO2 max, HRV and resting heart rate all at personal bests",
+    metric: "VO2 max, HRV and resting heart rate all at personal bests",
     quote: "You've helped me remove the ceiling of what I thought I was capable of achieving." },
   { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
-    metric: "10kg lost in four months · works fewer hours and is more productive",
+    metric: "Works fewer hours and is more productive",
     quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
   { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    metric: "35kg down in under a year",
+    metric: "",
     quote: "Going to the root cause, and building my energy back up." },
   { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
-    metric: "16.5 lbs lost in four months · first-ever half marathon in 1h 49m",
+    metric: "First-ever half marathon in 1h 49m",
     quote: "First half marathon four months in. Something I never thought I could do." },
   { photo: "/images/andrew-thompson.webp", photoClass: "qc-andrew", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    metric: "14kg off in seven months · running faster in his forties than his thirties",
+    metric: "Running faster in his forties than his thirties",
     quote: "Long-term health is the ROI. This was life-changing for me." },
   { photo: "/images/ben-rutter.webp", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
     metric: "Best fitness regime he has been on, with a new baby at home",
     quote: "My mindset shift to not needing to overeat has been my biggest win." },
   { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
-    metric: "Five months in · weight lost · routine built",
-    quote: "After work, I'm now off the sofa and onto the trampoline with my four-year-old son because of the energy that I've gained." },
+    metric: "From crashing on the sofa after work to the trampoline with his four-year-old",
+    quote: "He's happy that he's got a fit dad, and I'm over the moon that I've now got the energy to keep up with him." },
   { photo: "/images/sam-sneyd.webp", photoClass: "qc-sam", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors",
     metric: "Three and a half months in · a bespoke, holistic plan built around a busy lifestyle",
     quote: "The main benefit I've had is just a lot more energy." },
-  { photo: "/images/jaz.webp", wide: true, fit: "contain", name: "Jaz", role: "Property business owner",
-    metric: "Down to 102kg — a weight he hadn't seen in four years",
+  { photo: "/images/jaz.webp", wide: true, photoClass: "qc-jaz", name: "Jaz", role: "Property business owner",
+    metric: "Back to a weight he hadn't seen in four years",
     quote: "Mindset and fitness-wise, I'm the best I've ever been." },
   { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
-    metric: "Back pain 7 out of 10, spiking to 9, down to 0 after working with George",
+    metric: "Back pain from 7/10, spiking to 9/10, down to 0/10",
     quote: "Take the jump and work with George." },
   { photo: "/images/mani-konkon.webp", desktopOnly: true, name: "Mani Konkon", role: "Finance Director",
     metric: "Years of failed attempts, finally sustainable",
@@ -145,6 +181,45 @@ const QUOTES: Quote[] = [
     metric: "WHOOP stress at its lowest during one of the most stressful weeks in dentistry — his first patient complaint",
     quote: "The psychology work meant a week that would have wrecked me became a conversation instead." },
 ];
+
+// One slider, each person once. Strongest results first, alternating photos and
+// videos so the first few swipes land. Data comes from RESULTS / QUOTES above.
+const CARD_ORDER: ["video" | "photo", string][] = [
+  ["photo", "Vish"],
+  ["video", "Matt Hadman"],
+  ["video", "Lash Saranna"],
+  ["video", "Dr Sanchia Jauch"],
+  ["video", "Ian Tilley"],
+  ["video", "Rob Allen-Pugh"],
+  ["photo", "Kieran Kearns"],
+  ["video", "Mark Harris"],
+  ["video", "Andrew Thompson"],
+  ["video", "Dr Darren Hill"],
+  ["photo", "Reece"],
+  ["photo", "Jaz"],
+  ["video", "Steve Want"],
+  ["video", "Robbie Newton"],
+  ["video", "Commercial Director"],
+  ["video", "Lukman"],
+  ["video", "Jacob"],
+  ["video", "Ben Rutter"],
+  ["photo", "Sam Sneyd"],
+  ["photo", "Mani Konkon"],
+  ["photo", "Sana Ali"],
+];
+
+type Card = { kind: "video"; r: Result } | { kind: "photo"; q: Quote };
+
+const CARDS: Card[] = CARD_ORDER.map(([kind, name]): Card => {
+  if (kind === "video") {
+    const r = RESULTS.find((x) => x.name === name);
+    if (!r) throw new Error(`No video testimonial for ${name}`);
+    return { kind, r };
+  }
+  const q = QUOTES.find((x) => x.name === name);
+  if (!q) throw new Error(`No photo testimonial for ${name}`);
+  return { kind, q };
+});
 
 // ─── REVEAL ──────────────────────────────────────────────────────────────────
 
@@ -299,7 +374,9 @@ function Slider({
     const track = trackRef.current;
     if (!track) return;
     const { step, perView } = measure();
-    const p = Math.max(1, Math.ceil(count / perView));
+    // Count only slides actually shown (desktop-only cards are hidden on small screens)
+    const shown = Array.from(track.children).filter((el) => (el as HTMLElement).offsetWidth > 0).length || count;
+    const p = Math.max(1, Math.ceil(shown / perView));
     setPages(p);
     const idx = Math.round(track.scrollLeft / (perView * step));
     setActivePage(Math.min(idx, p - 1));
@@ -432,7 +509,7 @@ function Navbar() {
             <a href="#coaching">Coaching</a>
             <a href="#corporate">Business Wellbeing Programmes</a>
             <a href="#about">About George</a>
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
           </div>
           <button
@@ -452,7 +529,7 @@ function Navbar() {
         <a href="#coaching" onClick={close}>Coaching</a>
         <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
         <a href="#about" onClick={close}>About George</a>
-        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a Call with George</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Apply for a Call with George</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
           Take the Dental Performance Audit
         </a>
@@ -564,7 +641,7 @@ export default function Page() {
               />
             </div>
             <div className="hero-cta">
-              <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Book a Call with George</a>
+              <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Apply for a Call with George</a>
               <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Take the Dental Performance Audit</a>
               <p className="micro" style={{ color: "rgba(255,255,255,.55)", textAlign: "center" }}>
                 Free · Takes 4 minutes · No commitment required
@@ -583,6 +660,15 @@ export default function Page() {
             <div className="trust-i">Frank Taylor &amp; Associates</div>
             <div className="trust-i">Dental Update</div>
             <div className="trust-i">BDIA Dental Showcase</div>
+          </div>
+          <div className="trust-in">
+            <div className="trust-l">Trusted by leaders from</div>
+            <div className="trust-i">NG Bailey</div>
+            <div className="trust-i">Frankham Group</div>
+            <div className="trust-i">Fingleton White</div>
+            <div className="trust-i">Patient Plan Direct</div>
+            <div className="trust-i">EZOO</div>
+            <div className="trust-i">Nova Solar Renewables</div>
           </div>
         </div>
       </div>
@@ -614,23 +700,59 @@ export default function Page() {
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
               <h2>Straight from <span className="gold">the clients.</span></h2>
             </div>
-            <Slider count={RESULTS.length}>
-              {RESULTS.map((r) => (
-                <article className="slide" key={r.yt}>
-                  <div className="slide-vid">
-                    <YouTubeVideo id={r.yt} label={r.name} />
-                  </div>
-                  <div className="slide-body">
-                    <div className="stars">{STARS}</div>
-                    <div className="s-name">{r.name}</div>
-                    <div className="s-role">{r.role}</div>
-                    <ul className="s-res">
-                      {r.results.map((x, i) => <li key={i}>{x}</li>)}
-                    </ul>
-                    <div className="s-quote">&ldquo;{r.quote}&rdquo;</div>
-                  </div>
-                </article>
-              ))}
+            <Slider count={CARDS.length}>
+              {CARDS.map((c) => {
+                if (c.kind === "video") {
+                  const r = c.r;
+                  return (
+                    <article className="slide" key={r.yt}>
+                      <div className="slide-vid">
+                        <YouTubeVideo id={r.yt} label={r.name} />
+                      </div>
+                      <div className="slide-body">
+                        <div className="stars">{STARS}</div>
+                        <div className="s-name">{r.name}</div>
+                        <div className="s-role">{r.role}</div>
+                        <WeightStat name={r.name} />
+                        <ul className="s-res">
+                          {r.results.map((x, i) => <li key={i}>{x}</li>)}
+                        </ul>
+                        <div className="s-quote">&ldquo;{r.quote}&rdquo;</div>
+                      </div>
+                    </article>
+                  );
+                }
+                const q = c.q;
+                return (
+                  <article className={`slide slide-q${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={q.name}>
+                    <div className="qc-media">
+                      {q.photo && (
+                        <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={encodeURI(q.photo)}
+                            alt={q.name}
+                            style={{
+                              ...(q.fit ? { objectFit: q.fit } : {}),
+                              ...(q.pos ? { objectPosition: q.pos } : {}),
+                            }}
+                          />
+                        </div>
+                      )}
+                      <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
+                        <div className="qc-name">{q.name}</div>
+                        <div className="qc-role">{q.role}</div>
+                        <div className="stars qc-stars">{STARS}</div>
+                      </div>
+                    </div>
+                    <div className="qc-right">
+                      <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
+                      <WeightStat name={q.name} dark />
+                      {q.metric && <div className="qc-metric">{q.metric}</div>}
+                    </div>
+                  </article>
+                );
+              })}
             </Slider>
           </Reveal>
         </section>
@@ -731,7 +853,7 @@ export default function Page() {
               <div>WHOOP integration, optional add-on</div>
             </div>
             <div className="btns" style={{ justifyContent: "center" }}>
-              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
             </div>
           </Reveal>
         </section>
@@ -753,46 +875,6 @@ export default function Page() {
                 </div>
               </div>
             </div>
-          </Reveal>
-        </section>
-
-        {/* QUOTE SLIDER */}
-        <section>
-          <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">More results</span><span className="goldbar" /></div>
-              <h2>In their <span className="gold">own words.</span></h2>
-            </div>
-            <Slider count={QUOTES.length} trackClassName="track-q">
-              {QUOTES.map((q, i) => (
-                <article className={`slide${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={i}>
-                  <div className="qc-media">
-                    {q.photo && (
-                      <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={encodeURI(q.photo)}
-                          alt={q.name}
-                          style={{
-                            ...(q.fit ? { objectFit: q.fit } : {}),
-                            ...(q.pos ? { objectPosition: q.pos } : {}),
-                          }}
-                        />
-                      </div>
-                    )}
-                    <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
-                      <div className="qc-name">{q.name}</div>
-                      <div className="qc-role">{q.role}</div>
-                      <div className="stars qc-stars">{STARS}</div>
-                    </div>
-                  </div>
-                  <div className="qc-right">
-                    <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
-                    <div className="qc-metric">{q.metric}</div>
-                  </div>
-                </article>
-              ))}
-            </Slider>
           </Reveal>
         </section>
 
@@ -944,7 +1026,7 @@ export default function Page() {
             </div>
 
             <div className="btns" style={{ justifyContent: "center", marginTop: 26 }}>
-              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
             </div>
           </Reveal>
         </section>
@@ -954,9 +1036,9 @@ export default function Page() {
           <Reveal className="wrap">
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
             <h2>Take control of <span className="gold">your health.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Book a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
+            <p className="sub" style={{ marginTop: 18 }}>Apply for a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
             <div className="btns">
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
               <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
             </div>
             <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
@@ -986,7 +1068,7 @@ export default function Page() {
       {/* MOBILE STICKY */}
       <div className="sticky" aria-hidden={false}>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call with George</a>
+        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
       </div>
     </>
   );

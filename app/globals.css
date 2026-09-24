@@ -127,6 +127,7 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 .trust { background: #fff; border-bottom: 1px solid var(--border); padding: 42px 0; }
 .trust-in { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 .trust-l { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); flex: 0 0 100%; text-align: center; margin-bottom: 22px; }
+.trust-in + .trust-in { margin-top: 32px; padding-top: 30px; border-top: 1px solid var(--border); }
 .trust-i { font-family: Georgia, serif; font-size: clamp(17px, 1.7vw, 22px); color: var(--navy); opacity: .85; text-align: center; flex: 1 1 auto; }
 @media (min-width: 900px) {
   .trust-i { flex: 1 1 0; }
@@ -453,3 +454,77 @@ footer.site-footer { background: var(--navy-deep); color: rgba(255,255,255,.6); 
 .legal p, .legal li { font-size: 16.5px; line-height: 1.65; color: var(--text-2, #333); margin-bottom: 12px; }
 .legal ul { padding-left: 22px; margin-bottom: 12px; }
 .legal a { color: var(--navy); text-decoration: underline; }
+
+/* Weight result stat — same layout on every card */
+.wstat { display: flex; align-items: center; gap: 14px; margin: 14px 0 4px; padding: 12px 14px; border-left: 3px solid var(--gold); background: rgba(201,169,110,.08); }
+.wstat-num { display: flex; flex-direction: column; min-width: 78px; }
+.wstat-num b { font-family: Georgia, serif; font-size: 30px; line-height: 1; color: var(--navy); font-weight: 400; }
+.wstat-num span { font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-top: 4px; }
+.wstat-txt { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.wstat-txt strong { color: var(--navy); font-weight: 600; }
+.wstat-dark { margin: 12px 0 0; background: rgba(201,169,110,.1); flex-direction: column; align-items: flex-start; gap: 8px; }
+.wstat-dark .wstat-num b { color: var(--gold); }
+.wstat-dark .wstat-num span, .wstat-dark .wstat-txt { color: rgba(255,255,255,.7); }
+.wstat-dark .wstat-txt strong { color: #fff; }
+
+/* Photo testimonials inside the main results slider: navy card, photo stacked on top. */
+.slide-q { background: var(--navy); border-color: var(--navy); }
+.slide-q .qc-media,
+.slide-wide.slide-q .qc-media { flex: 0 0 auto; }
+/* Show every photo whole: never crop faces or text baked into the image. Square frame,
+   capped on desktop so photo cards stay close to video-card height; white fills any gap. */
+.slide-q .qc-photo,
+.slide-q .qc-photo-wide { aspect-ratio: 1 / 1; max-height: 460px; background: #fff; }
+.slide-q .qc-photo img { object-fit: contain; object-position: center center; }
+/* Jaz's file has white bands above and below the photo — frame to the photo itself */
+.slide-q .qc-photo.qc-jaz { aspect-ratio: 4 / 3; max-height: none; }
+.slide-q .qc-photo.qc-jaz img { object-fit: cover; }
+.slide-q .qc-right { justify-content: flex-start; }
+.slide-q .wstat-dark { flex-direction: row; align-items: center; gap: 14px; }
+
+/* Laptop / iPad landscape: media on the left, words on the right, so every card
+   (video or photo) fits one screen instead of stacking into a tall column. */
+@media (min-width: 1000px) {
+  #results .track { max-width: 1040px; }
+  #results .slide { flex-direction: row; align-items: stretch; }
+  #results .slide-vid { flex: 0 0 54%; border-bottom: 0; border-right: 1px solid var(--border); display: flex; align-items: center; }
+  #results .slide-vid > * { width: 100%; }
+  #results .slide-body { justify-content: center; padding: 20px 26px; }
+  #results .slide-q .qc-media,
+  #results .slide-wide.slide-q .qc-media { flex: 0 0 46%; justify-content: center; }
+  #results .slide-q .qc-photo,
+  #results .slide-q .qc-photo-wide { max-height: 400px; }
+  #results .slide-q .qc-photo.qc-jaz { max-height: none; }
+  #results .slide-q .qc-right { justify-content: center; padding: 22px 28px; }
+  #results .qc-quote { font-size: clamp(18px, 1.6vw, 21px); }
+}
+
+/* Phones: keep each testimonial card within one screen (between the top nav and the
+   sticky apply bar) without dropping any content. Photos still show whole. */
+@media (max-width: 599px) {
+  .nav-in { padding-top: 10px; padding-bottom: 10px; }
+  .sticky { padding: 5px 8px; }
+  .sticky a { padding: 7px 4px; min-height: 44px; font-size: 10px; }
+
+  .slide-q .qc-photo,
+  .slide-q .qc-photo-wide { max-height: 230px; }
+  .slide-q .qc-photo.qc-jaz { max-height: 200px; }
+  .slide-q .qc-meta { padding: 6px 12px 8px; }
+  .slide-q .qc-right { padding: 10px 12px 12px; }
+  .qc-quote { font-size: 16px; }
+  .qc-metric { margin-top: 8px; padding-top: 6px; }
+
+  .slide-body { padding: 10px 12px 12px; }
+  .s-name { font-size: 19px; margin-top: 4px; }
+  .s-res { margin-top: 6px; padding-top: 6px; }
+  .s-res li { font-size: 13.5px; padding-top: 1px; padding-bottom: 1px; line-height: 1.38; }
+  .s-res li:before { top: 8px; }
+  .s-quote { margin-top: 6px; padding-top: 6px; font-size: 14.5px; }
+
+  .wstat { margin: 10px 0 2px; padding: 8px 12px; gap: 12px; }
+  .wstat-num { min-width: 64px; }
+  .wstat-num b { font-size: 25px; }
+  .wstat-num span { margin-top: 2px; }
+  .wstat-txt { font-size: 12px; line-height: 1.35; }
+  .wstat-dark { margin-top: 10px; }
+}
