@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Children, cloneElement, isValidElement, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
@@ -220,6 +220,7 @@ const CARDS: Card[] = CARD_ORDER.map(([kind, name]): Card => {
   return { kind, q };
 });
 
+
 // ─── REVEAL ──────────────────────────────────────────────────────────────────
 
 function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -288,6 +289,7 @@ function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: 
     if (!autoplayOnDesktop) return;
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(min-width: 1000px) and (hover: hover)").matches) return;
     const el = btnRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -354,44 +356,75 @@ function Slider({
   trackClassName?: string;
   children: React.ReactNode;
 }) {
+  // Endless loop: the cards are rendered three times and the visitor starts on the
+  // middle copy. When scrolling settles outside it, we jump by exactly one copy's
+  // width, which lands on the identical card, so the strip never reaches an end.
   const trackRef = useRef<HTMLDivElement>(null);
+  const settleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [pages, setPages] = useState(1);
   const [activePage, setActivePage] = useState(0);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
-    if (!track) return { step: 340, perView: 1 };
+    if (!track) return { step: 340, perView: 1, loop: 0 };
     const first = track.querySelector<HTMLElement>(".slide");
-    const step = first ? first.getBoundingClientRect().width + 22 : 340;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 22;
+    const step = first ? first.getBoundingClientRect().width + gap : 340;
     const perView = Math.max(1, Math.round(track.clientWidth / step));
-    return { step, perView };
+    const loop = (track.scrollWidth + gap) / 3;
+    return { step, perView, loop };
   }, []);
+
+  const jumpTo = (left: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollTo({ left, behavior: "instant" });
+  };
 
   const recompute = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    const { step, perView } = measure();
+    const { step, perView, loop } = measure();
     // Count only slides actually shown (desktop-only cards are hidden on small screens)
-    const shown = Array.from(track.children).filter((el) => (el as HTMLElement).offsetWidth > 0).length || count;
+    const shown = Array.from(track.children).filter((el) => (el as HTMLElement).offsetWidth > 0).length / 3 || count;
     const p = Math.max(1, Math.ceil(shown / perView));
     setPages(p);
-    const idx = Math.round(track.scrollLeft / (perView * step));
-    setActivePage(Math.min(idx, p - 1));
-    setCanPrev(track.scrollLeft > 8);
-    setCanNext(track.scrollLeft < track.scrollWidth - track.clientWidth - 8);
+    const into = (((track.scrollLeft - loop) % loop) + loop) % loop;
+    setActivePage(Math.min(Math.round(into / (perView * step)), p - 1));
   }, [count, measure]);
 
-  useLayoutEffect(() => {
+  const settle = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    // Leave a playing video where it is rather than jumping it off screen
+    if (track.querySelector("iframe")) return;
+    const { loop } = measure();
+    if (track.scrollLeft < loop - 4) jumpTo(track.scrollLeft + loop);
+    else if (track.scrollLeft >= 2 * loop - 4) jumpTo(track.scrollLeft - loop);
+  }, [measure]);
+
+  const onScroll = () => {
     recompute();
-  }, [recompute]);
+    if (settleTimer.current) clearTimeout(settleTimer.current);
+    settleTimer.current = setTimeout(settle, 140);
+  };
+
+  useLayoutEffect(() => {
+    jumpTo(measure().loop);
+    recompute();
+  }, [measure, recompute]);
 
   useEffect(() => {
-    const onResize = () => recompute();
+    const onResize = () => {
+      jumpTo(measure().loop);
+      recompute();
+    };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [recompute]);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (settleTimer.current) clearTimeout(settleTimer.current);
+    };
+  }, [measure, recompute]);
 
   const scrollByViews = (dir: 1 | -1) => {
     const track = trackRef.current;
@@ -403,9 +436,19 @@ function Slider({
   const goToPage = (i: number) => {
     const track = trackRef.current;
     if (!track) return;
-    const { step, perView } = measure();
-    track.scrollTo({ left: i * perView * step });
+    const { step, perView, loop } = measure();
+    track.scrollTo({ left: loop + i * perView * step });
   };
+
+  const copy = (tag: string, hidden: boolean) =>
+    Children.map(children, (child) =>
+      isValidElement(child)
+        ? cloneElement(child as React.ReactElement<{ "aria-hidden"?: boolean }>, {
+            key: `${tag}-${child.key}`,
+            ...(hidden ? { "aria-hidden": true } : {}),
+          })
+        : child
+    );
 
   return (
     <>
@@ -417,7 +460,6 @@ function Slider({
             type="button"
             className="arw"
             onClick={() => scrollByViews(-1)}
-            disabled={!canPrev}
             aria-label="Previous"
           >
             <ChevLeft />
@@ -426,7 +468,6 @@ function Slider({
             type="button"
             className="arw"
             onClick={() => scrollByViews(1)}
-            disabled={!canNext}
             aria-label="Next"
           >
             <ChevRight />
@@ -438,7 +479,6 @@ function Slider({
           type="button"
           className="arw arw-side arw-left"
           onClick={() => scrollByViews(-1)}
-          disabled={!canPrev}
           aria-label="Previous"
         >
           <ChevLeft />
@@ -446,15 +486,16 @@ function Slider({
         <div
           ref={trackRef}
           className={`track ${trackClassName}`}
-          onScroll={recompute}
+          onScroll={onScroll}
         >
-          {children}
+          {copy("before", true)}
+          {copy("main", false)}
+          {copy("after", true)}
         </div>
         <button
           type="button"
           className="arw arw-side arw-right"
           onClick={() => scrollByViews(1)}
-          disabled={!canNext}
           aria-label="Next"
         >
           <ChevRight />
@@ -503,11 +544,11 @@ function Navbar() {
             George Vernon<span>Health &amp; Performance Coach</span>
           </a>
           <div className="nav-links">
-            <a href="#why">Why George</a>
             <a href="#results">Results</a>
-            <a href="#coaching">Coaching</a>
+            <a href="#coaching">The Programme</a>
             <a href="#about">About George</a>
             <a href="#corporate">Business Wellbeing</a>
+            <a href="#faq">FAQs</a>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
           </div>
@@ -523,11 +564,11 @@ function Navbar() {
         </div>
       </nav>
       <div className={`drawer ${open ? "open" : ""}`}>
-        <a href="#why" onClick={close}>Why George</a>
         <a href="#results" onClick={close}>Results</a>
-        <a href="#coaching" onClick={close}>Coaching</a>
+        <a href="#coaching" onClick={close}>The Programme</a>
         <a href="#about" onClick={close}>About George</a>
         <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
+        <a href="#faq" onClick={close}>FAQs</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Apply for a Call with George</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
           Take the Dental Performance Audit
@@ -626,6 +667,7 @@ export default function Page() {
               <p className="sub">
                 More energy, sharper focus and better performance, without burning out. One-to-one coaching for people who already know what to do, and cannot work out why it never sticks.
               </p>
+              <a className="hero-watch" href="#results">▶ Watch the results reel</a>
             </div>
             <div className="hero-ph">
               <Image
@@ -650,52 +692,22 @@ export default function Page() {
         </div>
       </header>
 
-      {/* TRUST */}
-      <div className="trust">
-        <div className="wrap">
-          <div className="trust-in">
-            <div className="trust-l">Trusted in dentistry</div>
-            <div className="trust-i">The Principals Club</div>
-            <div className="trust-i">Frank Taylor &amp; Associates</div>
-            <div className="trust-i">Dental Update</div>
-            <div className="trust-i">BDIA Dental Showcase</div>
-            <div className="trust-i">Abbey House Dental</div>
-            <div className="trust-i">Namibia Dental Association</div>
-          </div>
-          <div className="trust-in">
-            <div className="trust-l">Trusted by leaders from</div>
-            <div className="trust-i">NG Bailey</div>
-            <div className="trust-i">Frankham Group</div>
-            <div className="trust-i">Fingleton White</div>
-            <div className="trust-i">Patient Plan Direct</div>
-            <div className="trust-i">EZOO</div>
-            <div className="trust-i">Bentley Independent Financial Advisors</div>
-            <div className="trust-i">Digital Prosthetics</div>
-          </div>
-        </div>
-      </div>
-
       <main>
 
-        {/* WHY GEORGE */}
-        <section className="grey" id="why">
+        {/* RESULTS: reel, then client slider */}
+        <section id="results">
           <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Why George</span><span className="goldbar" /></div>
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 44 }}>
-              Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
+              The results <span className="gold">you can expect.</span>
             </h2>
             <div className="vwrap">
-              <YouTubeVideo id="gv5OAXDah14" label="Why George: results reel" autoplayOnDesktop />
+              <YouTubeVideo id="gv5OAXDah14" label="Results reel" />
             </div>
           </Reveal>
-        </section>
-
-        {/* RESULTS SLIDER */}
-        <section id="results">
           <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
-              <h2>Straight from <span className="gold">the clients.</span></h2>
+            <div className="center sec-head" style={{ marginTop: 72 }}>
+              <h3>Straight from <span className="gold">the clients.</span></h3>
             </div>
             <Slider count={CARDS.length}>
               {CARDS.map((c) => {
@@ -875,72 +887,6 @@ export default function Page() {
           </Reveal>
         </section>
 
-        {/* AUDIT */}
-        <section className="grey" id="audit">
-          <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-              <h2>Take the Dental Performance Audit. <span className="gold">See where you&apos;re at.</span></h2>
-            </div>
-            <div className="audit">
-              <div className="audit-l">
-                <h3>The Dental Performance Audit</h3>
-                <p className="sub" style={{ marginTop: 16 }}>
-                  Four minutes, twenty-one questions. It scores you across three phases and tells you which one your health is actually in right now, before you commit to anything or speak to anybody.
-                </p>
-                <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a></div>
-                <p className="micro">Free · Takes 4 minutes · No commitment required</p>
-              </div>
-              <div className="audit-r">
-                <span className="eyebrow">What you get</span>
-                <ul className="alist">
-                  <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
-                  <li>What to focus on first, and what to leave alone for now</li>
-                  <li><b>A free four-part introduction to the framework, so you can see how it works before you commit.</b></li>
-                  <li>No call required, and no pitch</li>
-                </ul>
-              </div>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* FAQ */}
-        <section id="faq">
-          <Reveal className="wrap">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you book</span><span className="goldbar" /></div>
-              <h2>The questions <span className="gold">everyone asks first.</span></h2>
-            </div>
-            <div className="faq">
-              <details>
-                <summary>How much of my time does this take each week?</summary>
-                <p>One call with me each week. Everything else is built into a day you are already living: your training is written to fit the time you have, your meals fit how you already eat, and George AI turns logging into a photo. Most clients tell me it takes less time than their last attempt on their own.</p>
-              </details>
-              <details>
-                <summary>I travel a lot and eat out constantly. Does it still work?</summary>
-                <p>Yes. That is the point of building it around your life rather than around a meal plan. Nothing is off limits. Send George AI the menu and it tells you what fits your targets, and when your week changes, the plan changes with it on our call.</p>
-              </details>
-              <details>
-                <summary>I have tried coaches and plans before. Why would this be different?</summary>
-                <p>Because those ran on discipline, and discipline runs out. This runs on a system: the psychology first, so the start date stops moving; the app, so the right thing happens every day without willpower; and the education, so you understand it well enough to keep it once we finish.</p>
-                <p>And if it does not work, the guarantee means the risk sits with me, not you.</p>
-              </details>
-              <details>
-                <summary>Do I need a gym?</summary>
-                <p>No. Training is built around what you enjoy and what you have access to, whether that is a gym, a hotel room or a spare room at home. If you hate it, it will not last, so we do not start there.</p>
-              </details>
-              <details>
-                <summary>What does it cost?</summary>
-                <p>Investment starts from £1,000, and I do not work with anyone for less than three months. Building something that lasts takes longer than that, but three months is the minimum to set it up properly. The exact package depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
-              </details>
-              <details>
-                <summary>What happens on the call?</summary>
-                <p>It is 45 minutes. We look at where your health is now, where you want it to be and what has got in the way before. I walk you through the system, we cover the levels of support and what each one costs, and you leave with a clear next step. If this is not the right fit for you, I will tell you.</p>
-              </details>
-            </div>
-          </Reveal>
-        </section>
-
         {/* ABOUT */}
         <section id="about">
           <Reveal className="wrap-wide">
@@ -1028,22 +974,37 @@ export default function Page() {
           </Reveal>
         </section>
 
-        {/* FINAL CTA */}
-        <section className="dark center">
-          <Reveal className="wrap">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-            <h2>Take control of <span className="gold">your health.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Apply for a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
-            <div className="btns">
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
-              <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+        {/* AUDIT */}
+        <section className="grey" id="audit">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+              <h2>Take the Dental Performance Audit. <span className="gold">See where you&apos;re at.</span></h2>
             </div>
-            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
+            <div className="audit">
+              <div className="audit-l">
+                <h3>The Dental Performance Audit</h3>
+                <p className="sub" style={{ marginTop: 16 }}>
+                  Four minutes, twenty-one questions. It scores you across three phases and tells you which one your health is actually in right now, before you commit to anything or speak to anybody.
+                </p>
+                <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a></div>
+                <p className="micro">Free · Takes 4 minutes · No commitment required</p>
+              </div>
+              <div className="audit-r">
+                <span className="eyebrow">What you get</span>
+                <ul className="alist">
+                  <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
+                  <li>What to focus on first, and what to leave alone for now</li>
+                  <li><b>A free four-part introduction to the framework, so you can see how it works before you commit.</b></li>
+                  <li>No call required, and no pitch</li>
+                </ul>
+              </div>
+            </div>
           </Reveal>
         </section>
 
         {/* CORPORATE */}
-        <section className="grey" id="corporate">
+        <section id="corporate">
           <Reveal className="wrap center">
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
@@ -1061,15 +1022,84 @@ export default function Page() {
           </Reveal>
         </section>
 
+        {/* FAQ */}
+        <section className="grey" id="faq">
+          <Reveal className="wrap">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you book</span><span className="goldbar" /></div>
+              <h2>The questions <span className="gold">everyone asks first.</span></h2>
+            </div>
+            <div className="faq">
+              <details>
+                <summary>How much of my time does this take each week?</summary>
+                <p>One call with me each week. Everything else is built into a day you are already living: your training is written to fit the time you have, your meals fit how you already eat, and George AI turns logging into a photo. Most clients tell me it takes less time than their last attempt on their own.</p>
+              </details>
+              <details>
+                <summary>I travel a lot and eat out constantly. Does it still work?</summary>
+                <p>Yes. That is the point of building it around your life rather than around a meal plan. Nothing is off limits. Send George AI the menu and it tells you what fits your targets, and when your week changes, the plan changes with it on our call.</p>
+              </details>
+              <details>
+                <summary>I have tried coaches and plans before. Why would this be different?</summary>
+                <p>Because those ran on discipline, and discipline runs out. This runs on a system: the psychology first, so the start date stops moving; the app, so the right thing happens every day without willpower; and the education, so you understand it well enough to keep it once we finish.</p>
+                <p>And if it does not work, the guarantee means the risk sits with me, not you.</p>
+              </details>
+              <details>
+                <summary>Do I need a gym?</summary>
+                <p>No. Training is built around what you enjoy and what you have access to, whether that is a gym, a hotel room or a spare room at home. If you hate it, it will not last, so we do not start there.</p>
+              </details>
+              <details>
+                <summary>What does it cost?</summary>
+                <p>Investment starts from £1,000, and I do not work with anyone for less than three months. Building something that lasts takes longer than that, but three months is the minimum to set it up properly. The exact package depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
+              </details>
+              <details>
+                <summary>What happens on the call?</summary>
+                <p>It is 45 minutes. We look at where your health is now, where you want it to be and what has got in the way before. I walk you through the system, we cover the levels of support and what each one costs, and you leave with a clear next step. If this is not the right fit for you, I will tell you.</p>
+              </details>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="dark center">
+          <Reveal className="wrap">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+            <h2>Take control of <span className="gold">your health.</span></h2>
+            <p className="sub" style={{ marginTop: 18 }}>Apply for a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
+            <div className="btns">
+              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
+              <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+            </div>
+            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
+          </Reveal>
+        </section>
+
       </main>
 
       <Footer />
 
-      {/* MOBILE STICKY */}
-      <div className="sticky" aria-hidden={false}>
-        <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-        <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
-      </div>
+      <StickyBar />
     </>
+  );
+}
+
+// ─── MOBILE STICKY ───────────────────────────────────────────────────────────
+// Hidden while the hero is on screen, so the first view isn't four buttons deep.
+
+function StickyBar() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const hero = document.getElementById("top");
+    if (!hero) return;
+    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting), { rootMargin: "-80px 0px 0px 0px" });
+    io.observe(hero);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div className={`sticky ${show ? "show" : ""}`}>
+      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Take the Dental Performance Audit</a>
+      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Apply for a Call with George</a>
+    </div>
   );
 }
