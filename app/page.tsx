@@ -507,6 +507,7 @@ function Navbar() {
             <a href="#results">Results</a>
             <a href="#coaching">Coaching</a>
             <a href="#about">About George</a>
+            <a href="#corporate">Business Wellbeing</a>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
           </div>
@@ -526,6 +527,7 @@ function Navbar() {
         <a href="#results" onClick={close}>Results</a>
         <a href="#coaching" onClick={close}>Coaching</a>
         <a href="#about" onClick={close}>About George</a>
+        <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Apply for a Call with George</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
           Take the Dental Performance Audit
@@ -683,7 +685,7 @@ export default function Page() {
               Consistency is a systems problem, <span className="gold">not a discipline problem.</span>
             </h2>
             <div className="vwrap">
-              <YouTubeVideo id="TQBuOmHEoSw" label="Why George" autoplayOnDesktop />
+              <YouTubeVideo id="gv5OAXDah14" label="Why George: results reel" autoplayOnDesktop />
             </div>
           </Reveal>
         </section>
@@ -1046,6 +1048,9 @@ export default function Page() {
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
             <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
+            <div className="vwrap" style={{ marginTop: 32 }}>
+              <YouTubeVideo id="TQBuOmHEoSw" label="George Vernon speaker reel" />
+            </div>
             <div className="inc inc-2x2" style={{ marginTop: 26, textAlign: "left", maxWidth: "680px", marginLeft: "auto", marginRight: "auto" }}>
               <div>Keynotes, 45 to 90 minutes</div>
               <div>Employee workshops</div>
