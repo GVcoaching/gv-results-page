@@ -15,8 +15,6 @@ type Result = {
   yt: string;
   name: string;
   role: string;
-  results: string[];
-  quote: string;
 };
 
 type Quote = {
@@ -29,165 +27,168 @@ type Quote = {
   slideClass?: string;
   name: string;
   role: string;
-  metric: string;
-  quote: string;
 };
 
-// One source of truth for weight results, shown the same way on both sliders.
-// kg first, stone rounded down so it never overstates.
-type Weight = { kg: string; st: string; kept: string };
+// One source of truth for weight results. Kilos are supporting proof, never the
+// headline: they render as the small stat line at the foot of each card.
+// `over` is how long it took to lose; fill it in when known.
+type Weight = { kg: string; st: string; over?: string; kept: string };
 
 const WEIGHT: Record<string, Weight> = {
-  "Kieran Kearns":   { kg: "35kg",  st: "5st 7lb",  kept: "1 year+" },
-  "Vish":            { kg: "28kg",  st: "4st 5lb",  kept: "1 year+" },
+  "Kieran Kearns":   { kg: "35kg",  st: "5st 7lb",  kept: "over a year" },
+  "Vish":            { kg: "28kg",  st: "4st 5lb",  kept: "over a year" },
   "Rob Allen-Pugh":  { kg: "27kg",  st: "4st 3lb",  kept: "15 months" },
-  "Jaz":             { kg: "18kg",  st: "2st 11lb", kept: "2 years+" },
+  "Jaz":             { kg: "18kg",  st: "2st 11lb", kept: "over two years" },
   "Andrew Thompson": { kg: "14kg",  st: "2st 2lb",  kept: "7 months" },
   "Ian Tilley":      { kg: "13kg",  st: "2st",      kept: "10 months" },
   "Dr Darren Hill":  { kg: "12kg",  st: "1st 12lb", kept: "7 months" },
-  "Matt Hadman":     { kg: "10kg",  st: "1st 8lb",  kept: "1 year+" },
+  "Matt Hadman":     { kg: "10kg",  st: "1st 8lb",  kept: "over two years" },
   "Reece":           { kg: "7.5kg", st: "1st 2lb",  kept: "4 months" },
   "Mark Harris":     { kg: "6kg",   st: "13lb",     kept: "10 months" },
   "Steve Want":      { kg: "6kg+",  st: "13lb+",    kept: "5 months" },
   "Lash Saranna":    { kg: "6kg+",  st: "1st+",     kept: "10 months" },
 };
 
-function WeightStat({ name }: { name: string }) {
+// Every result card reads the same way: the change at work or at home in their
+// words, who they are, before and now, then the stat line underneath.
+// `said: false` marks a headline that is a summary, not their exact words.
+type Proof = { headline: string; said?: false; before?: string; now: string; stat?: string };
+
+const PROOF: Record<string, Proof> = {
+  "Dr Sanchia Jauch": { headline: "Recovery finally outweighing stress.",
+    before: "A dentist, a practice owner, four kids and no energy left",
+    now: "Leading six providers and twenty staff with the focus to run the practice at her best" },
+  "Robbie Newton": { headline: "I'm the captain again, steering the ship.",
+    before: "Burnt out, with no brain space",
+    now: "The best year the business has had in a long time, and present and happier at home" },
+  "Matt Hadman": { headline: "Working fewer hours, and getting more done.", said: false,
+    before: "Never in control of his diet in his whole adult life",
+    now: "Fewer hours, more productive, and in control of food while thinking about it less" },
+  "Lukman": { headline: "A week that would have wrecked me became a conversation instead.",
+    before: "His first patient complaint, in one of the most stressful weeks he had had in dentistry",
+    now: "Handled it calmly with the psychology work we had done, and the complaint was dropped the next morning",
+    stat: "WHOOP stress at its lowest during that week." },
+  "Vish": { headline: "Family members couldn't even recognise me.",
+    before: "On crutches after ACL reconstruction, and used to two-hour gym slogs",
+    now: "Fully recovered alongside his physio, training in short, sharp sessions, with pizza and burgers still in" },
+  "Lash Saranna": { headline: "Pain from 9/10 to 3/10.",
+    before: "Years of body pain after multiple surgeries",
+    now: "A training routine and healthy habits that fit life as a busy CEO" },
+  "Ian Tilley": { headline: "And it hasn't felt difficult.",
+    now: "Higher energy, sharper focus, better business performance and more quality time with family" },
+  "Rob Allen-Pugh": { headline: "My mentality with health and fitness used to be all or nothing.",
+    before: "Stuck in the all-or-nothing cycle",
+    now: "Consistency without extremes, and a routine that holds through busy periods" },
+  "Kieran Kearns": { headline: "Going to the root cause, and building my energy back up.",
+    now: "The energy to perform at work and keep up with his son, and his first Wolf Run in over a decade" },
+  "Mark Harris": { headline: "You are what you repeatedly do.",
+    before: "A goal set over ten years ago and never reached",
+    now: "Goal achieved, at 13.2% body fat, with the right actions feeling easy" },
+  "Andrew Thompson": { headline: "Long-term health is the ROI. This was life-changing for me.",
+    now: "Resting heart rate down by 20% to 30%, and running quicker in his forties than he did in his thirties" },
+  "Dr Darren Hill": { headline: "You've helped me remove the ceiling of what I thought I was capable of achieving.",
+    now: "VO2 max and heart rate variability the highest they have ever been, resting heart rate the lowest" },
+  "Reece": { headline: "My first-ever half marathon. It was never even a target for me.",
+    now: "His first half marathon, in 1 hour 49 minutes" },
+  "Jaz": { headline: "Mindset and fitness-wise, I'm the best I've ever been.",
+    now: "Back to a weight he had not seen in four years, and enjoying it, which is what makes it last" },
+  "Steve Want": { headline: "I've now got the energy to keep up with him.",
+    before: "Crashing on the sofa after work",
+    now: "Out on the trampoline with his four-year-old, stronger, with energy through the roof" },
+  "Commercial Director": { headline: "Big kudos to the mindset you helped me achieve, and the confidence I now have.",
+    before: "Lacking the confidence to go for more",
+    now: "Headhunted three months in, for a role paying well over six figures" },
+  "Jacob": { headline: "Take the jump and work with George.",
+    before: "Back pain at 7/10, spiking to 9/10, and anxious about standing for long periods",
+    now: "Pain at 0/10, stronger, more confident and posture corrected",
+    stat: "Back pain down from 7/10 to 0/10." },
+  "Ben Rutter": { headline: "My mindset shift to not needing to overeat has been my biggest win.",
+    before: "In a rut, having given up after various programmes",
+    now: "The best fitness regime he has been on, with a new baby at home and no late-night eating" },
+  "Sam Sneyd": { headline: "The main benefit I've had is just a lot more energy.",
+    now: "Three and a half months in, on a plan built around a busy lifestyle" },
+  "Mani Konkon": { headline: "It became apparent quickly why my years had not been successful.",
+    before: "Years of failed attempts",
+    now: "A sustainable plan, and a shift in mentality around healthy living" },
+  "Sana Ali": { headline: "George's coaching style and training programme truly encompasses this, and that is why I love it so much.",
+    now: "Coaching that covers physical, mental and social wellbeing, the definition of health she was first taught at medical school" },
+};
+
+function statLine(name: string): string | undefined {
   const w = WEIGHT[name];
-  if (!w) return null;
+  if (w) return `${name} lost ${w.kg}${w.over ? ` in ${w.over}` : ""} and has kept it off for ${w.kept}.`;
+  return PROOF[name]?.stat;
+}
+
+function ProofText({ name, role }: { name: string; role: string }) {
+  const p = PROOF[name];
+  const stat = statLine(name);
   return (
-    <div className="wstat">
-      <div className="wstat-head">
-        <b>{w.kg} lost</b> <span>({w.st})</span>
-      </div>
-      <div className="wstat-sub">
-        and kept off for <strong>{w.kept}</strong> and counting
-      </div>
-    </div>
+    <>
+      <div className="stars">{STARS}</div>
+      <div className="p-head">{p.said === false ? p.headline : <>&ldquo;{p.headline}&rdquo;</>}</div>
+      <div className="s-name">{name}</div>
+      <div className="s-role">{role}</div>
+      <p className="p-change">
+        {p.before && <><b>Before:</b> {p.before}. </>}
+        <b>Now:</b> {p.now}.
+      </p>
+      {stat && <div className="p-stat">{stat}</div>}
+    </>
   );
 }
 
 const RESULTS: Result[] = [
-  { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    results: ["Pain down from 9/10 to 3/10", "New exercise routine built after years of body pain from multiple surgeries", "A healthy routine that fits life as a busy CEO"],
-    quote: "Pain from 9/10 to 3/10." },
-  { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
-    results: ["Works fewer hours and is more productive", "More control over food while thinking about it less"],
-    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
-  { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association",
-    results: ["A dentist, a practice owner, four kids and no energy left", "Daily energy rebuilt while running six providers and twenty staff", "Focus back to lead the practice at her best"],
-    quote: "Recovery finally outweighing stress. That was the shift." },
-  { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
-    results: ["Higher energy levels and sharper focus", "Better business performance", "More quality time with family"],
-    quote: "And it hasn't felt difficult." },
-  { yt: "HE9kxhuNZOU", name: "Dr Darren Hill", role: "General dentist, Dublin",
-    results: ["VO2 max the highest it has ever been", "Heart rate variability the highest it has ever been", "Resting heart rate the lowest it has ever been"],
-    quote: "It's the first time in 32 years I've ever felt like this is a lifestyle change that I'm happy with." },
-  { yt: "BshYj_w56LU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property",
-    results: ["Finally achieved the goal he set over ten years ago", "13.2% body fat, down from the twenties", "Consistency where the right actions felt easy"],
-    quote: "You are what you repeatedly do." },
-  { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist",
-    results: ["Short, sharp sessions instead of two-hour gym slogs", "Pizza and burgers still in, in moderation"],
-    quote: "Family members couldn't even recognise me." },
-  { yt: "pvpICrhtVlw", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
-    results: ["Stopped the all-or-nothing cycle for good", "Built a routine that holds through busy periods", "Consistency without extremes"],
-    quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
-  { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    results: ["First Wolf Run in over a decade", "Energy to perform at work and keep up with his son"],
-    quote: "Going to the root cause, and building my energy back up." },
-  { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    results: ["Resting heart rate down by 20% to 30%", "Running quicker in his forties than he did in his thirties"],
-    quote: "Long-term health is the ROI. This was life-changing for me." },
-  { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training",
-    results: ["Used to crash on the sofa after work", "Now out on the trampoline with his four-year-old", "Lost weight, got stronger, energy through the roof"],
-    quote: "He's happy that he's got a fit dad, and I'm over the moon that I've now got the energy to keep up with him." },
-  { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover",
-    results: ["Best year the business has had in a long time", "Burnt out with no brain space, to mindset and strength back", "Present and happier at home"],
-    quote: "I'm the captain again, steering the ship. I feel like I did when I was in my early thirties." },
-  { yt: "rlctXVS0e8A", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
-    results: ["Was in a rut and had given up after various programmes", "Best fitness regime he has been on, with a new baby at home", "No late-night eating"],
-    quote: "My mindset shift to not needing to overeat has been my biggest win." },
-  { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in",
-    results: ["Headhunted for a role he could not even have thought of", "The role pays well over six figures"],
-    quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have. I did not have that before." },
-  { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner",
-    results: ["Back to a weight he had not seen in four years", "Mindset and fitness the best they have ever been", "Enjoying it, which is what makes it last"],
-    quote: "Mindset and fitness-wise, I'm the best I've ever been." },
-  { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London",
-    results: ["Back pain from 7/10, spiking to 9/10, down to 0/10", "Stronger, more confident, posture corrected", "No longer anxious about standing for long periods"],
-    quote: "Take the jump and work with George." },
-  { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist",
-    results: ["WHOOP stress at its lowest during one of the most stressful weeks he had had in dentistry", "First patient complaint — handled it calmly using the psychology techniques we had worked on together", "Complaint dropped the next morning"],
-    quote: "The psychology work meant a week that would have wrecked me became a conversation instead." },
+  { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO" },
+  { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct" },
+  { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association" },
+  { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands" },
+  { yt: "HE9kxhuNZOU", name: "Dr Darren Hill", role: "General dentist, Dublin" },
+  { yt: "BshYj_w56LU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property" },
+  { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist" },
+  { yt: "pvpICrhtVlw", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables" },
+  { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group" },
+  { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White" },
+  { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training" },
+  { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover" },
+  { yt: "rlctXVS0e8A", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
+  { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in" },
+  { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner" },
+  { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London" },
+  { yt: "bn35xfRdFEQ", name: "Lukman", role: "Dentist" },
 ];
 
 const QUOTES: Quote[] = [
-  { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist",
-    metric: "On crutches when we started · full recovery after ACL reconstruction alongside his physio",
-    quote: "My own family could hardly recognise me at our most recent family wedding." },
-  { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables",
-    metric: "The all-or-nothing cycle, broken",
-    quote: "My mentality with health and fitness used to be all or nothing before meeting George." },
-  { photo: "/images/headshot-sanchia.webp", name: "Dr Sanchia Jauch", role: "Dental practice owner, mum of four",
-    metric: "Six providers, twenty staff, energy rebuilt",
-    quote: "A dentist. A practice owner. Four kids. And no energy left. That is what changed." },
-  { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands",
-    metric: "Higher energy, sharper focus · better business performance · more quality time with family",
-    quote: "And it hasn't felt difficult." },
-  { photo: "/images/lash-saranna.webp", fit: "contain", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO",
-    metric: "Pain down from 9/10 to 3/10 · a new exercise routine built after years of body pain from multiple surgeries · a healthy routine that fits life as a busy CEO",
-    quote: "Pain from 9/10 to 3/10." },
-  { photo: "/images/headshot-darren.webp", name: "Dr Darren Hill", role: "General dentist, Dublin",
-    metric: "VO2 max, HRV and resting heart rate all at personal bests",
-    quote: "You've helped me remove the ceiling of what I thought I was capable of achieving." },
-  { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct",
-    metric: "Works fewer hours and is more productive",
-    quote: "From a diet point of view, I'm in a place where I've never been in my whole adult life." },
-  { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group",
-    metric: "",
-    quote: "Going to the root cause, and building my energy back up." },
-  { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist",
-    metric: "First-ever half marathon in 1h 49m",
-    quote: "My first-ever half marathon. It was never even a target for me." },
-  { photo: "/images/andrew-thompson.webp", photoClass: "qc-andrew", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White",
-    metric: "Running faster in his forties than his thirties",
-    quote: "Long-term health is the ROI. This was life-changing for me." },
-  { photo: "/images/ben-rutter.webp", name: "Ben Rutter", role: "Owner, Digital Prosthetics",
-    metric: "Best fitness regime he has been on, with a new baby at home",
-    quote: "My mindset shift to not needing to overeat has been my biggest win." },
-  { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training",
-    metric: "From crashing on the sofa after work to the trampoline with his four-year-old",
-    quote: "He's happy that he's got a fit dad, and I'm over the moon that I've now got the energy to keep up with him." },
-  { photo: "/images/sam-sneyd.webp", photoClass: "qc-sam", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors",
-    metric: "Three and a half months in · a bespoke, holistic plan built around a busy lifestyle",
-    quote: "The main benefit I've had is just a lot more energy." },
-  { photo: "/images/jaz.webp", wide: true, photoClass: "qc-jaz", name: "Jaz", role: "Property business owner",
-    metric: "Back to a weight he hadn't seen in four years",
-    quote: "Mindset and fitness-wise, I'm the best I've ever been." },
-  { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London",
-    metric: "Back pain from 7/10, spiking to 9/10, down to 0/10",
-    quote: "Take the jump and work with George." },
-  { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director",
-    metric: "Years of failed attempts, finally sustainable",
-    quote: "It became apparent quickly why my years had not been successful. George's focus on a sustainable plan and execution has led to the biggest win for me, which is a shift in mentality around weight loss and healthy living." },
-  { photo: "/images/sana-ali.webp", name: "Sana Ali", role: "Consultant Paediatric Radiologist",
-    metric: "Health as complete physical, mental and social wellbeing — the whole picture",
-    quote: "One of the first things I was ever taught at medical school was the World Health Organisation's definition of health… George's coaching style and training programme truly encompasses this, and that is why I love it so much." },
-  { photo: "", name: "Commercial Director", role: "Name withheld by request",
-    metric: "Headhunted three months in, for a role paying well over six figures",
-    quote: "Big kudos to the mindset you helped me achieve, and the confidence I now have." },
-  { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist",
-    metric: "WHOOP stress at its lowest during one of the most stressful weeks in dentistry — his first patient complaint",
-    quote: "The psychology work meant a week that would have wrecked me became a conversation instead." },
+  { photo: "/images/vish-before-after.webp", wide: true, name: "Vish", role: "Dentist" },
+  { photo: "/images/rob-allen-pugh.webp", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables" },
+  { photo: "/images/headshot-sanchia.webp", name: "Dr Sanchia Jauch", role: "Dental practice owner, mum of four" },
+  { photo: "/images/ian-tilley.webp", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands" },
+  { photo: "/images/lash-saranna.webp", fit: "contain", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO" },
+  { photo: "/images/headshot-darren.webp", name: "Dr Darren Hill", role: "General dentist, Dublin" },
+  { photo: "/images/headshot-matt-hadman.webp", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct" },
+  { photo: "/Testimonial pictures/Kieran-35kg.png", wide: true, name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group" },
+  { photo: "/images/reece.webp", wide: true, name: "Reece", role: "Maxillofacial dentist" },
+  { photo: "/images/andrew-thompson.webp", photoClass: "qc-andrew", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White" },
+  { photo: "/images/ben-rutter.webp", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
+  { photo: "/images/steve-want.webp", name: "Steve Want", role: "Creative Brand Designer, PET-Xi Training" },
+  { photo: "/images/sam-sneyd.webp", photoClass: "qc-sam", name: "Sam Sneyd", role: "Business owner, Bentley Independent Financial Advisors" },
+  { photo: "/images/jaz.webp", wide: true, photoClass: "qc-jaz", name: "Jaz", role: "Property business owner" },
+  { photo: "/images/jacob.webp", name: "Jacob", role: "Journalist, financial publication, London" },
+  { photo: "/images/mani-konkon.webp", name: "Mani Konkon", role: "Finance Director" },
+  { photo: "/images/sana-ali.webp", name: "Sana Ali", role: "Consultant Paediatric Radiologist" },
+  { photo: "", name: "Commercial Director", role: "Name withheld by request" },
+  { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist" },
 ];
 
-// One slider, each person once. Strongest results first, alternating photos and
-// videos so the first few swipes land. Data comes from RESULTS / QUOTES above.
+// One slider, each person once. The four performance stories lead, then the
+// rest alternate photos and videos. Data comes from RESULTS / QUOTES above.
 const CARD_ORDER: ["video" | "photo", string][] = [
-  ["photo", "Vish"],
-  ["video", "Matt Hadman"],
-  ["video", "Lash Saranna"],
   ["video", "Dr Sanchia Jauch"],
+  ["video", "Robbie Newton"],
+  ["video", "Matt Hadman"],
+  ["video", "Lukman"],
+  ["photo", "Vish"],
+  ["video", "Lash Saranna"],
   ["video", "Ian Tilley"],
   ["video", "Rob Allen-Pugh"],
   ["photo", "Kieran Kearns"],
@@ -197,12 +198,10 @@ const CARD_ORDER: ["video" | "photo", string][] = [
   ["photo", "Reece"],
   ["photo", "Jaz"],
   ["video", "Steve Want"],
-  ["video", "Robbie Newton"],
   ["video", "Commercial Director"],
   ["video", "Jacob"],
   ["video", "Ben Rutter"],
   ["photo", "Sam Sneyd"],
-  ["video", "Lukman"],
   ["photo", "Mani Konkon"],
   ["photo", "Sana Ali"],
 ];
@@ -274,15 +273,16 @@ function ChevRight() {
 
 // ─── YOUTUBE VIDEO (thumbnail → inline iframe on click) ──────────────────────
 
-function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false }: {
+function YouTubeVideo({ id, label, className = "", autoplayOnDesktop = false, poster }: {
   id: string;
   label: string;
   className?: string;
   autoplayOnDesktop?: boolean;
+  poster?: string;
 }) {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
-  const [imgSrc, setImgSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
+  const [imgSrc, setImgSrc] = useState(poster ?? `https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
   const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -536,21 +536,34 @@ function Navbar() {
 
   const close = () => setOpen(false);
 
+  // The open drawer locks page scroll, so a plain anchor jump goes nowhere on
+  // phones. Unlock first, then scroll to the section.
+  const go = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const hash = e.currentTarget.getAttribute("href");
+    const target = hash ? document.querySelector(hash) : null;
+    if (!target) return;
+    e.preventDefault();
+    document.body.style.overflow = "";
+    setOpen(false);
+    history.replaceState(null, "", hash);
+    setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 0);
+  };
+
   return (
     <>
       <nav className={`site-nav ${scrolled ? "scrolled" : ""}`} aria-label="Primary">
         <div className="nav-in">
           <a className="logo" href="#top">
-            George Vernon<span>Health &amp; Performance Coach</span>
+            George Vernon<span>Performance Coach</span>
           </a>
           <div className="nav-links">
-            <a href="#results">Results</a>
+            <a href="#top">Results</a>
             <a href="#coaching">The Programme</a>
             <a href="#about">About George</a>
             <a href="#corporate">Business Wellbeing</a>
             <a href="#faq">FAQs</a>
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply</a>
-            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit →</a>
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit →</a>
           </div>
           <button
             type="button"
@@ -564,14 +577,14 @@ function Navbar() {
         </div>
       </nav>
       <div className={`drawer ${open ? "open" : ""}`}>
-        <a href="#results" onClick={close}>Results</a>
-        <a href="#coaching" onClick={close}>The Programme</a>
-        <a href="#about" onClick={close}>About George</a>
-        <a href="#corporate" onClick={close}>Business Wellbeing Programmes</a>
-        <a href="#faq" onClick={close}>FAQs</a>
-        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Apply for a Call with George</a>
+        <a href="#top" onClick={go}>Results</a>
+        <a href="#coaching" onClick={go}>The Programme</a>
+        <a href="#about" onClick={go}>About George</a>
+        <a href="#corporate" onClick={go}>Business Wellbeing Programmes</a>
+        <a href="#faq" onClick={go}>FAQs</a>
+        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a call</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
-          Take the Dental Performance Audit
+          Dental Performance Audit
         </a>
       </div>
     </>
@@ -633,7 +646,7 @@ function Footer() {
     <>
       <footer className="site-footer">
         <div className="wrap foot">
-          <div>© 2026 GV Coaching Ltd</div>
+          <div>© 2026 GV Coaching Ltd · George Vernon, performance coach for dentists and business leaders</div>
           <div>
             <a href="mailto:george@gvcoaching.co.uk">george@gvcoaching.co.uk</a>
             {" · "}
@@ -660,33 +673,19 @@ export default function Page() {
         <div className="wrap-wide">
           <div className="hero-grid">
             <div className="hero-txt">
-              <div className="eyebrow">For dentists, practice owners &amp; business leaders</div>
-              <h1 style={{ margin: "20px 0 24px" }}>
+              <h1 style={{ margin: "0 0 24px" }}>
                 Make this the <span className="gold">last time</span> you go on a health kick.
               </h1>
               <p className="sub">
-                More energy, sharper focus and better performance, without burning out. One-to-one coaching for people who already know what to do, and cannot work out why it never sticks.
+                For people who already know what to do, and cannot work out why it never sticks.
               </p>
-              <a className="hero-watch" href="#results">▶ Watch the results reel</a>
+              <div className="hero-role">Performance coach for dentists and business leaders.</div>
             </div>
-            <div className="hero-ph">
-              <Image
-                src="/Headshot/IMG_8821.webp"
-                alt="George Vernon, Health and Performance Coach"
-                width={3707}
-                height={2678}
-                priority
-                fetchPriority="high"
-                sizes="(min-width: 1000px) 55vw, 100vw"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-              />
+            <div className="hero-ph hero-vid">
+              <YouTubeVideo id="VELuysAT1E0" label="What changed: dentists and business leaders in their own words" poster="/images/reel-what-changed.webp" />
             </div>
             <div className="hero-cta">
-              <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", marginBottom: 12 }}>Apply for a Call with George</a>
-              <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Take the Dental Performance Audit</a>
-              <p className="micro" style={{ color: "rgba(255,255,255,.55)", textAlign: "center" }}>
-                Free · Takes 4 minutes · No commitment required
-              </p>
+              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Book a call</a>
             </div>
           </div>
         </div>
@@ -694,20 +693,12 @@ export default function Page() {
 
       <main>
 
-        {/* RESULTS: reel, then client slider */}
-        <section id="results">
-          <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
-            <h2 style={{ marginBottom: 44 }}>
-              The results <span className="gold">you can expect.</span>
-            </h2>
-            <div className="vwrap">
-              <YouTubeVideo id="gv5OAXDah14" label="Results reel" />
-            </div>
-          </Reveal>
+        {/* RESULTS */}
+        <section className="grey" id="results">
           <Reveal className="wrap-wide">
-            <div className="center sec-head" style={{ marginTop: 72 }}>
-              <h3>Straight from <span className="gold">the clients.</span></h3>
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Results</span><span className="goldbar" /></div>
+              <h2>What changes <span className="gold">at work and at home.</span></h2>
             </div>
             <Slider count={CARDS.length}>
               {CARDS.map((c) => {
@@ -719,14 +710,7 @@ export default function Page() {
                         <YouTubeVideo id={r.yt} label={r.name} />
                       </div>
                       <div className="slide-body">
-                        <div className="stars">{STARS}</div>
-                        <div className="s-name">{r.name}</div>
-                        <div className="s-role">{r.role}</div>
-                        <WeightStat name={r.name} />
-                        <ul className="s-res">
-                          {r.results.map((x, i) => <li key={i}>{x}</li>)}
-                        </ul>
-                        <div className="s-quote">&ldquo;{r.quote}&rdquo;</div>
+                        <ProofText name={r.name} role={r.role} />
                       </div>
                     </article>
                   );
@@ -734,8 +718,8 @@ export default function Page() {
                 const q = c.q;
                 return (
                   <article className={`slide slide-q${q.photo ? "" : " slide-nopic"}${q.desktopOnly ? " slide-desktop-only" : ""}${q.wide ? " slide-wide" : ""}${q.slideClass ? " " + q.slideClass : ""}`} key={q.name}>
-                    <div className="qc-media">
-                      {q.photo && (
+                    {q.photo && (
+                      <div className="qc-media">
                         <div className={`qc-photo${q.wide ? " qc-photo-wide" : ""}${q.photoClass ? " " + q.photoClass : ""}`}>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
@@ -747,143 +731,15 @@ export default function Page() {
                             }}
                           />
                         </div>
-                      )}
-                      <div className={`qc-meta${q.photo ? "" : " no-photo"}`}>
-                        <div className="qc-name">{q.name}</div>
-                        <div className="qc-role">{q.role}</div>
-                        <div className="stars qc-stars">{STARS}</div>
                       </div>
-                    </div>
+                    )}
                     <div className="qc-right">
-                      <div className="qc-quote">&ldquo;{q.quote}&rdquo;</div>
-                      <WeightStat name={q.name} />
-                      {q.metric && <div className="qc-metric">{q.metric}</div>}
+                      <ProofText name={q.name} role={q.role} />
                     </div>
                   </article>
                 );
               })}
             </Slider>
-          </Reveal>
-        </section>
-
-        {/* THE SYSTEM */}
-        <section className="grey" id="coaching">
-          <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The system</span><span className="goldbar" /></div>
-              <h2>The system I install <span className="gold">underneath your health.</span></h2>
-            </div>
-            <div className="five">
-              <div className="f"><div className="f-n">01</div><h3>Psychology</h3><p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred. Nothing changes long term without getting this right.</p></div>
-              <div className="f"><div className="f-n">02</div><h3>Stress &amp; recovery</h3><p>Recovery must be equal to or greater than stress, and it has to be managed deliberately.</p></div>
-              <div className="f"><div className="f-n">03</div><h3>Nutrition</h3><p>Evidence-based and simple. Eating more than you intend is a system gap, not a willpower gap.</p></div>
-              <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Built on training you enjoy and that gives you energy, not something you have to endure.</p></div>
-              <div className="f"><div className="f-n">05</div><h3>Measurement</h3><p>What gets measured gets managed. Your data decides what changes, not guesswork — very much like the way a business runs.</p></div>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* COACHING */}
-        <section>
-          <Reveal className="wrap-wide">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
-              <h2>What installing it <span className="gold">actually looks like.</span></h2>
-              <p className="sub" style={{ marginTop: 14 }}>Those five pillars are the system. This is how it gets installed: three things working together, all built around your time. Coaching to get the result. The app so it happens every day without willpower or admin. And the education so you understand it well enough to keep it when the coaching ends.</p>
-            </div>
-            <div className="cad">
-              <div className="c"><h3>Every week</h3><p>A one-to-one call with me. The plan changes when your week changes, so a chaotic week does not end the programme.</p></div>
-              <div className="c"><h3>Every month</h3><p>An in-person session where geography allows, or a deeper review call where it does not.</p></div>
-              <div className="c"><h3>Every day</h3><p>The whole plan sits in the app, so there is nothing to plan and nothing to work out: the day&apos;s actions, your training, your meals and the data behind both. George AI is in there too, so a photo of your plate is logged in seconds and there is an answer whenever you need one.</p></div>
-            </div>
-            <div className="course">
-              <div className="course-img">
-                <div className="course-img-inner">
-                  <Image src="/images/education-course.webp" alt="The full education course inside the GV Coaching app" width={708} height={578} sizes="(min-width: 860px) 45vw, 90vw" style={{ width: "100%", height: "auto", display: "block" }} />
-                </div>
-              </div>
-              <div className="course-txt">
-                <span className="eyebrow">Why it lasts</span>
-                <h3 style={{ marginTop: 14 }}>Understand it, and you keep it.</h3>
-                <p>Most people lose their results because they were following instructions they never understood. The full education course sits inside the app and takes you through every part of the system, from psychology to measurement, so you understand why you are doing what you are doing and can run it yourself. That is the difference between a result, and a result that lasts.</p>
-              </div>
-            </div>
-            <div className="shots">
-              {[
-                { src: "/images/app-daily-plan.webp", alt: "Daily plan and habit tracking", title: "Daily plan and habits", caption: "The day's actions in one list, ticked off as you go.", w: 590, h: 930 },
-                { src: "/images/app-training.webp", alt: "Personalised training with video guidance", title: "Your training sessions", caption: "Every session written for you, with a video to show you each movement.", w: 590, h: 932 },
-                { src: "/images/app-nutrition.webp", alt: "Meal plans and nutrition tracking", title: "Meals and nutrition", caption: "Built around what you actually eat. Nothing off limits.", w: 590, h: 931 },
-                { src: "/images/app-dashboard.webp", alt: "Progress dashboard covering sleep, steps, weight and trends", title: "Your dashboard", caption: "Sleep, steps, weight and trends, reviewed on every call.", w: 590, h: 931 },
-              ].map((s) => (
-                <div className="shot" key={s.src}>
-                  <div className="shot-img">
-                    <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
-                  </div>
-                  <b>{s.title}</b>
-                  <p>{s.caption}</p>
-                </div>
-              ))}
-            </div>
-            <div className="gai">
-              <div className="gai-head">
-                <span className="eyebrow">New in the app</span>
-                <h3>George AI, <span className="gold">with you between calls.</span></h3>
-                <p>Built to save you time. Take a photo of your plate and it is analysed and logged for you, no typing. Send a menu and it tells you what fits your targets. Send a video of a lift and it checks your form. Ask it anything, any time of day, and it answers the way I would.</p>
-              </div>
-              <div className="shots gai-shots">
-                {[
-                  { src: "/images/ai-meal-photo.webp", alt: "A photo of a noodle dish sent to George AI, with the food analysis it returned", title: "Photo your food", caption: "Send a photo. It works out what is on the plate and the calories and macros.", w: 590, h: 931 },
-                  { src: "/images/ai-meal-logged.webp", alt: "The meal tracker showing the meal logged automatically from the photo", title: "Logged for you", caption: "The meal goes straight into your tracker. Nothing to type.", w: 590, h: 931 },
-                  { src: "/images/ai-menu-help.webp", alt: "A restaurant menu sent to George AI, with its recommendation of what fits", title: "Eating out", caption: "Send the menu and it tells you what fits your targets today.", w: 590, h: 931 },
-                  { src: "/images/ai-form-check.webp", alt: "George AI feedback on a deadlift video, correcting hip position and back rounding", title: "Form check", caption: "Send a video of a lift and it tells you what to fix before the next set.", w: 590, h: 931 },
-                  { src: "/images/ai-ask-anything.webp", alt: "A client asking George AI how much water to drink, with its detailed answer", title: "Ask it anything", caption: "A question about your plan, your food or your training, answered straight away.", w: 590, h: 931 },
-                ].map((s) => (
-                  <div className="shot" key={s.src}>
-                    <div className="shot-img">
-                      <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
-                    </div>
-                    <b>{s.title}</b>
-                    <p>{s.caption}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>
-            <div className="inc">
-              <div>The full education course, so you keep the result long term</div>
-              <div>Weekly one-to-one coaching calls</div>
-              <div>Fully personalised training built around your week</div>
-              <div>Nutrition and meal planning, nothing off limits</div>
-              <div>George AI in the app: photo your food and it is logged, ask anything, any time</div>
-              <div>Habit system tracked daily in the app</div>
-              <div>Progress dashboard reviewed on every call</div>
-              <div>Psychology work, so none of it depends on motivation</div>
-              <div>In-person sessions where geography allows</div>
-              <div>WHOOP integration, optional add-on</div>
-            </div>
-            <div className="btns" style={{ justifyContent: "center" }}>
-              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* GUARANTEE */}
-        <section className="grey">
-          <Reveal className="wrap">
-            <div className="guar">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The guarantee</span><span className="goldbar" /></div>
-              <h2>The risk sits <span className="gold">with me.</span></h2>
-              <div className="two">
-                <div>
-                  <b>Two weeks to change your mind</b>
-                  <p>If you start and decide within the first two weeks that it is not for you, tell me and I refund you in full. No conditions, and no conversation needed.</p>
-                </div>
-                <div>
-                  <b>Results, or I keep going for free</b>
-                  <p>We set your targets together on day one. If you have not achieved them after three months, I keep working with you at no further cost until you do.</p>
-                </div>
-              </div>
-            </div>
           </Reveal>
         </section>
 
@@ -898,16 +754,17 @@ export default function Page() {
             <div className="about-portrait">
               <div className="accent" />
               <div className="about-portrait-img">
-                <Image src="/Headshot/IMG_8821.webp" alt="Portrait of George Vernon" width={3707} height={2678} sizes="(min-width: 700px) 640px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+                <Image src="/about/george-portrait.webp" alt="Portrait of George Vernon" width={1200} height={1600} quality={90} sizes="(min-width: 700px) 640px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               </div>
               <div className="about-caption">
                 <b>George Vernon</b>
-                <span>Health &amp; Performance Coach</span>
+                <span>Performance coach for dentists and business leaders</span>
               </div>
             </div>
 
             <div className="about-centered">
-              <p>George Vernon is the founder of GV Coaching, a health and performance coaching business that helps business owners, medical professionals and senior leaders improve their health to increase daily energy, focus and long-term business performance. Alongside his coaching work, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
+              <p className="about-lead">&ldquo;I help dentists and business leaders get their headspace, energy and body working for them, so they can perform at their best and keep doing it, without the burnout or the quick fix.&rdquo;</p>
+              <p>George Vernon is the founder of GV Coaching. Alongside his one-to-one coaching, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
               <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
               <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
               <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.</p>
@@ -926,13 +783,13 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Coaching athletes */}
-            <div className="grp grp-3">
+            {/* Coaching athletes: the gym talk leads, shown uncropped */}
+            <div className="grp grp-feature">
               <div className="accent" />
               <div className="grp-imgs">
-                <div><Image src="/about/coaching-athletes-1.webp" alt="George Vernon coaching elite athletes" width={1440} height={1440} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-                <div><Image src="/about/coaching-athletes-2.webp" alt="George Vernon coaching elite athletes" width={1200} height={1500} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 10%" }} /></div>
-                <div><Image src="/about/coaching-athletes-3.webp" alt="George Vernon coaching elite athletes" width={1600} height={1200} sizes="(min-width: 720px) 30vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "left center" }} /></div>
+                <div className="grp-lead grp-lead-43"><Image src="/about/coaching-athletes-3.webp" alt="George Vernon speaking to boxers in the ring at a boxing gym" width={1600} height={1200} sizes="(min-width: 1000px) 900px, 95vw" style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center" }} /></div>
+                <div><Image src="/about/coaching-athletes-1.webp" alt="George Vernon with boxers he coaches at a championship" width={1440} height={1440} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image src="/about/coaching-athletes-2.webp" alt="George Vernon with a boxer he coaches after a fight" width={1200} height={1500} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 10%" }} /></div>
               </div>
               <div className="about-caption">
                 <b>The Athletes</b>
@@ -968,8 +825,150 @@ export default function Page() {
               </div>
             </div>
 
+            {/* Public speaking */}
+            <div className="grp grp-3">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image quality={90} src="/about/speaking-stage.webp" alt="George Vernon speaking on stage" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
+                <div><Image quality={90} src="/about/speaking-room.webp" alt="George Vernon presenting to a full room" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
+                <div><Image quality={90} src="/about/speaking-audience.webp" alt="The audience at one of George Vernon's talks" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
+              </div>
+              <div className="about-caption">
+                <b>On Stage</b>
+                <span>Talks and workshops for teams and organisations across the UK</span>
+              </div>
+            </div>
+
             <div className="btns" style={{ justifyContent: "center", marginTop: 26 }}>
-              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* HOW IT WORKS */}
+        <section className="grey" id="coaching">
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">How it works</span><span className="goldbar" /></div>
+              <h2>The system I install <span className="gold">underneath your performance.</span></h2>
+            </div>
+            <div className="five">
+              <div className="f f-lead">
+                <div className="f-n">01</div>
+                <h3>Psychology</h3>
+                <p className="f-lead-line">We start at the level of thought and feeling. That&apos;s why the results last when every other approach has failed.</p>
+                <p>Identity, beliefs, and why the start date keeps moving when the only setting is zero or a hundred. Nothing changes long term without getting this right.</p>
+              </div>
+              <div className="f"><div className="f-n">02</div><h3>Stress &amp; recovery</h3><p>Recovery must be equal to or greater than stress, and it has to be managed deliberately.</p></div>
+              <div className="f"><div className="f-n">03</div><h3>Nutrition</h3><p>Evidence-based and simple. Eating more than you intend is a system gap, not a willpower gap.</p></div>
+              <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Built on training you enjoy and that gives you energy, not something you have to endure.</p></div>
+              <div className="f"><div className="f-n">05</div><h3>Building long-term habits</h3><p>What gets measured gets managed. Your data shows what is working, and the science of habit building turns it into what you do without thinking, so everything sticks.</p></div>
+            </div>
+            <p className="sub five-foot">Long term behaviour change, not another health kick. Losing weight and keeping it off is what happens when the foundations are right.</p>
+          </Reveal>
+        </section>
+
+        {/* COACHING */}
+        <section>
+          <Reveal className="wrap-wide">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">One-to-one coaching</span><span className="goldbar" /></div>
+              <h2>What installing it <span className="gold">actually looks like.</span></h2>
+              <p className="sub" style={{ marginTop: 14 }}>Built around your time, and it takes less of it than your last attempt on your own. Coaching to get the result, the app so it happens every day without willpower, and the education so you keep it when the coaching ends.</p>
+            </div>
+            <div className="cad">
+              <div className="c"><h3>Every week</h3><p>A one-to-one call with me. The plan changes when your week changes, so a chaotic week does not end the programme.</p></div>
+              <div className="c"><h3>Every month</h3><p>An in-person session where geography allows, or a deeper review call where it does not.</p></div>
+              <div className="c"><h3>Every day</h3><p>The whole plan sits in the app, with George AI there between calls. Nothing to plan, nothing to work out.</p></div>
+            </div>
+            <div className="shots">
+              {[
+                { src: "/images/app-daily-plan.webp", alt: "Daily plan and habit tracking", title: "Your day, planned", caption: "The day's actions in one list, ticked off as you go.", w: 590, h: 930 },
+                { src: "/images/app-training.webp", alt: "Personalised training with video guidance", title: "Training for your week", caption: "Every session written for you, with a video for each movement.", w: 590, h: 932 },
+                { src: "/images/ai-meal-photo.webp", alt: "A photo of a noodle dish sent to George AI, with the food analysis it returned", title: "Photo your food", caption: "Send a photo and it is analysed and logged. Nothing to type.", w: 590, h: 931 },
+                { src: "/images/ai-ask-anything.webp", alt: "A client asking George AI a question, with its detailed answer", title: "Ask George AI", caption: "A question about your plan, your food or your training, answered straight away.", w: 590, h: 931 },
+              ].map((s) => (
+                <div className="shot" key={s.src}>
+                  <div className="shot-img">
+                    <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+                  </div>
+                  <b>{s.title}</b>
+                  <p>{s.caption}</p>
+                </div>
+              ))}
+            </div>
+            <div className="eyebrow" style={{ marginBottom: 8 }}>What is included</div>
+            <div className="inc">
+              <div>Weekly one-to-one coaching calls</div>
+              <div>In-person sessions where geography allows</div>
+              <div>Training and nutrition built around your week, nothing off limits</div>
+              <div>Psychology work, so none of it depends on motivation</div>
+              <div>George AI in the app, between calls</div>
+              <div>The full education course, so you keep the result</div>
+            </div>
+            <div className="btns" style={{ justifyContent: "center" }}>
+              <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* GUARANTEE */}
+        <section className="grey">
+          <Reveal className="wrap">
+            <div className="guar">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">The guarantee</span><span className="goldbar" /></div>
+              <h2>The risk sits <span className="gold">with me.</span></h2>
+              <div className="two">
+                <div>
+                  <b>Two weeks to change your mind</b>
+                  <p>If you start and decide within the first two weeks that it is not for you, tell me and I refund you in full. No conditions, and no conversation needed.</p>
+                </div>
+                <div>
+                  <b>Results, or I keep going for free</b>
+                  <p>We set your targets together on day one. If you have not achieved them after three months, I keep working with you at no further cost until you do.</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq">
+          <Reveal className="wrap">
+            <div className="center sec-head">
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you book</span><span className="goldbar" /></div>
+              <h2>The questions <span className="gold">everyone asks first.</span></h2>
+            </div>
+            <div className="faq">
+              <details>
+                <summary>Are you a personal trainer or an online fitness coach?</summary>
+                <p>No. I used to run an education company that educated and qualified new personal trainers. My work sits underneath: how you think, how you recover and how you behave with your health, so the level of performance you want becomes your new default.</p>
+              </details>
+              <details>
+                <summary>How much of my time does this take each week?</summary>
+                <p>One call with me each week. That is where the real work happens: what the week threw at you, where the stress went, and what changes next. Everything else fits into the day you already have, and the app takes the planning and admin off you. Most clients tell me it takes less time than their last attempt on their own.</p>
+              </details>
+              <details>
+                <summary>I&apos;m already exhausted. Won&apos;t this just add more to my plate?</summary>
+                <p>No. If you are exhausted, the first job is not to add more, it is to recover. Burnout is stress outweighing recovery for too long, so we start by bringing recovery back up and taking out what is costing you energy. Harder training and stricter food are not where we begin. The aim is the minimum that works, not the most you can survive.</p>
+              </details>
+              <details>
+                <summary>I travel a lot and eat out constantly. Does it still work?</summary>
+                <p>Yes. Travel, long clinical days and client dinners are where most plans fall apart, so they are what we plan for. We work on the decisions you make under pressure, not a meal plan you abandon by Wednesday. Nothing is off limits, and when your week changes, the plan changes with it.</p>
+              </details>
+              <details>
+                <summary>I have tried coaches and plans before. Why would this be different?</summary>
+                <p>Because those ran on discipline, and discipline runs out. This runs on a system: the psychology first, so the start date stops moving; habits built around your week, so the right thing happens without relying on willpower; and the education, so you understand it well enough to keep it once we finish.</p>
+                <p>And if it does not work, the guarantee means the risk sits with me, not you.</p>
+              </details>
+              <details>
+                <summary>What does it cost?</summary>
+                <p>I do not work with anyone for less than three months, and investment starts from £3,000. Building something that lasts takes longer than three months, but that is the minimum to set it up properly. The exact package depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
+              </details>
+              <details>
+                <summary>What happens on the call?</summary>
+                <p>It is 45 minutes. We look at where your health is now, where you want it to be and what has got in the way before. I walk you through the system, we cover the levels of support and what each one costs, and you leave with a clear next step. If this is not the right fit for you, I will tell you.</p>
+              </details>
             </div>
           </Reveal>
         </section>
@@ -978,14 +977,14 @@ export default function Page() {
         <section className="grey" id="audit">
           <Reveal className="wrap-wide">
             <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Free audit</span><span className="goldbar" /></div>
               <h2>Take the Dental Performance Audit. <span className="gold">See where you&apos;re at.</span></h2>
             </div>
             <div className="audit">
               <div className="audit-l">
                 <h3>The Dental Performance Audit</h3>
                 <p className="sub" style={{ marginTop: 16 }}>
-                  Four minutes, twenty-one questions. It scores you across three phases and tells you which one your health is actually in right now, before you commit to anything or speak to anybody.
+                  How are your energy, your focus and the way you handle pressure holding up right now? Four minutes, twenty-one questions. It scores you across three phases and tells you which one you are actually in, before you commit to anything or speak to anybody.
                 </p>
                 <div className="btns"><a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Audit</a></div>
                 <p className="micro">Free · Takes 4 minutes · No commitment required</p>
@@ -993,13 +992,27 @@ export default function Page() {
               <div className="audit-r">
                 <span className="eyebrow">What you get</span>
                 <ul className="alist">
-                  <li>Your phase result: Accelerated Fat Loss, Lifestyle Optimisation or Performance</li>
+                  <li>Your phase result: Foundations, Lifestyle Optimisation or Performance</li>
                   <li>What to focus on first, and what to leave alone for now</li>
                   <li><b>A free four-part introduction to the framework, so you can see how it works before you commit.</b></li>
                   <li>No call required, and no pitch</li>
                 </ul>
               </div>
             </div>
+          </Reveal>
+        </section>
+
+        {/* FINAL CTA */}
+        <section className="dark center">
+          <Reveal className="wrap">
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
+            <h2>Perform at your best, <span className="gold">and keep doing it.</span></h2>
+            <p className="sub" style={{ marginTop: 18 }}>Book a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
+            <div className="btns">
+              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+              <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit</a>
+            </div>
+            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
           </Reveal>
         </section>
 
@@ -1019,57 +1032,6 @@ export default function Page() {
               <div>Senior leadership performance coaching</div>
             </div>
             <div className="btns"><a className="btn navy" href={TALK_ENQUIRY_URL}>Enquire About a Talk</a></div>
-          </Reveal>
-        </section>
-
-        {/* FAQ */}
-        <section className="grey" id="faq">
-          <Reveal className="wrap">
-            <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Before you book</span><span className="goldbar" /></div>
-              <h2>The questions <span className="gold">everyone asks first.</span></h2>
-            </div>
-            <div className="faq">
-              <details>
-                <summary>How much of my time does this take each week?</summary>
-                <p>One call with me each week. Everything else is built into a day you are already living: your training is written to fit the time you have, your meals fit how you already eat, and George AI turns logging into a photo. Most clients tell me it takes less time than their last attempt on their own.</p>
-              </details>
-              <details>
-                <summary>I travel a lot and eat out constantly. Does it still work?</summary>
-                <p>Yes. That is the point of building it around your life rather than around a meal plan. Nothing is off limits. Send George AI the menu and it tells you what fits your targets, and when your week changes, the plan changes with it on our call.</p>
-              </details>
-              <details>
-                <summary>I have tried coaches and plans before. Why would this be different?</summary>
-                <p>Because those ran on discipline, and discipline runs out. This runs on a system: the psychology first, so the start date stops moving; the app, so the right thing happens every day without willpower; and the education, so you understand it well enough to keep it once we finish.</p>
-                <p>And if it does not work, the guarantee means the risk sits with me, not you.</p>
-              </details>
-              <details>
-                <summary>Do I need a gym?</summary>
-                <p>No. Training is built around what you enjoy and what you have access to, whether that is a gym, a hotel room or a spare room at home. If you hate it, it will not last, so we do not start there.</p>
-              </details>
-              <details>
-                <summary>What does it cost?</summary>
-                <p>Investment starts from £1,000, and I do not work with anyone for less than three months. Building something that lasts takes longer than that, but three months is the minimum to set it up properly. The exact package depends on the level of support you need, so we go through it on the call once we have worked out whether this is the right fit. There is no pressure on that call, and no pitch in the audit.</p>
-              </details>
-              <details>
-                <summary>What happens on the call?</summary>
-                <p>It is 45 minutes. We look at where your health is now, where you want it to be and what has got in the way before. I walk you through the system, we cover the levels of support and what each one costs, and you leave with a clear next step. If this is not the right fit for you, I will tell you.</p>
-              </details>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="dark center">
-          <Reveal className="wrap">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-            <h2>Take control of <span className="gold">your health.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Apply for a call and we work out together whether this is the right fit. Or take the free audit first and see exactly where you are.</p>
-            <div className="btns">
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Apply for a Call with George</a>
-              <a className="btn out-light" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-            </div>
-            <p className="micro" style={{ color: "rgba(255,255,255,.55)" }}>No pressure on the call · The audit is free and takes 4 minutes</p>
           </Reveal>
         </section>
 
@@ -1098,8 +1060,8 @@ function StickyBar() {
 
   return (
     <div className={`sticky ${show ? "show" : ""}`}>
-      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Take the Dental Performance Audit</a>
-      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Apply for a Call with George</a>
+      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Dental Performance Audit</a>
+      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Book a call</a>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function PrivacyPage() {
     <>
       <nav className="site-nav" style={{ position: "static" }}>
         <div className="wrap-wide nav-in">
-          <Link className="logo" href="/">George Vernon<span>Health &amp; Performance Coach</span></Link>
+          <Link className="logo" href="/">George Vernon<span>Performance Coach</span></Link>
         </div>
       </nav>
       <main>

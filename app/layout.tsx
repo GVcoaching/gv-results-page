@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 const SITE_URL = "https://www.georgevernon.co.uk";
-const TITLE = "Health & Performance Coach | George Vernon";
+const TITLE = "Performance Coach for Dentists & Business Leaders | George Vernon";
 const DESCRIPTION =
-  "One-to-one health and performance coaching for dentists, practice owners and business leaders. More energy, sharper focus, without burning out.";
+  "Performance coach for dentists and business leaders. More energy, sharper focus and a calmer head, without the burnout or the quick fix.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 867,
-        alt: "George Vernon speaking on stage — Health & Performance Coach",
+        alt: "George Vernon speaking on stage — performance coach for dentists and business leaders",
       },
     ],
   },
@@ -47,7 +47,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "George Vernon",
-  jobTitle: "Health & Performance Coach",
+  jobTitle: "Performance coach for dentists and business leaders",
   url: SITE_URL,
   email: "george@gvcoaching.co.uk",
   image: `${SITE_URL}/Headshot/IMG_8821.webp`,
