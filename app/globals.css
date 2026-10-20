@@ -113,8 +113,14 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 @media (min-width: 1000px) {
   .hero-grid { gap: 36px; }
   .hero-grid .hero-vid { max-width: 880px; }
-  .hero-cta { max-width: 360px; }
+  .hero-grid .hero-cta { max-width: 360px; }
 }
+/* Hero centred at every size */
+.hero-grid { justify-items: center; text-align: center; }
+.hero-grid > * { width: 100%; }
+.hero-grid .hero-vid, .hero-grid .hero-cta { margin-left: auto; margin-right: auto; }
+.hero-grid .sub { margin-left: auto; margin-right: auto; }
+.hero-grid h1 { max-width: 22ch; }
 .hero-ph { aspect-ratio: 4/5; background: transparent; border: 0; padding: 0; overflow: hidden; position: relative; display: block; }
 .hero-ph img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 /* The reel sits in the hero at its own 16:9 shape */

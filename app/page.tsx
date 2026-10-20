@@ -673,7 +673,7 @@ export default function Page() {
         <div className="wrap-wide">
           <div className="hero-grid">
             <div className="hero-txt">
-              <h1 style={{ margin: "0 0 24px" }}>
+              <h1 style={{ margin: "0 auto 24px" }}>
                 Make this the <span className="gold">last time</span> you go on a health kick.
               </h1>
               <p className="sub">
