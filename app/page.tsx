@@ -200,11 +200,11 @@ const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Lukman"],
   ["video", "Steve Want"],
   ["video", "Andrew Thompson"],
-  ["video", "Ben Rutter"],
   ["video", "Rob Allen-Pugh"],
   ["video", "Kieran Kearns"],
   ["video", "Commercial Director"],
   ["video", "Jacob"],
+  ["video", "Ben Rutter"],
   // Photo cards
   ["photo", "Reece"],
   ["photo", "Jaz"],
@@ -565,8 +565,8 @@ function Navbar() {
           </a>
           <div className="nav-links">
             <a href="#top">Results</a>
-            <a href="#coaching">The Programme</a>
             <a href="#about">About George</a>
+            <a href="#coaching">The Programme</a>
             <a href="#corporate">Business Wellbeing</a>
             <a href="#faq">FAQs</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit →</a>
@@ -585,8 +585,8 @@ function Navbar() {
       </nav>
       <div className={`drawer ${open ? "open" : ""}`}>
         <a href="#top" onClick={go}>Results</a>
-        <a href="#coaching" onClick={go}>The Programme</a>
         <a href="#about" onClick={go}>About George</a>
+        <a href="#coaching" onClick={go}>The Programme</a>
         <a href="#corporate" onClick={go}>Business Wellbeing Programmes</a>
         <a href="#faq" onClick={go}>FAQs</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a call</a>
@@ -778,10 +778,14 @@ export default function Page() {
 
             <div className="about-centered">
               <p className="about-lead">&ldquo;I help dentists and business leaders get their headspace, energy and body working for them, so they can perform at their best and keep doing it, without the burnout or the quick fix.&rdquo;</p>
+              <div className="about-cred">
+                <span className="eyebrow">The Principals Club</span>
+                <p>Health expert for The Principals Club for Dental Practice Owners in the UK.</p>
+              </div>
               <p>George Vernon is the founder of GV Coaching. Alongside his one-to-one coaching, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
               <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
               <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
-              <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He also consults for professional groups, including The Principals Club for Dental Practice Owners in the UK.</p>
+              <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He is the health expert for The Principals Club for Dental Practice Owners in the UK, and consults for other professional groups.</p>
             </div>
 
             {/* Boxing + University */}
