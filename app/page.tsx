@@ -15,6 +15,9 @@ type Result = {
   yt: string;
   name: string;
   role: string;
+  // A short line in place of the full proof text, for a follow-on video
+  // card when the person's photo card already tells the story.
+  simple?: string;
 };
 
 type Quote = {
@@ -145,14 +148,14 @@ const RESULTS: Result[] = [
   { yt: "nV757-4Yv4I", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands" },
   { yt: "PjwqI1F6nYI", name: "Dr Darren Hill", role: "General dentist, Dublin" },
   { yt: "Afn8-jEouPU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property" },
-  { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist" },
+  { yt: "4xQdEkM94So", name: "Vish", role: "Dentist", simple: "What Vish had to say." },
   { yt: "lPlCKBasfY8", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables" },
   { yt: "7_PoGD311NU", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group" },
   { yt: "_W7cLmdH9Bc", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White" },
   { yt: "ibksayDfSnI", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training" },
   { yt: "BtVuz8cgAT4", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover" },
-  { yt: "rlctXVS0e8A", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
-  { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in" },
+  { yt: "zH-Qv4Gn1cg", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
+  { yt: "Nf2o47qEWso", name: "Commercial Director", role: "Name withheld by request · three months in" },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner" },
   { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London" },
   { yt: "SnHWAj-YH-M", name: "Lukman", role: "Dentist" },
@@ -188,6 +191,7 @@ const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Robbie Newton"],
   ["video", "Matt Hadman"],
   ["photo", "Vish"],
+  ["video", "Vish"],
   ["video", "Lash Saranna"],
   ["video", "Ian Tilley"],
   ["photo", "Reece"],
@@ -201,11 +205,11 @@ const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Andrew Thompson"],
   ["photo", "Mani Konkon"],
   ["video", "Steve Want"],
-  ["photo", "Sana Ali"],
-  // Old edits
   ["video", "Commercial Director"],
-  ["video", "Jacob"],
+  ["photo", "Sana Ali"],
   ["video", "Ben Rutter"],
+  // Old edits
+  ["video", "Jacob"],
 ];
 
 type Card = { kind: "video"; r: Result } | { kind: "photo"; q: Quote };
@@ -710,7 +714,16 @@ export default function Page() {
                         <YouTubeVideo id={r.yt} label={r.name} />
                       </div>
                       <div className="slide-body">
-                        <ProofText name={r.name} role={r.role} />
+                        {r.simple ? (
+                          <>
+                            <div className="stars">{STARS}</div>
+                            <div className="p-head">{r.simple}</div>
+                            <div className="s-name">{r.name}</div>
+                            <div className="s-role">{r.role}</div>
+                          </>
+                        ) : (
+                          <ProofText name={r.name} role={r.role} />
+                        )}
                       </div>
                     </article>
                   );
