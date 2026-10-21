@@ -569,8 +569,8 @@ function Navbar() {
             <a href="#coaching">The Programme</a>
             <a href="#corporate">Business Wellbeing</a>
             <a href="#faq">FAQs</a>
-            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit →</a>
-            <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call with George</a>
+            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit</a>
+            <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
           </div>
           <button
             type="button"
@@ -765,6 +765,7 @@ export default function Page() {
               <h2>Fifteen years working out how <span className="gold">health drives performance.</span></h2>
             </div>
 
+            <div className="about-split">
             <div className="about-portrait">
               <div className="accent" />
               <div className="about-portrait-img">
@@ -786,6 +787,7 @@ export default function Page() {
               <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
               <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
               <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He is the health expert for The Principals Club for Dental Practice Owners in the UK, and consults for other professional groups.</p>
+            </div>
             </div>
 
             {/* Boxing + University */}
@@ -1068,8 +1070,8 @@ export default function Page() {
 function StickyBar() {
   return (
     <div className="sticky">
-      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
-      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call with George</a>
+      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit</a>
+      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
     </div>
   );
 }

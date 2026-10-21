@@ -92,20 +92,19 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 .nav-links a { font-family: Georgia, serif; font-size: 15px; color: var(--navy); text-decoration: none; white-space: nowrap; }
 .nav-links a:hover { color: var(--gold); }
 .nav-links { gap: 20px; }
-.nav-links .nav-cta-navy { background: var(--navy); color: #fff; }
-.nav-links .nav-cta-navy:hover { background: var(--navy-deep); color: var(--gold); }
-.nav-links .nav-cta + .nav-cta { margin-left: -10px; }
-.nav-cta { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; background: var(--gold); color: var(--navy); padding: 13px 17px; text-decoration: none; font-family: 'Inter', sans-serif !important; min-height: 44px; display: inline-flex; align-items: center; }
+.nav-links .nav-cta + .nav-cta { margin-left: -8px; }
+.nav-cta, .nav-links a.nav-cta { font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: transparent; color: var(--navy); border: 1px solid var(--gold); padding: 9px 14px; text-decoration: none; font-family: 'Inter', sans-serif !important; min-height: 38px; display: inline-flex; align-items: center; transition: .15s; }
+.nav-links a.nav-cta:hover { background: var(--gold); color: var(--navy); }
+.nav-links a.nav-cta-navy { background: var(--navy); color: #fff; border-color: var(--navy); }
+.nav-links a.nav-cta-navy:hover { background: var(--navy-deep); border-color: var(--navy-deep); color: var(--gold); }
 .burger { margin-left: auto; background: none; border: 0; cursor: pointer; padding: 10px; display: flex; flex-direction: column; gap: 5px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
 .burger span { width: 24px; height: 2px; background: var(--navy); display: block; }
 @media (min-width: 1200px) { .nav-links { display: flex; } .burger { display: none; } }
-/* Two full-worded buttons in the bar: tighten things up until there's room */
-@media (min-width: 1200px) and (max-width: 1599px) {
+/* Narrower laptops: drop the tagline and tighten so links and both buttons fit */
+@media (min-width: 1200px) and (max-width: 1399px) {
   .logo span { display: none; }
-  .nav-in { gap: 16px; }
-  .nav-links { gap: 16px; }
-  .nav-links a { font-size: 14px; }
-  .nav-links .nav-cta { padding: 13px 13px; font-size: 10.5px; }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 14.5px; }
 }
 
 .drawer { position: fixed; inset: 0; background: var(--navy-deep); z-index: 99; padding: 92px 26px 26px; display: none; flex-direction: column; gap: 4px; overflow-y: auto; }
@@ -123,7 +122,7 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
   padding: 104px 0 64px;
   border-bottom: 1px solid var(--border-dark);
 }
-.hero h1 { color: #fff; font-size: clamp(40px, 5.6vw, 80px); line-height: 1.04; letter-spacing: -.01em; margin: 0; max-width: 15ch; }
+.hero h1 { color: #fff; font-size: clamp(40px, 5.2vw, 70px); line-height: 1.05; letter-spacing: -.01em; margin: 0; max-width: 15ch; }
 .hero .sub { color: rgba(255,255,255,.78); font-size: clamp(18px, 1.7vw, 23px); line-height: 1.5; margin-top: 24px; max-width: 34ch; }
 .hero-eye { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
 .hero-eye .eyebrow { color: var(--gold); }
@@ -161,14 +160,16 @@ nav.site-nav.scrolled { box-shadow: 0 1px 14px rgba(0,0,0,.09); border-bottom: 1
 .slot.dark { color: var(--muted); }
 
 /* SECTION */
-section { padding: 40px 0; border-top: 1px solid var(--border); scroll-margin-top: 80px; }
-@media (min-width: 768px) { section { padding: 44px 0; } }
+section { padding: 48px 0; border-top: 1px solid var(--border); scroll-margin-top: 80px; }
+@media (min-width: 768px) { section { padding: 60px 0; } }
+@media (min-width: 1100px) { section { padding: 76px 0; } }
 .grey { background: var(--offwhite); }
 .dark { background: var(--navy); color: #fff; border-top: none; }
 .dark h2, .dark h3 { color: #fff; }
 .dark .sub { color: rgba(255,255,255,.72); }
-.sec-head { margin-bottom: 18px; }
-@media (min-width: 768px) { .sec-head { margin-bottom: 24px; } }
+.sec-head { margin-bottom: 22px; }
+@media (min-width: 768px) { .sec-head { margin-bottom: 32px; } }
+@media (min-width: 1100px) { .sec-head { margin-bottom: 40px; } }
 
 /* VIDEO */
 .pain { display: grid; gap: 14px; max-width: 980px; margin: 22px auto 34px; text-align: left; }
@@ -408,6 +409,17 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 .about-caption b { display: block; color: var(--gold); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
 .about-caption span { font-family: Georgia, serif; font-size: 14px; }
 
+/* Laptop: portrait on the left (stays in view), story on the right, then the
+   photo panels full width underneath. Phones keep the stacked layout. */
+@media (min-width: 1000px) {
+  .about-split { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 64px; align-items: start; max-width: 1140px; margin: 0 auto 56px; }
+  .about-split .about-portrait { max-width: none; margin: 0; position: sticky; top: 104px; }
+  .about-split .about-centered { max-width: none; margin: 0; text-align: left; }
+  .about-split .about-centered p,
+  .about-split .about-cred { max-width: 64ch; margin-left: 0; margin-right: 0; }
+  .about-split .about-centered p.about-lead { text-align: left; max-width: 34ch; margin-bottom: 28px; }
+}
+
 .grp { border: 1px solid var(--border); overflow: hidden; margin-bottom: 26px; background: #fff; }
 .grp .accent { height: 3px; background: var(--gold); }
 .grp-imgs { display: grid; gap: 0; }
@@ -418,11 +430,11 @@ iframe.emb { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 @media (min-width: 720px) {
   .grp-feature .grp-imgs { grid-template-columns: repeat(2, 1fr); }
   .grp-feature .grp-imgs > * { aspect-ratio: auto; height: 340px; }
-  .grp-feature .grp-imgs > .grp-lead { grid-column: 1 / -1; aspect-ratio: auto; height: 600px; }
+  .grp-feature .grp-imgs > .grp-lead { grid-column: 1 / -1; aspect-ratio: auto; height: 520px; }
 }
 @media (min-width: 720px) {
   .grp-2 .grp-imgs { grid-template-columns: repeat(2, 1fr); }
-  .grp-2 .grp-imgs > * { aspect-ratio: auto; height: 460px; }
+  .grp-2 .grp-imgs > * { aspect-ratio: auto; height: 400px; }
   .grp-3 .grp-imgs { grid-template-columns: repeat(3, 1fr); }
   .grp-3 .grp-imgs > * { aspect-ratio: auto; height: 340px; }
   .grp-4 .grp-imgs { grid-template-columns: repeat(2, 1fr); }

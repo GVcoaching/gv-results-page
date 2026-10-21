@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 const SITE_URL = "https://www.georgevernon.co.uk";
-const TITLE = "Performance Coach for Dentists & Business Leaders | George Vernon";
+const TITLE = "George Vernon | Performance Coach for Dentists and Business Leaders";
 const DESCRIPTION =
-  "Performance coach for dentists and business leaders. More energy, sharper focus and a calmer head, without the burnout or the quick fix.";
+  "George Vernon, performance coach for dentists and business leaders. More energy, sharper focus and a calmer head, without the burnout or the quick fix.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "GV Coaching — George Vernon",
+    siteName: "George Vernon",
     locale: "en_GB",
     type: "website",
     images: [
@@ -59,6 +59,16 @@ const personSchema = {
   sameAs: [] as string[],
 };
 
+// Tells Google the site's name, so results read "George Vernon" rather than
+// anything it guesses from elsewhere.
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "George Vernon",
+  alternateName: "George Vernon, Performance Coach for Dentists and Business Leaders",
+  url: `${SITE_URL}/`,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" className={inter.variable}>
@@ -66,6 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body>{children}</body>
