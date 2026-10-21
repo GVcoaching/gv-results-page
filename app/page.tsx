@@ -157,7 +157,7 @@ const RESULTS: Result[] = [
   { yt: "zH-Qv4Gn1cg", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
   { yt: "Nf2o47qEWso", name: "Commercial Director", role: "Name withheld by request · three months in" },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner" },
-  { yt: "Vd7LEChZjBs", name: "Jacob", role: "Journalist, financial publication, London" },
+  { yt: "3whz4Qp8f4k", name: "Jacob", role: "Journalist, financial publication, London" },
   { yt: "SnHWAj-YH-M", name: "Lukman", role: "Dentist" },
 ];
 
@@ -183,33 +183,34 @@ const QUOTES: Quote[] = [
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist" },
 ];
 
-// One slider, each person once. Newly edited videos lead, mixed in with the
-// photo cards; videos still in the old edit sit at the end until they're redone.
+// One slider: every video first, then the photo cards. Vish's photo stays just
+// ahead of his video, which only says "What Vish had to say." because the photo
+// card carries his story.
 // Data comes from RESULTS / QUOTES above.
 const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Dr Sanchia Jauch"],
   ["video", "Robbie Newton"],
   ["video", "Matt Hadman"],
-  ["photo", "Vish"],
-  ["video", "Vish"],
+  ["video", "Mark Harris"],
   ["video", "Lash Saranna"],
   ["video", "Ian Tilley"],
-  ["photo", "Reece"],
-  ["video", "Rob Allen-Pugh"],
-  ["video", "Kieran Kearns"],
-  ["photo", "Jaz"],
-  ["video", "Mark Harris"],
+  ["photo", "Vish"],
+  ["video", "Vish"],
   ["video", "Dr Darren Hill"],
   ["video", "Lukman"],
-  ["photo", "Sam Sneyd"],
-  ["video", "Andrew Thompson"],
-  ["photo", "Mani Konkon"],
   ["video", "Steve Want"],
-  ["video", "Commercial Director"],
-  ["photo", "Sana Ali"],
+  ["video", "Andrew Thompson"],
   ["video", "Ben Rutter"],
-  // Old edits
+  ["video", "Rob Allen-Pugh"],
+  ["video", "Kieran Kearns"],
+  ["video", "Commercial Director"],
   ["video", "Jacob"],
+  // Photo cards
+  ["photo", "Reece"],
+  ["photo", "Jaz"],
+  ["photo", "Sam Sneyd"],
+  ["photo", "Sana Ali"],
+  ["photo", "Mani Konkon"],
 ];
 
 type Card = { kind: "video"; r: Result } | { kind: "photo"; q: Quote };
