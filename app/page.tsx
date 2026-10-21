@@ -139,18 +139,18 @@ function ProofText({ name, role }: { name: string; role: string }) {
 }
 
 const RESULTS: Result[] = [
-  { yt: "5bUTkPtKIak", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO" },
-  { yt: "Q_B-ajMX4B4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct" },
-  { yt: "0OrneCoUSSU", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association" },
-  { yt: "znNeTPMBxTs", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands" },
-  { yt: "HE9kxhuNZOU", name: "Dr Darren Hill", role: "General dentist, Dublin" },
-  { yt: "BshYj_w56LU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property" },
+  { yt: "f5R6BKbbqfE", name: "Lash Saranna", role: "Co-Founder & CEO, EZOO" },
+  { yt: "-JVQBhDAFr4", name: "Matt Hadman", role: "Head of Dental Groups, Patient Plan Direct" },
+  { yt: "OSPaqdj69lQ", name: "Dr Sanchia Jauch", role: "Dental practice owner · past President, Namibia Dental Association" },
+  { yt: "nV757-4Yv4I", name: "Ian Tilley", role: "Operations Manager, NG Bailey Midlands" },
+  { yt: "PjwqI1F6nYI", name: "Dr Darren Hill", role: "General dentist, Dublin" },
+  { yt: "Afn8-jEouPU", name: "Mark Harris", role: "Serial business owner · IT, telecoms and property" },
   { yt: "cZC4YfC29_Q", name: "Vish", role: "Dentist" },
-  { yt: "pvpICrhtVlw", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables" },
-  { yt: "n2GZO2-QZtQ", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group" },
+  { yt: "lPlCKBasfY8", name: "Rob Allen-Pugh", role: "Senior Manager, Nova Solar Renewables" },
+  { yt: "7_PoGD311NU", name: "Kieran Kearns", role: "Senior Bid Manager, Frankham Group" },
   { yt: "HTYQEOJxg2k", name: "Andrew Thompson", role: "Head of UK Water, Fingleton White" },
   { yt: "u9IJAWhxF2Y", name: "Steve Want", role: "Creative Brand Designer & Communication Lead, PET-Xi Training" },
-  { yt: "wLREk3NHYd0", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover" },
+  { yt: "BtVuz8cgAT4", name: "Robbie Newton", role: "Owner, plumbing & heating business · £2M turnover" },
   { yt: "rlctXVS0e8A", name: "Ben Rutter", role: "Owner, Digital Prosthetics" },
   { yt: "ryg6JrOmCZU", name: "Commercial Director", role: "Name withheld by request · three months in" },
   { yt: "yoKPbAjhfIo", name: "Jaz", role: "Property business owner" },
@@ -180,30 +180,32 @@ const QUOTES: Quote[] = [
   { photo: "/images/lukman.webp", name: "Lukman", role: "Dentist" },
 ];
 
-// One slider, each person once. The four performance stories lead, then the
-// rest alternate photos and videos. Data comes from RESULTS / QUOTES above.
+// One slider, each person once. Newly edited videos lead, mixed in with the
+// photo cards; videos still in the old edit sit at the end until they're redone.
+// Data comes from RESULTS / QUOTES above.
 const CARD_ORDER: ["video" | "photo", string][] = [
   ["video", "Dr Sanchia Jauch"],
   ["video", "Robbie Newton"],
   ["video", "Matt Hadman"],
-  ["video", "Lukman"],
   ["photo", "Vish"],
   ["video", "Lash Saranna"],
   ["video", "Ian Tilley"],
-  ["video", "Rob Allen-Pugh"],
-  ["photo", "Kieran Kearns"],
-  ["video", "Mark Harris"],
-  ["video", "Andrew Thompson"],
-  ["video", "Dr Darren Hill"],
   ["photo", "Reece"],
+  ["video", "Rob Allen-Pugh"],
+  ["video", "Kieran Kearns"],
   ["photo", "Jaz"],
+  ["video", "Mark Harris"],
+  ["video", "Dr Darren Hill"],
+  ["photo", "Sam Sneyd"],
+  ["photo", "Mani Konkon"],
+  ["photo", "Sana Ali"],
+  // Old edits
+  ["video", "Lukman"],
+  ["video", "Andrew Thompson"],
   ["video", "Steve Want"],
   ["video", "Commercial Director"],
   ["video", "Jacob"],
   ["video", "Ben Rutter"],
-  ["photo", "Sam Sneyd"],
-  ["photo", "Mani Konkon"],
-  ["photo", "Sana Ali"],
 ];
 
 type Card = { kind: "video"; r: Result } | { kind: "photo"; q: Quote };
@@ -562,8 +564,8 @@ function Navbar() {
             <a href="#about">About George</a>
             <a href="#corporate">Business Wellbeing</a>
             <a href="#faq">FAQs</a>
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
-            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit →</a>
+            <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit →</a>
+            <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call with George</a>
           </div>
           <button
             type="button"
@@ -673,20 +675,18 @@ export default function Page() {
         <div className="wrap-wide">
           <div className="hero-grid">
             <div className="hero-txt">
-              <h1 style={{ margin: "0 auto 24px" }}>
-                Make this the <span className="gold">last time</span> you go on a health kick.
+              <div className="hero-eye"><span className="goldbar" /><span className="eyebrow">George Vernon</span></div>
+              <h1>
+                Performance coach for <span className="gold">dentists and business leaders.</span>
               </h1>
-              <p className="sub">
-                For people who already know what to do, and cannot work out why it never sticks.
-              </p>
-              <div className="hero-role">Performance coach for dentists and business leaders.</div>
+              <p className="sub">Building the long-term habits that drive your performance.</p>
             </div>
-            <div className="hero-ph hero-vid">
-              <YouTubeVideo id="VELuysAT1E0" label="What changed: dentists and business leaders in their own words" poster="/images/reel-what-changed.webp" />
-            </div>
-            <div className="hero-cta">
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center" }}>Book a call</a>
-            </div>
+            <figure className="hero-vid">
+              <div className="hero-frame">
+                <YouTubeVideo id="VELuysAT1E0" label="What changed: dentists and business leaders in their own words" poster="/images/reel-what-changed.webp" />
+              </div>
+              <figcaption>What changed, in their own words</figcaption>
+            </figure>
           </div>
         </div>
       </header>
@@ -754,7 +754,7 @@ export default function Page() {
             <div className="about-portrait">
               <div className="accent" />
               <div className="about-portrait-img">
-                <Image src="/about/george-portrait.webp" alt="Portrait of George Vernon" width={1200} height={1600} quality={90} sizes="(min-width: 700px) 640px, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+                <Image src="/about/george-portrait.webp" alt="Portrait of George Vernon" width={1200} height={1600} quality={90} sizes="(min-width: 700px) 420px, 70vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               </div>
               <div className="about-caption">
                 <b>George Vernon</b>
@@ -1045,23 +1045,13 @@ export default function Page() {
 }
 
 // ─── MOBILE STICKY ───────────────────────────────────────────────────────────
-// Hidden while the hero is on screen, so the first view isn't four buttons deep.
+// Always visible, so the audit and the call are one tap away wherever they are.
 
 function StickyBar() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const hero = document.getElementById("top");
-    if (!hero) return;
-    const io = new IntersectionObserver(([entry]) => setShow(!entry.isIntersecting), { rootMargin: "-80px 0px 0px 0px" });
-    io.observe(hero);
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <div className={`sticky ${show ? "show" : ""}`}>
-      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Dental Performance Audit</a>
-      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" tabIndex={show ? 0 : -1}>Book a call</a>
+    <div className="sticky">
+      <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Take the Dental Performance Audit</a>
+      <a className="btn out-light" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call with George</a>
     </div>
   );
 }
