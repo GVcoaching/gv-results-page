@@ -859,6 +859,19 @@ export default function Page() {
               </div>
             </div>
 
+            {/* The Principals Club experts: square graphics, shown whole */}
+            <div className="grp grp-sq">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div><Image src="/about/principals-club-1.webp" alt="The Principals Club Meet The Experts: Shaz Memon, George Vernon, Justin Leigh, Raj Rattan, Rahul Doshi and Andy Acton" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
+                <div><Image src="/about/principals-club-2.webp" alt="The Principals Club experts: Philip Molden, Sarah Buxton, Nigel Risner, David Brewer, Adam Brookbanks and David Claridge" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
+              </div>
+              <div className="about-caption">
+                <b>The Principals Club</b>
+                <span>Health expert alongside leading names in UK dentistry</span>
+              </div>
+            </div>
+
             <div className="btns" style={{ justifyContent: "center", marginTop: 26 }}>
               <a className="btn navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
             </div>
