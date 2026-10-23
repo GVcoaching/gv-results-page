@@ -567,7 +567,7 @@ function Navbar() {
             <a href="#top">Results</a>
             <a href="#about">About George</a>
             <a href="#coaching">The Programme</a>
-            <a href="#corporate">Business Wellbeing</a>
+            <a href="#corporate">Business Performance</a>
             <a href="#faq">FAQs</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit</a>
             <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
@@ -587,7 +587,7 @@ function Navbar() {
         <a href="#top" onClick={go}>Results</a>
         <a href="#about" onClick={go}>About George</a>
         <a href="#coaching" onClick={go}>The Programme</a>
-        <a href="#corporate" onClick={go}>Business Wellbeing Programmes</a>
+        <a href="#corporate" onClick={go}>Business Performance Programmes</a>
         <a href="#faq" onClick={go}>FAQs</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a call</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
@@ -1013,7 +1013,7 @@ export default function Page() {
         {/* CORPORATE */}
         <section id="corporate">
           <Reveal className="wrap center">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business wellbeing programmes</span><span className="goldbar" /></div>
+            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Business performance programmes</span><span className="goldbar" /></div>
             <h2 style={{ marginBottom: 18 }}>Healthier, happier teams. <span className="gold">Better business performance.</span></h2>
             <p className="sub">Evidence-based talks and programmes that help your people improve energy, focus and resilience, and help your business reduce absence, burnout and lost productivity. Delivered for dental practices, groups and organisations across the UK.</p>
             <div className="vwrap" style={{ marginTop: 32 }}>
