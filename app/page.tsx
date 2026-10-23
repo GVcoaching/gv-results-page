@@ -815,7 +815,7 @@ export default function Page() {
               </div>
               <div className="about-caption">
                 <b>The Principals Club</b>
-                <span>Speaking at the Ambassadors Day, and one of its experts alongside leading names in UK dentistry</span>
+                <span>George is the health expert for The Principals Club, and has spoken at several of their live events for dental practice owners</span>
               </div>
             </div>
 
@@ -858,7 +858,7 @@ export default function Page() {
               <div className="f"><div className="f-n">04</div><h3>Physical health</h3><p>Built on training you enjoy and that gives you energy, not something you have to endure.</p></div>
               <div className="f"><div className="f-n">05</div><h3>Building long-term habits</h3><p>What gets measured gets managed. Your data shows what is working, and the science of habit building turns it into what you do without thinking, so everything sticks.</p></div>
             </div>
-            <p className="sub five-foot">Long term behaviour change, not another health kick. Losing weight and keeping it off is what happens when the foundations are right.</p>
+            <p className="sub five-foot">Long-term behaviour change, not another health kick. Losing weight and keeping it off is what happens when the foundations are right.</p>
           </Reveal>
         </section>
 
@@ -988,7 +988,7 @@ export default function Page() {
                 <ul className="alist">
                   <li>Your phase result: Foundations, Lifestyle Optimisation or Performance</li>
                   <li>What to focus on first, and what to leave alone for now</li>
-                  <li><b>A free four-part introduction to the framework, so you can see how it works before you commit.</b></li>
+                  <li><b>A free four-part introduction to the framework, so you can see how it works before you commit</b></li>
                   <li>No call required, and no pitch</li>
                 </ul>
               </div>
