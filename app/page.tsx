@@ -762,44 +762,60 @@ export default function Page() {
           <Reveal className="wrap-wide">
             <div className="center sec-head">
               <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">About George</span><span className="goldbar" /></div>
-              <h2>Fifteen years working out how <span className="gold">health drives performance.</span></h2>
+              <h2>The health and <span className="gold">performance expert.</span></h2>
             </div>
 
             <div className="about-split">
             <div className="about-portrait">
               <div className="accent" />
               <div className="about-portrait-img">
-                <Image src="/about/george-portrait.webp" alt="Portrait of George Vernon" width={1200} height={1600} quality={90} sizes="(min-width: 700px) 420px, 70vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+                <Image src="/about/speaking-dental-showcase.webp" alt="George Vernon speaking in the Business Theatre at Dental Showcase, ExCeL London" width={2000} height={1675} quality={90} sizes="(min-width: 1000px) 480px, 95vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
               </div>
               <div className="about-caption">
                 <b>George Vernon</b>
-                <span>Performance coach for dentists and business leaders</span>
+                <span>Speaking in the Business Theatre at Dental Showcase, ExCeL London</span>
               </div>
             </div>
 
             <div className="about-centered">
-              <p className="about-lead">&ldquo;I help dentists and business leaders get their headspace, energy and body working for them, so they can perform at their best and keep doing it, without the burnout or the quick fix.&rdquo;</p>
               <div className="about-cred">
                 <span className="eyebrow">The Principals Club</span>
                 <p>Health expert for The Principals Club for Dental Practice Owners in the UK.</p>
               </div>
-              <p>George Vernon is the founder of GV Coaching. Alongside his one-to-one coaching, he delivers health and wellbeing education talks and programmes to organisations across the UK.</p>
-              <p>Over the past 15 years, George has immersed himself in understanding how health underpins performance. He competed as an elite amateur boxer for eight years, completing 33 fights, and spent seven years coaching general health, fitness and long-term weight loss within gym environments.</p>
-              <p>He holds a degree in Sports and Exercise Science and a Master&apos;s degree in Strength and Conditioning, working with elite athletes and professional boxers throughout this time. He also co-founded Fitness by Science with his brother, where he spent three years educating and mentoring new personal trainers.</p>
-              <p>Today, George works exclusively with professionals looking to avoid burnout, improve daily energy and mental clarity, and build sustainable health habits that support both professional success and life outside of work. He is the health expert for The Principals Club for Dental Practice Owners in the UK, and consults for other professional groups.</p>
+              <p>George coaches one to one, and speaks on health and performance to dental practice owners and organisations across the UK.</p>
+              <p>His work builds on 15 years in health and high performance: 33 fights as an elite amateur boxer, a degree in Sports and Exercise Science, a Master&apos;s degree in Strength and Conditioning, and years coaching everyone from general health and wellness clients to elite athletes. Today he works only with dentists and business leaders who want the energy to perform at their best in business, and the wellbeing to enjoy a healthy life outside it.</p>
             </div>
             </div>
 
-            {/* Boxing + University */}
-            <div className="grp grp-2">
+            {/* On stage */}
+            <div className="grp grp-3">
               <div className="accent" />
               <div className="grp-imgs">
-                <div><Image src="/about/boxing.webp" alt="George Vernon competing as an elite amateur boxer" width={1080} height={1080} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-                <div><Image src="/about/university.webp" alt="George Vernon at university, studying Sports and Exercise Science" width={2048} height={2048} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
+                <div><Image quality={90} src="/about/speaking-stage.webp" alt="George Vernon speaking on stage" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
+                <div><Image quality={90} src="/about/speaking-room.webp" alt="George Vernon presenting to a full room" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
+                <div><Image quality={90} src="/about/speaking-audience.webp" alt="The audience at one of George Vernon's talks" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
               </div>
               <div className="about-caption">
-                <b>Boxing &amp; the Science</b>
-                <span>Elite amateur boxer, Sports and Exercise Science degree and S&amp;C MSc</span>
+                <b>On Stage</b>
+                <span>Talks and workshops for dental teams and organisations across the UK</span>
+              </div>
+            </div>
+
+            {/* The Principals Club: Ambassadors Day talk, then the experts graphics (square, shown whole) */}
+            <div className="grp grp-pc">
+              <div className="accent" />
+              <div className="grp-imgs">
+                <div className="grp-lead"><Image src="/about/principals-ambassadors-screen.webp" alt="The Principals Club Ambassadors Day, 27 February 2026" width={2000} height={1333} sizes="(min-width: 1000px) 900px, 95vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 45%" }} /></div>
+                <div className="pc-tall"><Image src="/about/principals-ambassadors-talk.webp" alt="George Vernon speaking at The Principals Club Ambassadors Day" width={1333} height={2000} sizes="(min-width: 720px) 24vw, 48vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} /></div>
+                <div className="pc-tall"><Image src="/about/principals-ambassadors-audience-2.webp" alt="Dental practice owners listening to George Vernon at The Principals Club Ambassadors Day" width={1333} height={2000} sizes="(min-width: 720px) 24vw, 48vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 45%" }} /></div>
+                <div className="pc-tall"><Image src="/about/principals-ambassadors-audience-1.webp" alt="Dental practice owners listening to George Vernon at The Principals Club Ambassadors Day" width={1333} height={2000} sizes="(min-width: 720px) 24vw, 48vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 35%" }} /></div>
+                <div className="pc-tall"><Image src="/about/principals-ambassadors-audience-3.webp" alt="Dental practice owners listening to George Vernon at The Principals Club Ambassadors Day" width={1333} height={2000} sizes="(min-width: 720px) 24vw, 48vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%" }} /></div>
+                <div className="pc-sq"><Image src="/about/principals-club-1.webp" alt="The Principals Club Meet The Experts: Shaz Memon, George Vernon, Justin Leigh, Raj Rattan, Rahul Doshi and Andy Acton" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
+                <div className="pc-sq"><Image src="/about/principals-club-2.webp" alt="The Principals Club experts: Philip Molden, Sarah Buxton, Nigel Risner, David Brewer, Adam Brookbanks and David Claridge" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
+              </div>
+              <div className="about-caption">
+                <b>The Principals Club</b>
+                <span>Speaking at the Ambassadors Day, and one of its experts alongside leading names in UK dentistry</span>
               </div>
             </div>
 
@@ -813,62 +829,7 @@ export default function Page() {
               </div>
               <div className="about-caption">
                 <b>The Athletes</b>
-                <span>Coaching elite athletes and elite boxers</span>
-              </div>
-            </div>
-
-            {/* Working in the gym */}
-            <div className="grp grp-2">
-              <div className="accent" />
-              <div className="grp-imgs">
-                <div><Image src="/about/gym-1.webp" alt="George Vernon coaching in the gym" width={1194} height={1194} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-                <div><Image src="/about/gym-2.webp" alt="George Vernon coaching in the gym" width={1179} height={1257} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-              </div>
-              <div className="about-caption">
-                <b>The Gym Floor</b>
-                <span>Seven years coaching general health, fitness and weight loss</span>
-              </div>
-            </div>
-
-            {/* Fitness by Science */}
-            <div className="grp grp-4">
-              <div className="accent" />
-              <div className="grp-imgs">
-                <div><Image src="/about/fitness-by-science-1.webp" alt="Fitness by Science" width={1440} height={1800} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-                <div><Image src="/about/fitness-by-science-2.webp" alt="Fitness by Science" width={1536} height={2048} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} /></div>
-                <div><Image src="/about/fitness-by-science-3.webp" alt="Fitness by Science" width={1800} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }} /></div>
-                <div><Image src="/about/fitness-by-science-4.webp" alt="Fitness by Science" width={1440} height={1440} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 15%" }} /></div>
-              </div>
-              <div className="about-caption">
-                <b>Fitness by Science</b>
-                <span>A business George co-founded with his brother, mentoring new personal trainers</span>
-              </div>
-            </div>
-
-            {/* Public speaking */}
-            <div className="grp grp-3">
-              <div className="accent" />
-              <div className="grp-imgs">
-                <div><Image quality={90} src="/about/speaking-stage.webp" alt="George Vernon speaking on stage" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
-                <div><Image quality={90} src="/about/speaking-room.webp" alt="George Vernon presenting to a full room" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
-                <div><Image quality={90} src="/about/speaking-audience.webp" alt="The audience at one of George Vernon's talks" width={2000} height={1125} sizes="(min-width: 720px) 45vw, 130vw" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
-              </div>
-              <div className="about-caption">
-                <b>On Stage</b>
-                <span>Talks and workshops for teams and organisations across the UK</span>
-              </div>
-            </div>
-
-            {/* The Principals Club experts: square graphics, shown whole */}
-            <div className="grp grp-sq">
-              <div className="accent" />
-              <div className="grp-imgs">
-                <div><Image src="/about/principals-club-1.webp" alt="The Principals Club Meet The Experts: Shaz Memon, George Vernon, Justin Leigh, Raj Rattan, Rahul Doshi and Andy Acton" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
-                <div><Image src="/about/principals-club-2.webp" alt="The Principals Club experts: Philip Molden, Sarah Buxton, Nigel Risner, David Brewer, Adam Brookbanks and David Claridge" width={1200} height={1200} sizes="(min-width: 720px) 45vw, 90vw" style={{ width: "100%", height: "100%", objectFit: "contain" }} /></div>
-              </div>
-              <div className="about-caption">
-                <b>The Principals Club</b>
-                <span>Health expert alongside leading names in UK dentistry</span>
+                <span>Coaching elite athletes and professional boxers</span>
               </div>
             </div>
 
@@ -975,7 +936,7 @@ export default function Page() {
             <div className="faq">
               <details>
                 <summary>Are you a personal trainer or an online fitness coach?</summary>
-                <p>No. I used to run an education company that educated and qualified new personal trainers. My work sits underneath: how you think, how you recover and how you behave with your health, so the level of performance you want becomes your new default.</p>
+                <p>No. A personal trainer works on your body for an hour. My work sits underneath: how you think, how you recover and how you behave with your health, so the level of performance you want becomes your new default. I know the difference well: I used to run an education company that trained and qualified new personal trainers.</p>
               </details>
               <details>
                 <summary>How much of my time does this take each week?</summary>
