@@ -10,8 +10,8 @@ import { track } from "@vercel/analytics";
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
 const STARS = "★★★★★";
-const CALENDLY_URL = "https://calendly.com/georgegvcoaching/performance-diagnostic";
-// The calendar shown on the page. Swap this for a team specific event type when it exists.
+const CALENDLY_URL = "https://calendly.com/georgegvcoaching/team-performance-call";
+// The calendar shown on the page: the 20 minute Team Performance Call.
 const BOOKING_EMBED_URL = `${CALENDLY_URL}?hide_gdpr_banner=1&primary_color=c9a96e&text_color=222f39`;
 const ENQUIRY_URL = "mailto:george@gvcoaching.co.uk?subject=Business%20performance%20programme";
 
