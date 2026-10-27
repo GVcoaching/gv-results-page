@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { track } from "@vercel/analytics";
 
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
@@ -62,10 +63,12 @@ const CHANGES = [
 ];
 
 const FAQS = [
+  ["How do we measure the return?", "Everyone gets a baseline in month one: energy, stress, sleep and habits. You get progress reports at months 1, 3 and 6. If you track sickness absence or staff turnover, we add those too."],
+  ["What if people don't engage?", "The sessions are live and the accountability is built in, which is why it holds when diaries fill up. Attendance and progress show up in your reports, so nothing hides."],
   ["Is this a fitness programme?", "No. Fitness is one part. We start with psychology and stress, because that's why change hasn't lasted before."],
+  ["How much time does it take?", "About one live session a week, plus the daily habits in the app. It is built for people who are already busy."],
   ["Online or in person?", "The group calls are live online. The monthly education session can be in person at your practice or office."],
-  ["How much time does it take?", "About one live session a week, plus the daily habits in the app."],
-  ["How big is a cohort?", "10 to 20 people. Larger teams run as several cohorts."],
+  ["Can we start smaller?", "Yes. Plenty of teams start with a keynote or a workshop, then run the programme with the people who want to go further."],
   ["Are you a personal trainer?", "No. I used to run an education company that trained personal trainers."],
 ];
 
@@ -217,22 +220,68 @@ function Footer() {
 
 // ─── PAGE ────────────────────────────────────────────────────────────────────
 
+// Every booking button reports where it was clicked, so Vercel Analytics shows
+// which part of the page actually converts.
+function BookCall({ where, className = "btn", children = "Book a call about your team" }: {
+  where: string;
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <a className={className} href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("Business page: book call", { where })}>
+      {children}
+    </a>
+  );
+}
+
+const TRUSTED = ["The Principals Club", "Patient Plan Direct", "Fingleton White", "Dental Showcase, ExCeL London", "Namibia Dental Congress"];
+
+const FIT = [
+  "You run a practice, group or business with 10 or more people",
+  "Your people are good at their jobs and running on empty",
+  "You want change you can measure, not a one off wellbeing day",
+];
+
+const NOT_FIT = [
+  "You want a box ticked for the staff handbook",
+  "You're looking for a gym membership or a step challenge",
+];
+
+const NEXT = [
+  ["Book a 20 minute call", "We talk about your team, what's getting in the way, and what you want to change."],
+  ["Get a plan for your team", "Cohort size, start date and how we'll measure the return. In writing, within two working days."],
+  ["Start in month one", "Baseline, first education session and the app set up for everyone."],
+];
+
 export default function BusinessPerformance() {
   return (
     <>
       <Navbar />
 
       <header className="hero bp-hero" id="top">
-        <div className="wrap">
-          <div className="hero-eye bp-left"><span className="goldbar" /><span className="eyebrow">Business performance programmes</span></div>
-          <h1 className="bp-h1">Make this the last time your team <span className="gold">goes on a health kick.</span></h1>
-          <p className="sub bp-hero-sub">
-            A six month group programme for practices and businesses whose people already know what to do, and can&apos;t work out why it never sticks. More energy at work and at home, and it lasts.
-          </p>
-          <div className="btns">
-            <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call about your team</a>
-            <a className="btn out-light" href="#how">How it works</a>
+        <div className="wrap-wide bp-hero-grid">
+          <div className="bp-hero-txt">
+            <div className="hero-eye bp-left"><span className="goldbar" /><span className="eyebrow">Business performance programmes</span></div>
+            <h1 className="bp-h1">Make this the last time your team <span className="gold">goes on a health kick.</span></h1>
+            <p className="sub bp-hero-sub">
+              A six month group programme for practices and businesses whose people already know what to do, and can&apos;t work out why it never sticks. More energy at work and at home, and it lasts.
+            </p>
+            <div className="btns bp-hero-btns">
+              <BookCall where="hero" />
+              <a className="btn out-light" href="#results">Watch client results</a>
+            </div>
+            <p className="bp-micro">A 20 minute call. No pressure, and a clear next step either way.</p>
           </div>
+          <figure className="bp-hero-vid">
+            <div className="hero-frame">
+              <YouTubeVideo id="TQBuOmHEoSw" label="George Vernon speaking to dental and business teams" />
+            </div>
+            <figcaption>George on stage with dental and business teams</figcaption>
+          </figure>
+        </div>
+        <div className="wrap-wide bp-trusted">
+          <span>Trusted by leaders and teams at</span>
+          <ul>{TRUSTED.map((t) => <li key={t}>{t}</li>)}</ul>
         </div>
       </header>
 
@@ -255,6 +304,7 @@ export default function BusinessPerformance() {
             <div className="bp-copy">
               <p>Tired people don&apos;t stop doing the job. They stop doing it well. The warmth goes first, then the focus, then the decisions.</p>
               <p>Most wellbeing programmes hand out information. Your team already has the information. What&apos;s missing is the system that makes it stick when work gets busy.</p>
+              <p className="bp-lead">That system is what this programme installs.</p>
             </div>
           </Reveal>
         </section>
@@ -269,6 +319,45 @@ export default function BusinessPerformance() {
               {CHANGES.map(([t, d]) => (
                 <div className="bp-card" key={t}><h3>{t}</h3><p>{d}</p></div>
               ))}
+            </div>
+          </Reveal>
+        </section>
+
+        <section className="grey bp-proof-sec" id="results">
+          <Reveal className="wrap-wide bp-invest-wrap">
+            <div className="bp-price">
+              <div className="eyebrow">Investment</div>
+              <div className="bp-price-num">£300</div>
+              <div className="bp-price-unit">per person, per month</div>
+              <div className="bp-price-day">About £10 a day per person</div>
+              <ul className="bp-ticks">
+                <li>Six month programme, 24 live sessions</li>
+                <li>Cohorts of 10 to 20 people</li>
+                <li>The app and the on demand course for everyone</li>
+                <li>Progress reports at months 1, 3 and 6</li>
+              </ul>
+              <BookCall where="price" />
+              <p className="bp-guarantee"><b>The risk sits with me.</b> If your team doesn&apos;t rate the first month, you don&apos;t pay for it.</p>
+            </div>
+            <div className="bp-proof">
+              <h2>What changes <span className="gold">at work and at home.</span></h2>
+              <p className="sub">In their own words. Tap a video to watch.</p>
+              <div className="bp-videos">
+                {VIDEOS.map((v) => (
+                  <article className="bp-vcard" key={v.yt}>
+                    <YouTubeVideo id={v.yt} label={`${v.name} on working with George`} />
+                    <div className="bp-vbody">
+                      <div className="stars">{STARS}</div>
+                      <p className="bp-quote">&ldquo;{v.quote}&rdquo;</p>
+                      <div className="bp-name">{v.name}</div>
+                      <div className="bp-role">{v.role}</div>
+                      <p className="bp-line">{v.line}</p>
+                      {v.stat && <p className="bp-stat">{v.stat}</p>}
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <Link className="bp-more" href="/#results">See every client result</Link>
             </div>
           </Reveal>
         </section>
@@ -295,34 +384,15 @@ export default function BusinessPerformance() {
           </Reveal>
         </section>
 
-        <section className="grey" id="results">
-          <Reveal className="wrap-wide bp-invest-wrap">
-            <div className="bp-price">
-              <div className="eyebrow">Investment</div>
-              <div className="bp-price-num">£300</div>
-              <div className="bp-price-unit">per person, per month</div>
-              <p>Six month programme. Cohorts of 10 to 20. Paid by the practice or organisation. Larger teams run as several cohorts.</p>
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call about your team</a>
+        <section className="grey">
+          <Reveal className="wrap bp-fit">
+            <div className="bp-fit-col">
+              <h3>This is for you if</h3>
+              <ul className="bp-ticks bp-ticks-dark">{FIT.map((f) => <li key={f}>{f}</li>)}</ul>
             </div>
-            <div className="bp-proof">
-              <h2>What changes <span className="gold">at work and at home.</span></h2>
-              <p className="sub">In their own words. Tap a video to watch.</p>
-              <div className="bp-videos">
-                {VIDEOS.map((v) => (
-                  <article className="bp-vcard" key={v.yt}>
-                    <YouTubeVideo id={v.yt} label={`${v.name} on working with George`} />
-                    <div className="bp-vbody">
-                      <div className="stars">{STARS}</div>
-                      <p className="bp-quote">&ldquo;{v.quote}&rdquo;</p>
-                      <div className="bp-name">{v.name}</div>
-                      <div className="bp-role">{v.role}</div>
-                      <p className="bp-line">{v.line}</p>
-                      {v.stat && <p className="bp-stat">{v.stat}</p>}
-                    </div>
-                  </article>
-                ))}
-              </div>
-              <Link className="bp-more" href="/#results">See every client result</Link>
+            <div className="bp-fit-col bp-fit-no">
+              <h3>It isn&apos;t for you if</h3>
+              <ul className="bp-cross">{NOT_FIT.map((f) => <li key={f}>{f}</li>)}</ul>
             </div>
           </Reveal>
         </section>
@@ -330,17 +400,16 @@ export default function BusinessPerformance() {
         <section>
           <Reveal className="wrap">
             <div className="center sec-head">
-              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Other ways to work together</span><span className="goldbar" /></div>
-              <h2>Start with one session, <span className="gold">or go further.</span></h2>
+              <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">What happens next</span><span className="goldbar" /></div>
+              <h2>Three steps <span className="gold">to your first session.</span></h2>
             </div>
-            <div className="bp-grid">
-              <div className="bp-card"><h3>Keynotes</h3><p>45 to 90 minutes for conferences, groups and team days.</p></div>
-              <div className="bp-card"><h3>Employee workshops</h3><p>Hands on sessions on energy, stress and habits.</p></div>
-              <div className="bp-card"><h3>Group programmes</h3><p>The six month programme on this page.</p></div>
-              <div className="bp-card"><h3>Senior leadership coaching</h3><p>One to one for owners, partners and directors.</p></div>
-            </div>
+            <ol className="bp-next">
+              {NEXT.map(([t, d], i) => (
+                <li key={t}><span className="bp-num">{i + 1}</span><div><b>{t}</b><p>{d}</p></div></li>
+              ))}
+            </ol>
             <div className="btns" style={{ justifyContent: "center" }}>
-              <a className="btn navy" href="mailto:george@gvcoaching.co.uk?subject=Talk%20enquiry">Enquire about a talk</a>
+              <BookCall where="next steps" />
             </div>
           </Reveal>
         </section>
@@ -365,6 +434,9 @@ export default function BusinessPerformance() {
               <p>Fifteen years in health and performance. BSc in Sports and Exercise Science and an MSc in Strength and Conditioning. Eight years and 33 fights as an elite amateur boxer.</p>
               <p>I used to run an education company that trained personal trainers. Today I work with practice owners, clinicians and business leaders on the thing that decides whether change lasts: behaviour.</p>
               <p>Health expert for The Principals Club for Dental Practice Owners, and a speaker in the Business Theatre at Dental Showcase, ExCeL London, and at the Namibia Dental Congress.</p>
+              <div className="bp-other">
+                <b>Not ready for six months?</b> Start with a keynote (45 to 90 minutes) or an employee workshop. <a href="mailto:george@gvcoaching.co.uk?subject=Talk%20enquiry">Enquire about a talk</a>
+              </div>
             </div>
           </Reveal>
         </section>
@@ -387,10 +459,10 @@ export default function BusinessPerformance() {
           <Reveal className="wrap">
             <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
             <h2>Health is the foundation of performance, <span className="gold">not the cost of it.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Book 20 minutes to talk about your team.</p>
+            <p className="sub" style={{ marginTop: 18 }}>Book 20 minutes to talk about your team. You&apos;ll leave with a clear next step, whether we work together or not.</p>
             <div className="btns">
-              <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
-              <a className="btn out-light" href={ENQUIRY_URL}>Email George</a>
+              <BookCall where="final">Book a call</BookCall>
+              <a className="btn out-light" href={ENQUIRY_URL} onClick={() => track("Business page: email", { where: "final" })}>Email George</a>
             </div>
           </Reveal>
         </section>
@@ -399,8 +471,8 @@ export default function BusinessPerformance() {
       <Footer />
 
       <div className="sticky">
-        <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
-        <a className="btn out-light" href={ENQUIRY_URL}>Email George</a>
+        <BookCall where="sticky bar">Book a call</BookCall>
+        <a className="btn out-light" href={ENQUIRY_URL} onClick={() => track("Business page: email", { where: "sticky bar" })}>Email George</a>
       </div>
     </>
   );
