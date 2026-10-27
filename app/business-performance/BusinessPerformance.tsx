@@ -415,22 +415,20 @@ export default function BusinessPerformance() {
         </section>
 
         <section className="grey">
-          <Reveal className="wrap bp-split">
-            <div>
-              <div className="hero-eye bp-left"><span className="goldbar" /><span className="eyebrow">Who runs it</span></div>
-              <h2>George Vernon</h2>
-              <p className="bp-role" style={{ marginTop: 8 }}>Performance coach for dentists and business leaders</p>
-              <div className="bp-photo">
-                <Image
-                  src="/about/speaking-dental-showcase.webp"
-                  alt="George Vernon speaking in the Business Theatre at Dental Showcase, ExCeL London"
-                  width={2000}
-                  height={1675}
-                  sizes="(min-width: 900px) 420px, 100vw"
-                />
-              </div>
+          <Reveal className="wrap bp-about">
+            <div className="bp-photo">
+              <Image
+                src="/about/george-portrait.webp"
+                alt="George Vernon speaking in the Business Theatre at Dental Showcase, ExCeL London"
+                width={1200}
+                height={1600}
+                sizes="(min-width: 900px) 400px, 100vw"
+              />
             </div>
             <div className="bp-copy">
+              <div className="hero-eye bp-left"><span className="goldbar" /><span className="eyebrow">Who runs it</span></div>
+              <h2>George Vernon</h2>
+              <p className="bp-role" style={{ marginTop: 8, marginBottom: 22 }}>Performance coach for dentists and business leaders</p>
               <p>Fifteen years in health and performance. BSc in Sports and Exercise Science and an MSc in Strength and Conditioning. Eight years and 33 fights as an elite amateur boxer.</p>
               <p>I used to run an education company that trained personal trainers. Today I work with practice owners, clinicians and business leaders on the thing that decides whether change lasts: behaviour.</p>
               <p>Health expert for The Principals Club for Dental Practice Owners, and a speaker in the Business Theatre at Dental Showcase, ExCeL London, and at the Namibia Dental Congress.</p>
