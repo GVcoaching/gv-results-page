@@ -90,9 +90,9 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return <div ref={ref} className={`reveal-el ${visible ? "reveal-in" : ""} ${className}`}>{children}</div>;
 }
 
-function YouTubeVideo({ id, label }: { id: string; label: string }) {
+function YouTubeVideo({ id, label, poster }: { id: string; label: string; poster?: string }) {
   const [playing, setPlaying] = useState(false);
-  const [imgSrc, setImgSrc] = useState(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
+  const [imgSrc, setImgSrc] = useState(poster ?? `https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
   if (playing) {
     return (
       <iframe
@@ -274,7 +274,7 @@ export default function BusinessPerformance() {
           </div>
           <figure className="bp-hero-vid">
             <div className="hero-frame">
-              <YouTubeVideo id="TQBuOmHEoSw" label="George Vernon speaking to dental and business teams" />
+              <YouTubeVideo id="TQBuOmHEoSw" label="George Vernon speaking to dental and business teams" poster="/about/speaking-stage.webp" />
             </div>
             <figcaption>George on stage with dental and business teams</figcaption>
           </figure>
