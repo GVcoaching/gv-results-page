@@ -699,3 +699,9 @@ footer.site-footer { background: var(--navy-deep); color: rgba(255,255,255,.6); 
 .bp-about .bp-photo { margin: 0; max-width: none; position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
 .bp-about .bp-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 6%; }
 @media (max-width: 899px) { .bp-about .bp-photo { aspect-ratio: 4 / 3; } }
+
+.bp-book { padding-bottom: 40px !important; }
+.bp-cal { min-width: 320px; height: 760px; margin-top: 28px; background: #fff; }
+@media (max-width: 640px) { .bp-cal { height: 1000px; margin-left: -12px; margin-right: -12px; } }
+.bp-cal-alt { margin-top: 14px; text-align: center; font-size: 14px; color: rgba(255,255,255,.6); }
+.bp-cal-alt a { color: var(--gold); display: inline-flex; min-height: 44px; align-items: center; }

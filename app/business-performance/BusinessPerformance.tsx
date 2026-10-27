@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { track } from "@vercel/analytics";
@@ -10,6 +11,8 @@ import { track } from "@vercel/analytics";
 
 const STARS = "★★★★★";
 const CALENDLY_URL = "https://calendly.com/georgegvcoaching/performance-diagnostic";
+// The calendar shown on the page. Swap this for a team specific event type when it exists.
+const BOOKING_EMBED_URL = `${CALENDLY_URL}?hide_gdpr_banner=1&primary_color=c9a96e&text_color=222f39`;
 const ENQUIRY_URL = "mailto:george@gvcoaching.co.uk?subject=Business%20performance%20programme";
 
 // Video testimonials shown beside the price. Kilos stay as the small stat line.
@@ -139,7 +142,7 @@ function Navbar() {
             <a href="#how">How the programme works</a>
             <a href="#faq">FAQs</a>
             <a className="nav-cta" href={ENQUIRY_URL}>Email George</a>
-            <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+            <a className="nav-cta nav-cta-navy" href="#book" onClick={() => track("Business page: book call", { where: "nav" })}>Book a call</a>
           </div>
           <button type="button" className="burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
             <span /><span /><span />
@@ -153,7 +156,7 @@ function Navbar() {
         <a href="#how" onClick={close}>How the programme works</a>
         <a href="#faq" onClick={close}>FAQs</a>
         <a href={ENQUIRY_URL} onClick={close}>Email George</a>
-        <a className="btn" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a call</a>
+        <a className="btn" href="#book" onClick={() => { close(); track("Business page: book call", { where: "menu" }); }}>Book a call</a>
       </div>
     </>
   );
@@ -228,9 +231,37 @@ function BookCall({ where, className = "btn", children = "Book a call about your
   children?: React.ReactNode;
 }) {
   return (
-    <a className={className} href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={() => track("Business page: book call", { where })}>
+    <a className={className} href="#book" onClick={() => track("Business page: book call", { where })}>
       {children}
     </a>
+  );
+}
+
+// Calendly's inline calendar, so a buyer picks a time without leaving the page.
+// A completed booking is reported to Vercel Analytics as the conversion.
+function Booking() {
+  useEffect(() => {
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== "https://calendly.com") return;
+      const ev = (e.data as { event?: string } | null)?.event;
+      if (ev === "calendly.event_scheduled") track("Business page: call booked");
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+  return (
+    <section className="dark bp-book" id="book">
+      <div className="wrap">
+        <div className="center">
+          <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Book your team call</span><span className="goldbar" /></div>
+          <h2>Pick a time. <span className="gold">20 minutes, on Zoom.</span></h2>
+          <p className="sub" style={{ marginTop: 14 }}>We talk about your team and what you want to change. You leave with a clear next step, whether we work together or not.</p>
+        </div>
+        <div className="calendly-inline-widget bp-cal" data-url={BOOKING_EMBED_URL} />
+        <p className="bp-cal-alt">Calendar not loading? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Open it in a new tab</a> or <a href={ENQUIRY_URL}>email George</a>.</p>
+      </div>
+      <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="lazyOnload" />
+    </section>
   );
 }
 
@@ -264,13 +295,13 @@ export default function BusinessPerformance() {
             <div className="hero-eye bp-left"><span className="goldbar" /><span className="eyebrow">Business performance programmes</span></div>
             <h1 className="bp-h1">Make this the last time your team <span className="gold">goes on a health kick.</span></h1>
             <p className="sub bp-hero-sub">
-              A six month group programme for practices and businesses whose people already know what to do, and can&apos;t work out why it never sticks. More energy at work and at home, and it lasts.
+              A six month programme for practices and businesses with 10 or more people. Your team gets more energy and focus at work, you get less burnout and absence, and it lasts.
             </p>
             <div className="btns bp-hero-btns">
-              <BookCall where="hero" />
+              <BookCall where="hero">Book a call about your team</BookCall>
               <a className="btn out-light" href="#results">Watch client results</a>
             </div>
-            <p className="bp-micro">A 20 minute call. No pressure, and a clear next step either way.</p>
+            <p className="bp-micro">Pick a time on this page. A 20 minute call, no pressure, and a clear next step either way.</p>
           </div>
           <figure className="bp-hero-vid">
             <div className="hero-frame">
@@ -453,17 +484,7 @@ export default function BusinessPerformance() {
           </Reveal>
         </section>
 
-        <section className="dark center">
-          <Reveal className="wrap">
-            <div className="eyecenter"><span className="goldbar" /><span className="eyebrow">Start here</span><span className="goldbar" /></div>
-            <h2>Health is the foundation of performance, <span className="gold">not the cost of it.</span></h2>
-            <p className="sub" style={{ marginTop: 18 }}>Book 20 minutes to talk about your team. You&apos;ll leave with a clear next step, whether we work together or not.</p>
-            <div className="btns">
-              <BookCall where="final">Book a call</BookCall>
-              <a className="btn out-light" href={ENQUIRY_URL} onClick={() => track("Business page: email", { where: "final" })}>Email George</a>
-            </div>
-          </Reveal>
-        </section>
+        <Booking />
       </main>
 
       <Footer />
