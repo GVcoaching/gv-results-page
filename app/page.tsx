@@ -567,7 +567,7 @@ function Navbar() {
             <a href="#top">Results</a>
             <a href="#about">About George</a>
             <a href="#coaching">The Programme</a>
-            <a href="#corporate">Business Performance</a>
+            <a href="/business-performance">Business Performance</a>
             <a href="#faq">FAQs</a>
             <a className="nav-cta" href={AUDIT_URL} target="_blank" rel="noopener noreferrer">Dental Performance Audit</a>
             <a className="nav-cta nav-cta-navy" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
@@ -587,7 +587,7 @@ function Navbar() {
         <a href="#top" onClick={go}>Results</a>
         <a href="#about" onClick={go}>About George</a>
         <a href="#coaching" onClick={go}>The Programme</a>
-        <a href="#corporate" onClick={go}>Business Performance Programmes</a>
+        <a href="/business-performance" onClick={close}>Business Performance Programmes</a>
         <a href="#faq" onClick={go}>FAQs</a>
         <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" onClick={close}>Book a call</a>
         <a className="btn" href={AUDIT_URL} target="_blank" rel="noopener noreferrer" onClick={close}>
@@ -1025,7 +1025,7 @@ export default function Page() {
               <div>Ongoing corporate health programmes</div>
               <div>Senior leadership performance coaching</div>
             </div>
-            <div className="btns"><a className="btn navy" href={TALK_ENQUIRY_URL}>Enquire About a Talk</a></div>
+            <div className="btns" style={{ justifyContent: "center" }}><a className="btn navy" href="/business-performance">See the team programme</a><a className="btn navy" href={TALK_ENQUIRY_URL}>Enquire About a Talk</a></div>
           </Reveal>
         </section>
 
